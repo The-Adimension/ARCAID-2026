@@ -86,7 +86,8 @@ The [DEITY Principles Framework](https://doi.org/10.1093/ehjimp/qyaf038) (Data, 
 | **GitHub** (this repository) | The source of truth: code, notebooks, logs, tables, paper source |
 | **Kaggle notebooks** | Every notebook used in the competitions, with its outputs ([`Documentation/LINKS.md`](Documentation/LINKS.md)) |
 | **Kaggle Writeup** | The Paper Track submission |
-| **Kaggle Dataset and Hugging Face** | Full run outputs, too large for git. Each run folder here lists them with sha256 (planned; published after the release checks) |
+| **Kaggle Dataset** [`habanwer/arcaid-2026-run-outputs`](https://www.kaggle.com/datasets/habanwer/arcaid-2026-run-outputs) | Full run outputs, too large for git: one zip per notebook version (80 zips, 17.2 GB). Private until release. |
+| **Hugging Face** [`The-Adimension/ARCAID-2026-run-outputs`](https://huggingface.co/datasets/The-Adimension/ARCAID-2026-run-outputs) | The same zips, at the same folder paths as this repository (`<folder>/outputs.zip`). Private until release. |
 
 ## Licence and citation
 

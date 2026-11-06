@@ -13,8 +13,8 @@ For every notebook version it writes one folder:
   log.txt                the Save & Run log: seconds since start, stream, text
   run.json               Kaggle ids and URL, inputs, run start/end and exception, submissions of this
                          version, inferred parent, sha256 of the original notebook and log
-  outputs-manifest.csv   every output file: path, bytes, sha256 (the files themselves are hosted
-                         outside git; see Documentation/LINKS.md)
+  outputs-manifest.csv   every output file: path, bytes, sha256 (the files themselves are one zip per
+                         run in the Kaggle Dataset and on Hugging Face; see Documentation/LINKS.md)
   outputs/               the small summary outputs (summary.txt, benchmark.json, submission files)
   DIFF.md, added/, changed/   cell diff against the inferred parent (Tools/lineage/notebook_diff.py)
   vs-root-base/          the same diff against the third-party notebook at the root of its lineage

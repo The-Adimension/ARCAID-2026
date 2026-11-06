@@ -86,16 +86,26 @@ if compdata:
     out += ["## Competition data paths", ""] + [f"- `{r}`" for r in compdata] + [""]
 
 # Kaggle notebook visibility
-meta_priv = {}
-for p in root.glob("**/run.json"):
-    r = json.loads(p.read_text())
-    meta_priv[r["kernel"]] = r.get("private_on_kaggle_at_collection")
+vis_file = root / "Documentation" / "KAGGLE-VISIBILITY.csv"
+if vis_file.exists():
+    import csv as _csv
+    vis = {r["kernel"]: r for r in _csv.DictReader(open(vis_file))}
+    src = f"checked live on Kaggle at {next(iter(vis.values()))['checked_utc']} (Tools/kaggle/check_visibility.py)"
+    priv = {k: v for k, v in vis.items() if v["visibility"] != "public"}
+else:
+    vis, priv = {}, {}
+    for p in root.glob("**/run.json"):
+        r = json.loads(p.read_text())
+        vis[r["kernel"]] = r
+        if r.get("private_on_kaggle_at_collection"):
+            priv[r["kernel"]] = r
+    src = "as recorded when the runs were collected (run.json)"
 out += ["## Kaggle notebooks still private", "",
         "The author's instruction is that every notebook used for the competitions is made public with its logs and outputs. "
-        "Visibility is as recorded when the runs were collected.", ""]
-pv = sorted(k for k, v in meta_priv.items() if v)
-out += [f"- `{k}`" for k in pv] or ["- none"]
-out += ["", f"{len(pv)} of {len(meta_priv)} notebooks are private.", ""]
+        f"Visibility {src}.", ""]
+out += [f"- `{k}` ({v.get('track', '')}, {v.get('place', (v.get('placement') or {}).get('place', ''))}): {v.get('url', '')}"
+        for k, v in sorted(priv.items())] or ["- none"]
+out += ["", f"{len(priv)} of {len(vis)} notebooks are private.", ""]
 
 # Third-party licences
 ref = (root / "Documentation" / "REFERENCES.md").read_text() if (root / "Documentation" / "REFERENCES.md").exists() else ""

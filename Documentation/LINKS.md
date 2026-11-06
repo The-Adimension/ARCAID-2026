@@ -1,6 +1,6 @@
 # Links
 
-Every notebook version of ours that used an ARC Prize 2026 competition, with its address on Kaggle and its folder in this repository. Run outputs that are too large for git will be hosted as a Kaggle Dataset and on Hugging Face after the release checks; each folder's `outputs-manifest.csv` lists them with sha256.
+Every notebook version of ours that used an ARC Prize 2026 competition, with its address on Kaggle and its folder in this repository. Each run's full outputs are one zip in the Kaggle Dataset [`habanwer/arcaid-2026-run-outputs`](https://www.kaggle.com/datasets/habanwer/arcaid-2026-run-outputs) and at `<folder>/outputs.zip` in the Hugging Face dataset [`The-Adimension/ARCAID-2026-run-outputs`](https://huggingface.co/datasets/The-Adimension/ARCAID-2026-run-outputs) (both private until release). [`DATASET-MANIFEST.csv`](DATASET-MANIFEST.csv) maps each zip to its folder with its sha256; each folder's `outputs-manifest.csv` lists the files inside.
 
 | Notebook | Version | Track | Placement | Kaggle (version) | Folder here |
 |---|---|---|---|---|---|

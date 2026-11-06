@@ -5,6 +5,7 @@ Scripts that collect, organise, check and analyse the record. They are not part 
 | Folder | What |
 |---|---|
 | `kaggle/` | `collect_runs.py` (every notebook version, log and output manifest), `collect_submissions.py` (submission records per track), `pull_bases.py` (third-party base notebooks), `collect_external_notebooks.py` (the 154 other teams' notebooks, 2026-10-01), `upload_outputs_dataset.py` (the full run outputs as one Kaggle Dataset, one zip per run), and the September collectors as used then |
+| `huggingface/` | `upload_outputs_hf.py` (the same run outputs on Hugging Face, in the repository's folder layout) and the dataset card |
 | `lineage/` | `notebook_diff.py` (cell-by-cell diff of two notebooks), `infer_parents.py` (nearest earlier notebook by code distance) |
 | `catalogue/` | `placement.csv` (which notebook goes where; hand-written), `build_catalogue.py` (writes `Submissions/` and `Ablations/*/runs/`), `build_indexes.py` (track indexes, `LINKS.md`, `LINEAGE.md`) |
 | `release/` | `release_check.py`: secrets, e-mail addresses, local paths, private links, large and binary files, competition data, private notebooks, unverified licences |
