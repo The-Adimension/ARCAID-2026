@@ -1,0 +1,227 @@
+# ---------------------------------------------------------------------------------------------
+# Probe-first governor (PF). Paste-in cell for Daniel Franzen's Milestone 2 notebook (v1, N40)
+# or any TAAF/Duck notebook that carries his harness patch. Place it AFTER the cell that puts
+# the bundled source on sys.path ("4. Import the bundled source") and BEFORE "9. Run the
+# benchmark". Standard library only. Kill switch: set env PF=0 before this cell runs.
+#
+# What it changes, and nothing else:
+#   1. Ledger. Per game, the cell counts (a) actions spent on the CURRENT level and (b) how many
+#      consecutive analyzer turns ended without executing an action. Both are read from what the
+#      harness passes to its own opener builder (the engine action count and the frame's level);
+#      the cell never issues, skips or re-counts an action.
+#   2. Nudge. While the no-action streak is at least PF_NUDGE_AT, each turn opener gets one
+#      extra paragraph that states the ledger and the scoring economics: on a level where few
+#      actions have been spent, a 1-3 action test is cheaper than another round of planning.
+#      Above a typical human count the wording flips to "every further action costs score".
+#   3. Cap. From the PF_CAP_AT-th consecutive no-action exchange, requests are sent with
+#      max_tokens=PF_CAP_TOKENS until an action executes. Explicit max_tokens set by the
+#      harness (e.g. summary requests) are never overridden.
+#
+# Invariants: valid actions still come only from the harness (`valid_actions`); a game_over
+# auto-RESET keeps the level, so the ledger persists through it; a level_completed resets the
+# ledger; RESET counts as an action because the harness's `action_num` advances; no network,
+# no files. Any error inside the wrappers falls back to the stock behaviour and is counted.
+# ---------------------------------------------------------------------------------------------
+import os as _os
+
+PF_ON = _os.environ.get("PF", "1").strip() not in ("0", "", "false", "False")
+PF_NUDGE_AT = int(_os.environ.get("PF_NUDGE_AT", "3"))      # consecutive no-action exchanges
+PF_CAP_AT = int(_os.environ.get("PF_CAP_AT", "5"))          # consecutive no-action exchanges
+PF_CAP_TOKENS = int(_os.environ.get("PF_CAP_TOKENS", "4096"))
+# Free-probe allowance per level depth. 0.4 x the per-depth median human action count of the
+# 25 public games (medians: L1 30, L2-L4 ~52, L5+ ~90). It is a prior, not the hidden
+# baseline; it only decides which wording the nudge uses.
+PF_FREE = {1: 12, 2: 20, 3: 20, 4: 20}
+PF_FREE_DEFAULT = 30
+PF_CAUTION_MULT = 2.5   # free x 2.5 ~ the per-depth median human count; a > h is where (h/a)^2 bites
+
+PF_STATS = globals().get("PF_STATS") or {
+    "openers": 0, "nudged": 0, "capped_requests": 0, "max_streak": 0, "errors": 0,
+}
+
+
+def _pf_state(agent):
+    return agent.__dict__.setdefault(
+        "_pf", {"level": None, "level_start": 0, "last_action": None, "streak": 0, "pending": True}
+    )
+
+
+def _pf_update(agent, action_num, level, count=True):
+    """Advance the ledger. `action_num` is the engine action count after the last executed action;
+    `level` the level it was taken on. With count=True (one request = one exchange) an unchanged
+    count is one more no-action exchange, except for the first request after an action, which
+    has not failed yet. With count=False (turn opener) the ledger only resets when the count has
+    advanced. Returns the ledger."""
+    st = _pf_state(agent)
+    if action_num is None or level is None:
+        return st
+    action_num, level = int(action_num), int(level)
+    if st["level"] is not None and level < st["level"]:
+        level = st["level"]                        # levels never go back within a game; an older
+                                                   # summary level must not reopen a finished ledger
+    if st["level"] != level:                       # level_completed: fresh ledger
+        st.update(level=level, level_start=action_num, streak=0, last_action=action_num, pending=not count)
+        return st
+    if st["last_action"] is None or action_num > st["last_action"]:
+        # an action executed. Seen from a request, this request is the first after it (nothing to
+        # count yet); seen from an opener, the first request is still to come.
+        st.update(streak=0, last_action=action_num, pending=not count)
+    elif count:
+        if st.get("pending"):
+            st["pending"] = False                  # first request after that action
+        else:
+            st["streak"] += 1                      # an exchange executed no action
+    return st
+
+
+def _pf_lines(st):
+    if st["level"] is None or st["last_action"] is None or st["streak"] < PF_NUDGE_AT:
+        return []
+    used = max(0, st["last_action"] - st["level_start"])
+    free = PF_FREE.get(st["level"], PF_FREE_DEFAULT)
+    head = (
+        f"Probe ledger: {st['streak']} consecutive exchanges executed no action; "
+        f"{used} action(s) spent on this level."
+    )
+    if used < free:
+        body = (
+            "Actions are cheap here and reasoning is not: a level scores the same once you "
+            "beat the human action count, and you are far below it. If any step of your plan "
+            "rests on a rule you have not observed, run a 1-3 action test of that rule now and "
+            "read `frame_diff()`, instead of searching inside a model you have not verified."
+        )
+    elif used < free * PF_CAUTION_MULT:
+        body = (
+            "You are within the normal action range for a level. Prefer one short, decisive "
+            "test over another round of planning; batch only what the evidence supports."
+        )
+    else:
+        body = (
+            "This is above a typical human action count, so every further action now lowers "
+            "this level's score. Spend the next action on whatever most reduces your "
+            "uncertainty, and if the level is in an unrecoverable state use RESET if it is "
+            "listed in `valid_actions`."
+        )
+    return [head + " " + body]
+
+
+def _pf_opener_args(args, kwargs):
+    """(action_num, level) from a `_build_user_prompt(action_num, *, current_frame=..., 
+    previous_step_summary=...)` call. Level comes from the frame, else from the summary."""
+    action_num = args[0] if args else kwargs.get("action_num")
+    level = None
+    frame = kwargs.get("current_frame")
+    if frame is not None:
+        level = getattr(frame, "level", None)
+    if level is None:
+        summary = kwargs.get("previous_step_summary")
+        if isinstance(summary, dict):
+            level = summary.get("level")
+    return action_num, level
+
+
+def _pf_cap_kwargs(st, kwargs):
+    """Return kwargs with max_tokens capped while the no-action streak is long."""
+    if st["streak"] >= PF_CAP_AT and kwargs.get("max_tokens") is None:
+        kwargs = dict(kwargs)
+        kwargs["max_tokens"] = PF_CAP_TOKENS
+        return kwargs, True
+    return kwargs, False
+
+
+def _pf_install():
+    import inference.agent.tool_agent as _ta
+    cls = _ta.ToolAgent
+    if getattr(cls, "_pf_installed", False):
+        return "already_installed"
+
+    _orig_prompt = cls._build_user_prompt
+    _orig_chat = cls._chat_completion
+
+    def _build_user_prompt(self, *args, **kwargs):
+        out = _orig_prompt(self, *args, **kwargs)
+        try:
+            PF_STATS["openers"] += 1
+            st = _pf_state(self)
+            action_num, level = _pf_opener_args(args, kwargs)
+            st = _pf_update(self, action_num, level, count=False)   # reset only if an action executed
+            lines = _pf_lines(st)
+            if lines and isinstance(out, str):
+                PF_STATS["nudged"] += 1
+                out = out + "\n" + "\n".join(lines)
+            if PF_STATS["openers"] % 100 == 0:
+                print("ARC3_PF_STATS", PF_STATS, flush=True)
+        except Exception:
+            PF_STATS["errors"] += 1
+        return out
+
+    def _chat_completion(self, messages, *args, **kwargs):
+        try:
+            # one exchange = one request. The harness's own step summary carries the engine action
+            # count after the last executed action (`end_action_num`), stale or not.
+            summary = getattr(self, "_last_step_summary", None)
+            if isinstance(summary, dict):
+                st = _pf_update(self, summary.get("end_action_num"), summary.get("level"))
+                PF_STATS["max_streak"] = max(PF_STATS["max_streak"], st["streak"])
+            kwargs, capped = _pf_cap_kwargs(_pf_state(self), kwargs)
+            if capped:
+                PF_STATS["capped_requests"] += 1
+        except Exception:
+            PF_STATS["errors"] += 1
+        return _orig_chat(self, messages, *args, **kwargs)
+
+    for new, old in ((_build_user_prompt, _orig_prompt), (_chat_completion, _orig_chat)):
+        for attr in ("__doc__", "__name__", "__qualname__"):
+            setattr(new, attr, getattr(old, attr, None))
+    cls._build_user_prompt = _build_user_prompt
+    cls._chat_completion = _chat_completion
+    cls._pf_installed = True
+    return "installed"
+
+
+def _pf_selftest():
+    class _Stub:
+        pass
+    a = _Stub()
+    # level 1, action count 4: first request after the action is free, then each one counts
+    assert _pf_update(a, 4, 1)["streak"] == 0            # fresh ledger: first request on the level
+    assert _pf_update(a, 4, 1)["streak"] == 1
+    assert _pf_update(a, 4, 1)["streak"] == 2
+    assert _pf_lines(_pf_state(a)) == []
+    st = _pf_update(a, 4, 1)
+    assert st["streak"] == 3 and len(_pf_lines(st)) == 1 and "Actions are cheap" in _pf_lines(st)[0]
+    # an opener after an executed action resets; an opener at the same count does not count
+    assert _pf_update(a, 7, 1, count=False)["streak"] == 0
+    assert _pf_update(a, 7, 1, count=False)["streak"] == 0
+    assert _pf_cap_kwargs(_pf_state(a), {"max_tokens": None})[1] is False
+    # long streak -> cap, but never over an explicit max_tokens
+    for _ in range(PF_CAP_AT + 1):
+        _pf_update(a, 7, 1)
+    kw, capped = _pf_cap_kwargs(_pf_state(a), {"max_tokens": None})
+    assert _pf_state(a)["streak"] == PF_CAP_AT and capped and kw["max_tokens"] == PF_CAP_TOKENS
+    assert _pf_cap_kwargs(_pf_state(a), {"max_tokens": 512})[1] is False
+    # game_over auto-RESET keeps the level: the ledger persists (RESET advanced the count)
+    assert _pf_update(a, 9, 1)["level_start"] == 4
+    # level_completed -> fresh ledger
+    st = _pf_update(a, 30, 2)
+    assert st["level_start"] == 30 and st["streak"] == 0
+    # caution wording once far above the allowance
+    for _ in range(PF_NUDGE_AT + 2):
+        st = _pf_update(a, 30 + PF_FREE[2] * 3, 2)
+    assert "lowers this level's score" in _pf_lines(st)[0]
+    # missing fields are ignored; opener-argument extraction
+    assert _pf_update(a, None, 2) is _pf_state(a)
+    assert _pf_update(a, 95, 1)["level"] == 2            # an older level in a summary is ignored
+    class _F:
+        level = 5
+    assert _pf_opener_args((12,), {"current_frame": _F()}) == (12, 5)
+    assert _pf_opener_args((12,), {"current_frame": None, "previous_step_summary": {"level": 3}}) == (12, 3)
+    return "ok"
+
+
+if PF_ON:
+    _state = _pf_install()
+    print(f"ARC3_PF_READY {_state} nudge_at={PF_NUDGE_AT} cap_at={PF_CAP_AT} "
+          f"cap_tokens={PF_CAP_TOKENS} self_test={_pf_selftest()}", flush=True)
+else:
+    print("ARC3_PF_READY disabled", flush=True)

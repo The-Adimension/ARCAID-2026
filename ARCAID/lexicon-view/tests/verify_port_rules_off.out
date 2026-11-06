@@ -1,0 +1,56 @@
+ARCAID3_LEXICON_READY {'enabled': True, 'installed': True, 'scale_lock': 'on, self-test ok', 'rules': 'off (ARCAID3_RULES=0)', 'prompt_edits': {'tool_description': 'applied', 'system_only_current': 'applied', 'system_only_history': 'applied', 'trigger': 'applied'}, 'first_turn_cue': 'installed', 'self_test': 'ok'}
+PASS 1 installed + self-test
+PASS 1 sandbox program fits one command-line argument (< 128 KiB)  97626 bytes
+PASS 1 prompt edits all applied  {'tool_description': 'applied', 'system_only_current': 'applied', 'system_only_history': 'applied', 'trigger': 'applied'}
+PASS 1 cue installed
+PASS 2 system prompt: both 'only' lines list the members
+PASS 2 system prompt: trigger line present
+PASS 2 system prompt: lexicon note present
+PASS 2 dfranzen persistent-function wording intact
+PASS 2 dfranzen frame_diff hint intact
+     system prompt lines: 2 replaced, 4 added
+PASS 2 only an 'only' line was replaced  - - `current_frame` exposes only `.ascii`, `.step`, `.level`, `.shape`, and `.segmentation`.
+PASS 2 only an 'only' line was replaced  - - Each `history[i].frame` is the frame after `history[i].action`; each frame exposes only `.ascii`
+PASS 3 tool description lists the members
+PASS 4 cue on dfranzen first turn
+PASS 4 cue on dfranzen new level (LEVEL_START_USER_PROMPT)
+PASS 4 no cue on an ordinary turn
+PASS 5 sandbox call ran without error
+PASS 5 .code answers
+PASS 5 .changes_since answers
+PASS 5 dfranzen frame_diff() still works beside it
+---- sandbox stdout ----
+SCREEN 64x64 = world 32x32 cells, each cell 2x2 px (locked for this level), first cell at px (row 0, col 0); background B (black); 0 px drawn outside the cell grid (HUD).
+OBJECTS 1 in 1 kinds (symbol xcount @ (row, col) of top-left cell):
+  R86bb x1 @ (4,6)
+LEGEND (. = not part of the object):
+  R86bb 3x3 [R]: RRR/RRR/RRR
+R86bb moved (4, 4)->(4, 6) (d_row +0, d_col +2)
+32 1
+FRAME_DIFF {'changed_cell_count': 48, 'moved': [{'color': 'R', 'pixels': 36, 'hash': '2d4563507c6dec86', 'from': [8, 8], 'to': [8, 12]}], 'rotated': [], 'appeared': [], 'disappeared': [], 'changed_color': [], 'r
+
+PASS 6 scale lock on and its sandbox self-test passes  on, self-test ok
+PASS 7 sparse frame read at the level's 2 px grid, marker kept  SCREEN 64x64 = world 32x32 cells, each cell 2x2 px (locked for this level), first cell at px (row 0, col 0); background 
+PASS 7 changes_since across the contact keeps the original name
+---- lock sandbox stdout ----
+SCREEN 64x64 = world 32x32 cells, each cell 2x2 px (locked for this level), first cell at px (row 0, col 0); background B (black); 0 px drawn outside the cell grid (HUD).
+OBJECTS 3 in 2 kinds (symbol xcount @ (row, col) of top-left cell):
+  bc89b x2 @ (5,5) (5,11)
+  Rb761 x1 @ (20,20)
+LEGEND (. = not part of the object):
+  bc89b 3x3 [b]: bbb/bbb/bbb
+  Rb761 1x1 [R]: R
+b5e11 became bc89b @ (5, 5)
+bc89b appeared @ (5, 11)
+
+PASS 8 kill switch: rules off  off (ARCAID3_RULES=0)
+PASS 9 kill switch: .rules says it is off  rules are switched off (ARCAID3_RULES=0)
+
+---- rules sandbox stdout ----
+rules are switched off (ARCAID3_RULES=0)
+
+PASS 12 object permanence: the step against the wall is a move, not the wall becoming a new picture  b6bef moved (10, 12)->(10, 11) (d_row +0, d_col -1)
+
+PASS 13 lock: 3-cell objects moving 1 cell are read at the true 2 px grid, no marker  SCREEN 64x64 = world 32x32 cells, each cell 2x2 px (locked for this level), first cell at px (row 0, col 0); background 
+PASS 14 names: 4 hex digits; a colliding picture's fallback name depends only on the picture  ('bc89b', ['bzzzz', 'bzzzz_d28074'], ['bzzzz', 'bzzzz_d28074'], ['bzzzz', 'bzzzz_d71129'])
+ALL PASS

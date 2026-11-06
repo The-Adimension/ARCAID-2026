@@ -1,0 +1,4 @@
+[interior] stuck-recoverable: attempts=40 level-start probed=40 with a cyclic action=15 [(('ar25', 6), 1), (('cn04', 2), 2), (('dc22', 4), 1), (('ft09', 5), 1), (('ls20', 5), 2), (('m0r0', 6), 1), (('re86', 7), 3), (('sc25', 4), 1), (('tn36', 2), 1), (('tn36', 3), 1), (('tr87', 6), 1)]
+[interior] never-completed: attempts=27 level-start probed=27 with a cyclic action=9 [(('cn04', 5), 2), (('dc22', 5), 3), (('ka59', 6), 1), (('re86', 8), 1), (('sc25', 5), 2)]
+[exact] stuck-recoverable: attempts=40 level-start probed=40 with a cyclic action=0 []
+[exact] never-completed: attempts=27 level-start probed=27 with a cyclic action=5 [(('cn04', 5), 2), (('re86', 8), 1), (('sc25', 5), 2)]

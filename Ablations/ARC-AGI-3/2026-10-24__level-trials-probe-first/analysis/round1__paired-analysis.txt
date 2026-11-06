@@ -1,0 +1,9 @@
+paired entries 183 | cleared off 58 on 69 | lift +19.0% | on-only 18 off-only 7 both 51 neither 107 | exact McNemar p = 0.0433
+  off: median a/h on cleared 0.82 (n=58) | deaths/entry 0.104 | no-action token share 53% | truncations 58
+  on: median a/h on cleared 0.81 (n=69) | deaths/entry 0.115 | no-action token share 51% | truncations 110
+  gate lift >= +15%: PASS
+  gate McNemar p < 0.05: PASS
+  gate median a/h (on) < 0.90: PASS
+  gate deaths (on) <= 1.5x off: PASS
+  gate no-action token share (on) <= 45%: FAIL
+VERDICT: DO NOT submit

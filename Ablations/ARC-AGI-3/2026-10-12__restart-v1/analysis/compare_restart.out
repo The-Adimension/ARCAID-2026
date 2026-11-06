@@ -1,0 +1,14 @@
+  r1 cd82 level 4: restart at 110,011 tokens / 17 actions -> COMPLETED
+  r1 tn36 level 2: restart at 100,322 tokens / 87 actions -> COMPLETED
+  r1 bp35 level 2: restart at 114,796 tokens / 23 actions -> not completed
+  r1 su15 level 4: restart at 118,200 tokens / 13 actions -> not completed
+  r1 m0r0 level 3: restart at 104,648 tokens / 35 actions -> not completed
+arcaid3-restart-dfranzen-m2: health {'ready_tokens_100000': True, 'no_traceback': True, 'games_25': True}; score 37.60, levels 94; restarts 5 on 116 attempts (4.3%); completed after restart 2
+  r2 sp80 level 2: restart at 100,066 tokens / 48 actions -> not completed
+  r2 tn36 level 2: restart at 100,223 tokens / 98 actions -> COMPLETED
+  r2 m0r0 level 1: restart at 102,513 tokens / 123 actions -> COMPLETED
+  r2 vc33 level 4: restart at 106,487 tokens / 46 actions -> not completed
+  r2 cn04 level 2: restart at 116,676 tokens / 49 actions -> not completed
+arcaid3-restart-dfranzen-m2-r2: health {'ready_tokens_100000': True, 'no_traceback': True, 'games_25': True}; score 37.99, levels 95; restarts 5 on 115 attempts (4.3%); completed after restart 2
+pooled: 4 of 10 restarts completed their level (40.0%; control 19.6%); fired on 4.3% of 231 attempts
+decision: PASS

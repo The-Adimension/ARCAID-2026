@@ -1,0 +1,41 @@
+arcaid3-pair-restart-r1: 212 output files; kept ['benchmark.json', 'log.txt', 'stuck_restarts.jsonl', 'summary.txt']
+arcaid3-pair-flag0-r1b: 211 output files; kept ['benchmark.json', 'log.txt', 'summary.txt']
+arcaid3-pair-restart-r1: health {'ready_tokens_100000': True, 'no_traceback': True, 'games_25': True, 'states_won_or_gave_up': True, 'no_failed_notes': True, 'run_finished': True, 'summary_cell_ran': True}
+arcaid3-pair-flag0-r1b: health {'ready_tokens_0': True, 'no_traceback': True, 'games_25': True, 'states_won_or_gave_up': True, 'no_failed_notes': True, 'run_finished': True, 'summary_cell_ran': True, 'no_restart_events': True}
+
+same day, restart arm: 7 restarts (5 on a no-action resumption), 0 of them completed their level afterwards; restarts reached 7 of its 7 attempts past 100K tokens
+PRIMARY, same day, attempts past 100K tokens that completed later: restart on 0/7 (0.0%), restart off 1/13 (7.7%); one-sided Fisher p = 1.000
+SECONDARY, pooled (3 runs on: v1 x2 + v2; 5 runs off): restart on 5/28 = 17.9%, restart off 10/59 = 16.9%; stratified by game-level p = 0.797 (14 strata seen in both arms, 52 attempts); naive Fisher p = 0.569 (anti-conservative)
+
+same-day score: restart on 50.48, restart off 47.91; difference +2.57 (per-game bootstrap 95% CI -6.47 to +12.81; sign-flip p = 0.630); levels +4
+  (a same-day difference must exceed about +/-13-17 points to reach p < 0.05; the plausible effect of the mechanism is about +1 point, so a large difference either way is noise)
+  per game (score, levels); markers: a = restart arm had an attempt past 100K, b = control had one, R = a restart fired (selection-biased, shown for reference only)
+      ar25  on  100.0 (8)  off  100.0 (8)
+   b  bp35  on    2.2 (1)  off    1.9 (1)
+      cd82  on   86.8 (6)  off  100.0 (6)
+  abR cn04  on   71.4 (5)  off   14.3 (2)
+   b  dc22  on   47.6 (4)  off   47.6 (4)
+      ft09  on  100.0 (6)  off  100.0 (6)
+   b  g50t  on    3.4 (1)  off    0.0 (0)
+  abR ka59  on   10.7 (2)  off   53.6 (5)
+   b  lf52  on    5.2 (2)  off    5.5 (2)
+      lp85  on  100.0 (8)  off  100.0 (8)
+      ls20  on   53.6 (5)  off   29.3 (4)
+      m0r0  on   67.9 (5)  off   63.2 (5)
+  a R r11l  on   71.4 (5)  off  100.0 (6)
+   b  re86  on   58.3 (6)  off   58.3 (6)
+  abR s5i5  on    8.3 (2)  off    8.3 (2)
+      sb26  on  100.0 (8)  off  100.0 (8)
+      sc25  on   43.3 (4)  off   87.9 (6)
+   b  sk48  on    2.4 (1)  off    2.8 (1)
+  abR sp80  on    4.8 (1)  off    4.8 (1)
+  abR su15  on   13.3 (3)  off   12.0 (3)
+  abR tn36  on   21.4 (3)  off    2.1 (1)
+      tr87  on   87.8 (6)  off   71.4 (5)
+      tu93  on  100.0 (9)  off  100.0 (9)
+   b  vc33  on  100.0 (7)  off   21.4 (3)
+      wa30  on    2.2 (1)  off   13.3 (3)
+  day check: control today 47.91 against the 10-09 controls [43.77, 47.57, 51.2, 40.08] (mean 45.66); restart v1 on 10-12: 37.60, 37.99
+
+mechanism (same-day rate higher and pooled stratified p < 0.05): NOT CONFIRMED
+decision: NO CHANGE: restart stays an equivalent draw; the base configuration remains the default

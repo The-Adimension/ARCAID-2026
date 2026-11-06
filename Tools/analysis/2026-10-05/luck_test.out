@@ -1,0 +1,65 @@
+== Leaderboard 2026-10-05T10:16:27 ==
+teams: 3748
+  teams >= 50: 1
+  teams >= 40: 2
+  teams >= 35: 11
+  teams >= 32: 51
+  teams >= 30: 171
+  teams >= 25: 628
+  teams >= 20: 760
+  teams >= 10: 783
+  teams >= 6: 794
+  rank 353 score: 28.02
+  teams with exactly 1 submission and score >= 15: n=77 mean=25.81 sd=2.91 p10=22.53 p50=26.14 p90=28.97 min=15.75 max=30.64
+  teams with exactly 1 submission and 5 <= score < 15: [14.04]
+
+== Same-code noise ==
+  identical-path draws: n=8 mean=25.88 sd=2.89 p10=21.87 p50=26.93 p90=28.25 min=21.01 max=29.08
+  D' scheduler draws: mean 27.95 (n=3)
+  CV ours (Flash-Next v3 family): 0.11
+  CV rellik13 triple: 0.13
+  CV dfranzen identical-path: 0.11
+
+== Luck envelope: expected vs observed counts ==
+  pool: teams with last submission >= 2026-10-01 and score >= 15;
+  draws per team = min(SubmissionCount, 25) (upper bound: 5/day since 09-30)
+  pool size: 772
+  -- wide N(25.8, 3.93) [Son Pham, thread 745062]
+     >= 30: expected by luck  550.1   observed  171
+     >= 32: expected by luck  371.8   observed   51
+     >= 34: expected by luck  165.0   observed   17
+     >= 35: expected by luck   93.2   observed   11
+     >= 36: expected by luck   48.0   observed    9
+     >= 38: expected by luck   10.0   observed    3
+  -- narrow N(25.8, 2.91) [single-submission teams]
+     >= 30: expected by luck  427.0   observed  171
+     >= 32: expected by luck  150.5   observed   51
+     >= 34: expected by luck   25.1   observed   17
+     >= 35: expected by luck    8.3   observed   11
+     >= 36: expected by luck    2.4   observed    9
+     >= 38: expected by luck    0.1   observed    3
+
+  per-team P(best of k draws >= score) under each null, top 16:
+     1 Tufa Labs                 55.89 subs= 154  wide= 2.4e-13  narrow= 0.0e+00
+     2 Yi-Chia Chen              48.59 subs=  21  wide= 7.0e-08  narrow= 5.1e-14
+     3 the last dance 🕺          39.30 subs=  72  wide= 7.4e-03  narrow= 4.4e-05
+     4 face-of-agi               37.94 subs=  44  wide= 2.5e-02  narrow= 3.8e-04
+     5 mtg                       37.54 subs=  59  wide= 3.5e-02  narrow= 6.8e-04
+     6 gng                       36.78 subs=  30  wide= 6.3e-02  narrow= 2.0e-03
+     7 Lord Han Solo             36.61 subs=  83  wide= 7.2e-02  narrow= 2.5e-03
+     8 YUTO KOJIMA               36.14 subs= 119  wide= 1.0e-01  narrow= 4.7e-03
+     9 Andrew Reed               36.14 subs=   4  wide= 1.7e-02  narrow= 7.6e-04
+    10 lalalia                   35.79 subs=   6  wide= 3.3e-02  narrow= 1.8e-03
+    11 Kamal Kadakara            35.44 subs=  13  wide= 8.8e-02  narrow= 6.0e-03
+    12 Nhan Duc Nguyen           34.74 subs=  10  wide= 1.1e-01  narrow= 1.1e-02
+    13 TDSAI Lab                 34.36 subs=  17  wide= 2.2e-01  narrow= 2.7e-02
+    14 Arke                      34.30 subs=   7  wide= 1.0e-01  narrow= 1.2e-02
+    15 markintell                34.21 subs=  16  wide= 2.3e-01  narrow= 3.0e-02
+    16 EISLab_hwlee              34.12 subs=  11  wide= 1.7e-01  narrow= 2.3e-02
+
+== Save-run mechanics: dfranzen v1 (10 games, 25 min, 10 streams) vs our sheetu run (25 games, 120 min) ==
+  aggregate generated tok/s: dfranzen 616, sheetu 257
+  dfranzen same 10 games: levels 40, mean score 36.56 (ex-sb26 30.25), tokens 927167
+  sheetu   same 10 games: levels 23, mean score 15.64 (ex-sb26 17.07), tokens 693621
+  dfranzen requests 531: prompt p50 66710, p90 103511; cache reuse 94.2%; uncached prompt / generated = 2.1
+  sheetu vLLM: prefix-cache queries 0; prompt tokens 19.51M; generated 1.85M; prompt / generated = 10.5

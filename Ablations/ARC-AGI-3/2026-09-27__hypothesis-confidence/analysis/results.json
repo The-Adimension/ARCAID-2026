@@ -1,0 +1,120 @@
+{
+ "n": 1027,
+ "wrong_rate": 0.5861733203505355,
+ "models": {
+  "B1_confidence": {
+   "auc": 0.7195485636114911
+  },
+  "B2_conf+setup": {
+   "auc": 0.6545593120969317,
+   "brier": 0.22118199610187664
+  },
+  "T1_text": {
+   "auc": 0.6225405511041626,
+   "brier": 0.24167374542148912
+  },
+  "T2_text+conf+setup": {
+   "auc": 0.7008911471565371,
+   "brier": 0.2122991369994656
+  },
+  "B0_chance": {
+   "auc": 0.5,
+   "brier": 0.242574158859764
+  }
+ },
+ "per_game": {
+  "ar25": {
+   "n": 30,
+   "B1_confidence": 0.444,
+   "B2_conf+setup": 0.34,
+   "T1_text": 0.642,
+   "T2_text+conf+setup": 0.617
+  },
+  "g50t": {
+   "n": 228,
+   "B1_confidence": 0.543,
+   "B2_conf+setup": 0.561,
+   "T1_text": 0.663,
+   "T2_text+conf+setup": 0.589
+  },
+  "ka59": {
+   "n": 5,
+   "B1_confidence": 1.0,
+   "B2_conf+setup": 1.0,
+   "T1_text": 0.5,
+   "T2_text+conf+setup": 1.0
+  },
+  "lf52": {
+   "n": 15,
+   "B1_confidence": 0.375,
+   "B2_conf+setup": 0.375,
+   "T1_text": 0.278,
+   "T2_text+conf+setup": 0.25
+  },
+  "ls20": {
+   "n": 302,
+   "B1_confidence": 0.924,
+   "B2_conf+setup": 0.864,
+   "T1_text": 0.757,
+   "T2_text+conf+setup": 0.904
+  },
+  "r11l": {
+   "n": 83,
+   "B1_confidence": 0.756,
+   "B2_conf+setup": 0.856,
+   "T1_text": 0.755,
+   "T2_text+conf+setup": 0.851
+  },
+  "s5i5": {
+   "n": 165,
+   "B1_confidence": 0.362,
+   "B2_conf+setup": 0.376,
+   "T1_text": 0.827,
+   "T2_text+conf+setup": 0.601
+  },
+  "su15": {
+   "n": 162,
+   "B1_confidence": 0.704,
+   "B2_conf+setup": 0.704,
+   "T1_text": 0.467,
+   "T2_text+conf+setup": 0.698
+  },
+  "tr87": {
+   "n": 21,
+   "B1_confidence": 0.861,
+   "B2_conf+setup": 0.832,
+   "T1_text": 0.413,
+   "T2_text+conf+setup": 0.769
+  },
+  "wa30": {
+   "n": 3,
+   "B1_confidence": 0.75,
+   "B2_conf+setup": 0.75,
+   "T1_text": 0.0,
+   "T2_text+conf+setup": 0.5
+  }
+ },
+ "delta_auc_T2_minus_B2": {
+  "mean": 0.0477470074027554,
+  "ci95": [
+   0.013930468173384246,
+   0.10272385260299173
+  ]
+ },
+ "delta_auc_T1_text_minus_B1": {
+  "mean": -0.0806544406512202,
+  "ci95": [
+   -0.311746892862216,
+   0.17508272753702464
+  ],
+  "pass": false
+ },
+ "delta_auc_T2_text+conf+setup_minus_B1": {
+  "mean": -0.0019917322173269815,
+  "ci95": [
+   -0.0603882198215755,
+   0.08974708440016484
+  ],
+  "pass": false
+ }
+}

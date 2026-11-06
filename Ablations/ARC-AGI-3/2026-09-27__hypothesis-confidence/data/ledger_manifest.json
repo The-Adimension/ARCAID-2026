@@ -1,0 +1,488 @@
+[
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-agy-gemini3.1pro-ar25",
+  "sha": "1699f2bb747bbf875a224f6ca1bcd35bd13f2921",
+  "has_ledger": true,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-agy-gemini3.1pro-ft09",
+  "sha": "5120d8f10fb9da05046deb93e762f22c0ebb202b",
+  "has_ledger": false,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-agy-gemini3.1pro-g50t",
+  "sha": "68a74fbc5a1f1673a4e0d60dcc0dc80c694b3cea",
+  "has_ledger": true,
+  "rows": 1
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-agy-gemini3.1pro-ls20",
+  "sha": "d83522796cd1761472a2d3a3a954165704407278",
+  "has_ledger": false,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-agy-gemini3.1pro-r11l",
+  "sha": "393ba8a95c8166374d7f30e00670b180c722cfd1",
+  "has_ledger": false,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-agy-gemini3.1pro-s5i5",
+  "sha": "b906ee76d9e1752a231fbf32030384ff6c92747f",
+  "has_ledger": false,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-agy-gemini3.1pro-su15",
+  "sha": "da5471d0b85c498a0bef0c8a85be98ab2311d809",
+  "has_ledger": false,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-agy-gemini3.1pro-tr87",
+  "sha": "774e6a4b788a808f444b6aecf3981e3a76e6d005",
+  "has_ledger": false,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-agy-kimi2.7-thinking-ft09",
+  "sha": "7c9f21cc4675231d81b2b8093393c74994aef338",
+  "has_ledger": false,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-agy-kimi2.7-thinking-tr87",
+  "sha": "93f35c843650a78240ee9a2f8e24c0ad3abdbd93",
+  "has_ledger": true,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-fable5-ar25",
+  "sha": "484e30be8f1f4bfd43233c72c7a66284b775ca2e",
+  "has_ledger": false,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-fable5-ft09",
+  "sha": "7195030827bd6acfd25bd1068b4fcc3f0fd6f8ef",
+  "has_ledger": false,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-fable5-g50t",
+  "sha": "6be54ddaba13666cf4df4f95c58dc41e86cf061b",
+  "has_ledger": true,
+  "rows": 10
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-fable5-ls20",
+  "sha": "6ba3c26feeecb5135a2feff3d8ebbc07b676af29",
+  "has_ledger": true,
+  "rows": 184
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-fable5-r11l",
+  "sha": "eb629df8abb6d720d1a0f34f3ddff654fa4fc198",
+  "has_ledger": false,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-fable5-s5i5",
+  "sha": "e260ce5069cdadc4ebac6576dc596e647f8813a8",
+  "has_ledger": false,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-fable5-su15",
+  "sha": "73b3d4e53b90a15a86b2497d48041b169fbccb1d",
+  "has_ledger": true,
+  "rows": 2
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-fable5-tr87",
+  "sha": "cdcbde0d0ff7aecac2e9bf8e3c40a149d43b93dc",
+  "has_ledger": false,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-glm5.2-ar25",
+  "sha": "6bebc1fe27e4a6acc3d9cda300980620b53218a4",
+  "has_ledger": true,
+  "rows": 6
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-glm5.2-ft09",
+  "sha": "58d31f7b9079f6d76744e0f1aac33ff38c17ed85",
+  "has_ledger": true,
+  "rows": 15
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-glm5.2-g50t",
+  "sha": "e47c9c6dff662d9a644a7d3c2bdfb41d7cdcb140",
+  "has_ledger": true,
+  "rows": 15
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-glm5.2-ls20",
+  "sha": "6f5033561a21649b042b3d73e065dfad17a6e98f",
+  "has_ledger": true,
+  "rows": 4
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-glm5.2-r11l",
+  "sha": "5b96308893457a0c460968abb006d32a81522a23",
+  "has_ledger": true,
+  "rows": 13
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-glm5.2-s5i5",
+  "sha": "9e1275e4fbe16b34b4f1303bcf442df642846825",
+  "has_ledger": true,
+  "rows": 7
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-glm5.2-su15",
+  "sha": "95f1fd585e8e3931fd1550e09ae3aced1145c3dd",
+  "has_ledger": true,
+  "rows": 7
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-glm5.2-tr87",
+  "sha": "5dbc953b25d3344cc39075214735cb954b6ae05d",
+  "has_ledger": true,
+  "rows": 10
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-opus4.8-ar25",
+  "sha": "b17bb167914587b126e7bec6a4816114561a38fe",
+  "has_ledger": true,
+  "rows": 4
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-opus4.8-ft09",
+  "sha": "e50b692bde1665483c38fe7c81830f094e5a635f",
+  "has_ledger": true,
+  "rows": 4
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-opus4.8-g50t",
+  "sha": "246a02595c9f6ea20818ec27ace800aa4a9b57ea",
+  "has_ledger": true,
+  "rows": 26
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-opus4.8-ka59",
+  "sha": "38a1656205e3d802b5b321a2108f640a08b132a4",
+  "has_ledger": true,
+  "rows": 20
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-opus4.8-lf52",
+  "sha": "789cf09a97df2e79f0a5969d38d73850aac5a794",
+  "has_ledger": true,
+  "rows": 40
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-opus4.8-ls20",
+  "sha": "a13bdd70c1ae679815fbcf6bbc81c8bc568708ac",
+  "has_ledger": true,
+  "rows": 19
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-opus4.8-ls20-demo",
+  "sha": "e4995377bb9df75d68ea6e4e56460e3df0f452a8",
+  "has_ledger": false,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-opus4.8-r11l",
+  "sha": "144c8ee07adcecb544b99aa90e7a544b8030a8b3",
+  "has_ledger": true,
+  "rows": 8
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-opus4.8-s5i5",
+  "sha": "70e466e437d8e4d59e90f1da493b678ad1e1e9d4",
+  "has_ledger": true,
+  "rows": 11
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-opus4.8-su15",
+  "sha": "a7511379719daf54a2f5fd26360d20273d36f7ff",
+  "has_ledger": true,
+  "rows": 23
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-opus4.8-tr87",
+  "sha": "c83a39a191907bb4576a03f4438d67415cc995bc",
+  "has_ledger": true,
+  "rows": 28
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-cc-opus4.8-wa30",
+  "sha": "8180a33d61d5a2131f0c039656420f2fdcbfc7a9",
+  "has_ledger": true,
+  "rows": 21
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-codex-gpt5.5-ar25",
+  "sha": "5142f62ddf81779121ebf94fd46a25161c7650ea",
+  "has_ledger": true,
+  "rows": 71
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-codex-gpt5.5-ft09",
+  "sha": "f748d97da20e2b557ee723bfb58933f688da65d2",
+  "has_ledger": true,
+  "rows": 2
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-codex-gpt5.5-g50t",
+  "sha": "fcda7b4a301ec66480b8c9a009108db043c664f3",
+  "has_ledger": true,
+  "rows": 244
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-codex-gpt5.5-ls20",
+  "sha": "34bcf4c95f2f4754aa0487492c4aa2937380fe15",
+  "has_ledger": true,
+  "rows": 56
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-codex-gpt5.5-r11l",
+  "sha": "ea52b0b1105b941eef8a7c46b44fde65c09e2436",
+  "has_ledger": true,
+  "rows": 129
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-codex-gpt5.5-s5i5",
+  "sha": "946596ca43fc4c3b5c790ef7d6918bd59f37a75b",
+  "has_ledger": true,
+  "rows": 353
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-codex-gpt5.5-su15",
+  "sha": "5c524661ee7b30ef30a87d1530bef7d06f90fac4",
+  "has_ledger": true,
+  "rows": 12
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-codex-gpt5.5-tr87",
+  "sha": "8458077a283496f2a768d28efc3efba3ebac98f1",
+  "has_ledger": true,
+  "rows": 2
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-codex-gpt5.6sol-ar25",
+  "sha": "b9ee4a2dea38d9e800db5c6554edc5e1edac063b",
+  "has_ledger": true,
+  "rows": 4
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-codex-gpt5.6sol-ft09",
+  "sha": "213077b2f5f2f57175d254d0f56b8ad8af37346c",
+  "has_ledger": false,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-codex-gpt5.6sol-g50t",
+  "sha": "f11e6528dc3d90701a90b8a6e3d116ff82ee11ae",
+  "has_ledger": true,
+  "rows": 232
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-codex-gpt5.6sol-ls20",
+  "sha": "4741c79e339a67dc487fc27e836cf92f4fe7d2ce",
+  "has_ledger": true,
+  "rows": 394
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-codex-gpt5.6sol-r11l",
+  "sha": "c8e8031069a8e34203e09940c737ad6b365639d6",
+  "has_ledger": true,
+  "rows": 86
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-codex-gpt5.6sol-s5i5",
+  "sha": "a0607845975056fdd2e1840ba5f7baa49ab2553b",
+  "has_ledger": true,
+  "rows": 6
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-codex-gpt5.6sol-su15",
+  "sha": "c103d06dca025f5bf6c6fec66646624809fcd62b",
+  "has_ledger": true,
+  "rows": 331
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-codex-gpt5.6sol-tr87",
+  "sha": "d64fb0f5a3e3ac7bf08192e0bfa626f069bf814c",
+  "has_ledger": false,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-grok-4.5-ar25",
+  "sha": "ac76b9b0fb1643bb89438e6b2b5e35ee73debde9",
+  "has_ledger": true,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-grok-4.5-ft09",
+  "sha": "9662011967114eb77f8615fa2c21f1949e951281",
+  "has_ledger": true,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-grok-4.5-ls20",
+  "sha": "20337e703c64a185f5cc7695ea922ddb8595d700",
+  "has_ledger": true,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-grok-4.5-s5i5",
+  "sha": "993b416848b42d89244417fa0b43852bfdede8f2",
+  "has_ledger": true,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-grok-4.5-tr87",
+  "sha": "248f3ecc2a5a16dc06a50b7f743e783b4ac99f84",
+  "has_ledger": true,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-ka59-agent-trajectories",
+  "sha": "e46c3d6153622bed01302f15e3fefcf0baf9fed0",
+  "has_ledger": true,
+  "rows": 20
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-kimi-k2.7-ar25",
+  "sha": "e73d7f83f55b2fa9ce9a08b6c8b6257e887a7249",
+  "has_ledger": true,
+  "rows": 2
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-kimi-k2.7-ft09",
+  "sha": "07fcd6c78a14c87bf97c93c659613a0e50a09f29",
+  "has_ledger": true,
+  "rows": 23
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-kimi-k2.7-g50t",
+  "sha": "12123ba46a491977c1019180e5bdc6fdd0f39054",
+  "has_ledger": true,
+  "rows": 28
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-kimi-k2.7-ls20",
+  "sha": "7ca87a3bf99f7ef509d24d5cd23e2cd9a4822c1c",
+  "has_ledger": true,
+  "rows": 6
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-kimi-k2.7-r11l",
+  "sha": "6d640c07595d64989a8ea1bd7765d8fb9f79e484",
+  "has_ledger": true,
+  "rows": 20
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-kimi-k2.7-s5i5",
+  "sha": "835f5e9e09955312fe52dda9692ec814e8c782c0",
+  "has_ledger": true,
+  "rows": 17
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-kimi-k2.7-su15",
+  "sha": "984cfcdd457936f4b84815ffacd2102aa739f21e",
+  "has_ledger": true,
+  "rows": 7
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-kimi-k2.7-tr87",
+  "sha": "4a2a26ba2689db4e4ece0573115022ecd3f55003",
+  "has_ledger": true,
+  "rows": 17
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-lf52-agent-trajectories",
+  "sha": "e4b1161cd05a8e32eb594a35c318e753aea8c48a",
+  "has_ledger": true,
+  "rows": 40
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-ls20-agent-trajectories",
+  "sha": "297517af48b409d02811a3e5ef5ab019f8488fdd",
+  "has_ledger": false,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-phase2-ar25",
+  "sha": "d3b32a66d001515806c8f5f72f6a6d823c40d901",
+  "has_ledger": false,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-phase2-ft09",
+  "sha": "5c03e65d4e404dac3e36906bed038656c9ef3d00",
+  "has_ledger": false,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-phase2-g50t",
+  "sha": "2bf9d017d9dedf4cd48abc02118d0e917e718824",
+  "has_ledger": false,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-phase2-ls20",
+  "sha": "df7b5a9e5d5a62d500f90857f2362752a104e6c2",
+  "has_ledger": false,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-phase2-r11l",
+  "sha": "f0296e0bfbfc51ec38642ec96f30d1264bbefeb2",
+  "has_ledger": false,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-phase2-s5i5",
+  "sha": "cb16f5389e4a506e0ab4f8e17dfd2ea26fc33110",
+  "has_ledger": false,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-phase2-su15",
+  "sha": "a9b87a410cb3674685b38674e827c28a7be49e37",
+  "has_ledger": false,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-phase2-tr87",
+  "sha": "2ab93bf6c80062472ea6a3e816afc8154f5a4c8a",
+  "has_ledger": false,
+  "rows": 0
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-su15-agent-trajectories",
+  "sha": "7b344b4fc058655fa471dc08786dfe8cbda72eeb",
+  "has_ledger": true,
+  "rows": 26
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-tr87-agent-trajectories",
+  "sha": "0ae9676e2ec99b42b3072f7d5179b2352abeefe0",
+  "has_ledger": true,
+  "rows": 21
+ },
+ {
+  "repo": "AgentNativeResearchLab/arc-agi3-wa30-agent-trajectories",
+  "sha": "5dd93f0ef26d4dee26eefba1161c740c7bfd8620",
+  "has_ledger": true,
+  "rows": 21
+ }
+]

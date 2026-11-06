@@ -1,0 +1,7 @@
+transcripts=100 python calls=9271 function definitions=6086
+definition tokens (chars/4)=530,696; all generated tokens (solver totals)=17,954,840; share=0.0296
+within-run exact redefinitions=1215 tokens=51,563 share_of_all_generated=0.0029
+unique per-run definitions=4871; exact duplicate in another game=83 (0.017); tokens=1,670 share_of_all_generated=0.0001
+near-duplicate (bigram Jaccard>=0.8) in another game=656 (0.135); tokens=24,669 share_of_all_generated=0.0014
+generic by proxy=2191 (0.450)
+most common helper names: [('crop', 89), ('bfs', 83), ('ok', 68), ('run', 48), ('solve', 45), ('snap', 38), ('step', 37), ('show', 36), ('state', 33), ('sim', 31), ('cells', 30), ('build', 26), ('slide', 26), ('rec', 23), ('valid', 23), ('free', 23), ('bar', 22), ('reach', 22), ('grid', 20), ('legal', 20), ('probe', 19), ('st', 18), ('blocks', 18), ('brief', 18), ('dist', 18)]

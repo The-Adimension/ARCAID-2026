@@ -1,0 +1,374 @@
+== generated worlds: 20 games x 2 layouts x 150 actions
+                predictions right      changes explained        steps exact     changes, any
+old kinds     90.3% (5606/6210)      35.6% (3062/8594)       47.3% (2840/6000)   59.4%
+grammar       90.5% (5657/6248)      59.6% (5123/8594)       68.3% (4098/6000)   65.8%
+changes explained by both: 2949; by the old kinds only: 113; by the grammar only: 2174
+  by old rule kind (also explained by the grammar / old kinds only): steer 2949/113
+  grammar only, by verb: move 1783; recolor 248; turn 66; reshape 44; vanish 33
+final grammar rules: 132, of which 53 name no picture (40.2%)
+
+game   note                                           old: right / explained   grammar: right / explained / exact
+w01    control: steer + walls                          97.9% /   79.7%         93.5% /   77.5% /   79.7%
+w02    scrambled controls                              97.9% /   85.8%         90.6% /   82.8% /   84.0%
+w03    gravity on rocks                                96.9% /   78.0%         90.8% /   76.5% /   79.3%
+w04    pushable boxes                                  95.9% /   90.2%         93.1% /   88.7% /   85.0%
+w05    collect coins                                   98.6% /   96.3%         98.6% /   93.3% /   92.0%
+w06    key opens door                                  96.9% /   95.5%         92.9% /   92.2% /   87.3%
+w07    teleport pad                                    75.9% /   55.5%         83.6% /   54.3% /   61.7%
+w08    mirrored twin                                   93.3% /   45.1%         92.4% /   87.9% /   77.0%
+w09    chaser                                          92.0% /   49.0%         87.5% /   87.5% /   71.7%
+w10    conveyor drifters                               97.3% /   18.2%         90.0% /   67.6% /   42.7%
+w11    ice: slide until blocked                        96.9% /   88.6%         92.7% /   81.4% /   89.7%
+w12    painting trail                                  96.7% /   34.7%         86.0% /   35.8% /   13.0%
+w13    coins + timer bar                               97.9% /   28.9%         95.1% /   29.7% /    0.0%
+w14    ACTION5 rotates the avatar                      24.5% /   13.6%         82.1% /   53.0% /   59.3%
+w15    click cycles 3 colours (control)               100.0% /    0.0%        100.0% /   95.5% /   96.3%
+w16    lights-out on a lattice                         85.0% /    0.0%         48.4% /    3.4% /   24.0%
+w17    click switch rotates a shape                   100.0% /    0.0%        100.0% /   86.0% /   98.0%
+w18    click spawns falling blocks                     47.0% /    0.0%         80.3% /   59.6% /   56.3%
+w19    click removes (control) + ACTION5 swaps colo    86.3% /    0.0%         86.5% /   17.6% /   80.7%
+w20    push + gravity + coins, scrambled controls      83.6% /   12.2%         95.5% /   88.1% /   88.3%
+
+rules at the end (layout 0):
+-- w01 level 1 (150 steps, layout 0); residual 14 of 149 changes
+   grammar: when ACTION1|ACTION2|ACTION3|ACTION4 then move(colour:9, by action: A1 unless path:c8 (-1,+0) | A2 unless path:c8 (+1,+0) | A3 (+0,-1) | A4 (+0,+1)) # 135 right, 4 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 135/135    AVATAR = bbef; step A1=(-1,+0) A2=(+1,+0) A3=(+0,-1) A4=(+0,+1); 15 presses blocked
+   old:     on ACTION1-4: nothing if WALL ahead      # 15/15     WALL = {c8}
+-- w02 level 1 (150 steps, layout 0); residual 16 of 117 changes
+   grammar: when ACTION1|ACTION2|ACTION3|ACTION4 then move(colour:9, by action: A1 unless path:c8 (+1,+0) | A2 unless path:c8 (+0,+1) | A3 unless path:c8 (-1,+0) | A4 unless path:c8 (+0,-1)) # 101 right, 0 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 101/101    AVATAR = bbef; step A1=(+1,+0) A2=(+0,+1) A3=(-1,+0) A4=(+0,-1); 49 presses blocked
+   old:     on ACTION1-4: nothing if WALL ahead      # 49/49     WALL = {c8}
+-- w03 level 1 (150 steps, layout 0); residual 36 of 183 changes
+   grammar: when ACTION1|ACTION2|ACTION3|ACTION4 then move(colour:9, by action: A1 (-1,+0) | A2 unless path:c8 (+1,+0) | A3 (+0,-1) | A4 unless path:c8 (+0,+1)) # 137 right, 3 wrong
+   grammar: when ACTION1|ACTION4 then resize(pic:Re98, by action: A1 -1 | A4 -1) # 10 right, 2 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 137/137    AVATAR = bbef; step A1=(-1,+0) A2=(+1,+0) A3=(+0,-1) A4=(+0,+1); 13 presses blocked
+   old:     on ACTION1-4: nothing if WALL ahead      # 12/12     WALL = {c8}
+-- w04 level 1 (150 steps, layout 0); residual 4 of 141 changes
+   grammar: when ACTION1|ACTION2|ACTION3|ACTION4 then move(colour:9, by action: A1 (-1,+0) | A2 unless path:c8 (+1,+0) | A3 unless path:c8 (+0,-1) | A4 (+0,+1)) # 137 right, 5 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 137/137    AVATAR = bbef (+g5d9); step A1=(-1,+0) A2=(+1,+0) A3=(+0,-1) A4=(+0,+1); 13 presses blocked
+-- w05 level 1 (150 steps, layout 0); residual 2 of 150 changes
+   grammar: when ACTION1|ACTION2|ACTION3|ACTION4 then move(colour:9, by action: A1 (-1,+0) | A2 (+1,+0) | A3 (+0,-1) | A4 (+0,+1)) # 148 right, 2 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 148/148    AVATAR = bbef; step A1=(-1,+0) A2=(+1,+0) A3=(+0,-1) A4=(+0,+1); 2 presses blocked
+-- w06 level 1 (150 steps, layout 0); residual 0 of 126 changes
+   grammar: when ACTION1|ACTION2|ACTION3|ACTION4 then move(colour:9, by action: A1 unless path:c8 (-1,+0) | A2 (+1,+0) | A3 unless path:c8 (+0,-1) | A4 unless path:c8 (+0,+1)) # 126 right, 4 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 126/126    AVATAR = bbef; step A1=(-1,+0) A2=(+1,+0) A3=(+0,-1) A4=(+0,+1); 24 presses blocked
+   old:     on ACTION1-4: nothing if WALL ahead      # 24/24     WALL = {c8, c13}
+-- w07 level 1 (150 steps, layout 0); residual 68 of 178 changes
+   grammar: when ACTION1|ACTION2|ACTION3|ACTION4 then move(pic:bbef, by action: A1 unless path:c8 (-1,+0) | A2 unless path:c8 (+1,+0) | A3 unless path:c8 (+0,-1) | A4 unless path:c8 (+0,+1)) # 77 right, 12 wrong
+   grammar: when ACTION1|ACTION3|ACTION4 then reshape(pic:Rea7, by action: A1 to b832 | A3 to bae2 | A4 to O846) # 10 right, 0 wrong
+   grammar: when ACTION2|ACTION3|ACTION4 then reshape(pic:b832, by action: A2 to Rea7 | A3 to bbef | A4 to O846) # 8 right, 0 wrong
+   grammar: when ACTION2|ACTION4 then reshape(pic:bae2, by action: A2 to O846 | A4 to Rea7) # 6 right, 0 wrong
+   grammar: when ACTION4 then resize(pic:R22a, +0)                         # 3 right, 0 wrong
+   grammar: when ACTION3 then vanish(pic:R22a)                             # 3 right, 0 wrong
+   grammar: when ACTION3 then resize(pic:Rf1b, +0)                         # 3 right, 0 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 77/77     AVATAR = bbef; step A1=(-1,+0) A2=(+1,+0) A3=(+0,-1) A4=(+0,+1); 73 presses blocked
+   old:     on ACTION1-4: nothing if WALL ahead      # 15/15     WALL = {c8}
+-- w08 level 1 (150 steps, layout 0); residual 12 of 277 changes
+   grammar: when ACTION1|ACTION2|ACTION3|ACTION4 then move(colour:10, by action: A1 (+1,+0) | A2 unless path:c9 (-1,+0) | A3 (+0,+1) | A4 unless touch:c9 (+0,-1)) # 136 right, 9 wrong
+   grammar: when ACTION1|ACTION2|ACTION3|ACTION4 then move(colour:9, by action: A1 unless path:c8 (-1,+0) | A2 unless path:c8 (+1,+0) | A3 unless path:c8 (+0,-1) | A4 unless touch:c10 (+0,+1)) # 129 right, 3 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 129/129    AVATAR = bbef; step A1=(-1,+0) A2=(+1,+0) A3=(+0,-1) A4=(+0,+1); 21 presses blocked
+   old:     on ACTION1-4: nothing if WALL ahead      # 21/21     WALL = {c8, c10}
+   old:     every action: move(TICKER)               # 136/143    TICKER = S0aa
+-- w09 level 1 (150 steps, layout 0); residual 9 of 265 changes
+   grammar: when ACTION1|ACTION2|ACTION3|ACTION4 then move(colour:9, by action: A1 (-1,+0) | A2 unless touch:c2 (+1,+0) | A3 unless touch:c8 (+0,-1) | A4 (+0,+1)) # 136 right, 0 wrong
+   grammar: when ACTION1|ACTION2|ACTION3|ACTION4 then move(colour:2, by action: A1 (-1,+0) | A2 unless touch:c9 (-1,+0) | A3 unless touch:c9 (-1,+0) | A4 unless touch:c9 (-1,+0)) # 107 right, 24 wrong
+   grammar: when ACTION1|ACTION3|ACTION4 then move(touching:bbef, by action: A1 (-1,+0) | A3 (+0,-1) | A4 (+0,+1)) # 20 right, 1 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 136/136    AVATAR = bbef; step A1=(-1,+0) A2=(+1,+0) A3=(+0,-1) A4=(+0,+1); 14 presses blocked
+   old:     on ACTION1-4: nothing if WALL ahead      # 14/14     WALL = {c8, c2}
+   old:     every action: move(TICKER)               # 129/144    TICKER = g5d9
+-- w10 level 1 (150 steps, layout 0); residual 213 of 569 changes
+   grammar: when any unless path:c8 then move(pic:G36e, (+0,+1))           # 190 right, 38 wrong
+   grammar: when ACTION1|ACTION2|ACTION3|ACTION4 then move(colour:9, by action: A1 unless path:c8 (-1,+0) | A2 unless path:c8 (+1,+0) | A3 unless touch:c3 (+0,-1) | A4 unless path:c8 (+0,+1)) # 115 right, 5 wrong
+   grammar: when any then reshape(pic:G0b9, to R761)                       # 26 right, 8 wrong
+   grammar: when any then resize(pic:R349, -1)                             # 8 right, 0 wrong
+   grammar: when any unless touch:c9 then resize(pic:Rd61, +0)             # 5 right, 0 wrong
+   grammar: when any then reshape(pic:G161, to G36e)                       # 4 right, 0 wrong
+   grammar: when any then resize(pic:Gc79, +0)                             # 4 right, 1 wrong
+   grammar: when ACTION2 then resize(pic:Gda5, -1)                         # 4 right, 1 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 115/115    AVATAR = bbef; step A1=(-1,+0) A2=(+1,+0) A3=(+0,-1) A4=(+0,+1); 35 presses blocked
+   old:     on ACTION1-4: nothing if WALL ahead      # 35/35     WALL = {c8, c3}
+   old:     every action: move(TICKER)               # 145/150    TICKER = G36e
+-- w11 level 1 (150 steps, layout 0); residual 6 of 75 changes
+   grammar: when ACTION1|ACTION2|ACTION3|ACTION4 then move(colour:9, by action: A1 unless path:edge (-13,+0) | A2 unless path:edge (+13,+0) | A3 unless path:edge (+0,-13) | A4 unless path:edge (+0,+13)) # 69 right, 0 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 69/71     AVATAR = bbef; step A1=(-13,+0) A2=(+13,+0) A3=(+0,-13) A4=(+0,+13); 79 presses blocked
+   old:     on ACTION1-4: nothing if WALL ahead      # 158/158    WALL = {c8, edge}
+-- w12 level 1 (150 steps, layout 0); residual 117 of 221 changes
+   grammar: when ACTION1|ACTION2|ACTION3|ACTION4 then move(pic:bbef, by action: A1 (-1,+0) | A2 unless path:c8 (+1,+0) | A3 unless path:c8 (+0,-1) | A4 unless path:c8 (+0,+1)) # 77 right, 3 wrong
+   grammar: when any if touch:c8 then recolor(colour:12, {9:12, 12:9})     # 24 right, 10 wrong
+   grammar: when any then resize(pic:Od16, +0)                             # 3 right, 0 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 77/77     AVATAR = bbef; step A1=(-1,+0) A2=(+1,+0) A3=(+0,-1) A4=(+0,+1); 73 presses blocked
+   old:     on ACTION1-4: nothing if WALL ahead      # 11/11     WALL = {c8}
+-- w13 level 1 (150 steps, layout 0); residual 9 of 427 changes
+   grammar: when any then resize(colour:4, -1)                             # 133 right, 17 wrong
+   grammar: when ACTION1|ACTION2|ACTION3|ACTION4 then move(colour:9, by action: A1 unless path:c8 (-1,+0) | A2 (+1,+0) | A3 unless path:c8 (+0,-1) | A4 (+0,+1)) # 118 right, 1 wrong
+   grammar: when any then resize(pic:Rdd8, +1)                             # 9 right, 0 wrong
+   grammar: when any then resize(pic:R761, +1)                             # 9 right, 0 wrong
+   grammar: when any then resize(pic:R38b, +1)                             # 9 right, 0 wrong
+   grammar: when any then resize(pic:R273, +1)                             # 9 right, 0 wrong
+   grammar: when any then resize(pic:R237, +1)                             # 9 right, 0 wrong
+   grammar: when any then resize(pic:R0fd, +1)                             # 9 right, 0 wrong
+   grammar: when any then reshape(pic:c7c0, to Y538)                       # 9 right, 0 wrong
+   grammar: when any then vanish(pic:c7fc)                                 # 8 right, 0 wrong
+   grammar: when any then resize(pic:Rcdb, +1)                             # 8 right, 0 wrong
+   grammar: when any then resize(pic:Rbd2, +1)                             # 8 right, 0 wrong
+   grammar: when any then resize(pic:Racb, +1)                             # 8 right, 0 wrong
+   grammar: when any then resize(pic:R9b3, +1)                             # 8 right, 0 wrong
+   grammar: when any then resize(pic:R8e9, +1)                             # 8 right, 0 wrong
+   grammar: when any then resize(pic:R527, +1)                             # 8 right, 0 wrong
+   grammar: when any then resize(pic:R4ad, +1)                             # 8 right, 0 wrong
+   grammar: when any then resize(pic:R416, +1)                             # 8 right, 0 wrong
+   grammar: when any then resize(pic:R1a7, +1)                             # 8 right, 0 wrong
+   grammar: when any then resize(pic:R083, +1)                             # 8 right, 0 wrong
+   grammar: when any then resize(pic:R054, +1)                             # 8 right, 0 wrong
+   grammar: when any then resize(pic:R023, +1)                             # 8 right, 0 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 118/118    AVATAR = bbef; step A1=(-1,+0) A2=(+1,+0) A3=(+0,-1) A4=(+0,+1); 32 presses blocked
+   old:     on ACTION1-4: nothing if WALL ahead      # 32/32     WALL = {c8}
+-- w14 level 1 (150 steps, layout 0); residual 90 of 185 changes
+   grammar: when ACTION1|ACTION2|ACTION3|ACTION4 then move(colour:9, by action: A1 (-1,+0) | A2 unless path:c8 (+1,+0) | A3 unless path:c8 (+0,-1) | A4 (+0,+1)) # 84 right, 30 wrong
+   grammar: when ACTION5 then turn(pic:b42c, mirror+rot0)                  # 6 right, 0 wrong
+   grammar: when ACTION5 then turn(pic:b10a, mirror+rot0)                  # 5 right, 0 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 24/24     AVATAR = b10a; step A1=(-1,+0) A2=(+1,+0) A3=(+0,-1) A4=(+0,+1); 94 presses blocked
+-- w15 level 1 (150 steps, layout 0); residual 0 of 119 changes
+   grammar: when any then recolor(clicked, {7:10, 10:14, 14:7})            # 119 right, 0 wrong
+   old:     on ACTION6(x,y): change(CLICKED)         # 119/119    CLICKED in {Pdfe, N2bf, S074}; Pdfe->S074, N2bf->Pdfe, S074->N2bf (colour 7 <-> 10 <-> 14)
+-- w16 level 1 (150 steps, layout 0); residual 401 of 446 changes
+   grammar: when any unless path:edge then move(clicked, (-3,+0))          # 45 right, 38 wrong
+   old:     on ACTION6(x,y) at TRIGGER: move(TARGET) # 48/59     TRIGGER = w325; TARGET = Pdfe
+   old:     on ACTION6(x,y) at TRIGGER: move(TARGET) # 46/52     TRIGGER = Pdfe; TARGET = w325
+-- w17 level 1 (150 steps, layout 0); residual 0 of 17 changes
+   grammar: when any if click:c12 then turn(colour:9, rot90)               # 17 right, 0 wrong
+   old:     on ACTION6(x,y): nothing if CLICKED is INERT # 100/100    INERT = {Pfde, bfdf, b5b5, bbd4}
+-- w18 level 1 (150 steps, layout 0); residual 70 of 253 changes
+   grammar: when any unless path:c8 then move(colour:6, (+4,+0))           # 160 right, 26 wrong
+   grammar: when any if click:none then appear(M28a, somewhere)            # 23 right, 16 wrong
+   old:     on ACTION6(x,y): nothing if CLICKED is INERT # 18/18     INERT = {R862, M672}
+-- w19 level 1 (150 steps, layout 0); residual 151 of 187 changes
+   grammar: when any unless click:c5 then vanish(clicked)                  # 14 right, 0 wrong
+   grammar: when ACTION5 if path:c7 then move(colour:10, (+3,+0))          # 11 right, 1 wrong
+   grammar: when ACTION5 if path:c10 then move(colour:7, (-3,+0))          # 11 right, 1 wrong
+   old:     on ACTION6(x,y): nothing if CLICKED is INERT # 32/32     INERT = {B827}
+-- w20 level 1 (150 steps, layout 0); residual 42 of 180 changes
+   grammar: when ACTION1|ACTION2|ACTION3|ACTION4 then move(colour:9, by action: A1 (+0,+1) | A2 unless path:c8 (+0,-1) | A3 (+1,+0) | A4 unless path:c8 (-1,+0)) # 138 right, 1 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 20/20     AVATAR = Mfc5; step A1=(+1,+0) A2=(+1,+0) A3=(+1,+0) A4=(+1,+0); 130 presses blocked
+   old:     on ACTION1-4: nothing if WALL ahead      # 130/146    WALL = {c8}
+   old:     every action: move(TICKER)               # 138/138    TICKER = bbef
+
+== public games: 55 recorded plays
+                predictions right      changes explained        steps exact     changes, any
+old kinds     84.3% (3506/4158)       9.4% (3207/34238)       4.1% (241/5948)    17.8%
+grammar       75.0% (7377/9838)      16.6% (5676/34238)       9.3% (553/5948)    22.0%
+changes explained by both: 2881; by the old kinds only: 326; by the grammar only: 2795
+  by old rule kind (also explained by the grammar / old kinds only): remote 107/9; scroll 184/0; steer 2590/317
+  grammar only, by verb: move 2196; recolor 331; vanish 253; reshape 14; turn 1
+final grammar rules: 685, of which 307 name no picture (44.8%)
+
+game   note                                           old: right / explained   grammar: right / explained / exact
+ar25                                                   80.7% /   17.4%         73.0% /   31.5% /    5.5%
+bp35                                                   64.0% /    1.1%         51.9% /    0.7% /    0.0%
+cd82                                                   60.0% /    0.0%         74.0% /    0.3% /    0.7%
+cn04                                                   36.8% /    5.5%         53.5% /   15.8% /   31.6%
+dc22                                                   87.8% /    6.6%         50.0% /    2.0% /   27.5%
+ft09                                                   97.5% /    0.0%         97.3% /   68.5% /   71.9%
+g50t                                                   81.0% /   20.8%         83.1% /   21.5% /    9.2%
+ka59                                                   45.1% /    9.1%         63.2% /    9.5% /    5.2%
+lf52                                                   61.0% /    4.5%         55.4% /   11.0% /    0.0%
+lp85                                                   95.6% /    0.0%         58.8% /    1.9% /    5.6%
+ls20                                                   91.4% /   15.5%         91.0% /   29.2% /    0.0%
+m0r0                                                   79.2% /   41.8%         67.8% /   37.7% /   20.7%
+r11l                                                   25.0% /    0.0%         83.8% /    0.8% /    0.0%
+re86                                                   85.3% /   14.2%         81.2% /   15.3% /    1.5%
+s5i5                                                    0.0% /    0.0%         63.2% /    0.7% /    7.3%
+sb26                                                   92.2% /    7.2%         88.5% /   10.7% /    4.5%
+sc25                                                   74.9% /    2.8%         68.5% /   12.6% /    9.8%
+sk48                                                   68.4% /    2.0%         67.1% /   12.2% /    6.7%
+sp80                                                   69.6% /   13.3%         62.1% /    9.2% /    0.0%
+su15                                                  100.0% /    0.0%         84.9% /    0.6% /    1.5%
+tn36                                                   92.9% /    0.0%         95.4% /    9.6% /    0.0%
+tr87                                                   92.0% /    4.9%         81.9% /   11.3% /    7.7%
+tu93                                                   90.0% /   22.5%         85.0% /   25.2% /   14.7%
+vc33                                                   54.8% /    0.0%         63.3% /    1.6% /    7.3%
+wa30                                                   81.7% /    1.7%         74.4% /   15.0% /    1.6%
+
+rules at the end of level 1 (first play per game):
+-- ar25 level 1 (16 steps, dfranzen-v1); residual 14 of 41 changes
+   grammar: when ACTION2|ACTION3 then move(colour:5, by action: A2 (+1,+0) | A3 (+0,-1)) # 14 right, 0 wrong
+   grammar: when ACTION2|ACTION3 then move(colour:4, by action: A2 (+1,+0) | A3 (+0,+1)) # 13 right, 1 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 15/15     AVATAR = B826; step A2=(+1,+0) A3=(+0,-1) A4=(+0,+1); 1 presses blocked
+   old:     every action: move(TICKER)               # 14/16     TICKER = cd56
+-- bp35 level 1 (24 steps, sheetu-4.17); residual 393 of 555 changes
+   grammar: when any unless click:c14 then appear(G36e, somewhere)         # 3 right, 16 wrong
+   grammar: when any then resize(colour:15, +1)                            # 22 right, 0 wrong
+   grammar: when ACTION4 then move(pic:b83e, (+0,+6))                      # 6 right, 1 wrong
+   grammar: when ACTION3 then move(pic:b78e, (+0,-6))                      # 4 right, 0 wrong
+   grammar: when any then vanish(colour:14)                                # 3 right, 0 wrong
+   grammar: when any if click:c14 then vanish(clicked)                     # 4 right, 1 wrong
+   grammar: when ACTION3 then vanish(pic:b83e)                             # 3 right, 0 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 6/6      AVATAR = b83e; step A4=(+0,+6); 3 presses blocked
+   old:     on ACTION6(x,y): change(CLICKED)         # 4/8      CLICKED in {N946}; 
+   old:     on ACTION6(x,y) at TRIGGER: vanish(TARGET) # 5/5      TRIGGER = N946; TARGET = G36e
+-- cd82 level 1 (138 steps, sheetu-4.17); residual 81 of 286 changes
+   grammar: when any unless touch:c3 then resize(colour:4, -1)             # 87 right, 51 wrong
+   grammar: when ACTION3|ACTION4 then resize(pic:g800, by action: A3 +13 | A4 +13) # 26 right, 1 wrong
+   grammar: when ACTION3 then resize(pic:g1c5, -13)                        # 17 right, 0 wrong
+   grammar: when ACTION3|ACTION4 then resize(pic:p265, by action: A3 +1 | A4 +1) # 13 right, 0 wrong
+   grammar: when ACTION3|ACTION4 then resize(pic:Wc5b, by action: A3 +1 | A4 +1) # 13 right, 1 wrong
+   grammar: when ACTION3 then resize(pic:W484, -1)                         # 11 right, 0 wrong
+   grammar: when ACTION4 then resize(pic:g9cd, -13)                        # 8 right, 0 wrong
+   grammar: when ACTION4 then resize(pic:p5ad, -1)                         # 6 right, 0 wrong
+   grammar: when ACTION3 then resize(pic:p206, -1)                         # 6 right, 0 wrong
+   grammar: when ACTION6 unless click:c0 then resize(pic:Gd7a, +0)         # 5 right, 0 wrong
+   grammar: when ACTION6 if click:c4 then resize(pic:G767, +0)             # 5 right, 0 wrong
+   grammar: when ACTION5 then vanish(pic:Wdba)                             # 5 right, 1 wrong
+   grammar: when any if click:c4 then recolor(pic:p265, {15:0})            # 3 right, 0 wrong
+   old:     on ACTION6(x,y) at TRIGGER: move(TARGET) # 9/9      TRIGGER = c1a0; TARGET = W3c7
+-- cn04 level 1 (45 steps, sheetu-4.17); residual 84 of 121 changes
+   grammar: when ACTION3|ACTION4 then move(pic:Wc5e, by action: A3 (+0,-1) | A4 unless touch:edge (+0,+1)) # 12 right, 0 wrong
+   grammar: when ACTION2 then move(colour:0, (+1,+0))                      # 7 right, 0 wrong
+   grammar: when ACTION3|ACTION4 then move(pic:R761, by action: A3 unless touch:c14 (+0,-1) | A4 (+0,+1)) # 14 right, 8 wrong
+   grammar: when ACTION4 then resize(pic:Nde8, +1)                         # 4 right, 0 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 10/10     AVATAR = Wc5e (+R761); step A3=(+0,-1) A4=(+0,+1); 24 presses blocked
+   old:     on ACTION1-4: nothing if WALL ahead      # 7/7      WALL = {edge}
+-- dc22 level 1 (69 steps, sheetu-4.17); residual 134 of 152 changes
+   grammar: when ACTION1|ACTION2|ACTION3|ACTION4 then move(colour:14, by action: A1 if path:c2 (-2,+0) | A2 (+2,+0) | A3 if path:c2 (+0,-2) | A4 unless path:c4 (+0,+2)) # 14 right, 0 wrong
+   grammar: when ACTION3 then resize(pic:g251, +0)                         # 4 right, 0 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 14/14     AVATAR = N2bf; step A1=(-2,+0) A2=(+2,+0) A3=(+0,-2) A4=(+0,+2); 30 presses blocked
+   old:     on ACTION1-4: nothing if WALL ahead      # 31/31     WALL = {c4, c9}
+   old:     on ACTION6(x,y) at TRIGGER: move(TARGET) # 5/5      TRIGGER = bb2f; TARGET = b3fe
+-- ft09 level 1 (3 steps, dfranzen-v1); residual 0 of 3 changes
+   grammar: when any then recolor(clicked, {9:8})                          # 3 right, 0 wrong
+   old:     on ACTION6(x,y): change(CLICKED)         # 3/3      CLICKED in {b89b}; b89b->R6bb (colour 8 <-> 9)
+-- g50t level 1 (109 steps, sheetu-4.17); residual 155 of 307 changes
+   grammar: when ACTION1|ACTION2|ACTION3|ACTION4|ACTION5 then move(pic:bde6, by action: A1 unless touch:c8 (-6,+0) | A2 unless path:c8 (+6,+0) | A3 (+0,-6) | A4 unless touch:c8 (+0,+6) | A5 unless path:edge (-24,+0)) # 75 right, 4 wrong
+   grammar: when ACTION1|ACTION2 then resize(pic:Bdd5, by action: A1 +0 | A2 +0) # 9 right, 0 wrong
+   grammar: when any then resize(pic:Bbca, +0)                             # 10 right, 2 wrong
+   grammar: when any then resize(pic:Bac7, +0)                             # 8 right, 0 wrong
+   grammar: when ACTION1|ACTION2 then resize(pic:B22d, by action: A1 +0 | A2 +0) # 8 right, 0 wrong
+   grammar: when any then resize(pic:B6a5, +0)                             # 6 right, 0 wrong
+   grammar: when any then resize(pic:B634, +0)                             # 6 right, 0 wrong
+   grammar: when ACTION5 then vanish(colour:2)                             # 6 right, 0 wrong
+   grammar: when ACTION3|ACTION4 then resize(pic:Bfe8, by action: A3 +0 | A4 +40) # 6 right, 0 wrong
+   grammar: when ACTION3 then resize(pic:R096, +16)                        # 4 right, 0 wrong
+   grammar: when ACTION1|ACTION5 then resize(pic:B8c3, by action: A1 +0 | A5 +0) # 5 right, 1 wrong
+   grammar: when ACTION5 then vanish(pic:w965)                             # 3 right, 0 wrong
+   grammar: when ACTION3 then resize(pic:Bb5f, -40)                        # 3 right, 0 wrong
+   grammar: when ACTION5 if path:c2 then move(colour:9, (+0,-4))           # 3 right, 0 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 72/72     AVATAR = bde6; step A1=(-6,+0) A2=(+6,+0) A3=(+0,-6) A4=(+0,+6); 31 presses blocked
+   old:     on ACTION1-4: nothing if WALL ahead      # 21/26     WALL = {c8}
+   old:     on ACTION5: move(SUBJECT)                # 6/6      SUBJECT = b9f3
+-- ka59 level 1 (35 steps, sheetu-4.17); residual 76 of 126 changes
+   grammar: when ACTION3|ACTION4|ACTION6 then move(pic:N285, by action: A3 (+0,-3) | A4 unless path:c15 (+0,+3) | A6 (+0,+12)) # 20 right, 7 wrong
+   grammar: when any if touch:edge then resize(colour:0, +1)               # 21 right, 13 wrong
+   grammar: when any then resize(pic:wda2, +0)                             # 3 right, 0 wrong
+   grammar: when any then resize(pic:w1c2, +0)                             # 3 right, 0 wrong
+   grammar: when any if click:c14 then vanish(clicked)                     # 3 right, 0 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 18/18     AVATAR = N285; step A3=(+0,-3) A4=(+0,+3); 8 presses blocked
+   old:     on ACTION6(x,y): change(CLICKED)         # 4/6      CLICKED in {N6bb, Naf3, cd29}; cd29->c56d
+-- lf52 level 1 (13 steps, sheetu-4.17); residual 61 of 74 changes
+   grammar: when ACTION6 then resize(pic:Wda5, -16)                        # 5 right, 1 wrong
+   grammar: when any if click:c2 then vanish(clicked)                      # 3 right, 0 wrong
+   grammar: when any if click:c14 then reshape(clicked, to N219)           # 5 right, 2 wrong
+   old:     on ACTION6(x,y): change(CLICKED)         # 8/12     CLICKED in {N337, w413}; N337->N219
+   old:     on ACTION6(x,y) at TRIGGER: recolor(TARGET) # 5/7      TRIGGER = N337; TARGET = w252
+   old:     on ACTION6(x,y) at TRIGGER: resize(TARGET) # 5/7      TRIGGER = N337; TARGET = Wda5
+   old:     on ACTION6(x,y) at TRIGGER: appear(TARGET) # 3/3      TRIGGER = w413; TARGET = w252
+-- lp85 level 1 (19 steps, dfranzen-v1); residual 120 of 124 changes
+   grammar: when any if click:c8 then move(pic:Y1d6, (+0,-6))              # 4 right, 1 wrong
+   old:     on ACTION6(x,y): nothing if CLICKED is INERT # 4/4      INERT = {Ba18, G6f3}
+   old:     on ACTION6(x,y) at TRIGGER: move(TARGET) # 5/5      TRIGGER = R7a8; TARGET = S036
+   old:     on ACTION6(x,y) at TRIGGER: move(TARGET) # 5/5      TRIGGER = R7a8; TARGET = b516
+   old:     on ACTION6(x,y) at TRIGGER: move(TARGET) # 5/5      TRIGGER = R7a8; TARGET = g94a
+-- ls20 level 1 (66 steps, sheetu-4.17); residual 125 of 342 changes
+   grammar: when ACTION1|ACTION2|ACTION3|ACTION4 then move(colour:12, by action: A1 if path:c3 (-5,+0) | A2 (+5,+0) | A3 if path:c3 (+0,-5) | A4 (+0,+5)) # 59 right, 0 wrong
+   grammar: when ACTION1|ACTION2|ACTION3|ACTION4 then move(pic:b768, by action: A1 if path:c3 (-5,+0) | A2 (+5,+0) | A3 if path:c3 (+0,-5) | A4 (+0,+5)) # 59 right, 0 wrong
+   grammar: when any if touch:c11 then resize(colour:3, +2)                # 38 right, 3 wrong
+   grammar: when any if touch:c3 then resize(colour:11, -2)                # 20 right, 2 wrong
+   grammar: when any then resize(pic:G277, +0)                             # 7 right, 0 wrong
+   grammar: when any then resize(pic:Gee1, -5)                             # 6 right, 0 wrong
+   grammar: when ACTION2|ACTION4 then resize(pic:Gcdf, by action: A2 +5 | A4 +0) # 6 right, 0 wrong
+   grammar: when any then resize(pic:Gcf7, +0)                             # 5 right, 0 wrong
+   grammar: when any then resize(pic:G54a, +0)                             # 5 right, 0 wrong
+   grammar: when ACTION1|ACTION2 then resize(pic:G255, by action: A1 +5 | A2 +0) # 5 right, 0 wrong
+   grammar: when any then resize(pic:Gc09, +0)                             # 3 right, 0 wrong
+   grammar: when any then resize(pic:Gaee, +0)                             # 4 right, 1 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 59/60     AVATAR = O989 (+b768); step A1=(-5,+0) A2=(+5,+0) A3=(+0,-5) A4=(+0,+5); 6 presses blocked
+-- m0r0 level 1 (28 steps, sheetu-4.17); residual 34 of 70 changes
+   grammar: when ACTION1|ACTION2|ACTION3|ACTION4 then move(colour:10, by action: A1 unless path:c12 (-5,+0) | A2 (+5,+0) | A3 unless path:c11 (+0,+5) | A4 unless touch:c12 (+0,+5)) # 36 right, 8 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 22/23     AVATAR = Sc94; step A1=(-5,+0) A2=(+5,+0) A3=(+0,-5) A4=(+0,-5); 4 presses blocked
+-- r11l level 1 (6 steps, dfranzen-v1); residual 34 of 40 changes
+   grammar: when any if touch:c2 then resize(all, -1)                      # 6 right, 0 wrong
+   old:     (no rule)
+-- re86 level 1 (31 steps, dfranzen-v1); residual 89 of 138 changes
+   grammar: when ACTION1|ACTION2|ACTION3 then move(colour:0, by action: A1 (-3,+0) | A2 (+3,+0) | A3 (+0,-3)) # 24 right, 1 wrong
+   grammar: when ACTION1|ACTION2|ACTION4 then resize(colour:1, by action: A1 +1 | A2 +1 | A4 +1) # 18 right, 7 wrong
+   grammar: when ACTION1|ACTION4 then move(pic:b99d, by action: A1 (-3,+0) | A4 (+0,+3)) # 7 right, 2 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 25/25     AVATAR = W717; step A1=(-3,+0) A2=(+3,+0) A3=(+0,-3) A4=(+0,+3); 4 presses blocked
+-- s5i5 level 1 (22 steps, sheetu-4.17); residual 59 of 78 changes
+   grammar: when any unless click:none then resize(colour:4, +1)           # 14 right, 4 wrong
+   grammar: when any if path:c14 then move(pic:r5db, (+0,+3))              # 5 right, 2 wrong
+   old:     on ACTION6(x,y) at TRIGGER: move(TARGET) # 5/7      TRIGGER = cdb7; TARGET = r5db
+-- sb26 level 1 (8 steps, dfranzen-v1); residual 13 of 24 changes
+   grammar: when any then vanish(pic:W875)                                 # 4 right, 0 wrong
+   grammar: when any if click:c2 then resize(colour:3, +1)                 # 3 right, 0 wrong
+   grammar: when any unless click:c2 then appear(W875, somewhere)          # 4 right, 0 wrong
+   old:     on ACTION6(x,y) at TRIGGER: vanish(TARGET) # 4/4      TRIGGER = g766; TARGET = W875
+-- sc25 level 1 (23 steps, dfranzen-v1); residual 42 of 60 changes
+   grammar: when any then recolor(clicked, {0:14, 2:14, 14:2})             # 7 right, 2 wrong
+   grammar: when ACTION3|ACTION6 then resize(colour:0, by action: A3 unless touch:c3 +4 | A6 if touch:edge +4) # 11 right, 7 wrong
+   old:     on ACTION6(x,y): toggle(CLICKED)         # 8/10     CLICKED in {W018, N098, ge59}; W018->N098, N098->ge59, ge59->N098, W018->ge59 (colour 0 <-> 2 <-> 14)
+-- sk48 level 1 (89 steps, sheetu-4.17); residual 399 of 641 changes
+   grammar: when ACTION3 then vanish(pic:gc63)                             # 39 right, 0 wrong
+   grammar: when ACTION4 then appear(gc63, somewhere)                      # 11 right, 21 wrong
+   grammar: when ACTION1|ACTION2 then move(pic:Mb4f, by action: A1 if path:c3 (-6,+0) | A2 if path:c3 (+6,+0)) # 17 right, 1 wrong
+   grammar: when ACTION1|ACTION2 then move(colour:0, by action: A1 if path:c3 (-6,+0) | A2 if path:c3 (+6,+0)) # 17 right, 4 wrong
+   grammar: when ACTION3|ACTION4 then reshape(pic:M8dc, by action: A3 to Gbb3 | A4 to Madb) # 11 right, 0 wrong
+   grammar: when ACTION3 then vanish(pic:Gbb3)                             # 10 right, 2 wrong
+   grammar: when ACTION1 then move(pic:gc63, (-6,+0))                      # 15 right, 7 wrong
+   grammar: when ACTION3|ACTION4 then reshape(pic:w3fb, by action: A3 to W71d | A4 to w3b1) # 8 right, 0 wrong
+   grammar: when ACTION2 if path:c0 then move(colour:2, (-6,+0))           # 8 right, 1 wrong
+   grammar: when ACTION4 then resize(pic:w3b1, +8)                         # 6 right, 0 wrong
+   grammar: when ACTION4 then resize(pic:w311, +2)                         # 5 right, 0 wrong
+   grammar: when ACTION4 then resize(pic:We9b, +12)                        # 5 right, 0 wrong
+   grammar: when ACTION3 then vanish(pic:g5d9)                             # 5 right, 0 wrong
+   grammar: when ACTION1|ACTION4 then resize(pic:gdea, by action: A1 +0 | A4 +4) # 5 right, 0 wrong
+   grammar: when ACTION3 then reshape(pic:Madb, to M8dc)                   # 5 right, 0 wrong
+   grammar: when ACTION3 then resize(pic:w07a, -8)                         # 4 right, 0 wrong
+   grammar: when ACTION2 then resize(pic:G183, +0)                         # 4 right, 0 wrong
+   grammar: when ACTION3 then move(touching:gc63, (+0,-6))                 # 4 right, 0 wrong
+   grammar: when ACTION1|ACTION4 then move(pic:g5d9, by action: A1 (-6,+0) | A4 (+0,+6)) # 7 right, 3 wrong
+   grammar: when ACTION1 if path:c0 then move(colour:3, (+2,+0))           # 4 right, 0 wrong
+   grammar: when any then resize(pic:g2ef, -25)                            # 3 right, 0 wrong
+   grammar: when ACTION1 if path:c0 then move(pic:Gbb3, (-14,+0))          # 4 right, 0 wrong
+   grammar: when ACTION4 then resize(pic:g9bf, +4)                         # 3 right, 0 wrong
+   grammar: when ACTION1|ACTION2|ACTION4 then resize(pic:G90c, by action: A1 +0 | A2 +4 | A4 -16) # 6 right, 3 wrong
+   old:     on ACTION6: nothing                      # 3/3      
+   old:     on ACTION1-4: move(AVATAR, step)         # 17/17     AVATAR = Mb4f (+W71d+We9b+w3fb); step A1=(-6,+0) A2=(+6,+0); 6 presses blocked
+   old:     on ACTION6(x,y): nothing if CLICKED is INERT # 2/2      INERT = {R4d5}
+-- sp80 level 1 (7 steps, sheetu-4.17); residual 11 of 20 changes
+   grammar: when any then resize(colour:0, +2)                             # 5 right, 1 wrong
+   grammar: when ACTION4 then move(colour:9, (+0,+4))                      # 4 right, 0 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 6/6      AVATAR = b8c0; step A2=(+4,+0) A3=(+0,-4) A4=(+0,+4)
+-- su15 level 1 (13 steps, sheetu-4.17); residual 14 of 32 changes
+   grammar: when any if touch:edge then resize(colour:0, -2)               # 12 right, 1 wrong
+   grammar: when any unless click:c15 then move(pic:p8ed, (-6,+6))         # 6 right, 3 wrong
+   old:     on ACTION6(x,y) at TRIGGER: move(TARGET) # 5/6      TRIGGER = G36e; TARGET = p8ed
+-- tn36 level 1 (20 steps, sheetu-4.17); residual 28 of 56 changes
+   grammar: when any then resize(colour:3, +1)                             # 19 right, 0 wrong
+   grammar: when any if click:c1 then vanish(clicked)                      # 9 right, 0 wrong
+   old:     (no rule)
+-- tr87 level 1 (44 steps, dfranzen-v1); residual 119 of 139 changes
+   grammar: when ACTION3|ACTION4 then move(colour:0, by action: A3 (+0,-7) | A4 (+0,+7)) # 14 right, 0 wrong
+   grammar: when any then resize(pic:Bd2c, -5)                             # 3 right, 0 wrong
+   grammar: when any then resize(pic:B029, +2)                             # 3 right, 0 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 7/7      AVATAR = W130 (+W276); step A3=(+0,-7) A4=(+0,+7)
+-- tu93 level 1 (47 steps, dfranzen-v1); residual 29 of 58 changes
+   grammar: when ACTION1|ACTION2|ACTION3|ACTION4 then move(colour:9, by action: A1 (-2,+0) | A2 if path:c2 (+2,+0) | A3 (+0,-2) | A4 if path:c2 (+0,+2)) # 29 right, 2 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 29/29     AVATAR = bbef; step A1=(-2,+0) A2=(+2,+0) A3=(+0,-2) A4=(+0,+2); 18 presses blocked
+   old:     every action: move(TICKER)               # 29/29     TICKER = W717
+-- vc33 level 1 (17 steps, dfranzen-v1); residual 53 of 64 changes
+   grammar: when any unless click:c5 then resize(colour:4, +1)             # 11 right, 4 wrong
+   old:     on ACTION6(x,y) at TRIGGER: move(TARGET) # 10/11     TRIGGER = b516; TARGET = Y278
+   old:     on ACTION6(x,y) at TRIGGER: move(TARGET) # 10/11     TRIGGER = b516; TARGET = c2e2
+-- wa30 level 1 (42 steps, sheetu-4.17); residual 104 of 126 changes
+   grammar: when ACTION1|ACTION3|ACTION4 then move(colour:14, by action: A1 unless touch:c3 (-4,+0) | A3 unless path:c4 (+0,-4) | A4 unless touch:c3 (+0,+4)) # 19 right, 8 wrong
+   grammar: when ACTION4 then move(pic:Wfc5, (+0,+4))                      # 3 right, 0 wrong
+   old:     on ACTION1-4: move(AVATAR, step)         # 5/5      AVATAR = N220 (+Wfc5); step A3=(+0,-4) A4=(+0,+4); 17 presses blocked

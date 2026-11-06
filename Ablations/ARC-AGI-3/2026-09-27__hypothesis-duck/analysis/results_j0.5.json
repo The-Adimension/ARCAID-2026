@@ -1,0 +1,117 @@
+{
+ "threshold": "0.5",
+ "n": 584,
+ "wrong_rate": 0.7534246575342466,
+ "models": {
+  "H_hedges": {
+   "auc": 0.5097222222222222,
+   "brier": 0.18587949473780363
+  },
+  "C_counters": {
+   "auc": 0.6765151515151515,
+   "brier": 0.17400074703908908
+  },
+  "S_config": {
+   "auc": 0.5485953282828283,
+   "brier": 0.23404958254157046
+  },
+  "HCS_all": {
+   "auc": 0.6598721590909091,
+   "brier": 0.21618472250069723
+  },
+  "T_text": {
+   "auc": 0.5545138888888889,
+   "brier": 0.18499528338527851
+  },
+  "T+HCS": {
+   "auc": 0.6500631313131313,
+   "brier": 0.21729269228304382
+  },
+  "chance": {
+   "auc": 0.5,
+   "brier": 0.18577594295364985
+  }
+ },
+ "strongest_baseline": "C_counters",
+ "delta_T_text_minus_C_counters": {
+  "mean": -0.1230792009848425,
+  "ci95": [
+   -0.22027811322907428,
+   -0.026588806328011073
+  ],
+  "pass": false
+ },
+ "delta_T+HCS_minus_C_counters": {
+  "mean": -0.013493943368723104,
+  "ci95": [
+   -0.10349574780608255,
+   0.13226049869380802
+  ],
+  "pass": false
+ },
+ "per_game": {
+  "ar25": {
+   "n": 42,
+   "H_hedges": 0.452,
+   "C_counters": 0.807,
+   "S_config": 0.784,
+   "HCS_all": 0.795,
+   "T_text": 0.58,
+   "T+HCS": 0.785
+  },
+  "cn04": {
+   "n": 11,
+   "H_hedges": 0.3,
+   "C_counters": 0.5,
+   "S_config": 0.45,
+   "HCS_all": 0.5,
+   "T_text": 0.1,
+   "T+HCS": 0.2
+  },
+  "ft09": {
+   "n": 62,
+   "H_hedges": 0.449,
+   "C_counters": 0.659,
+   "S_config": 0.52,
+   "HCS_all": 0.639,
+   "T_text": 0.531,
+   "T+HCS": 0.641
+  },
+  "lp85": {
+   "n": 162,
+   "H_hedges": 0.56,
+   "C_counters": 0.716,
+   "S_config": 0.514,
+   "HCS_all": 0.612,
+   "T_text": 0.531,
+   "T+HCS": 0.586
+  },
+  "re86": {
+   "n": 75,
+   "H_hedges": 0.594,
+   "C_counters": 0.779,
+   "S_config": 0.543,
+   "HCS_all": 0.77,
+   "T_text": 0.596,
+   "T+HCS": 0.779
+  },
+  "sb26": {
+   "n": 134,
+   "H_hedges": 0.496,
+   "C_counters": 0.663,
+   "S_config": 0.435,
+   "HCS_all": 0.484,
+   "T_text": 0.659,
+   "T+HCS": 0.514
+  },
+  "vc33": {
+   "n": 53,
+   "H_hedges": 0.542,
+   "C_counters": 0.773,
+   "S_config": 0.647,
+   "HCS_all": 0.799,
+   "T_text": 0.661,
+   "T+HCS": 0.777
+  }
+ }
+}

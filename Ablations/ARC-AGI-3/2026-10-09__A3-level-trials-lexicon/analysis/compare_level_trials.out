@@ -1,0 +1,44 @@
+round 3: 183 paired trials (on 183, off 183; logged entries 183 / 183), 20 min each
+  validity: trials that never acted: on 0, off 0  (ok)
+arm   cleared   time-weighted   view   .rules   errors
+lex        58           0.202  19.1%      688        0
+off        67           0.214      -        0        0
+
+all rounds, 183 paired trials:
+  cleared by lexicon only 8, by control only 17, by both 50, by neither 108
+  clear-rate difference on - off: -4.9 points (95% CI -10.2 to +0.4); exact McNemar p = 0.108
+  time-weighted difference: -0.012 (sign-flip p = 0.423)
+  decision (rule fixed before the first run): NO DETECTABLE DIFFERENCE at this size (McNemar p >= 0.05); see the interval
+
+by level depth (cleared on / off):
+  levels 0-0: 23 / 22 of 25
+  levels 1-2: 22 / 25 of 50
+  levels 3-5: 11 / 17 of 75
+  levels 6-99: 2 / 3 of 33
+
+by game (cleared on / off, of trials):
+  ar25: 3 / 6 of 8
+  bp35: 0 / 1 of 9
+  cd82: 0 / 1 of 6
+  cn04: 1 / 1 of 6
+  dc22: 1 / 1 of 6
+  ft09: 5 / 5 of 6
+  g50t: 1 / 0 of 7
+  ka59: 3 / 3 of 7
+  lf52: 1 / 1 of 10
+  lp85: 7 / 8 of 8
+  ls20: 1 / 2 of 7
+  m0r0: 3 / 1 of 6
+  r11l: 1 / 2 of 6
+  re86: 4 / 4 of 8
+  s5i5: 2 / 5 of 8
+  sb26: 4 / 5 of 8
+  sc25: 3 / 3 of 6
+  sk48: 1 / 0 of 8
+  sp80: 1 / 2 of 6
+  su15: 2 / 2 of 9
+  tn36: 3 / 2 of 7
+  tr87: 4 / 4 of 6
+  tu93: 3 / 4 of 9
+  vc33: 3 / 3 of 7
+  wa30: 1 / 1 of 9

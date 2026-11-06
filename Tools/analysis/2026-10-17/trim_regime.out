@@ -1,0 +1,21 @@
+game runs 100; level attempts 484: completed 417, unfinished 67
+unfinished attempts' share of all generated tokens: 34.6%
+threshold 59,392 generated tokens on the level:
+  completed attempts that finished below it: 89.7%
+  unfinished attempts that went past it: 59 of 67
+  unfinished tokens spent past it: 36.2% of unfinished, 12.5% of all
+threshold 100,000 generated tokens on the level:
+  completed attempts that finished below it: 99.3%
+  unfinished attempts that went past it: 24 of 67
+  unfinished tokens spent past it: 7.5% of unfinished, 2.6% of all
+context trims per game (request logs):
+  ar25-0c556536: 2
+  ft09-0d8bbf25: 1
+  lp85-305b61c3: 1
+  r11l-495a7899: 1
+  re86-8af5384d: 1
+  sb26-7fbdac44: 1
+  sc25-635fd71a: 2
+  tr87-cd924810: 1
+  tu93-0768757b: 1
+  vc33-5430563c: 1
