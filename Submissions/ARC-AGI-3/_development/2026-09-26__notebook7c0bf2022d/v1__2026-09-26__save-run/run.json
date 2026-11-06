@@ -3,12 +3,12 @@
  "title": "notebook7c0bf2022d",
  "version": 1,
  "script_version_id": 352952435,
- "url": "https://www.kaggle.com/code/habanwer/notebook7c0bf2022d?scriptVersionId=352952435",
+ "url": "https://www.kaggle.com/code/habanwer/notebook7c0bf2022d-v4a-v3-harness-context-win-v4a-v3-harness-context-win?scriptVersionId=352952435",
  "track": "ARC-AGI-3",
  "private_on_kaggle_at_collection": true,
  "placement": {
   "place": "development",
-  "note": "Same code as duck-nvfp4-batch-stall-warn-dead-sign v5"
+  "note": "Same code as duck-nvfp4-batch-stall-warn-dead-sign v5. Renamed on Kaggle to 'notebook7c0bf2022d: v4A = v3 + harness context win'"
  },
  "inputs_now": {
   "competition_sources": [

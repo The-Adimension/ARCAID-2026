@@ -93,6 +93,8 @@ def main():
         for d in sorted(vdirs, key=lambda x: int(x.name[1:])):
             meta = json.loads((d / "meta.json").read_text())
             v, sid = meta["version"], meta["script_version_id"]
+            if p.get("kaggle_slug_now"):                # renamed on Kaggle after collection: keep the folder, fix the links
+                meta["url"] = meta["url"].replace(f"/{slug}?", f"/{p['kaggle_slug_now']}?").replace(f"/{slug}", f"/{p['kaggle_slug_now']}")
             pm, nbmeta = {}, {}
             if (d / "__notebook__.ipynb").exists():
                 nbmeta = json.loads((d / "__notebook__.ipynb").read_text(encoding="utf-8")).get("metadata", {})
@@ -183,7 +185,7 @@ def main():
                          f"[Kaggle]({meta['url']}) |")
             index[(track, p["place"], p.get("group", ""))].append((slug, v, vdir, my_subs, label))
         readme = [f"# {meta['title']}", "",
-                  f"Kaggle: https://www.kaggle.com/code/{meta['owner']}/{slug} · Track: {track}"
+                  f"Kaggle: https://www.kaggle.com/code/{meta['owner']}/{p.get('kaggle_slug_now') or slug} · Track: {track}"
                   + (f" · {p['note']}" if p.get("note") else ""), "",
                   "| Version | Run started | Minutes | Public score(s) | Nearest earlier notebook (inferred) | Link |",
                   "|---|---|---|---|---|---|"] + table + ["",

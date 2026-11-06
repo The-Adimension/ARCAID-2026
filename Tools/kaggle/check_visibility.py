@@ -17,7 +17,8 @@ with api.build_kaggle_client() as k:
     for r in csv.DictReader(open(root / "Tools/catalogue/placement.csv")):
         if r["place"] == "none":
             continue
-        q = ApiGetKernelRequest(); q.user_name, q.kernel_slug = "habanwer", r["kernel"]
+        slug = r.get("kaggle_slug_now") or r["kernel"]     # follow a rename made on Kaggle after collection
+        q = ApiGetKernelRequest(); q.user_name, q.kernel_slug = "habanwer", slug
         vis = "error"
         for w in (0, 10, 30, 60):
             time.sleep(w)
@@ -26,7 +27,7 @@ with api.build_kaggle_client() as k:
             except Exception:
                 pass
         rows.append({"kernel": f"habanwer/{r['kernel']}", "track": r["track"], "place": r["place"],
-                     "visibility": vis, "url": f"https://www.kaggle.com/code/habanwer/{r['kernel']}",
+                     "visibility": vis, "url": f"https://www.kaggle.com/code/habanwer/{slug}",
                      "checked_utc": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())})
         time.sleep(0.5)
 with open(root / "Documentation/KAGGLE-VISIBILITY.csv", "w", newline="") as f:
