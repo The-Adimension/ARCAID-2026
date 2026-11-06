@@ -44,7 +44,9 @@ def main():
     ap.add_argument("--keep-zips", action="store_true")
     ap.add_argument("--local", action="append", default=[],
                     help="a folder of earlier collections (<date>__<slug>__v<N>__*/outputs); its outputs are hashed "
-                         "locally instead of downloading the zip again")
+                         "locally instead of downloading the zip again. Caution: an earlier copy may lack files "
+                         "(e.g. __pycache__ removed before committing); ARCAID-2026 re-hashed every such manifest "
+                         "from the Kaggle zip on 2026-11-06")
     ap.add_argument("--shard", default="0/1", help="i/n: handle only every n-th kernel, starting at i (parallel runs)")
     a = ap.parse_args()
     shard_i, shard_n = map(int, a.shard.split("/"))

@@ -51,7 +51,7 @@
  "files": {
   "__notebook__.ipynb": "211e8c2bfb1818badd08fbe1bb661c8fcd9e2982ae5208eceb136818303579d0",
   "__output__.json": "0b7962c01de40ffb6420d315711eed51a598ef9f482254fd3710a66dfec168eb",
-  "outputs": "hashed from local copy 2026-09-26__duck-nvfp4-batch-stall-warn-dead-sign__v5__unsubmitted__error-vllm-setup"
+  "outputs": "hashed from the Kaggle output zip (earlier: local copy 2026-09-26__duck-nvfp4-batch-stall-warn-dead-sign__v5__unsubmitted__error-vllm-setup)"
  },
  "collected_at": "2026-11-06T12:14:16Z",
  "notebook_sha256_original": "211e8c2bfb1818badd08fbe1bb661c8fcd9e2982ae5208eceb136818303579d0",

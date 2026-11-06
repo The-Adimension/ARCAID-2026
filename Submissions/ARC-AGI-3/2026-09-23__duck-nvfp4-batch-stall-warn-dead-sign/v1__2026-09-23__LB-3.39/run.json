@@ -61,7 +61,7 @@
  "files": {
   "__notebook__.ipynb": "6bb3d5c17fb4adb74e82eb0fec3ed03bcbca255285a388dd6c39a96d4720760f",
   "__output__.json": "f9271e256ddd508599b8243b77f0003c9d8c6aaf4d1603628d6cfc1afec7d79d",
-  "outputs": "hashed from local copy 2026-09-24__duck-nvfp4-batch-stall-warn-dead-sign__v1__score-3.39"
+  "outputs": "hashed from the Kaggle output zip (earlier: local copy 2026-09-24__duck-nvfp4-batch-stall-warn-dead-sign__v1__score-3.39)"
  },
  "collected_at": "2026-11-06T12:14:10Z",
  "notebook_sha256_original": "6bb3d5c17fb4adb74e82eb0fec3ed03bcbca255285a388dd6c39a96d4720760f",

@@ -66,7 +66,7 @@
  "files": {
   "__notebook__.ipynb": "f9ff2cf0a07bbc0e2c446f99878eaf010e6c810d427a08f7b01f317997577279",
   "__output__.json": "e1b90c74c82120ab3cadcb11b6e7fb237d80e9c16bc6c1ae5fe414bbd657ff2e",
-  "outputs": "hashed from local copy 2026-09-16__arc3-duck-qwen38-baseline__v1__score-1.37"
+  "outputs": "hashed from the Kaggle output zip (earlier: local copy 2026-09-16__arc3-duck-qwen38-baseline__v1__score-1.37)"
  },
  "collected_at": "2026-11-06T11:57:13Z",
  "notebook_sha256_original": "f9ff2cf0a07bbc0e2c446f99878eaf010e6c810d427a08f7b01f317997577279",
