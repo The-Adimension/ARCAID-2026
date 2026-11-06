@@ -2,11 +2,11 @@
 
 ## 1. Use of AI
 
-Claude Code (Anthropic), running the model **[model: to be stated by the author]**, was used to:
-- improve the lexicon;
-- analyse run logs;
-- write code that supported decisions;
-- implement and engineer code.
+Claude Code (Anthropic), running Claude Opus 5 and Claude Opus 5.5, with subagents running Claude Haiku and Claude Sonnet, was used for:
+- The lexicon improvement;
+- Logs analyses;
+- Decision-support;
+- Code implementation and engineering.
 
 The concept and the base work are by Shehab Anwer. Every ablation was built on public notebooks by others. Their lineage is in [`ARCAID/LINEAGE.md`](ARCAID/LINEAGE.md), and every source is cited in [`Documentation/REFERENCES.md`](Documentation/REFERENCES.md).
 
