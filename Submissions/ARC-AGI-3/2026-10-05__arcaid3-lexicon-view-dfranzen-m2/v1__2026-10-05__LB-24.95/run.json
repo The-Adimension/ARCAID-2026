@@ -1,0 +1,82 @@
+{
+ "kernel": "habanwer/arcaid3-lexicon-view-dfranzen-m2",
+ "title": "arcaid3-lexicon-view-dfranzen-m2",
+ "version": 1,
+ "script_version_id": 355438281,
+ "url": "https://www.kaggle.com/code/habanwer/arcaid3-lexicon-view-dfranzen-m2?scriptVersionId=355438281",
+ "track": "ARC-AGI-3",
+ "private_on_kaggle_at_collection": false,
+ "placement": {
+  "place": "submissions",
+  "note": "Main lexicon line on Franzen M2 v1"
+ },
+ "inputs_now": {
+  "competition_sources": [
+   "arc-prize-2026-arc-agi-3"
+  ],
+  "dataset_sources": [
+   "dfranzen/pennyroyal-v253",
+   "dfranzen/taaf-kaggle-source-bundle-copy"
+  ],
+  "model_sources": [
+   "dfranzen/albucino-qwen3-8-flash-next-drafter/Transformers/default/1",
+   "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/Transformers/default/1"
+  ],
+  "kernel_sources": []
+ },
+ "inputs_as_run": [
+  {
+   "sourceId": 133468,
+   "sourceType": "competition"
+  },
+  {
+   "sourceId": 20092813,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 20134793,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 1007009,
+   "sourceType": "modelInstanceVersion"
+  },
+  {
+   "sourceId": 1007514,
+   "sourceType": "modelInstanceVersion"
+  }
+ ],
+ "accelerator": "nvidiaRtxPro6000",
+ "run": {
+  "start": "2026-10-05T18:38:47.689225+00:00",
+  "end": "2026-10-05T19:16:13.536731+00:00",
+  "duration_s": 2245.847506,
+  "exception": null
+ },
+ "submissions": [
+  {
+   "submission_ref": "56873728",
+   "submitted_utc": "2026-10-06T07:14:33.880000",
+   "status": "COMPLETE",
+   "public_score": "24.95",
+   "private_score": "",
+   "selected": "",
+   "after_deadline": ""
+  }
+ ],
+ "files": {
+  "__notebook__.ipynb": "7b3baa59c72e05a5766c98c6009ac120686ca731f387b358432659247bf68082",
+  "__output__.json": "094976c77019d0eb10efc4476f34ea726c118d1cd2886f35c4056162c4807497"
+ },
+ "collected_at": "2026-11-06T11:53:58Z",
+ "notebook_sha256_original": "7b3baa59c72e05a5766c98c6009ac120686ca731f387b358432659247bf68082",
+ "log_sha256_original": "094976c77019d0eb10efc4476f34ea726c118d1cd2886f35c4056162c4807497",
+ "inferred_parent": {
+  "notebook": "dfranzen/arc-agi-3-milestone-2-solution@v1",
+  "distance_lines": 771,
+  "runner_up": "amatlas/dfranzen-fork-d-prime@v1",
+  "runner_up_distance": 771,
+  "method": "Tools/lineage/infer_parents.py"
+ },
+ "root_base": "dfranzen/arc-agi-3-milestone-2-solution@v1"
+}

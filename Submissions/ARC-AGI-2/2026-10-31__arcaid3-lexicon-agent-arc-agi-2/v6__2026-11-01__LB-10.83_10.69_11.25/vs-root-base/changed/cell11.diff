@@ -1,0 +1,118 @@
+--- base cell 10
++++ new cell 11
+@@ -149,29 +149,97 @@
+         return direct(cfg, tasks, client, deadline, sub, sub_path, t0)
+ 
++    # Phases. v5 smoke: the agent ran but never submitted, and a direct pass that waits for the
++    # agent can run out of time. So: (1) one direct answer for EVERY task -- coverage first;
++    # (2) the REPL agent for repl_share of what is left; (3) a second direct sample for the
++    # tasks still unverified, until the deadline. Per test input: verified programs, then the
++    # direct samples, then the unverified programs.
++    opts = {k: cfg[k] for k in AGENT_OPTS if k in cfg and k not in ("turn_max_tokens", "in_python")}
+     lock = threading.Lock()
+-    done = {}
++    done, direct_grids = {}, {}                 # direct_grids: task -> [grids of each sample]
++
++    def publish(tid):
++        task = tasks[tid]
++        recs = done.get(tid, [])
++        ntr = len(task["train"])
++        for j, cands in enumerate(ranked_answers(recs, task)):
++            ver = {json.dumps(p["test"][j]) for r in recs for p in r["programs"]
++                   if p["n_ok"] == ntr and j < len(p["test"]) and p["test"][j] is not None}
++            order = [g for g in cands if json.dumps(g) in ver]
++            order += [d[j] for d in direct_grids.get(tid, []) if j < len(d)]
++            order += [g for g in cands if json.dumps(g) not in ver]
++            uniq = []
++            for g in order:
++                if g not in uniq:
++                    uniq.append(g)
++            inp = task["test"][j]["input"]
++            sub[tid][j] = {"attempt_1": uniq[0] if uniq else inp,
++                           "attempt_2": uniq[1] if len(uniq) > 1 else inp}
++        write_atomic(sub, sub_path)
+ 
+     def on_done(rec):
+         with lock:
+             done.setdefault(rec["task_id"], []).append(rec)
+-            task = tasks[rec["task_id"]]
+-            for j, cands in enumerate(ranked_answers(done[rec["task_id"]], task)):
+-                inp = task["test"][j]["input"]
+-                a1 = cands[0] if cands else inp
+-                a2 = cands[1] if len(cands) > 1 else inp
+-                sub[rec["task_id"]][j] = {"attempt_1": a1, "attempt_2": a2}
+-            write_atomic(sub, sub_path)
+-
++            publish(rec["task_id"])
++
++    from run_direct import answer
++    # Direct answers think in one long turn: their own thinking budget and effort, not the
++    # agent's per-turn cap.
++    dclient = ChatClient(cfg["base_url"], cfg["model"], max_tokens=cfg.get("direct_max_tokens", 32768),
++                         temperature=cfg.get("temperature", 0.6), top_p=cfg.get("top_p", 0.95),
++                         top_k=cfg.get("top_k", 20), thinking=cfg.get("thinking", True),
++                         thinking_token_budget=cfg.get("direct_thinking_token_budget",
++                                                       cfg.get("thinking_token_budget")),
++                         template_kwargs=cfg.get("direct_template_kwargs", cfg.get("template_kwargs")),
++                         timeout=4 * 3600)
++    count = {}
++
++    def direct_pass(todo, seed, label, start_until):
++        """One direct answer per task in `todo`; none is STARTED after start_until."""
++        print(f"{label}: {len(todo)} tasks, {(deadline - time.time()) / 3600:.2f} h left", flush=True)
++
++        def work(t):
++            if min(start_until, deadline) - time.time() < cfg.get("min_start_s", 600):
++                st = "skipped: deadline"
++            else:
++                rec = answer(dclient, tasks[t], seed, deadline, rescue_tokens=cfg.get("rescue_tokens", 8192))
++                st = rec["status"]
++                if rec["grids"]:
++                    with lock:
++                        direct_grids.setdefault(t, []).append(rec["grids"])
++                        publish(t)
++            with lock:
++                k = f"{label} {st.split(':')[0]}"
++                count[k] = count.get(k, 0) + 1
++                print(f"[{time.time() - t0:6.0f}s] {label} {t} {st[:30]} | {count}", flush=True)
++
++        with ThreadPoolExecutor(max_workers=cfg.get("direct_concurrency", 16)) as ex:
++            list(ex.map(work, todo))
++
++    if cfg.get("direct_pass_1", True):
++        direct_pass(list(tasks), 7, "direct1", time.time() + avail * cfg.get("direct1_max_share", 0.6))
++
++    left = max(0.0, deadline - time.time())
++    window = left * min(1.0, cfg.get("repl_share", 0.8))
++    cap = int(min(cfg.get("max_cap", 60000),
++                  max(cfg.get("min_cap", 15000), cfg.get("tok_per_s", 140) * window / max(n, 1) * 1.3)))
++    if cfg.get("restart_frac"):
++        opts["restart_at"] = int(cap * cfg["restart_frac"])
++    print(f"REPL agent: {window / 3600:.2f} h, per-attempt cap {cap}", flush=True)
+     _, report = solve_repl(
+         tasks, client, attempts=cfg.get("attempts", 1), concurrency=cfg.get("concurrency", 24),
+-        deadline=deadline, stop_after=1, max_turns=cfg.get("max_turns", 40), max_gen_tokens=cap,
+-        context_budget=cfg.get("context_budget", 24000), nudge_every=cfg.get("nudge_every", 0),
+-        turn_max_tokens=cfg.get("turn_max_tokens"), in_python=cfg.get("in_python", False),
+-        log=lambda m: print(m, flush=True), on_done=on_done,
+-        **{k: cfg[k] for k in AGENT_OPTS if k in cfg and k not in ("turn_max_tokens", "in_python")})
+-
+-    ver = sum(1 for a in report["attempts"] if a["status"] == "verified")
+-    print(f"done: {ver}/{n} tasks verified, {sum(a['gen_tokens'] for a in report['attempts'])} "
+-          f"tokens, {time.time() - t0:.0f}s", flush=True)
++        deadline=time.time() + window, stop_after=1, max_turns=cfg.get("max_turns", 40),
++        max_gen_tokens=cap, context_budget=cfg.get("context_budget", 24000),
++        nudge_every=cfg.get("nudge_every", 0), turn_max_tokens=cfg.get("turn_max_tokens"),
++        in_python=cfg.get("in_python", False), log=lambda m: print(m, flush=True), on_done=on_done, **opts)
++    ver_tasks = {a["task_id"] for a in report["attempts"] if a["status"] == "verified"}
++    print(f"REPL done: {len(ver_tasks)}/{n} tasks verified, "
++          f"{sum(a['gen_tokens'] for a in report['attempts'])} tokens, "
++          f"submits {sum(a['submits'] for a in report['attempts'])}, "
++          f"restarts {sum(a.get('restarts', 0) for a in report['attempts'])}, {time.time() - t0:.0f}s",
++          flush=True)
++
++    if cfg.get("direct_pass_2", True):
++        direct_pass([t for t in tasks if t not in ver_tasks], 1007, "direct2", deadline)
++    print(f"all phases done: {count}, {time.time() - t0:.0f}s", flush=True)
+ 
+ 

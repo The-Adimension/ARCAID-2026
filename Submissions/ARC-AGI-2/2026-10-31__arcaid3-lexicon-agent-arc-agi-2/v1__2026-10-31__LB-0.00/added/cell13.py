@@ -1,0 +1,21 @@
+import json, os, subprocess, sys, time
+from pathlib import Path
+START = float(Path("/kaggle/working/start_epoch.txt").read_text())
+cfg = json.loads(r"""{"model_glob": "/kaggle/input/**/qwen3-8-27b-fp8-repacked-v1/**/config.json", "overlay": "/kaggle/input/**/taaf-duck-qwen38-serving-v1/serving_wheels/*.whl", "parsers": ["--tool-call-parser", "qwen3_coder", "--reasoning-parser", "qwen3"], "server_ladder": [["--reasoning-config", "{\"reasoning_start_str\": \"<think>\", \"reasoning_end_str\": \"</think>\"}", "--kv-cache-dtype", "fp8", "--language-model-only", "--speculative-config", "{\"method\": \"qwen3_5_mtp\", \"num_speculative_tokens\": 2}"], ["--reasoning-config", "{\"reasoning_start_str\": \"<think>\", \"reasoning_end_str\": \"</think>\"}", "--kv-cache-dtype", "fp8", "--speculative-config", "{\"method\": \"qwen3_5_mtp\", \"num_speculative_tokens\": 2}"], ["--reasoning-config", "{\"reasoning_start_str\": \"<think>\", \"reasoning_end_str\": \"</think>\"}", "--kv-cache-dtype", "fp8"], ["--reasoning-config", "{\"reasoning_start_str\": \"<think>\", \"reasoning_end_str\": \"</think>\"}"], []], "max_model_len": 81920, "max_num_seqs": 16, "first_server_wait_s": 3600, "server_wait_s": 1500, "server_hold_max_s": 7200, "precache_threads": 4, "mode": "repl", "attempts": 1, "concurrency": 16, "max_turns": 40, "context_budget": 28000, "nudge_every": 6, "turn_max_tokens": 16384, "thinking_token_budget": 12288, "template_kwargs": {"reasoning_effort": "high"}, "effort_ladder": ["medium", "low"], "retain_functions": true, "trim_drain": 4000, "keep_recent": 6, "degenerate_guard": true, "timeout_as_cut": true, "lexicon_cue": true, "digest": true, "restart_frac": 0.5, "max_restarts": 1, "repl_share": 0.75, "direct_first": true, "direct_concurrency": 10, "direct_max_tokens": 32768, "direct_thinking_token_budget": 28672, "direct_template_kwargs": {"reasoning_effort": "xhigh"}, "rescue_tokens": 8192, "min_start_s": 900, "temperature": 1.0, "top_p": 0.95, "top_k": 20, "max_tokens": 16384, "tok_per_s": 140, "min_cap": 15000, "max_cap": 60000}""")
+cfg["deadline_epoch"] = START + 12 * 3600 - 35 * 60        # 35 min reserve inside the 12 h limit
+RERUN = os.environ.get("KAGGLE_IS_COMPETITION_RERUN", "").strip().lower() in {"1", "true"}
+sys.path.insert(0, "/kaggle/working/agent")
+import lexicon2, repl                                       # import check: a broken module fails the save run
+print("lexicon on:", repl.LEXICON_ON)
+if not RERUN:
+    # A version is only submittable once a run has produced submission.json. The save run
+    # therefore writes the fallback and stops here (a minute of quota); the agent itself
+    # runs only in the competition rerun, which does not bill quota.
+    print("not a competition rerun: fallback submission only, agent skipped")
+else:
+    try:
+        rc = subprocess.run([sys.executable, "/kaggle/working/agent/submit_main.py", json.dumps(cfg)],
+                            timeout=max(60, cfg["deadline_epoch"] + 15 * 60 - time.time())).returncode
+        print("submit_main exit code", rc)
+    except Exception as e:
+        print("submit_main did not finish cleanly:", repr(e))

@@ -1,0 +1,9 @@
+--- base cell 16
++++ new cell 17
+@@ -122,5 +122,5 @@
+ # arc3: two passes over the same games -- n_passes, never a repeated games list
+ # (duplicate game_ids raise in taaf/benchmark.py).
+-bm.n_passes = 1 if TRUE_SUBMISSION else 1
++bm.n_passes = 2 if TRUE_SUBMISSION else 2
+ bm.game_weights = None
+ 

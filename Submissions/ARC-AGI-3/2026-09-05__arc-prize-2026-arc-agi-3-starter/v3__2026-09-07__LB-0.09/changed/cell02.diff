@@ -1,0 +1,502 @@
+--- base cell 2
++++ new cell 2
+@@ -108,4 +108,31 @@
+ 
+ GROUND = GroundConfig()
++
++# Knob panel for scripts/lab.py. Human-owned like GROUND — the ratchet never
++# touches it — but unlike GROUND it is meant to be swept. Every default here
++# reproduces the shipped agent exactly, so an empty variant is the baseline.
++TUNE: dict[str, Any] = {
++    "explore_budget": GROUND.EXPLORE_BUDGET_PER_LEVEL,
++    "plan_horizon": GROUND.PLAN_HORIZON,
++    "max_candidates": GROUND.MAX_MODEL_CANDIDATES,
++    "research_max_gap": 32,   # 1 == research every action (pre-backoff behaviour)
++    "research_ms": 30,        # per-round candidate budget
++    "noise_min": 3,           # observations before a row can be called HUD
++    "noise_frac": 0.6,        # fraction of observations it must be dirty in
++    "mask_cap": 16,           # never mask more rows/cols than this
++    "max_shift": 16,          # largest per-action translation we will fit
++    "wall_hits": 2,           # bumps before a colour is suspected of being wall
++    # Frontier priority. Measured on ls20: switch-first reaches level 1 at
++    # action 34 vs 84 for door-first (scripts/lab.py, 2026-09-07). A switch
++    # is the scarce thing on a state-machine level; unexplored ground keeps.
++    "tiers": ("switch", "door", "new"),
++    # ACTION6 targets per frame. Swept over {6,12,24,48,96,128,256} on all 25
++    # public games: 24 clears 5 of them, every other value 3 or 4. Too few
++    # never reaches the control that matters; too many bury it in a tail the
++    # explorer never works through. (scripts/lab.py, 2026-09-07)
++    "click_cap": 24,
++    "consume_hits": 2,        # touches before a colour counts as collectable
++    "goal_min_obs": 6,        # observations before the goal channel may fire
++}
+ 
+ _STD_MOVE: dict[int, tuple[int, int]] = {
+@@ -274,4 +301,31 @@
+ 
+ 
++def color_stats(grid: list[list[int]]) -> dict[int, tuple[int, int, int]]:
++    """colour -> (count, sum_x, sum_y) in a single sweep.
++
++    `cells_of` per colour per transition was 48% of total agent time: every call
++    walked all 4096 cells to find one colour. One sweep answers every colour.
++    """
++    out: dict[int, list[int]] = {}
++    for y, row in enumerate(grid):
++        for x, v in enumerate(row):
++            c = int(v)
++            slot = out.get(c)
++            if slot is None:
++                out[c] = [1, x, y]
++            else:
++                slot[0] += 1
++                slot[1] += x
++                slot[2] += y
++    return {c: (v[0], v[1], v[2]) for c, v in out.items()}
++
++
++def _centroid_of(stats: dict[int, tuple[int, int, int]], color: int) -> Optional[tuple[float, float]]:
++    st = stats.get(color)
++    if not st or not st[0]:
++        return None
++    return (st[1] / st[0], st[2] / st[0])
++
++
+ def _centroid(grid: list[list[int]], color: int) -> Optional[tuple[float, float]]:
+     cells = cells_of(grid, color)
+@@ -491,5 +545,5 @@
+ 
+ def detect_move(
+-    g0: list[list[int]], g1: list[list[int]], max_shift: int = MAX_SHIFT
++    g0: list[list[int]], g1: list[list[int]], max_shift: int = 0
+ ) -> Optional[tuple]:
+     """Rigid translation of a small object between two frames, or None.
+@@ -499,4 +553,5 @@
+     screen cannot drag the bounding box across unrelated sprites.
+     """
++    max_shift = max_shift or TUNE["max_shift"]
+     h = len(g1)
+     w = len(g1[0]) if h else 0
+@@ -562,4 +617,8 @@
+         self.occ_rows: set = set()
+         self.occ_cols: set = set()
++        # Goal channel: which colours vanish when we walk onto them.
++        self.bg: int = 0
++        self.consume: Counter = Counter()
++        self.color_floor: dict[int, int] = {}
+         self.moves: int = 0
+         self.n_obs: int = 0
+@@ -584,17 +643,18 @@
+     def _refresh_mask(self) -> None:
+         """A row that keeps changing in ways no object move explains is a HUD."""
+-        if self.moves < 2 or self.n_obs < self.NOISE_MIN:
++        noise_min = TUNE["noise_min"]
++        if self.moves < 2 or self.n_obs < noise_min:
+             return
+-        floor = max(self.NOISE_MIN, int(self.NOISE_FRAC * self.n_obs))
++        floor = max(noise_min, int(TUNE["noise_frac"] * self.n_obs))
+         rows = sorted(
+             (y for y, n in self.noise_rows.items()
+              if n >= floor and y not in self.occ_rows),
+             key=lambda y: -self.noise_rows[y],
+-        )[: self.MASK_CAP]
++        )[: TUNE["mask_cap"]]
+         cols = sorted(
+             (x for x, n in self.noise_cols.items()
+              if n >= floor and x not in self.occ_cols),
+             key=lambda x: -self.noise_cols[x],
+-        )[: self.MASK_CAP]
++        )[: TUNE["mask_cap"]]
+         if self.h and len(rows) * 4 > self.h:
+             rows = rows[: self.h // 4]
+@@ -771,5 +831,5 @@
+         return {
+             c for c, n in self.hit.items()
+-            if n >= 2 and not self.walk.get(c) and c not in self.colors
++            if n >= TUNE["wall_hits"] and not self.walk.get(c) and c not in self.colors
+         }
+ 
+@@ -837,8 +897,76 @@
+         self._mark_occupied(self.anchor)
+         self._learn_terrain(g0, aid, before)
++        if "goal" in TUNE["tiers"]:
++            # REFUTED 2026-09-07 (see LAB.md): fires on only 2 of 8 sampled games
++            # and converts to no levels on either. Kept behind the tier switch so
++            # the negative result stays reproducible at zero cost when off.
++            self._learn_consumables(g0, g1)
+         if moved or len(diff(g0, g1)) * 20 < self.w * self.h:
+             self._learn_noise(g0, g1, explained)
+         self._refresh_mask()
+         self.bump_epoch(g0, g1, explained)
++
++    def _learn_consumables(self, g0: list[list[int]], g1: list[list[int]]) -> None:
++        """Which colours disappear when the avatar walks onto them.
++
++        This is the goal that exists before any level has been finished. Frontier
++        coverage produces motion and novelty but never converges: across the 25
++        public games, 19 of them wander at high novelty and low stuck and finish
++        nothing. "Collect the things" is the closest thing to a universal verb
++        these games have, so it is worth inferring rather than exploring past.
++
++        Two conditions, because either alone is wrong:
++
++        * the vanished pixels lie under where the avatar now stands -- so this is
++          something we touched, not something that moved on its own; and
++        * the colour's global count set a new all-time low -- because the avatar
++          *occludes* whatever it stands on, so plain floor loses pixels on every
++          single step and would otherwise look exactly like treasure. Occlusion
++          oscillates inside a band and stops setting records after a few moves.
++          A collected item never comes back.
++        """
++        st1 = color_stats(g1)
++        if not st1:
++            return
++        self.bg = max(st1.items(), key=lambda kv: (kv[1][0], -kv[0]))[0]
++        here = self.cells_at(self.anchor)
++        if not here:
++            for c, (n, _sx, _sy) in st1.items():
++                prev = self.color_floor.get(c)
++                self.color_floor[c] = n if prev is None else min(prev, n)
++            return
++        gone: set[int] = set()
++        for x, y, ca, cb in diff(g0, g1):
++            if ca != cb and (x, y) in here and ca != self.bg and ca not in self.colors:
++                gone.add(int(ca))
++        for c, (n, _sx, _sy) in st1.items():
++            prev = self.color_floor.get(c)
++            if prev is None:
++                self.color_floor[c] = n
++            elif n < prev:
++                self.color_floor[c] = n
++                if c in gone:
++                    self.consume[c] += 1
++
++    def target_colors(self) -> set[int]:
++        """Colours worth walking to. Empty until the evidence repeats."""
++        if self.n_obs < TUNE["goal_min_obs"]:
++            return set()
++        need = TUNE["consume_hits"]
++        return {
++            c for c, n in self.consume.items()
++            if n >= need and c != self.bg and c not in self.colors
++        }
++
++    def goal_cells(self, grid: list[list[int]]) -> set:
++        cols = self.target_colors()
++        if not cols:
++            return set()
++        return {
++            (x, y)
++            for y, row in enumerate(grid)
++            for x, v in enumerate(row)
++            if int(v) in cols
++        }
+ 
+     def _learn_terrain(
+@@ -885,5 +1013,11 @@
+ 
+     def new_level(self) -> None:
+-        """Walls and coverage are per-level; colours and deltas are not."""
++        """Walls and coverage are per-level; colours and deltas are not.
++
++        `color_floor` is per-level too: a fresh board restocks whatever we
++        collected, and a stale all-time low would suppress the goal channel for
++        the rest of the game.
++        """
++        self.color_floor.clear()
+         self.edges.clear()
+         self.blocked.clear()
+@@ -968,4 +1102,5 @@
+             return None
+         start = self.anchor
++        want = self.goal_cells(grid) if "goal" in TUNE["tiers"] else set()
+         for strict in (True, False):
+             q: deque = deque([(start, 0)])
+@@ -982,4 +1117,6 @@
+                         continue
+                     parent[nxt] = (cur, str(aid))
++                    if want and self.cells_at(nxt) & want:
++                        tiers.setdefault("goal", nxt)
+                     if nxt in self.retry:
+                         tiers.setdefault("door", nxt)
+@@ -1002,7 +1139,7 @@
+                 if len(parent) >= max_nodes:
+                     break
+-            # A door that may have just opened beats unexplored ground, which
+-            # beats flipping a switch again, which beats plain staleness.
+-            for tier in ("door", "new", "switch"):
++            # Order is TUNE["tiers"]; "goal" first means a known collectable
++            # outranks curiosity, which is the whole point of the channel.
++            for tier in TUNE["tiers"]:
+                 target = tiers.get(tier)
+                 if target is not None:
+@@ -1016,4 +1153,73 @@
+                 return _reconstruct(parent, best)
+         return None
++
++
++_CLICK_CACHE: dict = {}
++
++
++def click_targets(grid: list[list[int]], cap: int = 0) -> list[tuple[int, int]]:
++    """One click target per connected component, rarest and smallest first.
++
++    ACTION6 is legal in 19 of the 25 public games and picks one of 4096 cells.
++    The old policy offered six: three rare-colour centroids and four corners of
++    the largest blob. On lp85 that meant 1191 explore actions cycling six dead
++    cells and six distinct states over a full 1200-action budget.
++
++    A component is the right unit because these boards are drawn from sprites:
++    every button, tile and token is one blob, so one representative cell per blob
++    covers the interactable surface at a branching factor the explorer can
++    actually work through. Order is rarest colour first, then smallest area --
++    a ten-pixel token is far likelier to be a control than the background slab.
++
++    The representative is a cell that genuinely belongs to the component (its
++    centroid can land outside a ring or an L), so a click always hits the thing
++    it was chosen for.
++    """
++    cap = cap or TUNE["click_cap"]
++    h = len(grid)
++    w = len(grid[0]) if h else 0
++    if not h or not w:
++        return [(0, 0)]
++    key = (digest(grid), cap)
++    hit = _CLICK_CACHE.get(key)
++    if hit is not None:
++        return hit
++    bg = modal_color(grid)
++    hist = histogram(grid)
++    out: list[tuple[int, int]] = []
++    ranked = []
++    for b in blobs(grid):
++        if b["color"] == bg:
++            continue
++        cells = b["cells"]
++        cx = sum(c[0] for c in cells) // len(cells)
++        cy = sum(c[1] for c in cells) // len(cells)
++        if (cx, cy) not in set(cells):
++            cx, cy = min(cells, key=lambda c: abs(c[0] - cx) + abs(c[1] - cy))
++        ranked.append((hist.get(b["color"], 0), b["area"], cx, cy))
++    ranked.sort()
++    seen: set[tuple[int, int]] = set()
++    for _n, _a, cx, cy in ranked:
++        if (cx, cy) not in seen:
++            seen.add((cx, cy))
++            out.append((cx, cy))
++        if len(out) >= cap:
++            break
++    if not out:
++        # A uniform board still has to be probed somewhere; a coarse lattice is
++        # the only unbiased guess left.
++        step = max(1, min(w, h) // 4)
++        for y in range(step // 2, h, step):
++            for x in range(step // 2, w, step):
++                out.append((x, y))
++                if len(out) >= cap:
++                    break
++            if len(out) >= cap:
++                break
++    out = out or [(w // 2, h // 2)]
++    if len(_CLICK_CACHE) > 64:
++        _CLICK_CACHE.clear()
++    _CLICK_CACHE[key] = out
++    return out
+ 
+ 
+@@ -1241,13 +1447,20 @@
+         n_ok = n_total = peeking = illegal = 0
+         cx = model.complexity()
++        # The blind twin is a property of the model, not of any one transition:
++        # building it once per transition was pure waste.
++        try:
++            twin = _blind_copy(model)
++        except Exception:
++            twin = None
+         for item in transitions:
+             g0, akey, g1 = item[0], item[1], item[2]
++            truth = item[3] if len(item) > 3 else self._hash(g1)
+             n_total += 1
+             u = _safe_step(model, g0, akey, None)
+-            try:
+-                b = _safe_step(_blind_copy(model), g0, akey, "BLIND")
+-            except Exception:
++            if twin is None:
+                 b = None
+                 peeking += 1
++            else:
++                b = _safe_step(twin, g0, akey, "BLIND")
+             ut = self._hash(u)
+             bt = self._hash(b)
+@@ -1256,5 +1469,5 @@
+             if u is None:
+                 illegal += 1
+-            elif ut == self._hash(g1):
++            elif ut == truth:
+                 n_ok += 1
+         return Report(
+@@ -1439,5 +1652,5 @@
+                 keys.append(str(i))
+         if 6 in idset:
+-            for x, y in distinctive_cells(grid):
++            for x, y in click_targets(grid):
+                 keys.append(make_key(6, x, y))
+         for i in ids:
+@@ -1518,13 +1731,17 @@
+     toggle_pairs: Counter = Counter()
+ 
+-    for g0, akey, g1 in transitions:
++    for item in transitions:
++        g0, akey, g1 = item[0], item[1], item[2]
+         aid, _x, _y = parse_key(akey)
+         d = diff(g0, g1)
++        st0 = color_stats(g0)
++        st1 = color_stats(g1)
+         if static_cells is None:
+             static_cells = {}
+-            for col in set(histogram(g0)) | set(histogram(g1)):
++            for col in set(st0) | set(st1):
+                 static_cells[int(col)] = set(cells_of(g0, int(col)))
+         for col in list(static_cells.keys()):
+-            if set(cells_of(g1, col)) != static_cells[col]:
++            if st1.get(col, (0, 0, 0))[0] != len(static_cells[col]) or \
++                    set(cells_of(g1, col)) != static_cells[col]:
+                 del static_cells[col]
+         vanished: Counter = Counter()
+@@ -1536,6 +1753,6 @@
+                 toggle_pairs[(ca, cb)] += 1
+         for col in set(vanished) | set(appeared):
+-            c0 = _centroid(g0, col)
+-            c1 = _centroid(g1, col)
++            c0 = _centroid_of(st0, col)
++            c1 = _centroid_of(st1, col)
+             if c0 and c1:
+                 dx, dy = int(round(c1[0] - c0[0])), int(round(c1[1] - c0[1]))
+@@ -1550,4 +1767,5 @@
+     if transitions:
+         bg_guess = modal_color(transitions[0][0])
++    del d
+     solids = frozenset(c for c in solids if c != bg_guess)
+     bg_last = modal_color(transitions[-1][2])
+@@ -1647,4 +1865,7 @@
+         self._explore_used: int = 0
+         self._level_idx: int = 0
++        self._research_gap: int = 1
++        self._research_due: int = 0
++        self.stats: Counter = Counter()  # phase counts, read by scripts/lab.py
+         self._level_start: Any = None
+         self._level_keys: list[str] = []
+@@ -1737,4 +1958,6 @@
+             self._level_start = cur_t
+             self._level_keys = []
++            self._research_gap = 1
++            self._research_due = 0
+ 
+         # PHASE 3 before PHASE 2 return so the ratchet can raise n_ok (no deadlock).
+@@ -1742,5 +1965,5 @@
+         aligned = bool(self.pending_plan and self._pred_t is not None and cur_t == self._pred_t)
+         if len(self.mem.transitions) >= 2 and not aligned:
+-            self._research()
++            self._maybe_research()
+ 
+         # PHASE 2 — NEED_DATA? cheap informative explore.
+@@ -1753,5 +1976,5 @@
+             or (
+                 (self.best is None or self.best.n_ok < 3)
+-                and self._explore_used < GROUND.EXPLORE_BUDGET_PER_LEVEL
++                and self._explore_used < TUNE["explore_budget"]
+             )
+         )
+@@ -1775,4 +1998,6 @@
+             self.pending_plan.clear()
+             self._pred_t = None
++            self._research_gap = 1
++            self._research_due = 0
+             if len(self.mem.transitions) >= 2:
+                 self._research()
+@@ -1863,5 +2088,5 @@
+         self.nav_plan = []
+         self._nav_expect = None
+-        path = tr.plan_explore(grid, ids, GROUND.PLAN_HORIZON)
++        path = tr.plan_explore(grid, ids, TUNE["plan_horizon"])
+         if not path:
+             return None
+@@ -1873,10 +2098,27 @@
+         return path[0], "phase4-navigate"
+ 
+-    def _research(self) -> None:
++    def _maybe_research(self) -> None:
++        """Research on a backoff. It is by far the most expensive thing here, and
++        on a game the DSL cannot express it never commits — so paying for it on
++        every single action buys nothing. A commit resets the gap to 1; a barren
++        round doubles it. A new level or a broken plan resets it too."""
++        if self._research_due > 0:
++            self._research_due -= 1
++            return
++        improved = self._research()
++        self._research_gap = (
++            1 if improved else min(TUNE["research_max_gap"], self._research_gap * 2)
++        )
++        self._research_due = self._research_gap - 1
++
++    def _research(self) -> bool:
+         """Propose ≤ MAX_MODEL_CANDIDATES patches; commit under ProSAT rule."""
+-        trans = self.mem.transitions[-24:]
+-        if not trans:
+-            return
+-        deadline = time.perf_counter() + 0.03
++        raw = self.mem.transitions[-24:]
++        if not raw:
++            return False
++        # Hash the truth once per round, not once per candidate per transition.
++        trans = [(t[0], t[1], t[2], self._hash(t[2])) for t in raw]
++        deadline = time.perf_counter() + TUNE["research_ms"] / 1000.0
++        committed = False
+         if self.model is not None:
+             self.best = self.assessor.verify(self.model, trans)
+@@ -1884,5 +2126,5 @@
+             trans,
+             self.mem.rejected_hypotheses,
+-            GROUND.MAX_MODEL_CANDIDATES,
++            TUNE["max_candidates"],
+             hints=self.tracker.known_deltas(),
+             hint_colors=self.tracker.colors,
+@@ -1911,4 +2153,5 @@
+                 self.model = cand
+                 self.best = rep
++                committed = True
+                 if self.mem.known_goal:
+                     self.model.win_hashes = frozenset(self.mem.known_goal)
+@@ -1917,4 +2160,5 @@
+                     rep.n_ok, rep.n_total, rep.complexity,
+                 )
++        return committed
+ 
+     def _goals(self, levels: int) -> set:
+@@ -1927,5 +2171,5 @@
+         path = graph_plan(
+             cur, self._goals(levels), self.mem.state_graph,
+-            self.mem.known_dead, GROUND.PLAN_HORIZON,
++            self.mem.known_dead, TUNE["plan_horizon"],
+         )
+         if not path:  # empty list means already at a goal; keep looking
+@@ -1945,5 +2189,5 @@
+         path = world_plan(
+             self.model, grid, goals, self.mem.goal_examples if goals else [],
+-            GROUND.PLAN_HORIZON, clicks,
++            TUNE["plan_horizon"], clicks,
+             visits=self.mem.visits,
+             action_order=order,
+@@ -1970,5 +2214,5 @@
+         ]
+         rare.sort(key=lambda h: (self.mem.visits[h], -len(self.mem.state_graph.get(h) or {})))
+-        path = graph_plan(cur, set(rare[:24]), self.mem.state_graph, self.mem.known_dead, GROUND.PLAN_HORIZON)
++        path = graph_plan(cur, set(rare[:24]), self.mem.state_graph, self.mem.known_dead, TUNE["plan_horizon"])
+         if path and self._key_legal(path[0], ids):
+             self.pending_plan = path[1:]
+@@ -1993,4 +2237,5 @@
+ 
+     def _emit(self, key: str, frame: FrameData, why: str) -> GameAction:
++        self.stats[why] += 1
+         if key == "0":
+             act = GameAction.RESET

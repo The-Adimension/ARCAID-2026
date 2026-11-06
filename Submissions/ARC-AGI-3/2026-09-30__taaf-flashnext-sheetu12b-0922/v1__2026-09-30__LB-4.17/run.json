@@ -1,0 +1,61 @@
+{
+ "kernel": "habanwer/taaf-flashnext-sheetu12b-0922",
+ "title": "taaf-flashnext-sheetu12b-0922",
+ "version": 1,
+ "script_version_id": 354222550,
+ "url": "https://www.kaggle.com/code/habanwer/taaf-flashnext-sheetu12b-0922?scriptVersionId=354222550",
+ "track": "ARC-AGI-3",
+ "private_on_kaggle_at_collection": true,
+ "placement": {
+  "place": "submissions",
+  "note": "Copy of scottlegrand/taaf-flashnext-sheetu12b-0922 v1"
+ },
+ "inputs_now": {
+  "competition_sources": [
+   "arc-prize-2026-arc-agi-3"
+  ],
+  "dataset_sources": [
+   "keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1",
+   "keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1"
+  ],
+  "model_sources": [
+   ""
+  ],
+  "kernel_sources": []
+ },
+ "inputs_as_run": null,
+ "accelerator": null,
+ "run": {
+  "start": "2026-09-30T18:47:56.110526+00:00",
+  "end": "2026-09-30T21:05:26.206575+00:00",
+  "duration_s": 8250.096049,
+  "exception": null
+ },
+ "submissions": [
+  {
+   "submission_ref": "56716213",
+   "submitted_utc": "2026-09-30T18:47:51.297000",
+   "status": "COMPLETE",
+   "public_score": "4.17",
+   "private_score": "",
+   "selected": "",
+   "after_deadline": ""
+  }
+ ],
+ "files": {
+  "__notebook__.ipynb": "db05a49878d228ee5ab0d4eaf6a26eb323c7afdda483db137a0cb5d1d4de0b49",
+  "__output__.json": "2f17273f5d0b94f1517e20f6c82918dbb907ca5dd07280bf30fd393102028c86",
+  "outputs": "hashed from local copy 2026-09-30__taaf-flashnext-sheetu12b-0922__v1__score-4.17"
+ },
+ "collected_at": "2026-11-06T12:14:02Z",
+ "notebook_sha256_original": "db05a49878d228ee5ab0d4eaf6a26eb323c7afdda483db137a0cb5d1d4de0b49",
+ "log_sha256_original": "2f17273f5d0b94f1517e20f6c82918dbb907ca5dd07280bf30fd393102028c86",
+ "inferred_parent": {
+  "notebook": "scottlegrand/taaf-flashnext-sheetu12b-0922@v1",
+  "distance_lines": 0,
+  "runner_up": "habanwer/taaf-flashnext-sheetu12b-reasoning-notes@v3",
+  "runner_up_distance": 74,
+  "method": "Tools/lineage/infer_parents.py"
+ },
+ "root_base": "scottlegrand/taaf-flashnext-sheetu12b-0922@v1"
+}

@@ -1,0 +1,9 @@
+--- base cell 20
++++ new cell 24
+@@ -39,5 +39,5 @@
+ 
+ # The gateway can take a while to come up; poll until it answers.
+-def _wait_for_gateway(base_url: str, timeout_s: float = 600.0) -> None:
++def _wait_for_gateway(base_url: str, timeout_s: float = 1800.0) -> None:
+     deadline = time.monotonic() + timeout_s
+     last_error = ""

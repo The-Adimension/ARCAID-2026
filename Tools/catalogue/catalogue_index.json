@@ -1,10 +1,76 @@
 {
  "ARC-AGI-3|submissions|": [
   [
+   "arc-prize-2026-arc-agi-3-starter",
+   1,
+   "Submissions/ARC-AGI-3/2026-09-05__arc-prize-2026-arc-agi-3-starter/v1__2026-09-05__LB-0.02",
+   "LB-0.02"
+  ],
+  [
+   "arc-prize-2026-arc-agi-3-starter",
+   2,
+   "Submissions/ARC-AGI-3/2026-09-05__arc-prize-2026-arc-agi-3-starter/v2__2026-09-05__LB-0.09",
+   "LB-0.09"
+  ],
+  [
+   "arc-prize-2026-arc-agi-3-starter",
+   3,
+   "Submissions/ARC-AGI-3/2026-09-05__arc-prize-2026-arc-agi-3-starter/v3__2026-09-07__LB-0.09",
+   "LB-0.09"
+  ],
+  [
+   "arc-prize-2026-arc-agi-3-starter",
+   4,
+   "Submissions/ARC-AGI-3/2026-09-05__arc-prize-2026-arc-agi-3-starter/v4__2026-09-08__LB-0.13",
+   "LB-0.13"
+  ],
+  [
+   "arc-prize-2026-arc-agi-3-starter",
+   5,
+   "Submissions/ARC-AGI-3/2026-09-05__arc-prize-2026-arc-agi-3-starter/v5__2026-09-11__save-run",
+   "save-run"
+  ],
+  [
+   "arc-prize-2026-arc-agi-3-starter",
+   6,
+   "Submissions/ARC-AGI-3/2026-09-05__arc-prize-2026-arc-agi-3-starter/v6__2026-09-11__LB-0.13",
+   "LB-0.13"
+  ],
+  [
+   "arc-prize-2026-arc-agi-3-starter",
+   7,
+   "Submissions/ARC-AGI-3/2026-09-05__arc-prize-2026-arc-agi-3-starter/v7__2026-09-13__LB-0.13",
+   "LB-0.13"
+  ],
+  [
+   "arc-prize-2026-arc-agi-3-starter",
+   8,
+   "Submissions/ARC-AGI-3/2026-09-05__arc-prize-2026-arc-agi-3-starter/v8__2026-09-13__LB-0.07",
+   "LB-0.07"
+  ],
+  [
+   "arc-prize-2026-arc-agi-3-starter",
+   9,
+   "Submissions/ARC-AGI-3/2026-09-05__arc-prize-2026-arc-agi-3-starter/v9__2026-09-14__LB-0.13",
+   "LB-0.13"
+  ],
+  [
    "arc3-duck-fp4-batch",
    1,
    "Submissions/ARC-AGI-3/2026-09-18__arc3-duck-fp4-batch/v1__2026-09-18__LB-3.04",
    "LB-3.04"
+  ],
+  [
+   "arc3-duck-fp4-ledger",
+   1,
+   "Submissions/ARC-AGI-3/2026-09-22__arc3-duck-fp4-ledger/v1__2026-09-22__LB-2.57",
+   "LB-2.57"
+  ],
+  [
+   "arc3-duck-fp4-prompts",
+   1,
+   "Submissions/ARC-AGI-3/2026-09-22__arc3-duck-fp4-prompts/v1__2026-09-22__LB-3.01",
+   "LB-3.01"
   ],
   [
    "arc3-duck-fp4-reset",
@@ -31,6 +97,12 @@
    "LB-2.84"
   ],
   [
+   "arc3-duck-fp4-serving",
+   1,
+   "Submissions/ARC-AGI-3/2026-09-18__arc3-duck-fp4-serving/v1__2026-09-18__LB-2.49",
+   "LB-2.49"
+  ],
+  [
    "arc3-duck-qwen38-baseline",
    1,
    "Submissions/ARC-AGI-3/2026-09-16__arc3-duck-qwen38-baseline/v1__2026-09-16__LB-1.37",
@@ -49,10 +121,46 @@
    "LB-25.26_27.47_22.23"
   ],
   [
+   "arcaid3-lexicon-view",
+   1,
+   "Submissions/ARC-AGI-3/2026-10-03__arcaid3-lexicon-view/v1__2026-10-03__LB-error",
+   "LB-error"
+  ],
+  [
    "arcaid3-lexicon-view-dfranzen-m2",
    1,
    "Submissions/ARC-AGI-3/2026-10-05__arcaid3-lexicon-view-dfranzen-m2/v1__2026-10-05__LB-24.95",
    "LB-24.95"
+  ],
+  [
+   "arcaid3-lexicon-view-dfranzen-m2",
+   2,
+   "Submissions/ARC-AGI-3/2026-10-05__arcaid3-lexicon-view-dfranzen-m2/v2__2026-10-07__save-run",
+   "save-run"
+  ],
+  [
+   "arcaid3-lexicon-view-dfranzen-m2",
+   3,
+   "Submissions/ARC-AGI-3/2026-10-05__arcaid3-lexicon-view-dfranzen-m2/v3__2026-10-08__save-run",
+   "save-run"
+  ],
+  [
+   "arcaid3-lexicon-view-dfranzen-m2",
+   4,
+   "Submissions/ARC-AGI-3/2026-10-05__arcaid3-lexicon-view-dfranzen-m2/v4__2026-10-08__LB-27.05_31.90_26.83__SELECTED",
+   "LB-27.05_31.90_26.83__SELECTED"
+  ],
+  [
+   "arcaid3-lexicon-view-dfranzen-m2",
+   5,
+   "Submissions/ARC-AGI-3/2026-10-05__arcaid3-lexicon-view-dfranzen-m2/v5__2026-10-17__LB-27.79_24.35",
+   "LB-27.79_24.35"
+  ],
+  [
+   "arcaid3-lexicon-view-dfranzen-m2",
+   6,
+   "Submissions/ARC-AGI-3/2026-10-05__arcaid3-lexicon-view-dfranzen-m2/v6__2026-10-17__save-run",
+   "save-run"
   ],
   [
    "arcaid3-lexicon-view-v2",
@@ -79,6 +187,54 @@
    "LB-23.41_30.57__SELECTED"
   ],
   [
+   "duck-nvfp4-batch-stall-warn-dead-sign",
+   1,
+   "Submissions/ARC-AGI-3/2026-09-23__duck-nvfp4-batch-stall-warn-dead-sign/v1__2026-09-23__LB-3.39",
+   "LB-3.39"
+  ],
+  [
+   "duck-nvfp4-batch-stall-warn-dead-sign",
+   2,
+   "Submissions/ARC-AGI-3/2026-09-23__duck-nvfp4-batch-stall-warn-dead-sign/v2__2026-09-23__save-run",
+   "save-run"
+  ],
+  [
+   "duck-nvfp4-batch-stall-warn-dead-sign",
+   3,
+   "Submissions/ARC-AGI-3/2026-09-23__duck-nvfp4-batch-stall-warn-dead-sign/v3__2026-09-25__LB-3.59",
+   "LB-3.59"
+  ],
+  [
+   "duck-nvfp4-batch-stall-warn-dead-sign",
+   4,
+   "Submissions/ARC-AGI-3/2026-09-23__duck-nvfp4-batch-stall-warn-dead-sign/v4__2026-09-25__save-run",
+   "save-run"
+  ],
+  [
+   "duck-nvfp4-batch-stall-warn-dead-sign",
+   5,
+   "Submissions/ARC-AGI-3/2026-09-23__duck-nvfp4-batch-stall-warn-dead-sign/v5__2026-09-26__save-run-error",
+   "save-run-error"
+  ],
+  [
+   "duck-nvfp4-batch-stall-warn-dead-sign-compact",
+   1,
+   "Submissions/ARC-AGI-3/2026-09-26__duck-nvfp4-batch-stall-warn-dead-sign-compact/v1__2026-09-26__LB-2.78",
+   "LB-2.78"
+  ],
+  [
+   "duck-v3-wmreason",
+   1,
+   "Submissions/ARC-AGI-3/2026-09-27__duck-v3-wmreason/v1__2026-09-27__LB-3.03",
+   "LB-3.03"
+  ],
+  [
+   "taaf-flashnext-sheetu12b-0922",
+   1,
+   "Submissions/ARC-AGI-3/2026-09-30__taaf-flashnext-sheetu12b-0922/v1__2026-09-30__LB-4.17",
+   "LB-4.17"
+  ],
+  [
    "taaf-flashnext-sheetu12b-reasoning-notes",
    1,
    "Submissions/ARC-AGI-3/2026-09-27__taaf-flashnext-sheetu12b-reasoning-notes/v1__not-run__save-run",
@@ -97,11 +253,93 @@
    "LB-3.90"
   ]
  ],
+ "ARC-AGI-3|ablations|2026-09-18__ab-tricks": [
+  [
+   "arc3-duck-ab-tricks",
+   1,
+   "Ablations/ARC-AGI-3/2026-09-18__ab-tricks/runs/arc3-duck-ab-tricks/v1__2026-09-16__save-run-error",
+   "save-run-error"
+  ],
+  [
+   "arc3-duck-ab-tricks",
+   2,
+   "Ablations/ARC-AGI-3/2026-09-18__ab-tricks/runs/arc3-duck-ab-tricks/v2__2026-09-18__save-run",
+   "save-run"
+  ],
+  [
+   "arc3-duck-ab-tricks",
+   3,
+   "Ablations/ARC-AGI-3/2026-09-18__ab-tricks/runs/arc3-duck-ab-tricks/v3__2026-09-18__save-run",
+   "save-run"
+  ]
+ ],
+ "ARC-AGI-3|development|": [
+  [
+   "arc3-duck-fp4-depth",
+   1,
+   "Submissions/ARC-AGI-3/_development/2026-09-19__arc3-duck-fp4-depth/v1__not-run__no-saved-run",
+   "no-saved-run"
+  ],
+  [
+   "arc3-duck-fp4-depth",
+   2,
+   "Submissions/ARC-AGI-3/_development/2026-09-19__arc3-duck-fp4-depth/v2__2026-09-19__save-run-error",
+   "save-run-error"
+  ],
+  [
+   "arc3-duck-fp4-kvfp8",
+   1,
+   "Submissions/ARC-AGI-3/_development/2026-09-26__arc3-duck-fp4-kvfp8/v1__2026-09-26__save-run-error",
+   "save-run-error"
+  ],
+  [
+   "arc3-duck-fp4-stall",
+   1,
+   "Submissions/ARC-AGI-3/_development/2026-09-19__arc3-duck-fp4-stall/v1__2026-09-19__save-run-error",
+   "save-run-error"
+  ],
+  [
+   "arc3-duck-fp4-stall",
+   2,
+   "Submissions/ARC-AGI-3/_development/2026-09-19__arc3-duck-fp4-stall/v2__2026-09-19__save-run",
+   "save-run"
+  ],
+  [
+   "notebook7c0bf2022d",
+   1,
+   "Submissions/ARC-AGI-3/_development/2026-09-26__notebook7c0bf2022d/v1__2026-09-26__save-run",
+   "save-run"
+  ],
+  [
+   "v5b-v5-compact-keep-reasoning-8-min-bytes-sk",
+   1,
+   "Submissions/ARC-AGI-3/_development/2026-09-28__v5b-v5-compact-keep-reasoning-8-min-bytes-sk/v1__2026-09-28__save-run",
+   "save-run"
+  ]
+ ],
  "ARC-AGI-3|ablations|2026-10-09__A2-lexicon-on-vs-off": [
+  [
+   "arcaid3-lb-lex-r1",
+   1,
+   "Ablations/ARC-AGI-3/2026-10-09__A2-lexicon-on-vs-off/runs/arcaid3-lb-lex-r1/v1__2026-10-09__save-run",
+   "save-run"
+  ],
+  [
+   "arcaid3-lb-lex-r2",
+   1,
+   "Ablations/ARC-AGI-3/2026-10-09__A2-lexicon-on-vs-off/runs/arcaid3-lb-lex-r2/v1__2026-10-09__save-run",
+   "save-run"
+  ],
   [
    "arcaid3-lb-off-r1",
    1,
    "Ablations/ARC-AGI-3/2026-10-09__A2-lexicon-on-vs-off/runs/arcaid3-lb-off-r1/v1__2026-10-09__save-run",
+   "save-run"
+  ],
+  [
+   "arcaid3-lb-off-r2",
+   1,
+   "Ablations/ARC-AGI-3/2026-10-09__A2-lexicon-on-vs-off/runs/arcaid3-lb-off-r2/v1__2026-10-09__save-run",
    "save-run"
   ]
  ],
@@ -143,11 +381,37 @@
    "LB-10.83_10.69_11.25"
   ]
  ],
+ "ARC-AGI-3|ablations|2026-10-04__lexicon-view-read-or-not": [
+  [
+   "arcaid3-lexicon-view-py312",
+   1,
+   "Ablations/ARC-AGI-3/2026-10-04__lexicon-view-read-or-not/runs/arcaid3-lexicon-view-py312/v1__2026-10-04__save-run",
+   "save-run"
+  ]
+ ],
  "ARC-AGI-3|ablations|2026-10-09__A3-level-trials-lexicon": [
   [
    "arcaid3-lt-lex-r1",
    1,
    "Ablations/ARC-AGI-3/2026-10-09__A3-level-trials-lexicon/runs/arcaid3-lt-lex-r1/v1__2026-10-09__save-run",
+   "save-run"
+  ],
+  [
+   "arcaid3-lt-lex-r2",
+   1,
+   "Ablations/ARC-AGI-3/2026-10-09__A3-level-trials-lexicon/runs/arcaid3-lt-lex-r2/v1__2026-10-10__save-run",
+   "save-run"
+  ],
+  [
+   "arcaid3-lt-lex-r3",
+   1,
+   "Ablations/ARC-AGI-3/2026-10-09__A3-level-trials-lexicon/runs/arcaid3-lt-lex-r3/v1__2026-10-10__LB-7.16",
+   "LB-7.16"
+  ],
+  [
+   "arcaid3-lt-off-r1",
+   1,
+   "Ablations/ARC-AGI-3/2026-10-09__A3-level-trials-lexicon/runs/arcaid3-lt-off-r1/v1__2026-10-09__save-run",
    "save-run"
   ],
   [
@@ -217,6 +481,24 @@
  ],
  "ARC-AGI-3|ablations|2026-10-13__restart-pair": [
   [
+   "arcaid3-pair-flag0-r1",
+   1,
+   "Ablations/ARC-AGI-3/2026-10-13__restart-pair/runs/arcaid3-pair-flag0-r1/v1__2026-10-14__save-run-error",
+   "save-run-error"
+  ],
+  [
+   "arcaid3-pair-flag0-r1",
+   2,
+   "Ablations/ARC-AGI-3/2026-10-13__restart-pair/runs/arcaid3-pair-flag0-r1/v2__2026-10-14__save-run-error",
+   "save-run-error"
+  ],
+  [
+   "arcaid3-pair-flag0-r1",
+   3,
+   "Ablations/ARC-AGI-3/2026-10-13__restart-pair/runs/arcaid3-pair-flag0-r1/v3__2026-10-14__save-run-error",
+   "save-run-error"
+  ],
+  [
    "arcaid3-pair-flag0-r1b",
    1,
    "Ablations/ARC-AGI-3/2026-10-13__restart-pair/runs/arcaid3-pair-flag0-r1b/v1__2026-10-14__LB-26.22",
@@ -231,6 +513,24 @@
  ],
  "ARC-AGI-3|ablations|2026-10-09__A1-replicates-v2-vs-v4": [
   [
+   "arcaid3-rep-v2-r1",
+   1,
+   "Ablations/ARC-AGI-3/2026-10-09__A1-replicates-v2-vs-v4/runs/arcaid3-rep-v2-r1/v1__2026-10-09__save-run",
+   "save-run"
+  ],
+  [
+   "arcaid3-rep-v2-r2",
+   1,
+   "Ablations/ARC-AGI-3/2026-10-09__A1-replicates-v2-vs-v4/runs/arcaid3-rep-v2-r2/v1__2026-10-09__save-run",
+   "save-run"
+  ],
+  [
+   "arcaid3-rep-v4-r1",
+   1,
+   "Ablations/ARC-AGI-3/2026-10-09__A1-replicates-v2-vs-v4/runs/arcaid3-rep-v4-r1/v1__2026-10-09__save-run",
+   "save-run"
+  ],
+  [
    "arcaid3-rep-v4-r2",
    1,
    "Ablations/ARC-AGI-3/2026-10-09__A1-replicates-v2-vs-v4/runs/arcaid3-rep-v4-r2/v1__2026-10-09__save-run",
@@ -243,6 +543,12 @@
    1,
    "Ablations/ARC-AGI-3/2026-10-12__restart-v1/runs/arcaid3-restart-dfranzen-m2/v1__2026-10-12__LB-25.76",
    "LB-25.76"
+  ],
+  [
+   "arcaid3-restart-dfranzen-m2-r2",
+   1,
+   "Ablations/ARC-AGI-3/2026-10-12__restart-v1/runs/arcaid3-restart-dfranzen-m2-r2/v1__2026-10-12__save-run",
+   "save-run"
   ]
  ]
 }

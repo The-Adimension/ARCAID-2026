@@ -1,0 +1,136 @@
+{
+  "games": {
+    "ar25-0c556536": {
+      "score": 15.277777777777779,
+      "seed_count": 2,
+      "seed_scores": {
+        "working/pass-0": 2.7777777777777777,
+        "working/pass-1": 27.77777777777778
+      },
+      "trial_count": 2,
+      "trial_scores": {
+        "working/pass-0": 2.7777777777777777,
+        "working/pass-1": 27.77777777777778
+      }
+    },
+    "ft09-0d8bbf25": {
+      "score": 14.285714285714285,
+      "seed_count": 2,
+      "seed_scores": {
+        "working/pass-0": 14.285714285714285,
+        "working/pass-1": 14.285714285714285
+      },
+      "trial_count": 2,
+      "trial_scores": {
+        "working/pass-0": 14.285714285714285,
+        "working/pass-1": 14.285714285714285
+      }
+    },
+    "lp85-305b61c3": {
+      "score": 39.48201236064089,
+      "seed_count": 2,
+      "seed_scores": {
+        "working/pass-0": 64.3754830546151,
+        "working/pass-1": 14.588541666666666
+      },
+      "trial_count": 2,
+      "trial_scores": {
+        "working/pass-0": 64.3754830546151,
+        "working/pass-1": 14.588541666666666
+      }
+    },
+    "re86-8af5384d": {
+      "score": 31.286459804651003,
+      "seed_count": 2,
+      "seed_scores": {
+        "working/pass-0": 41.66666666666667,
+        "working/pass-1": 20.906252942635334
+      },
+      "trial_count": 2,
+      "trial_scores": {
+        "working/pass-0": 41.66666666666667,
+        "working/pass-1": 20.906252942635334
+      }
+    },
+    "sb26-7fbdac44": {
+      "score": 2.7777777777777777,
+      "seed_count": 2,
+      "seed_scores": {
+        "working/pass-0": 2.7777777777777777,
+        "working/pass-1": 2.7777777777777777
+      },
+      "trial_count": 2,
+      "trial_scores": {
+        "working/pass-0": 2.7777777777777777,
+        "working/pass-1": 2.7777777777777777
+      }
+    },
+    "vc33-5430563c": {
+      "score": 14.989690343098365,
+      "seed_count": 2,
+      "seed_scores": {
+        "working/pass-0": 16.49949634755863,
+        "working/pass-1": 13.4798843386381
+      },
+      "trial_count": 2,
+      "trial_scores": {
+        "working/pass-0": 16.49949634755863,
+        "working/pass-1": 13.4798843386381
+      }
+    }
+  },
+  "metadata": {
+    "created_at": "2026-09-23T14:07:07.768913Z",
+    "dataset": null,
+    "dataset_description": "",
+    "exclude_tags": [],
+    "experiment_dirs": [
+      "/kaggle/working"
+    ],
+    "game_count": 6,
+    "game_ids": [
+      "sb26-7fbdac44",
+      "vc33-5430563c",
+      "ft09-0d8bbf25",
+      "lp85-305b61c3",
+      "re86-8af5384d",
+      "ar25-0c556536"
+    ],
+    "git_commit": null,
+    "hardware": {},
+    "include_tags": [],
+    "model": null,
+    "re_arc_commit": "57e46d619d02e8129c215af72c81b187b6b51afe",
+    "run_dirs": [
+      "/kaggle/working"
+    ],
+    "run_names": [
+      "working/pass-0",
+      "working/pass-1"
+    ],
+    "runtime_budget": {
+      "concurrent_jobs": null,
+      "max_experiment_runtime_hours": null,
+      "max_experiment_runtime_minutes": null,
+      "max_runtime_minutes_per_game": null
+    },
+    "score_source": "taaf.final_score",
+    "scoring_version": "taaf-framework-score-v1",
+    "seed_labels": [
+      "working/pass-0",
+      "working/pass-1"
+    ],
+    "seeds": [],
+    "seeds_available": false,
+    "setup_id": null,
+    "trial_count": 12,
+    "trial_labels": [
+      "working/pass-0",
+      "working/pass-1"
+    ],
+    "trials": [],
+    "trials_available": true
+  },
+  "score": 19.683238724943347,
+  "version": 1
+}

@@ -1,0 +1,60 @@
+import json, os, subprocess, sys, time
+from pathlib import Path
+START = float(Path("/kaggle/working/start_epoch.txt").read_text())
+cfg = json.loads(r"""{"model_glob": "/kaggle/input/**/qwen3-8-27b-fp8-repacked-v1/**/config.json", "overlay": "/kaggle/input/**/taaf-duck-qwen38-serving-v1/serving_wheels/*.whl", "parsers": ["--tool-call-parser", "qwen3_coder", "--reasoning-parser", "qwen3"], "server_ladder": [["--reasoning-config", "{\"reasoning_start_str\": \"<think>\", \"reasoning_end_str\": \"</think>\"}", "--kv-cache-dtype", "fp8", "--language-model-only", "--speculative-config", "{\"method\": \"qwen3_5_mtp\", \"num_speculative_tokens\": 2}"], ["--reasoning-config", "{\"reasoning_start_str\": \"<think>\", \"reasoning_end_str\": \"</think>\"}", "--kv-cache-dtype", "fp8", "--speculative-config", "{\"method\": \"qwen3_5_mtp\", \"num_speculative_tokens\": 2}"], ["--reasoning-config", "{\"reasoning_start_str\": \"<think>\", \"reasoning_end_str\": \"</think>\"}", "--kv-cache-dtype", "fp8"], ["--reasoning-config", "{\"reasoning_start_str\": \"<think>\", \"reasoning_end_str\": \"</think>\"}"], []], "max_model_len": 81920, "max_num_seqs": 16, "first_server_wait_s": 3600, "server_wait_s": 1500, "server_hold_max_s": 7200, "precache_threads": 4, "mode": "repl", "attempts": 1, "concurrency": 16, "max_turns": 40, "context_budget": 28000, "nudge_every": 6, "turn_max_tokens": 16384, "thinking_token_budget": 12288, "template_kwargs": {"reasoning_effort": "medium"}, "effort_ladder": ["low"], "force_submit_after": 8, "retain_functions": true, "trim_drain": 4000, "keep_recent": 6, "degenerate_guard": true, "timeout_as_cut": true, "lexicon_cue": true, "digest": true, "restart_frac": 0.5, "max_restarts": 1, "direct1_max_share": 0.6, "repl_share": 0.8, "direct_concurrency": 16, "direct_max_tokens": 32768, "direct_thinking_token_budget": 28672, "direct_template_kwargs": {"reasoning_effort": "xhigh"}, "rescue_tokens": 8192, "min_start_s": 900, "temperature": 1.0, "top_p": 0.95, "top_k": 20, "max_tokens": 16384, "tok_per_s": 140, "min_cap": 15000, "max_cap": 60000}""")
+cfg["deadline_epoch"] = START + 12 * 3600 - 35 * 60        # 35 min reserve inside the 12 h limit
+RERUN = os.environ.get("KAGGLE_IS_COMPETITION_RERUN", "").strip().lower() in {"1", "true"}
+sys.path.insert(0, "/kaggle/working/agent")
+import lexicon2, repl                                       # import check: a broken module fails the save run
+print("lexicon on:", repl.LEXICON_ON)
+SMOKE_MINUTES = 40                                         # 0: save run = preflight + fallback only
+if not RERUN:
+    # A version is only submittable once a run has produced submission.json, and the save run
+    # is the only run whose log we can read. v1 scored 0.00 because the wheelhouse (cp312 wheels)
+    # could not install on Kaggle's Python 3.13 image -- the save run never tried. So the save run
+    # now proves the install works on THIS image, and fails loudly (no submittable version) if not.
+    import glob, sys as _sys
+    print("python", _sys.version.split()[0])
+    assert _sys.version_info[:2] == (3, 12), "the wheelhouse is cp312: pin the Python 3.12 docker image"
+    gpus = subprocess.run(["nvidia-smi", "--query-gpu=index,name,memory.total", "--format=csv,noheader"],
+                          capture_output=True, text=True).stdout.strip().splitlines()
+    print("gpus:", gpus)
+    assert len(gpus) == 4, "expected 4 GPUs (L4x4): wrong image or accelerator"
+    wh = Path(glob.glob("/kaggle/input/**/arc3-vllm-h100-wheelhouse-v3/**/requirements.lock", recursive=True)[0]).parent
+    t = time.time()
+    r = subprocess.run([sys.executable, "-m", "pip", "install", "--dry-run", "--no-index", "--find-links", str(wh),
+                        "--requirement", str(wh / "requirements.lock"), "--target", "/tmp/preflight",
+                        "--ignore-installed", "--only-binary", ":all:", "--disable-pip-version-check", "-q"],
+                       capture_output=True, text=True)
+    print(f"preflight: wheelhouse {'installs' if r.returncode == 0 else 'DOES NOT install'} on this image "
+          f"({time.time() - t:.0f}s)", r.stderr[-2000:] if r.returncode else "")
+    assert r.returncode == 0, "wheelhouse does not install on this image"
+    if SMOKE_MINUTES:
+        # GPU smoke test on 3 evaluation tasks: install, server ladder, agent, lexicon, direct pass.
+        # Writes only under /kaggle/working/smoke -- submission.json stays the fallback.
+        os.makedirs("/kaggle/working/smoke", exist_ok=True)
+        smoke = dict(cfg, challenges="arc-agi_evaluation_challenges.json",
+                     sub_path="/kaggle/working/smoke/submission.json",
+                     deadline_epoch=time.time() + SMOKE_MINUTES * 60, server_hold_max_s=SMOKE_MINUTES * 45,
+                     min_start_s=120, interactive_tasks=3,
+                     force_submit_after=2)   # exercise the forced submit within a short smoke run
+        try:
+            subprocess.run([sys.executable, "/kaggle/working/agent/submit_main.py", json.dumps(smoke)],
+                           timeout=SMOKE_MINUTES * 60 + 600)
+        except Exception as e:
+            print("smoke did not finish cleanly:", repr(e))
+        try:
+            ev = json.load(open(glob.glob("/kaggle/input/**/arc-agi_evaluation_solutions.json", recursive=True)[0]))
+            sm = json.load(open(smoke["sub_path"]))
+            hit = sum(sol in (row["attempt_1"], row["attempt_2"]) for t in sm for row, sol in zip(sm[t], ev[t]))
+            print(f"SMOKE: {len(sm)} eval tasks, {hit} test outputs correct", flush=True)
+        except Exception as e:
+            print("SMOKE: no result:", repr(e))
+    print("not a competition rerun: fallback submission only")
+else:
+    try:
+        rc = subprocess.run([sys.executable, "/kaggle/working/agent/submit_main.py", json.dumps(cfg)],
+                            timeout=max(60, cfg["deadline_epoch"] + 15 * 60 - time.time())).returncode
+        print("submit_main exit code", rc)
+    except Exception as e:
+        print("submit_main did not finish cleanly:", repr(e))

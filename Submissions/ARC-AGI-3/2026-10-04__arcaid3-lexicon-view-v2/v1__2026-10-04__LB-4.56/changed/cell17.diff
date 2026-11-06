@@ -1,0 +1,126 @@
+--- base cell 17
++++ new cell 17
+@@ -9,6 +9,15 @@
+ #   current_frame.native                the board at its true resolution (e.g. 32x32, not 64x64)
+ #   current_frame.changes_since(frame)  objects that moved / appeared / disappeared / changed
+-# and one sentence to the system prompt saying so. Nothing else changes: same prompts otherwise,
+-# same images, same actions, same scheduling. The view is read only when the model asks for it.
++# and tells the model about it.
++#
++# Version 2 (2026-10-04). Version 1 added the view and one sentence, and the model never used it:
++# 0 of 1,130 tool calls (arcaid3/part3/WHY-THE-VIEW-WAS-NOT-USED.md). The harness's own prompt said a
++# frame exposes "only" .ascii/.step/.level/.shape/.segmentation, three times per request. v2 changes:
++#   1. those three "only" lines now list the new members (tool description + two system-prompt lines);
++#   2. a "when" trigger next to the harness's "most recent change" line, in the style of F13's note;
++#   3. on the first turn of a game and after a level change, one line in the user message:
++#      start with print(current_frame.code).
++# Each prompt edit is applied only if its anchor text is found exactly once; the READY line reports
++# which edits applied. Nothing else changes: same images, actions, scheduling and serving.
+ #
+ # Kill switch: set ARCAID3_LEXICON=0 before this cell runs.
+@@ -563,5 +572,5 @@
+         if "error" in _ARCAID3:
+             return "lexicon unavailable: " + _ARCAID3["error"]
+-        return _ARCAID3["to_text"](_arcaid3_encode(self))
++        return _ARCAID3["to_text"](_arcaid3_encode(self), max_kinds=24, max_list=8)   # fits the 1,024-token tool cap
+ 
+     @property
+@@ -595,8 +604,87 @@
+ '''
+ 
++# v2 prompt edits: (where, exact harness text, replacement). Anchors were checked against the prompts
++# the v1 run actually sent (experiments/2026-10-04__arcaid3-lexicon-view-py312__v1__.../outputs/prompts).
++_A3_MEMBERS = "`.code`, `.objects`, `.native` and `.changes_since(frame)`"
++_A3_TRIGGER = (
++    "- When a level starts, or when you cannot tell what your last action did, print `current_frame.code` "
++    "(every object with a stable name and position) and `current_frame.changes_since(previous_frame)` "
++    "(objects that moved, appeared, disappeared or changed) before writing your own diff.\n"
++)
++_A3_RECENT = (
++    "- For the most recent change, compare `previous_frame` to `current_frame`, or `last_transition.before_frame` "
++    "to `last_transition.after_frame`. `history[-1].frame` is the current frame, so comparing it to `current_frame` "
++    "only compares the board to itself.\n"
++)
++ARCAID3_PROMPT_EDITS = (
++    ("tool_description", "_PYTHON_TOOL_DESCRIPTION",
++     "`current_frame` and each `history[*].frame` expose only `.ascii`, `.segmentation`, `.step`, and `.level`;",
++     "`current_frame` and each `history[*].frame` expose `.ascii`, `.segmentation`, `.step`, `.level`, " + _A3_MEMBERS + ";"),
++    ("system_only_current", "STRUCTURED_RUNTIME_STATE_ADDENDUM",
++     "- `current_frame` exposes only `.ascii`, `.step`, `.level`, `.shape`, and `.segmentation`.\n",
++     "- `current_frame` exposes `.ascii`, `.step`, `.level`, `.shape`, `.segmentation`, " + _A3_MEMBERS + ".\n"),
++    ("system_only_history", "STRUCTURED_RUNTIME_STATE_ADDENDUM",
++     "each frame exposes only `.ascii`, `.step`, `.level`, `.shape`, and `.segmentation`.",
++     "each frame exposes `.ascii`, `.step`, `.level`, `.shape`, `.segmentation`, " + _A3_MEMBERS + "."),
++    ("trigger", "PYTHON_ADDENDUM", _A3_RECENT, _A3_RECENT + _A3_TRIGGER),
++)
++ARCAID3_CUE = ("New board: start with `print(current_frame.code)` to see its objects by name and position, "
++               "then use `.segmentation` or a small `.ascii` crop for details.")
++_A3_CUE_WHEN = (
++    "Ground yourself in `current_frame` before acting, but start with a compact structural summary rather than restating the full frame.",
++    "You have progressed to a new level!",
++)
++
+ _A3_ANCHOR_GLOBALS = "HOST_STDOUT = sys.stdout"
+ _A3_ANCHOR_METHODS = "    @property\n    def segmentation(self):"
+ ARCAID3_STATS = {"tool_calls": 0, "calls_using_view": 0, "code": 0, "objects": 0, "native": 0,
+-                 "changes_since": 0, "errors": 0}
++                 "changes_since": 0, "cue_turns": 0, "errors": 0}
++
++
++def arcaid3_apply_prompt_edits(modules):
++    """Apply ARCAID3_PROMPT_EDITS to the named string constants of each module. Idempotent.
++
++    Returns {edit name: "applied" | "already" | "anchor found N times"}. An edit whose anchor is not
++    found exactly once is skipped, never forced.
++    """
++    result = {}
++    for name, const, old, new in ARCAID3_PROMPT_EDITS:
++        status = None
++        for mod in modules:
++            text = getattr(mod, const, None)
++            if not isinstance(text, str):
++                continue
++            if new in text:
++                status = status or "already"
++                continue
++            found = text.count(old)
++            if found != 1:
++                status = status or f"anchor found {found} times"
++                continue
++            setattr(mod, const, text.replace(old, new))
++            status = "applied"
++        result[name] = status or "constant missing"
++    return result
++
++
++def arcaid3_wrap_user_prompt(agent_cls):
++    """Add ARCAID3_CUE to the user message on a game's first turn and after a level change."""
++    orig = agent_cls._build_user_prompt
++    if getattr(orig, "_arcaid3", False):
++        return False
++
++    def _build_user_prompt(self, *args, **kwargs):
++        text = orig(self, *args, **kwargs)
++        try:
++            if isinstance(text, str) and ARCAID3_CUE not in text and any(w in text for w in _A3_CUE_WHEN):
++                text = text + "\n" + ARCAID3_CUE
++                ARCAID3_STATS["cue_turns"] += 1
++        except Exception:
++            ARCAID3_STATS["errors"] += 1
++        return text
++
++    _build_user_prompt._arcaid3 = True
++    agent_cls._build_user_prompt = _build_user_prompt
++    return True
+ 
+ 
+@@ -680,4 +768,9 @@
+         _a3_ta.STRUCTURED_RUNTIME_STATE_ADDENDUM = _a3_ta.STRUCTURED_RUNTIME_STATE_ADDENDUM + ARCAID3_NOTE
+ 
++    # v2: the harness's prompt text, edited in both modules (tool_agent imported the constants by name)
++    import inference.agent.prompts as _a3_pr
++    report["prompt_edits"] = arcaid3_apply_prompt_edits([_a3_ta, _a3_pr])
++    report["first_turn_cue"] = "installed" if arcaid3_wrap_user_prompt(_a3_ta.ToolAgent) else "already"
++
+     # observe-only usage counter on the function the agent calls (tool_agent imported it by name)
+     if not getattr(_a3_ta.run_sandboxed_python, "_arcaid3", False):

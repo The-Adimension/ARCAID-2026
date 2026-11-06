@@ -1,0 +1,31 @@
+      7.3 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+      7.3 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+      7.3 err | 0.00s - to python to disable frozen modules.
+      7.3 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+      7.9 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+      7.9 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+      7.9 err | 0.00s - to python to disable frozen modules.
+      7.9 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+      9.4 out | fallback submission written for 240 tasks; rerun = None
+      9.4 out | Writing /kaggle/working/agent/grids.py
+      9.4 out | Writing /kaggle/working/agent/sandbox.py
+      9.4 out | Writing /kaggle/working/agent/backend.py
+      9.4 out | Writing /kaggle/working/agent/agent.py
+      9.4 out | Writing /kaggle/working/agent/lexicon2.py
+      9.5 out | Writing /kaggle/working/agent/repl.py
+      9.5 out | Writing /kaggle/working/agent/client.py
+      9.5 out | Writing /kaggle/working/agent/repl_agent.py
+      9.5 out | Writing /kaggle/working/agent/run_direct.py
+      9.5 out | Writing /kaggle/working/agent/run_submit.py
+      9.5 out | Writing /kaggle/working/agent/submit_main.py
+      9.6 out | lexicon on: True
+      9.6 out | not a competition rerun: fallback submission only, agent skipped
+      9.7 out | submission.json valid: 240 tasks, 0 test outputs answered by the agent
+     12.1 err | /usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+     12.1 err |   cells[i][c] = re.sub('\\\\\|', '|', cell)
+     12.2 err | /usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+     12.2 err |   text = re.sub(r'_', '\_', text) # Escape underscores in display text
+     13.1 err | [NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+     13.1 err | [NbConvertApp] Writing 166992 bytes to __notebook__.ipynb
+     15.8 err | [NbConvertApp] Converting notebook __notebook__.ipynb to html
+     16.7 err | [NbConvertApp] Writing 860037 bytes to __results__.html

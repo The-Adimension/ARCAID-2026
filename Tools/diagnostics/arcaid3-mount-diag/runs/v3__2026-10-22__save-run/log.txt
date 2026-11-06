@@ -1,0 +1,173 @@
+      9.8 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+      9.8 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+      9.8 err | 0.00s - to python to disable frozen modules.
+      9.8 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+     10.3 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+     10.3 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+     10.3 err | 0.00s - to python to disable frozen modules.
+     10.3 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+     11.3 out | t=    0s exists=True input=['competitions', 'datasets', 'models']
+     11.5 out | ['README.dataset.md', 'benchmark_initial.pkl', 'deploy_target.pkl', 'git_status.txt', 'preamble.txt', 'setup_commands.json', 'src', 'taaf-kaggle-bundle.json', 'teardown_commands.json']
+     11.5 out | /kaggle/input ['competitions', 'datasets', 'models'] 0
+     11.5 out | /kaggle/input/models ['dfranzen'] 0
+     11.5 out | /kaggle/input/models/dfranzen ['albucino-qwen3-8-flash-next-drafter', 'intel-qwen3.8-flash-next-w4a16-autoround'] 0
+     11.5 out | /kaggle/input/competitions ['arc-prize-2026-arc-agi-3'] 0
+     11.5 out | /kaggle/input/competitions/arc-prize-2026-arc-agi-3 ['ARC-AGI-3-Agents', 'arc_agi_3_wheels', 'environment_files'] 0
+     11.5 out | /kaggle/input/datasets ['dfranzen'] 0
+     11.5 out | /kaggle/input/datasets/dfranzen ['pennyroyal-v253', 'taaf-kaggle-source-bundle-copy'] 0
+     11.6 out | /tmp/fs/kaggle_AgzjHCnEcuYedlkNPLwWiSsIUqjOxbiCl62glCzQ-361255840-webtier/srcfile on /kaggle/input type ext4 (ro,relatime)
+     11.6 out | 192.168.5.2:/data/kagglesdsdata/models/755365/1007514/dlt88zafaysl on /kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1 type nfs (ro,relatime,vers=3,rsize=524288,wsize=524288,namlen=255,hard,nolock,fatal_neterrors=none,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=192.168.5.2,mountvers=3,mountport=2050,mountproto=tcp,local_lock=all,addr=192.168.5.2)
+     11.6 out | 192.168.5.2:/data/kagglesdsdata/models/755057/1007009/dlt88zaem8b8 on /kaggle/input/models/dfranzen/albucino-qwen3-8-flash-next-drafter/transformers/default/1 type nfs (ro,relatime,vers=3,rsize=524288,wsize=524288,namlen=255,hard,nolock,fatal_neterrors=none,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=192.168.5.2,mountvers=3,mountport=2050,mountproto=tcp,local_lock=all,addr=192.168.5.2)
+     11.6 out | 192.168.5.2:/data/kagglesdsdata/competitions/133468/16741059/dhvpirwb043c on /kaggle/input/competitions/arc-prize-2026-arc-agi-3 type nfs (ro,relatime,vers=3,rsize=524288,wsize=524288,namlen=255,hard,nolock,fatal_neterrors=none,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=192.168.5.2,mountvers=3,mountport=2050,mountproto=tcp,local_lock=all,addr=192.168.5.2)
+     11.6 out | kagglesdsdata on /kaggle/input/datasets/dfranzen/taaf-kaggle-source-bundle-copy type fuse.gcsfuse (ro,nosuid,nodev,relatime,user_id=0,group_id=0,default_permissions,allow_other)
+     11.6 out | kagglesdsdata on /kaggle/input/datasets/dfranzen/pennyroyal-v253 type fuse.gcsfuse (ro,nosuid,nodev,relatime,user_id=0,group_id=0,default_permissions,allow_other)
+     11.6 out | GPU 0: NVIDIA RTX PRO 6000 Blackwell Server Edition (UUID: GPU-92964275-6f81-d22c-4c55-4f36ada66395)
+     11.6 out | Filesystem      Size  Used Avail Use% Mounted on
+     11.6 out | /dev/loop2       20G  176K   20G   1% /kaggle/working
+     11.6 out | overlay         8.0T  7.0T  1.1T  88% /
+     11.6 out | 
+     11.6 out | 
+     11.6 out | == intel-qwen3.8-flash-next-w4a16-autoround: 49 files, 168.79 GiB
+     35.9 out |      1.0/168.8 GiB      42 MiB/s  t=   24s
+     59.6 out |      2.0/168.8 GiB      43 MiB/s  t=   48s
+     83.6 out |      3.0/168.8 GiB      43 MiB/s  t=   72s
+    105.3 out |      4.0/168.8 GiB      44 MiB/s  t=   94s
+    127.5 out |      5.0/168.8 GiB      44 MiB/s  t=  116s
+    150.1 out |      6.0/168.8 GiB      44 MiB/s  t=  138s
+    172.4 out |      7.0/168.8 GiB      45 MiB/s  t=  161s
+    193.3 out |      8.0/168.8 GiB      45 MiB/s  t=  182s
+    214.5 out |      9.0/168.8 GiB      46 MiB/s  t=  203s
+    236.2 out |     10.0/168.8 GiB      46 MiB/s  t=  224s
+    260.6 out |     11.0/168.8 GiB      45 MiB/s  t=  249s
+    283.8 out |     12.0/168.8 GiB      45 MiB/s  t=  272s
+    305.8 out |     13.0/168.8 GiB      45 MiB/s  t=  294s
+    325.4 out |     14.0/168.8 GiB      46 MiB/s  t=  314s
+    346.1 out |     15.0/168.8 GiB      46 MiB/s  t=  334s
+    367.0 out |     16.0/168.8 GiB      46 MiB/s  t=  355s
+    387.8 out |     17.0/168.8 GiB      46 MiB/s  t=  376s
+    409.3 out |     18.0/168.8 GiB      46 MiB/s  t=  398s
+    431.1 out |     19.0/168.8 GiB      46 MiB/s  t=  419s
+    454.5 out |     20.0/168.8 GiB      46 MiB/s  t=  443s
+    476.4 out |     21.0/168.8 GiB      46 MiB/s  t=  465s
+    498.4 out |     22.0/168.8 GiB      46 MiB/s  t=  487s
+    520.0 out |     23.0/168.8 GiB      46 MiB/s  t=  508s
+    539.3 out |     24.0/168.8 GiB      47 MiB/s  t=  528s
+    561.6 out |     25.0/168.8 GiB      47 MiB/s  t=  550s
+    583.4 out |     26.0/168.8 GiB      47 MiB/s  t=  572s
+    604.8 out |     27.0/168.8 GiB      47 MiB/s  t=  593s
+    627.1 out |     28.0/168.8 GiB      47 MiB/s  t=  615s
+    648.2 out |     29.0/168.8 GiB      47 MiB/s  t=  637s
+    670.7 out |     30.0/168.8 GiB      47 MiB/s  t=  659s
+    695.9 out |     31.0/168.8 GiB      46 MiB/s  t=  684s
+    722.2 out |     32.0/168.8 GiB      46 MiB/s  t=  711s
+    748.2 out |     33.1/168.8 GiB      46 MiB/s  t=  737s
+    772.8 out |     34.1/168.8 GiB      46 MiB/s  t=  761s
+    795.9 out |     35.1/168.8 GiB      46 MiB/s  t=  784s
+    818.5 out |     36.1/168.8 GiB      46 MiB/s  t=  807s
+    840.0 out |     37.1/168.8 GiB      46 MiB/s  t=  828s
+    859.4 out |     38.0/168.8 GiB      46 MiB/s  t=  848s
+    879.4 out |     39.0/168.8 GiB      46 MiB/s  t=  868s
+    901.0 out |     40.0/168.8 GiB      46 MiB/s  t=  889s
+    925.4 out |     41.0/168.8 GiB      46 MiB/s  t=  914s
+    950.4 out |     42.0/168.8 GiB      46 MiB/s  t=  939s
+    972.6 out |     43.0/168.8 GiB      46 MiB/s  t=  961s
+    996.6 out |     44.0/168.8 GiB      46 MiB/s  t=  985s
+   1017.9 out |     45.0/168.8 GiB      46 MiB/s  t= 1006s
+   1040.0 out |     46.0/168.8 GiB      46 MiB/s  t= 1028s
+   1062.0 out |     47.0/168.8 GiB      46 MiB/s  t= 1050s
+   1085.6 out |     48.0/168.8 GiB      46 MiB/s  t= 1074s
+   1110.3 out |     49.0/168.8 GiB      46 MiB/s  t= 1099s
+   1134.0 out |     50.0/168.8 GiB      46 MiB/s  t= 1122s
+   1155.5 out |     51.0/168.8 GiB      46 MiB/s  t= 1144s
+   1174.9 out |     52.0/168.8 GiB      46 MiB/s  t= 1163s
+   1199.1 out |     53.0/168.8 GiB      46 MiB/s  t= 1187s
+   1222.5 out |     54.0/168.8 GiB      46 MiB/s  t= 1211s
+   1243.9 out |     55.0/168.8 GiB      46 MiB/s  t= 1232s
+   1268.3 out |     56.0/168.8 GiB      46 MiB/s  t= 1257s
+   1293.3 out |     57.0/168.8 GiB      46 MiB/s  t= 1282s
+   1318.0 out |     58.0/168.8 GiB      45 MiB/s  t= 1306s
+   1342.2 out |     59.0/168.8 GiB      45 MiB/s  t= 1331s
+   1363.5 out |     60.0/168.8 GiB      45 MiB/s  t= 1352s
+   1383.3 out |     61.0/168.8 GiB      46 MiB/s  t= 1372s
+   1404.6 out |     62.0/168.8 GiB      46 MiB/s  t= 1393s
+   1425.3 out |     63.0/168.8 GiB      46 MiB/s  t= 1414s
+   1446.5 out |     64.0/168.8 GiB      46 MiB/s  t= 1435s
+   1467.6 out |     65.0/168.8 GiB      46 MiB/s  t= 1456s
+   1489.1 out |     66.0/168.8 GiB      46 MiB/s  t= 1477s
+   1509.2 out |     67.0/168.8 GiB      46 MiB/s  t= 1498s
+   1528.2 out |     68.0/168.8 GiB      46 MiB/s  t= 1517s
+   1548.9 out |     69.0/168.8 GiB      46 MiB/s  t= 1537s
+   1571.3 out |     70.0/168.8 GiB      46 MiB/s  t= 1560s
+   1593.2 out |     71.0/168.8 GiB      46 MiB/s  t= 1582s
+   1615.9 out |     72.0/168.8 GiB      46 MiB/s  t= 1604s
+   1639.5 out |     73.1/168.8 GiB      46 MiB/s  t= 1628s
+   1660.6 out |     74.1/168.8 GiB      46 MiB/s  t= 1649s
+   1680.0 out |     75.1/168.8 GiB      46 MiB/s  t= 1668s
+   1699.4 out |     76.1/168.8 GiB      46 MiB/s  t= 1688s
+   1719.2 out |     77.1/168.8 GiB      46 MiB/s  t= 1708s
+   1741.0 out |     78.0/168.8 GiB      46 MiB/s  t= 1729s
+   1765.8 out |     79.0/168.8 GiB      46 MiB/s  t= 1754s
+   1788.9 out |     80.0/168.8 GiB      46 MiB/s  t= 1777s
+   1812.0 out |     81.0/168.8 GiB      46 MiB/s  t= 1800s
+   1831.9 out |     82.0/168.8 GiB      46 MiB/s  t= 1820s
+   1850.9 out |     83.0/168.8 GiB      46 MiB/s  t= 1839s
+   1870.8 out |     84.0/168.8 GiB      46 MiB/s  t= 1859s
+   1890.1 out |     85.0/168.8 GiB      46 MiB/s  t= 1878s
+   1908.9 out |     86.0/168.8 GiB      46 MiB/s  t= 1897s
+   1927.5 out |     87.0/168.8 GiB      47 MiB/s  t= 1916s
+   1944.7 out |     88.0/168.8 GiB      47 MiB/s  t= 1933s
+   1962.2 out |     89.0/168.8 GiB      47 MiB/s  t= 1951s
+   1982.0 out |     90.0/168.8 GiB      47 MiB/s  t= 1970s
+   2000.0 out |     91.0/168.8 GiB      47 MiB/s  t= 1988s
+   2018.4 out |     92.0/168.8 GiB      47 MiB/s  t= 2007s
+   2038.3 out |     93.0/168.8 GiB      47 MiB/s  t= 2027s
+   2057.6 out |     94.0/168.8 GiB      47 MiB/s  t= 2046s
+   2076.4 out |     95.0/168.8 GiB      47 MiB/s  t= 2065s
+   2095.4 out |     96.0/168.8 GiB      47 MiB/s  t= 2084s
+   2113.4 out |     97.0/168.8 GiB      47 MiB/s  t= 2102s
+   2131.9 out |     98.0/168.8 GiB      47 MiB/s  t= 2120s
+   2149.7 out |     99.0/168.8 GiB      47 MiB/s  t= 2138s
+   2167.1 out |    100.0/168.8 GiB      48 MiB/s  t= 2155s
+   2185.7 out |    101.0/168.8 GiB      48 MiB/s  t= 2174s
+   2203.2 out |    102.0/168.8 GiB      48 MiB/s  t= 2192s
+   2219.4 out |    103.0/168.8 GiB      48 MiB/s  t= 2208s
+   2237.1 out |    104.0/168.8 GiB      48 MiB/s  t= 2225s
+   2255.4 out |    105.0/168.8 GiB      48 MiB/s  t= 2244s
+   2272.1 out |    106.0/168.8 GiB      48 MiB/s  t= 2260s
+   2290.2 out |    107.0/168.8 GiB      48 MiB/s  t= 2279s
+   2309.8 out |    108.0/168.8 GiB      48 MiB/s  t= 2298s
+   2327.3 out |    109.0/168.8 GiB      48 MiB/s  t= 2316s
+   2345.3 out |    110.0/168.8 GiB      48 MiB/s  t= 2334s
+   2362.8 out |    111.0/168.8 GiB      48 MiB/s  t= 2351s
+   2381.0 out |    112.0/168.8 GiB      48 MiB/s  t= 2369s
+   2401.2 out |    113.0/168.8 GiB      48 MiB/s  t= 2390s
+   2422.5 out |    114.0/168.8 GiB      48 MiB/s  t= 2411s
+   2443.3 out |    115.0/168.8 GiB      48 MiB/s  t= 2432s
+   2464.1 out |    116.0/168.8 GiB      48 MiB/s  t= 2452s
+   2485.2 out |    117.0/168.8 GiB      48 MiB/s  t= 2474s
+   2505.6 out |    118.0/168.8 GiB      48 MiB/s  t= 2494s
+   2525.3 out |    119.0/168.8 GiB      48 MiB/s  t= 2514s
+   2544.7 out |    120.0/168.8 GiB      49 MiB/s  t= 2533s
+   2563.7 out |    121.0/168.8 GiB      49 MiB/s  t= 2552s
+   2584.1 out |    122.0/168.8 GiB      49 MiB/s  t= 2572s
+   2602.7 out |    123.0/168.8 GiB      49 MiB/s  t= 2591s
+   2620.8 out |    124.0/168.8 GiB      49 MiB/s  t= 2609s
+   2636.6 out |    125.0/168.8 GiB      49 MiB/s  t= 2625s
+   2655.2 out |    126.0/168.8 GiB      49 MiB/s  t= 2644s
+   2671.3 out |    127.0/168.8 GiB      49 MiB/s  t= 2660s
+   2689.1 out |    128.0/168.8 GiB      49 MiB/s  t= 2677s
+   2706.0 out |    129.0/168.8 GiB      49 MiB/s  t= 2694s
+   2712.5 out | DONE {'root': '/kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround', 'files': 49, 'gib': 168.79, 'read_gib': 129.39, 'secs': 2700.9, 'mib_s': 49.1, 'ttfb_s': 0.01, 'est_full_load_min': 58.7, 'stopped_by_budget': True}
+   2712.5 out | !! budget of 45 min hit; remaining roots skipped
+   2712.5 out | 
+   2712.5 out | ============================================================
+   2712.5 out | VERDICT: DEGRADED  estimated weight load ~58.7 min (healthy was 4-5 min; >25 min means agents will likely time out waiting for vLLM)
+   2712.5 out | ============================================================
+   2714.1 err | /usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+   2714.1 err |   cells[i][c] = re.sub('\\\\\|', '|', cell)
+   2714.2 err | /usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+   2714.2 err |   text = re.sub(r'_', '\_', text) # Escape underscores in display text
+   2714.7 err | [NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+   2714.9 err | [NbConvertApp] Writing 17694 bytes to __notebook__.ipynb
+   2716.1 err | [NbConvertApp] Converting notebook __notebook__.ipynb to html
+   2716.5 err | [NbConvertApp] Writing 305147 bytes to __results__.html

@@ -1,0 +1,22 @@
+--- base cell 11
++++ new cell 11
+@@ -45,4 +45,5 @@
+             'stall_resets': sum(r['counters'].get('stall_resets', 0) for r in rs),
+             'guard_blocks': sum(r['counters'].get('guard_blocks', 0) for r in rs),
++            'tail_skips': sum(r['counters'].get('tail_skips', 0) for r in rs),
+         }
+ 
+@@ -70,9 +71,10 @@
+ 
+     lines = ['# arc3 A/B report', '', f'verdict: {verdict} ({wins} games better, {losses} worse)', '',
+-             '| arm | runs | mean score | levels | runs with a level | actions | tokens/action | stall resets | guard blocks |',
+-             '|---|---|---|---|---|---|---|---|---|']
++             '| arm | runs | mean score | levels | runs with a level | actions | tokens/action | stall resets | guard blocks | tail skips |',
++             '|---|---|---|---|---|---|---|---|---|---|']
+     for arm, s in summary.items():
+         lines.append(f"| {arm} | {s['runs']} | {s['mean_score']} | {s['levels']} | {s['runs_with_a_level']} "
+-                     f"| {s['actions']} | {s['tokens_per_action']} | {s['stall_resets']} | {s['guard_blocks']} |")
++                     f"| {s['actions']} | {s['tokens_per_action']} | {s['stall_resets']} | {s['guard_blocks']} "
++                     f"| {s['tail_skips']} |")
+     lines += ['', '| game | plain levels | tricks levels | plain actions | tricks actions | plain score | tricks score |',
+               '|---|---|---|---|---|---|---|']

@@ -1,0 +1,16 @@
+--- base cell 4
++++ new cell 4
+@@ -1,11 +1,5 @@
+ import os
+ if not os.getenv('KAGGLE_IS_COMPETITION_RERUN'):
+-    # Save-and-run-all (commit) mode: emit a dummy submission so the
+-    # commit succeeds. The real submission.parquet is produced by the
+-    # gateway during competition rerun.
+     import pandas as pd
+-    submission = pd.DataFrame(
+-        data=[['1_0', '1', True, 1]],
+-        columns=['row_id', 'game_id', 'end_of_game', 'score'])
+-    submission.to_parquet('/kaggle/working/submission.parquet', index=False)
+-    submission.head()
++    pd.DataFrame(data=[['1_0', '1', True, 1]], columns=['row_id', 'game_id', 'end_of_game', 'score']
++                 ).to_parquet('/kaggle/working/submission.parquet', index=False)

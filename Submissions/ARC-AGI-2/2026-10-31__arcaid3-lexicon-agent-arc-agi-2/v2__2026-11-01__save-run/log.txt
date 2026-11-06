@@ -1,0 +1,340 @@
+     10.3 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+     10.3 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+     10.3 err | 0.00s - to python to disable frozen modules.
+     10.3 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+     11.1 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+     11.1 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+     11.1 err | 0.00s - to python to disable frozen modules.
+     11.1 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+     16.9 out | fallback submission written for 240 tasks; rerun = None
+     16.9 out | Writing /kaggle/working/agent/grids.py
+     17.0 out | Writing /kaggle/working/agent/sandbox.py
+     17.0 out | Writing /kaggle/working/agent/backend.py
+     17.0 out | Writing /kaggle/working/agent/agent.py
+     17.0 out | Writing /kaggle/working/agent/lexicon2.py
+     17.0 out | Writing /kaggle/working/agent/repl.py
+     17.1 out | Writing /kaggle/working/agent/client.py
+     17.1 out | Writing /kaggle/working/agent/repl_agent.py
+     17.1 out | Writing /kaggle/working/agent/run_direct.py
+     17.1 out | Writing /kaggle/working/agent/run_submit.py
+     17.1 out | Writing /kaggle/working/agent/submit_main.py
+     17.2 out | lexicon on: True
+     17.2 out | python 3.12.13
+    106.2 out | preflight: wheelhouse installs on this image (87s) 
+    192.3 out | precache: 944 chunks of /kaggle/input/models/foysalemonshanto/qwen3-8-27b-fp8-repacked-v1/pytorch/hf-fp8/1 read in 84s
+    192.5 out | precache: 944 chunks of /kaggle/input/models/foysalemonshanto/qwen3-8-27b-fp8-repacked-v1/pytorch/hf-fp8/1 read in 84s
+    240.9 out | wheelhouse installed in 133s
+    241.2 out | wheelhouse installed in 133s
+    255.3 out | overlay installed: ['huggingface_hub-1.5.0-py3-none-any.whl', 'transformers-5.8.0-py3-none-any.whl']
+    255.3 out | /usr/bin/python3 -m vllm.entrypoints.openai.api_server --model /kaggle/input/models/foysalemonshanto/qwen3-8-27b-fp8-repacked-v1/pytorch/hf-fp8/1 --served-model-name qwen --host 127.0.0.1 --port 1234 --tensor-parallel-size 4 --enable-auto-tool-choice --tool-call-parser qwen3_coder --reasoning-parser qwen3 --generation-config vllm --enable-prefix-caching --max-model-len 81920 --gpu-memory-utilization 0.90 --max-num-seqs 16 --reasoning-config {"reasoning_start_str": "<think>", "reasoning_end_str": "</think>"} --kv-cache-dtype fp8 --language-model-only --speculative-config {"method": "qwen3_5_mtp", "num_speculative_tokens": 2}
+    255.5 out | overlay installed: ['huggingface_hub-1.5.0-py3-none-any.whl', 'transformers-5.8.0-py3-none-any.whl']
+    255.5 out | /usr/bin/python3 -m vllm.entrypoints.openai.api_server --model /kaggle/input/models/foysalemonshanto/qwen3-8-27b-fp8-repacked-v1/pytorch/hf-fp8/1 --served-model-name qwen --host 127.0.0.1 --port 1234 --tensor-parallel-size 4 --enable-auto-tool-choice --tool-call-parser qwen3_coder --reasoning-parser qwen3 --generation-config vllm --enable-prefix-caching --max-model-len 81920 --gpu-memory-utilization 0.90 --max-num-seqs 16 --reasoning-config {"reasoning_start_str": "<think>", "reasoning_end_str": "</think>"} --kv-cache-dtype fp8 --language-model-only --speculative-config {"method": "qwen3_5_mtp", "num_speculative_tokens": 2}
+    295.3 out | server FAILED to start; tail:
+    295.3 out | W1101 12:15:26.709000 295 vllm-site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME='/usr/local/cuda'
+    295.3 out | Traceback (most recent call last):
+    295.3 out |   File "<frozen runpy>", line 198, in _run_module_as_main
+    295.3 out |   File "<frozen runpy>", line 88, in _run_code
+    295.3 out |   File "/kaggle/working/vllm-site-packages/vllm/entrypoints/openai/api_server.py", line 706, in <module>
+    295.3 out |     parser = make_arg_parser(parser)
+    295.3 out |              ^^^^^^^^^^^^^^^^^^^^^^^
+    295.3 out |   File "/kaggle/working/vllm-site-packages/vllm/entrypoints/openai/cli_args.py", line 349, in make_arg_parser
+    295.3 out |     parser = AsyncEngineArgs.add_cli_args(parser)
+    295.3 out |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    295.3 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 2264, in add_cli_args
+    295.3 out |     parser = EngineArgs.add_cli_args(parser)
+    295.3 out |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    295.3 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 1294, in add_cli_args
+    295.3 out |     vllm_kwargs = get_kwargs(VllmConfig)
+    295.3 out |                   ^^^^^^^^^^^^^^^^^^^^^^
+    295.3 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 369, in get_kwargs
+    295.3 out |     return copy.deepcopy(_compute_kwargs(cls))
+    295.3 out |                          ^^^^^^^^^^^^^^^^^^^^
+    295.3 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 280, in _compute_kwargs
+    295.3 out |     default = default.default_factory()  # type: ignore[call-arg]
+    295.3 out |               ^^^^^^^^^^^^^^^^^^^^^^^^^
+    295.3 out |   File "/kaggle/working/vllm-site-packages/pydantic/_internal/_dataclasses.py", line 121, in __init__
+    295.3 out |     s.__pydantic_validator__.validate_python(ArgsKwargs(args, kwargs), self_instance=s)
+    295.3 out |   File "/kaggle/working/vllm-site-packages/vllm/config/device.py", line 56, in __post_init__
+    295.3 out |     raise RuntimeError(
+    295.3 out | RuntimeError: Failed to infer device type, please set the environment variable `VLLM_LOGGING_LEVEL=DEBUG` to turn on verbose logging to help debug the issue.
+    295.3 out | option set 0 failed -> next
+    295.5 out | server FAILED to start; tail:
+    295.5 out | W1101 12:15:26.709000 295 vllm-site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME='/usr/local/cuda'
+    295.5 out | Traceback (most recent call last):
+    295.5 out |   File "<frozen runpy>", line 198, in _run_module_as_main
+    295.5 out |   File "<frozen runpy>", line 88, in _run_code
+    295.5 out |   File "/kaggle/working/vllm-site-packages/vllm/entrypoints/openai/api_server.py", line 706, in <module>
+    295.5 out |     parser = make_arg_parser(parser)
+    295.5 out |              ^^^^^^^^^^^^^^^^^^^^^^^
+    295.5 out |   File "/kaggle/working/vllm-site-packages/vllm/entrypoints/openai/cli_args.py", line 349, in make_arg_parser
+    295.5 out |     parser = AsyncEngineArgs.add_cli_args(parser)
+    295.5 out |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    295.5 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 2264, in add_cli_args
+    295.5 out |     parser = EngineArgs.add_cli_args(parser)
+    295.5 out |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    295.5 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 1294, in add_cli_args
+    295.5 out |     vllm_kwargs = get_kwargs(VllmConfig)
+    295.5 out |                   ^^^^^^^^^^^^^^^^^^^^^^
+    295.5 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 369, in get_kwargs
+    295.5 out |     return copy.deepcopy(_compute_kwargs(cls))
+    295.5 out |                          ^^^^^^^^^^^^^^^^^^^^
+    295.5 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 280, in _compute_kwargs
+    295.5 out |     default = default.default_factory()  # type: ignore[call-arg]
+    295.5 out |               ^^^^^^^^^^^^^^^^^^^^^^^^^
+    295.5 out |   File "/kaggle/working/vllm-site-packages/pydantic/_internal/_dataclasses.py", line 121, in __init__
+    295.5 out |     s.__pydantic_validator__.validate_python(ArgsKwargs(args, kwargs), self_instance=s)
+    295.5 out |   File "/kaggle/working/vllm-site-packages/vllm/config/device.py", line 56, in __post_init__
+    295.5 out |     raise RuntimeError(
+    295.5 out | RuntimeError: Failed to infer device type, please set the environment variable `VLLM_LOGGING_LEVEL=DEBUG` to turn on verbose logging to help debug the issue.
+    295.5 out | option set 0 failed -> next
+    315.3 out | /usr/bin/python3 -m vllm.entrypoints.openai.api_server --model /kaggle/input/models/foysalemonshanto/qwen3-8-27b-fp8-repacked-v1/pytorch/hf-fp8/1 --served-model-name qwen --host 127.0.0.1 --port 1234 --tensor-parallel-size 4 --enable-auto-tool-choice --tool-call-parser qwen3_coder --reasoning-parser qwen3 --generation-config vllm --enable-prefix-caching --max-model-len 81920 --gpu-memory-utilization 0.90 --max-num-seqs 16 --reasoning-config {"reasoning_start_str": "<think>", "reasoning_end_str": "</think>"} --kv-cache-dtype fp8 --speculative-config {"method": "qwen3_5_mtp", "num_speculative_tokens": 2}
+    315.5 out | /usr/bin/python3 -m vllm.entrypoints.openai.api_server --model /kaggle/input/models/foysalemonshanto/qwen3-8-27b-fp8-repacked-v1/pytorch/hf-fp8/1 --served-model-name qwen --host 127.0.0.1 --port 1234 --tensor-parallel-size 4 --enable-auto-tool-choice --tool-call-parser qwen3_coder --reasoning-parser qwen3 --generation-config vllm --enable-prefix-caching --max-model-len 81920 --gpu-memory-utilization 0.90 --max-num-seqs 16 --reasoning-config {"reasoning_start_str": "<think>", "reasoning_end_str": "</think>"} --kv-cache-dtype fp8 --speculative-config {"method": "qwen3_5_mtp", "num_speculative_tokens": 2}
+    335.3 out | server FAILED to start; tail:
+    335.3 out | W1101 12:16:01.802000 488 vllm-site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME='/usr/local/cuda'
+    335.3 out | Traceback (most recent call last):
+    335.3 out |   File "<frozen runpy>", line 198, in _run_module_as_main
+    335.3 out |   File "<frozen runpy>", line 88, in _run_code
+    335.3 out |   File "/kaggle/working/vllm-site-packages/vllm/entrypoints/openai/api_server.py", line 706, in <module>
+    335.3 out |     parser = make_arg_parser(parser)
+    335.3 out |              ^^^^^^^^^^^^^^^^^^^^^^^
+    335.3 out |   File "/kaggle/working/vllm-site-packages/vllm/entrypoints/openai/cli_args.py", line 349, in make_arg_parser
+    335.3 out |     parser = AsyncEngineArgs.add_cli_args(parser)
+    335.3 out |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    335.3 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 2264, in add_cli_args
+    335.3 out |     parser = EngineArgs.add_cli_args(parser)
+    335.3 out |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    335.3 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 1294, in add_cli_args
+    335.3 out |     vllm_kwargs = get_kwargs(VllmConfig)
+    335.3 out |                   ^^^^^^^^^^^^^^^^^^^^^^
+    335.3 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 369, in get_kwargs
+    335.3 out |     return copy.deepcopy(_compute_kwargs(cls))
+    335.3 out |                          ^^^^^^^^^^^^^^^^^^^^
+    335.3 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 280, in _compute_kwargs
+    335.3 out |     default = default.default_factory()  # type: ignore[call-arg]
+    335.3 out |               ^^^^^^^^^^^^^^^^^^^^^^^^^
+    335.3 out |   File "/kaggle/working/vllm-site-packages/pydantic/_internal/_dataclasses.py", line 121, in __init__
+    335.3 out |     s.__pydantic_validator__.validate_python(ArgsKwargs(args, kwargs), self_instance=s)
+    335.3 out |   File "/kaggle/working/vllm-site-packages/vllm/config/device.py", line 56, in __post_init__
+    335.3 out |     raise RuntimeError(
+    335.3 out | RuntimeError: Failed to infer device type, please set the environment variable `VLLM_LOGGING_LEVEL=DEBUG` to turn on verbose logging to help debug the issue.
+    335.3 out | option set 1 failed -> next
+    335.5 out | server FAILED to start; tail:
+    335.5 out | W1101 12:16:01.802000 488 vllm-site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME='/usr/local/cuda'
+    335.5 out | Traceback (most recent call last):
+    335.5 out |   File "<frozen runpy>", line 198, in _run_module_as_main
+    335.5 out |   File "<frozen runpy>", line 88, in _run_code
+    335.5 out |   File "/kaggle/working/vllm-site-packages/vllm/entrypoints/openai/api_server.py", line 706, in <module>
+    335.5 out |     parser = make_arg_parser(parser)
+    335.5 out |              ^^^^^^^^^^^^^^^^^^^^^^^
+    335.5 out |   File "/kaggle/working/vllm-site-packages/vllm/entrypoints/openai/cli_args.py", line 349, in make_arg_parser
+    335.5 out |     parser = AsyncEngineArgs.add_cli_args(parser)
+    335.5 out |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    335.5 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 2264, in add_cli_args
+    335.5 out |     parser = EngineArgs.add_cli_args(parser)
+    335.5 out |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    335.5 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 1294, in add_cli_args
+    335.5 out |     vllm_kwargs = get_kwargs(VllmConfig)
+    335.5 out |                   ^^^^^^^^^^^^^^^^^^^^^^
+    335.5 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 369, in get_kwargs
+    335.5 out |     return copy.deepcopy(_compute_kwargs(cls))
+    335.5 out |                          ^^^^^^^^^^^^^^^^^^^^
+    335.5 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 280, in _compute_kwargs
+    335.5 out |     default = default.default_factory()  # type: ignore[call-arg]
+    335.5 out |               ^^^^^^^^^^^^^^^^^^^^^^^^^
+    335.5 out |   File "/kaggle/working/vllm-site-packages/pydantic/_internal/_dataclasses.py", line 121, in __init__
+    335.5 out |     s.__pydantic_validator__.validate_python(ArgsKwargs(args, kwargs), self_instance=s)
+    335.5 out |   File "/kaggle/working/vllm-site-packages/vllm/config/device.py", line 56, in __post_init__
+    335.5 out |     raise RuntimeError(
+    335.5 out | RuntimeError: Failed to infer device type, please set the environment variable `VLLM_LOGGING_LEVEL=DEBUG` to turn on verbose logging to help debug the issue.
+    335.5 out | option set 1 failed -> next
+    355.3 out | /usr/bin/python3 -m vllm.entrypoints.openai.api_server --model /kaggle/input/models/foysalemonshanto/qwen3-8-27b-fp8-repacked-v1/pytorch/hf-fp8/1 --served-model-name qwen --host 127.0.0.1 --port 1234 --tensor-parallel-size 4 --enable-auto-tool-choice --tool-call-parser qwen3_coder --reasoning-parser qwen3 --generation-config vllm --enable-prefix-caching --max-model-len 81920 --gpu-memory-utilization 0.90 --max-num-seqs 16 --reasoning-config {"reasoning_start_str": "<think>", "reasoning_end_str": "</think>"} --kv-cache-dtype fp8
+    355.5 out | /usr/bin/python3 -m vllm.entrypoints.openai.api_server --model /kaggle/input/models/foysalemonshanto/qwen3-8-27b-fp8-repacked-v1/pytorch/hf-fp8/1 --served-model-name qwen --host 127.0.0.1 --port 1234 --tensor-parallel-size 4 --enable-auto-tool-choice --tool-call-parser qwen3_coder --reasoning-parser qwen3 --generation-config vllm --enable-prefix-caching --max-model-len 81920 --gpu-memory-utilization 0.90 --max-num-seqs 16 --reasoning-config {"reasoning_start_str": "<think>", "reasoning_end_str": "</think>"} --kv-cache-dtype fp8
+    375.3 out | server FAILED to start; tail:
+    375.3 out | W1101 12:16:41.810000 669 vllm-site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME='/usr/local/cuda'
+    375.3 out | Traceback (most recent call last):
+    375.3 out |   File "<frozen runpy>", line 198, in _run_module_as_main
+    375.3 out |   File "<frozen runpy>", line 88, in _run_code
+    375.3 out |   File "/kaggle/working/vllm-site-packages/vllm/entrypoints/openai/api_server.py", line 706, in <module>
+    375.3 out |     parser = make_arg_parser(parser)
+    375.3 out |              ^^^^^^^^^^^^^^^^^^^^^^^
+    375.3 out |   File "/kaggle/working/vllm-site-packages/vllm/entrypoints/openai/cli_args.py", line 349, in make_arg_parser
+    375.3 out |     parser = AsyncEngineArgs.add_cli_args(parser)
+    375.3 out |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    375.3 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 2264, in add_cli_args
+    375.3 out |     parser = EngineArgs.add_cli_args(parser)
+    375.3 out |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    375.3 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 1294, in add_cli_args
+    375.3 out |     vllm_kwargs = get_kwargs(VllmConfig)
+    375.3 out |                   ^^^^^^^^^^^^^^^^^^^^^^
+    375.3 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 369, in get_kwargs
+    375.3 out |     return copy.deepcopy(_compute_kwargs(cls))
+    375.3 out |                          ^^^^^^^^^^^^^^^^^^^^
+    375.3 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 280, in _compute_kwargs
+    375.3 out |     default = default.default_factory()  # type: ignore[call-arg]
+    375.3 out |               ^^^^^^^^^^^^^^^^^^^^^^^^^
+    375.3 out |   File "/kaggle/working/vllm-site-packages/pydantic/_internal/_dataclasses.py", line 121, in __init__
+    375.3 out |     s.__pydantic_validator__.validate_python(ArgsKwargs(args, kwargs), self_instance=s)
+    375.3 out |   File "/kaggle/working/vllm-site-packages/vllm/config/device.py", line 56, in __post_init__
+    375.3 out |     raise RuntimeError(
+    375.3 out | RuntimeError: Failed to infer device type, please set the environment variable `VLLM_LOGGING_LEVEL=DEBUG` to turn on verbose logging to help debug the issue.
+    375.3 out | option set 2 failed -> next
+    375.5 out | server FAILED to start; tail:
+    375.5 out | W1101 12:16:41.810000 669 vllm-site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME='/usr/local/cuda'
+    375.5 out | Traceback (most recent call last):
+    375.5 out |   File "<frozen runpy>", line 198, in _run_module_as_main
+    375.5 out |   File "<frozen runpy>", line 88, in _run_code
+    375.5 out |   File "/kaggle/working/vllm-site-packages/vllm/entrypoints/openai/api_server.py", line 706, in <module>
+    375.5 out |     parser = make_arg_parser(parser)
+    375.5 out |              ^^^^^^^^^^^^^^^^^^^^^^^
+    375.5 out |   File "/kaggle/working/vllm-site-packages/vllm/entrypoints/openai/cli_args.py", line 349, in make_arg_parser
+    375.5 out |     parser = AsyncEngineArgs.add_cli_args(parser)
+    375.5 out |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    375.5 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 2264, in add_cli_args
+    375.5 out |     parser = EngineArgs.add_cli_args(parser)
+    375.5 out |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    375.5 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 1294, in add_cli_args
+    375.5 out |     vllm_kwargs = get_kwargs(VllmConfig)
+    375.5 out |                   ^^^^^^^^^^^^^^^^^^^^^^
+    375.5 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 369, in get_kwargs
+    375.5 out |     return copy.deepcopy(_compute_kwargs(cls))
+    375.5 out |                          ^^^^^^^^^^^^^^^^^^^^
+    375.5 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 280, in _compute_kwargs
+    375.5 out |     default = default.default_factory()  # type: ignore[call-arg]
+    375.5 out |               ^^^^^^^^^^^^^^^^^^^^^^^^^
+    375.5 out |   File "/kaggle/working/vllm-site-packages/pydantic/_internal/_dataclasses.py", line 121, in __init__
+    375.5 out |     s.__pydantic_validator__.validate_python(ArgsKwargs(args, kwargs), self_instance=s)
+    375.5 out |   File "/kaggle/working/vllm-site-packages/vllm/config/device.py", line 56, in __post_init__
+    375.5 out |     raise RuntimeError(
+    375.5 out | RuntimeError: Failed to infer device type, please set the environment variable `VLLM_LOGGING_LEVEL=DEBUG` to turn on verbose logging to help debug the issue.
+    375.5 out | option set 2 failed -> next
+    395.3 out | /usr/bin/python3 -m vllm.entrypoints.openai.api_server --model /kaggle/input/models/foysalemonshanto/qwen3-8-27b-fp8-repacked-v1/pytorch/hf-fp8/1 --served-model-name qwen --host 127.0.0.1 --port 1234 --tensor-parallel-size 4 --enable-auto-tool-choice --tool-call-parser qwen3_coder --reasoning-parser qwen3 --generation-config vllm --enable-prefix-caching --max-model-len 81920 --gpu-memory-utilization 0.90 --max-num-seqs 16 --reasoning-config {"reasoning_start_str": "<think>", "reasoning_end_str": "</think>"}
+    395.6 out | /usr/bin/python3 -m vllm.entrypoints.openai.api_server --model /kaggle/input/models/foysalemonshanto/qwen3-8-27b-fp8-repacked-v1/pytorch/hf-fp8/1 --served-model-name qwen --host 127.0.0.1 --port 1234 --tensor-parallel-size 4 --enable-auto-tool-choice --tool-call-parser qwen3_coder --reasoning-parser qwen3 --generation-config vllm --enable-prefix-caching --max-model-len 81920 --gpu-memory-utilization 0.90 --max-num-seqs 16 --reasoning-config {"reasoning_start_str": "<think>", "reasoning_end_str": "</think>"}
+    415.3 out | server FAILED to start; tail:
+    415.3 out | W1101 12:17:21.805000 850 vllm-site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME='/usr/local/cuda'
+    415.3 out | Traceback (most recent call last):
+    415.3 out |   File "<frozen runpy>", line 198, in _run_module_as_main
+    415.3 out |   File "<frozen runpy>", line 88, in _run_code
+    415.3 out |   File "/kaggle/working/vllm-site-packages/vllm/entrypoints/openai/api_server.py", line 706, in <module>
+    415.3 out |     parser = make_arg_parser(parser)
+    415.3 out |              ^^^^^^^^^^^^^^^^^^^^^^^
+    415.3 out |   File "/kaggle/working/vllm-site-packages/vllm/entrypoints/openai/cli_args.py", line 349, in make_arg_parser
+    415.3 out |     parser = AsyncEngineArgs.add_cli_args(parser)
+    415.3 out |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    415.3 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 2264, in add_cli_args
+    415.3 out |     parser = EngineArgs.add_cli_args(parser)
+    415.3 out |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    415.3 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 1294, in add_cli_args
+    415.3 out |     vllm_kwargs = get_kwargs(VllmConfig)
+    415.3 out |                   ^^^^^^^^^^^^^^^^^^^^^^
+    415.3 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 369, in get_kwargs
+    415.3 out |     return copy.deepcopy(_compute_kwargs(cls))
+    415.3 out |                          ^^^^^^^^^^^^^^^^^^^^
+    415.3 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 280, in _compute_kwargs
+    415.3 out |     default = default.default_factory()  # type: ignore[call-arg]
+    415.3 out |               ^^^^^^^^^^^^^^^^^^^^^^^^^
+    415.3 out |   File "/kaggle/working/vllm-site-packages/pydantic/_internal/_dataclasses.py", line 121, in __init__
+    415.3 out |     s.__pydantic_validator__.validate_python(ArgsKwargs(args, kwargs), self_instance=s)
+    415.3 out |   File "/kaggle/working/vllm-site-packages/vllm/config/device.py", line 56, in __post_init__
+    415.3 out |     raise RuntimeError(
+    415.3 out | RuntimeError: Failed to infer device type, please set the environment variable `VLLM_LOGGING_LEVEL=DEBUG` to turn on verbose logging to help debug the issue.
+    415.4 out | option set 3 failed -> next
+    415.6 out | server FAILED to start; tail:
+    415.6 out | W1101 12:17:21.805000 850 vllm-site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME='/usr/local/cuda'
+    415.6 out | Traceback (most recent call last):
+    415.6 out |   File "<frozen runpy>", line 198, in _run_module_as_main
+    415.6 out |   File "<frozen runpy>", line 88, in _run_code
+    415.6 out |   File "/kaggle/working/vllm-site-packages/vllm/entrypoints/openai/api_server.py", line 706, in <module>
+    415.6 out |     parser = make_arg_parser(parser)
+    415.6 out |              ^^^^^^^^^^^^^^^^^^^^^^^
+    415.6 out |   File "/kaggle/working/vllm-site-packages/vllm/entrypoints/openai/cli_args.py", line 349, in make_arg_parser
+    415.6 out |     parser = AsyncEngineArgs.add_cli_args(parser)
+    415.6 out |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    415.6 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 2264, in add_cli_args
+    415.6 out |     parser = EngineArgs.add_cli_args(parser)
+    415.6 out |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    415.6 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 1294, in add_cli_args
+    415.6 out |     vllm_kwargs = get_kwargs(VllmConfig)
+    415.6 out |                   ^^^^^^^^^^^^^^^^^^^^^^
+    415.6 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 369, in get_kwargs
+    415.6 out |     return copy.deepcopy(_compute_kwargs(cls))
+    415.6 out |                          ^^^^^^^^^^^^^^^^^^^^
+    415.6 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 280, in _compute_kwargs
+    415.6 out |     default = default.default_factory()  # type: ignore[call-arg]
+    415.6 out |               ^^^^^^^^^^^^^^^^^^^^^^^^^
+    415.6 out |   File "/kaggle/working/vllm-site-packages/pydantic/_internal/_dataclasses.py", line 121, in __init__
+    415.6 out |     s.__pydantic_validator__.validate_python(ArgsKwargs(args, kwargs), self_instance=s)
+    415.6 out |   File "/kaggle/working/vllm-site-packages/vllm/config/device.py", line 56, in __post_init__
+    415.6 out |     raise RuntimeError(
+    415.6 out | RuntimeError: Failed to infer device type, please set the environment variable `VLLM_LOGGING_LEVEL=DEBUG` to turn on verbose logging to help debug the issue.
+    415.6 out | option set 3 failed -> next
+    435.4 out | /usr/bin/python3 -m vllm.entrypoints.openai.api_server --model /kaggle/input/models/foysalemonshanto/qwen3-8-27b-fp8-repacked-v1/pytorch/hf-fp8/1 --served-model-name qwen --host 127.0.0.1 --port 1234 --tensor-parallel-size 4 --enable-auto-tool-choice --tool-call-parser qwen3_coder --reasoning-parser qwen3 --generation-config vllm --enable-prefix-caching --max-model-len 81920 --gpu-memory-utilization 0.90 --max-num-seqs 16
+    435.6 out | /usr/bin/python3 -m vllm.entrypoints.openai.api_server --model /kaggle/input/models/foysalemonshanto/qwen3-8-27b-fp8-repacked-v1/pytorch/hf-fp8/1 --served-model-name qwen --host 127.0.0.1 --port 1234 --tensor-parallel-size 4 --enable-auto-tool-choice --tool-call-parser qwen3_coder --reasoning-parser qwen3 --generation-config vllm --enable-prefix-caching --max-model-len 81920 --gpu-memory-utilization 0.90 --max-num-seqs 16
+    455.4 out | server FAILED to start; tail:
+    455.4 out | W1101 12:18:01.772000 1031 vllm-site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME='/usr/local/cuda'
+    455.4 out | Traceback (most recent call last):
+    455.4 out |   File "<frozen runpy>", line 198, in _run_module_as_main
+    455.4 out |   File "<frozen runpy>", line 88, in _run_code
+    455.4 out |   File "/kaggle/working/vllm-site-packages/vllm/entrypoints/openai/api_server.py", line 706, in <module>
+    455.4 out |     parser = make_arg_parser(parser)
+    455.4 out |              ^^^^^^^^^^^^^^^^^^^^^^^
+    455.4 out |   File "/kaggle/working/vllm-site-packages/vllm/entrypoints/openai/cli_args.py", line 349, in make_arg_parser
+    455.4 out |     parser = AsyncEngineArgs.add_cli_args(parser)
+    455.4 out |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    455.4 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 2264, in add_cli_args
+    455.4 out |     parser = EngineArgs.add_cli_args(parser)
+    455.4 out |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    455.4 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 1294, in add_cli_args
+    455.4 out |     vllm_kwargs = get_kwargs(VllmConfig)
+    455.4 out |                   ^^^^^^^^^^^^^^^^^^^^^^
+    455.4 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 369, in get_kwargs
+    455.4 out |     return copy.deepcopy(_compute_kwargs(cls))
+    455.4 out |                          ^^^^^^^^^^^^^^^^^^^^
+    455.4 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 280, in _compute_kwargs
+    455.4 out |     default = default.default_factory()  # type: ignore[call-arg]
+    455.4 out |               ^^^^^^^^^^^^^^^^^^^^^^^^^
+    455.4 out |   File "/kaggle/working/vllm-site-packages/pydantic/_internal/_dataclasses.py", line 121, in __init__
+    455.4 out |     s.__pydantic_validator__.validate_python(ArgsKwargs(args, kwargs), self_instance=s)
+    455.4 out |   File "/kaggle/working/vllm-site-packages/vllm/config/device.py", line 56, in __post_init__
+    455.4 out |     raise RuntimeError(
+    455.4 out | RuntimeError: Failed to infer device type, please set the environment variable `VLLM_LOGGING_LEVEL=DEBUG` to turn on verbose logging to help debug the issue.
+    455.4 out | option set 4 failed -> next
+    455.6 out | server FAILED to start; tail:
+    455.6 out | W1101 12:18:01.772000 1031 vllm-site-packages/torch/utils/cpp_extension.py:118] No CUDA runtime is found, using CUDA_HOME='/usr/local/cuda'
+    455.6 out | Traceback (most recent call last):
+    455.6 out |   File "<frozen runpy>", line 198, in _run_module_as_main
+    455.6 out |   File "<frozen runpy>", line 88, in _run_code
+    455.6 out |   File "/kaggle/working/vllm-site-packages/vllm/entrypoints/openai/api_server.py", line 706, in <module>
+    455.6 out |     parser = make_arg_parser(parser)
+    455.6 out |              ^^^^^^^^^^^^^^^^^^^^^^^
+    455.6 out |   File "/kaggle/working/vllm-site-packages/vllm/entrypoints/openai/cli_args.py", line 349, in make_arg_parser
+    455.6 out |     parser = AsyncEngineArgs.add_cli_args(parser)
+    455.6 out |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    455.6 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 2264, in add_cli_args
+    455.6 out |     parser = EngineArgs.add_cli_args(parser)
+    455.6 out |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    455.6 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 1294, in add_cli_args
+    455.6 out |     vllm_kwargs = get_kwargs(VllmConfig)
+    455.6 out |                   ^^^^^^^^^^^^^^^^^^^^^^
+    455.6 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 369, in get_kwargs
+    455.6 out |     return copy.deepcopy(_compute_kwargs(cls))
+    455.6 out |                          ^^^^^^^^^^^^^^^^^^^^
+    455.6 out |   File "/kaggle/working/vllm-site-packages/vllm/engine/arg_utils.py", line 280, in _compute_kwargs
+    455.6 out |     default = default.default_factory()  # type: ignore[call-arg]
+    455.6 out |               ^^^^^^^^^^^^^^^^^^^^^^^^^
+    455.6 out |   File "/kaggle/working/vllm-site-packages/pydantic/_internal/_dataclasses.py", line 121, in __init__
+    455.6 out |     s.__pydantic_validator__.validate_python(ArgsKwargs(args, kwargs), self_instance=s)
+    455.6 out |   File "/kaggle/working/vllm-site-packages/vllm/config/device.py", line 56, in __post_init__
+    455.6 out |     raise RuntimeError(
+    455.6 out | RuntimeError: Failed to infer device type, please set the environment variable `VLLM_LOGGING_LEVEL=DEBUG` to turn on verbose logging to help debug the issue.
+    455.6 out | option set 4 failed -> next
+    479.0 out | SMOKE: no result: FileNotFoundError(2, 'No such file or directory')
+    479.0 out | not a competition rerun: fallback submission only
+    479.1 out | submission.json valid: 240 tasks, 0 test outputs answered by the agent
+    481.6 err | /usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+    481.6 err |   cells[i][c] = re.sub('\\\\\|', '|', cell)
+    481.8 err | /usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+    481.8 err |   text = re.sub(r'_', '\_', text) # Escape underscores in display text
+    482.5 err | [NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+    482.9 err | [NbConvertApp] Writing 184994 bytes to __notebook__.ipynb
+    485.4 err | [NbConvertApp] Converting notebook __notebook__.ipynb to html
+    486.6 err | [NbConvertApp] Writing 902612 bytes to __results__.html

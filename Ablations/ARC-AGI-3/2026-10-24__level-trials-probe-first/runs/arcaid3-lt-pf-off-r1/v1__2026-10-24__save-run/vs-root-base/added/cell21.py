@@ -1,0 +1,5 @@
+# ARCAID3 paired level trial: arm flag. The probe-first cell below reads PF from the environment.
+import os
+os.environ['PF'] = '0'
+os.environ['ARCAID3_LT_ROUND'] = '1'
+print('ARC3_PF_ARM', 'PF=' + os.environ['PF'], 'round', os.environ['ARCAID3_LT_ROUND'], flush=True)

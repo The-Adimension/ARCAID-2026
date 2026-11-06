@@ -1,0 +1,48 @@
+{
+ "kernel": "habanwer/arc-prize-2026-arc-agi-3-starter",
+ "title": "ARC Prize 2026 — ARC-AGI-3 Starter",
+ "version": 1,
+ "script_version_id": 347471650,
+ "url": "https://www.kaggle.com/code/habanwer/arc-prize-2026-arc-agi-3-starter?scriptVersionId=347471650",
+ "track": "ARC-AGI-3",
+ "private_on_kaggle_at_collection": true,
+ "placement": {
+  "place": "submissions",
+  "note": "Own S1-offline starter agent"
+ },
+ "inputs_now": {
+  "competition_sources": [
+   "arc-prize-2026-arc-agi-3"
+  ],
+  "dataset_sources": [],
+  "model_sources": [],
+  "kernel_sources": []
+ },
+ "inputs_as_run": null,
+ "accelerator": "nvidiaTeslaT4",
+ "run": {
+  "start": "2026-09-05T12:11:17.612263+00:00",
+  "end": "2026-09-05T12:11:26.459823+00:00",
+  "duration_s": 8.84756,
+  "exception": null
+ },
+ "submissions": [
+  {
+   "submission_ref": "56032478",
+   "submitted_utc": "2026-09-05T12:15:52.613000",
+   "status": "COMPLETE",
+   "public_score": "0.02",
+   "private_score": "",
+   "selected": "",
+   "after_deadline": ""
+  }
+ ],
+ "files": {
+  "__notebook__.ipynb": "253acd46518beaef47b597e8bfbc31361e6c53d51798cb49ec7a64e358481867",
+  "__output__.json": "300775f7b8d2933665005677743939a30fd3d9d5cef03d87ab0333265451135d",
+  "outputs": "hashed from local copy 2026-09-05__arc-prize-2026-arc-agi-3-starter__v1__score-0.02"
+ },
+ "collected_at": "2026-11-06T12:00:56Z",
+ "notebook_sha256_original": "253acd46518beaef47b597e8bfbc31361e6c53d51798cb49ec7a64e358481867",
+ "log_sha256_original": "300775f7b8d2933665005677743939a30fd3d9d5cef03d87ab0333265451135d"
+}

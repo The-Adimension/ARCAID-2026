@@ -1,0 +1,61 @@
+{
+  "games": {
+    "sb26-7fbdac44": {
+      "score": 2.7777777777777777,
+      "seed_count": 1,
+      "seed_scores": {
+        "working": 2.7777777777777777
+      },
+      "trial_count": 1,
+      "trial_scores": {
+        "working": 2.7777777777777777
+      }
+    }
+  },
+  "metadata": {
+    "created_at": "2026-09-22T17:43:52.527075Z",
+    "dataset": null,
+    "dataset_description": "",
+    "exclude_tags": [],
+    "experiment_dirs": [
+      "/kaggle/working"
+    ],
+    "game_count": 1,
+    "game_ids": [
+      "sb26-7fbdac44"
+    ],
+    "git_commit": null,
+    "hardware": {},
+    "include_tags": [],
+    "model": null,
+    "re_arc_commit": "57e46d619d02e8129c215af72c81b187b6b51afe",
+    "run_dirs": [
+      "/kaggle/working"
+    ],
+    "run_names": [
+      "working"
+    ],
+    "runtime_budget": {
+      "concurrent_jobs": null,
+      "max_experiment_runtime_hours": null,
+      "max_experiment_runtime_minutes": null,
+      "max_runtime_minutes_per_game": null
+    },
+    "score_source": "taaf.final_score",
+    "scoring_version": "taaf-framework-score-v1",
+    "seed_labels": [
+      "working"
+    ],
+    "seeds": [],
+    "seeds_available": false,
+    "setup_id": null,
+    "trial_count": 1,
+    "trial_labels": [
+      "working"
+    ],
+    "trials": [],
+    "trials_available": true
+  },
+  "score": 2.7777777777777777,
+  "version": 1
+}

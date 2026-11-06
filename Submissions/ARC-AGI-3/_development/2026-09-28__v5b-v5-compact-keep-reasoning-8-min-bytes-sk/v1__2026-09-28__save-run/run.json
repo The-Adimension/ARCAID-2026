@@ -1,0 +1,67 @@
+{
+ "kernel": "habanwer/v5b-v5-compact-keep-reasoning-8-min-bytes-sk",
+ "title": "v5b = v5 compact + KEEP_REASONING=8 + min-bytes sk",
+ "version": 1,
+ "script_version_id": 353692811,
+ "url": "https://www.kaggle.com/code/habanwer/v5b-v5-compact-keep-reasoning-8-min-bytes-sk?scriptVersionId=353692811",
+ "track": "ARC-AGI-3",
+ "private_on_kaggle_at_collection": true,
+ "placement": {
+  "place": "development"
+ },
+ "inputs_now": {
+  "competition_sources": [
+   "arc-prize-2026-arc-agi-3"
+  ],
+  "dataset_sources": [
+   "keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1",
+   "keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1"
+  ],
+  "model_sources": [
+   ""
+  ],
+  "kernel_sources": []
+ },
+ "inputs_as_run": [
+  {
+   "sourceId": 133468,
+   "sourceType": "competition"
+  },
+  {
+   "sourceId": 19306148,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 19333078,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 977939,
+   "sourceType": "modelInstanceVersion"
+  }
+ ],
+ "accelerator": "nvidiaRtxPro6000",
+ "run": {
+  "start": "2026-09-28T20:03:39.329638+00:00",
+  "end": "2026-09-28T21:25:06.172576+00:00",
+  "duration_s": 4886.842938,
+  "exception": null
+ },
+ "submissions": [],
+ "files": {
+  "__notebook__.ipynb": "2b2684a62e379672f6302719bd831053022f43e53b591f25651c210513dd0524",
+  "__output__.json": "16ea9862652be0e929bf864f0d65f5a865ab470266e3b6fa1240fab3bf7d515d",
+  "outputs": "hashed from local copy 2026-09-28__v5b-v5-compact-keep-reasoning-8-min-bytes-sk__v1__unsubmitted__offline-29.09"
+ },
+ "collected_at": "2026-11-06T12:00:41Z",
+ "notebook_sha256_original": "2b2684a62e379672f6302719bd831053022f43e53b591f25651c210513dd0524",
+ "log_sha256_original": "16ea9862652be0e929bf864f0d65f5a865ab470266e3b6fa1240fab3bf7d515d",
+ "inferred_parent": {
+  "notebook": "habanwer/duck-nvfp4-batch-stall-warn-dead-sign-compact@v1",
+  "distance_lines": 37,
+  "runner_up": "habanwer/duck-nvfp4-batch-stall-warn-dead-sign@v5",
+  "runner_up_distance": 153,
+  "method": "Tools/lineage/infer_parents.py"
+ },
+ "root_base": "keithtyser/duck-qwen3-8-flash-next-nvfp4-mtp@v13"
+}

@@ -1,0 +1,911 @@
+--- base cell 21
++++ new cell 21
+@@ -34,4 +34,9 @@
+ # coarser grid and rename every object. Checked by its own sandbox self-test; ARCAID3_SCALE_LOCK=0 turns
+ # it off. The camera scale changes between levels in 4 of the 25 public games, so the lock is per level.
++#
++# Version 3 (2026-10-08): `current_frame.rules`. In the sandbox, the rule grammar learns rules from the
++# level's recent steps in `history` (when <action> [if/unless <relation>] then <change>, each with its
++# right/wrong counts) and lists the last step's changes that no rule explains. No game-specific code.
++# Checked by its own sandbox self-test; ARCAID3_RULES=0 turns it off.
+ # ---------------------------------------------------------------------------
+ import os as _a3_os
+@@ -40,4 +45,6 @@
+ # Per-level scale lock (v2): read every frame of a level at one agreed block size. Kill switch: ARCAID3_SCALE_LOCK=0.
+ ARCAID3_SCALE_LOCK = _a3_os.environ.get("ARCAID3_SCALE_LOCK", "1").strip() not in ("0", "", "false", "False")
++# Rules (v3): `current_frame.rules`, learned from the level's steps with the rule grammar. Kill switch: ARCAID3_RULES=0.
++ARCAID3_RULES = _a3_os.environ.get("ARCAID3_RULES", "1").strip() not in ("0", "", "false", "False")
+ 
+ ARCAID3_LEXICON_SOURCE = (
+@@ -609,4 +616,719 @@
+     '    return out\n'
+ )
++ARCAID3_RULES_SOURCE = (
++    '"""Rule grammar: one rule shape, learned by explaining and compressing.\n'
++    '\n'
++    '    when <trigger> [if | unless <relation>] then <verb>(<who>, <how>)\n'
++    '\n'
++    'trigger   an action (ACTION1 ... ACTION7; ACTION6 carries its click) or `any` action\n'
++    'who       picked by relation on the screen before the step:\n'
++    '              clicked, all, same_as_clicked, touching_clicked, colour:c, touching:S, pic:S\n'
++    '          pic:S names one picture of this game. It is allowed but costs more, so on a tie a\n'
++    '          relation wins and the rule is worded without names.\n'
++    'relation  touch:c  the object touches colour c        path:c  colour c lies in the path of its move\n'
++    '          click:c  the clicked object carries colour c (click:none: the click hit no object)\n'
++    '          (c may be "edge"; contact, solidity and the action\'s own target, nothing game-specific)\n'
++    "verb/how  the engine's sprite operations as the screen shows them:\n"
++    '              move(d)  recolor(map)  turn(transform)  resize(delta)  reshape(to S)  vanish  appear(S, where)\n'
++    '\n'
++    'There are no rule kinds. What the first prototype (../2026-10-07__lexicon-code/effect_code.py) called\n'
++    'steer, toggle, solid, remote and tick are sentences here, e.g.\n'
++    '    when ACTION1 unless path:c8 then move(pic:G, (-1,+0))\n'
++    '    when ACTION6 then recolor(clicked, {8:9, 9:8})\n'
++    '    when any then move(colour:c3, (+1,+0))\n'
++    'and so are mechanics it had no kind for (gravity, conveyors, chasers, lights-out ...).\n'
++    '\n'
++    'A rule may also range over several actions: one selector and one verb, with a parameter for each\n'
++    'action (when ACTION1|ACTION2 then move(pic:G, A1 (-1,+0) | A2 (+1,+0))). It pools the evidence of its\n'
++    'actions, so "these actions move this object" is confirmed sooner than four separate rules would be.\n'
++    '\n'
++    'Learning (`Learner`). Every observed change proposes the rules that would have produced it, under\n'
++    'every selector that picks its object. A candidate seen twice is scored on every step of the level:\n'
++    'its hits, its false predictions, and the events it explains. A greedy minimum-description choice\n'
++    'keeps rules whose explained events outweigh their false predictions plus their own length. A rule\n'
++    'with false predictions may buy a condition (if / unless a relation) that removes them. Events that\n'
++    'no kept rule explains are the residual: where to look next, and what a language model can be asked\n'
++    'to explain. Prediction is closed-world: if no rule fires, nothing is predicted to change.\n'
++    '\n'
++    'Nothing here is taken from a particular game. Stdlib only, on top of kaggle/lexicon-dfranzen/lexicon.py.\n'
++    '"""\n'
++    'from __future__ import annotations\n'
++    '\n'
++    'import collections\n'
++    'try:\n'
++    '    LX                                   # a host that already holds the lexicon passes it in (the Kaggle sandbox)\n'
++    'except NameError:\n'
++    '    import importlib.util\n'
++    '    import pathlib\n'
++    '\n'
++    '    _HERE = pathlib.Path(__file__).resolve().parent\n'
++    '    _spec = importlib.util.spec_from_file_location("lexicon", _HERE.parents[1] / "kaggle/lexicon-dfranzen/lexicon.py")\n'
++    '    LX = importlib.util.module_from_spec(_spec)\n'
++    '    _spec.loader.exec_module(LX)\n'
++    '\n'
++    '_N4 = ((1, 0), (-1, 0), (0, 1), (0, -1))\n'
++    'ACTIONS = ("ACTION1", "ACTION2", "ACTION3", "ACTION4", "ACTION5", "ACTION6", "ACTION7")\n'
++    '\n'
++    '# description length of each part, in rough units of "one event explained"; a rule is kept only if\n'
++    '# it explains more events than its false predictions plus this length\n'
++    'COST = {"any": 0.25, "action": 0.5,\n'
++    '        "clicked": 0.5, "all": 0.5, "same_as_clicked": 0.75, "touching_clicked": 0.75,\n'
++    '        "colour": 1.0, "pic": 1.25, "touching": 1.5,\n'
++    '        "move": 0.5, "recolor": 0.5, "turn": 0.5, "resize": 0.5, "vanish": 0.5, "reshape": 1.0, "appear": 1.25,\n'
++    '        "condition": 0.75}\n'
++    '\n'
++    '\n'
++    '# --------------------------------------------------------------------------- the screen as a state\n'
++    '\n'
++    'class State:\n'
++    '    """One screen read by the lexicon, with the indexes that selectors and relations need."""\n'
++    '\n'
++    '    def __init__(self, code):\n'
++    '        self.code = code\n'
++    '        self.objs = code["placed"]\n'
++    '        self.grid = code["native"]\n'
++    '        self.bg = code["background"]\n'
++    '        self.h, self.w = code["shape"]\n'
++    '        self.cellset = [frozenset(p["cells"]) for p in self.objs]\n'
++    '        self.colours = [frozenset(self.grid[r][c] for r, c in p["cells"]) for p in self.objs]\n'
++    '        self.owner = {}\n'
++    '        for i, p in enumerate(self.objs):\n'
++    '            if not p["container"]:\n'
++    '                for rc in p["cells"]:\n'
++    '                    self.owner[rc] = i\n'
++    '        self.by_sym = collections.defaultdict(list)\n'
++    '        for i, p in enumerate(self.objs):\n'
++    '            self.by_sym[p["sym"]].append(i)\n'
++    '        self.free = [i for i, p in enumerate(self.objs) if not p["container"]]\n'
++    '        self._adj = None\n'
++    '        self._touch = {}\n'
++    '        self._path = {}\n'
++    '\n'
++    '    def adjacent(self, i):\n'
++    '        if self._adj is None:\n'
++    '            adj = collections.defaultdict(set)\n'
++    '            for (r, c), a in self.owner.items():\n'
++    '                for dr, dc in _N4:\n'
++    '                    b = self.owner.get((r + dr, c + dc))\n'
++    '                    if b is not None and b != a:\n'
++    '                        adj[a].add(b)\n'
++    '            self._adj = adj\n'
++    '        return self._adj.get(i, set())\n'
++    '\n'
++    '    def object_at(self, rc):\n'
++    '        hits = [i for i, cs in enumerate(self.cellset) if rc in cs]\n'
++    '        return min(hits, key=lambda i: len(self.cellset[i])) if hits else None\n'
++    '\n'
++    '    def cell_of(self, x, y):\n'
++    '        """Native cell under screen pixel (x, y)."""\n'
++    '        k = self.code["scale"]\n'
++    '        oy, ox = self.code["offset"]\n'
++    '        return ((y - oy) // k, (x - ox) // k)\n'
++    '\n'
++    '    def _colour(self, rc):\n'
++    '        r, c = rc\n'
++    '        if not (0 <= r < self.h and 0 <= c < self.w):\n'
++    '            return "edge"\n'
++    '        v = self.grid[r][c]\n'
++    '        return None if v == self.bg else f"c{v}"\n'
++    '\n'
++    '    def touch(self, i):\n'
++    '        """Colours (and "edge") on the cells next to object i."""\n'
++    '        if i not in self._touch:\n'
++    '            own, out = self.cellset[i], set()\n'
++    '            for r, c in own:\n'
++    '                for dr, dc in _N4:\n'
++    '                    t = (r + dr, c + dc)\n'
++    '                    if t not in own:\n'
++    '                        v = self._colour(t)\n'
++    '                        if v:\n'
++    '                            out.add(v)\n'
++    '            self._touch[i] = frozenset(out)\n'
++    '        return self._touch[i]\n'
++    '\n'
++    '    def path(self, i, d):\n'
++    '        """Colours (and "edge") on the cells object i would sweep moving by d."""\n'
++    '        key = (i, d)\n'
++    '        if key not in self._path:\n'
++    '            own, out = self.cellset[i], set()\n'
++    '            n = max(abs(d[0]), abs(d[1]))\n'
++    '            unit = ((d[0] > 0) - (d[0] < 0), (d[1] > 0) - (d[1] < 0))\n'
++    '            for r, c in own:\n'
++    '                for s in range(1, n + 1):\n'
++    '                    t = (r + unit[0] * s, c + unit[1] * s)\n'
++    '                    if t not in own:\n'
++    '                        v = self._colour(t)\n'
++    '                        if v:\n'
++    '                            out.add(v)\n'
++    '            self._path[key] = frozenset(out)\n'
++    '        return self._path[key]\n'
++    '\n'
++    '\n'
++    '# --------------------------------------------------------------------------- events: what changed\n'
++    '\n'
++    'def _mask(p):\n'
++    '    return tuple(tuple(v >= 0 for v in row) for row in p)\n'
++    '\n'
++    '\n'
++    'def _colours(p):\n'
++    '    return frozenset(v for row in p for v in row if v >= 0)\n'
++    '\n'
++    '\n'
++    'def observe(before, after):\n'
++    '    """Changes between two States of one level, as the engine\'s verbs.\n'
++    '\n'
++    '    Each event: verb, obj (index in `before`, None for appear), sym, at (anchor after), and\n'
++    '    d (move), map (recolor: colour pairs), transform (turn), delta (resize), to (new picture).\n'
++    '    """\n'
++    '    lex = before.code["lexicon"]\n'
++    '    d = LX.diff(before.code, after.code)\n'
++    '    i0 = {(p["sym"], p["at"]): i for i, p in enumerate(before.objs)}\n'
++    '    cells0 = {(p["sym"], p["at"]): before.cellset[i] for i, p in enumerate(before.objs)}\n'
++    '    cells1 = {(p["sym"], p["at"]): after.cellset[i] for i, p in enumerate(after.objs)}\n'
++    '    ev = []\n'
++    '\n'
++    '    def change(s0, a0, s1, a1):\n'
++    '        p0, p1 = lex.entries[s0]["patch"], lex.entries[s1]["patch"]\n'
++    '        base = {"obj": i0[(s0, a0)], "sym": s0, "to": s1, "at": a1}\n'
++    '        for name, var in LX._variants(p0):\n'
++    '            if var == p1 and name != "rot0":\n'
++    '                return dict(base, verb="turn", transform=name)\n'
++    '        if a0 == a1 and _mask(p0) == _mask(p1):\n'
++    '            pairs = sorted({(a, b) for r0, r1 in zip(p0, p1) for a, b in zip(r0, r1) if a >= 0 and a != b})\n'
++    '            if len({a for a, _ in pairs}) == len(pairs):          # a function: one new colour per old one\n'
++    '                return dict(base, verb="recolor", map=tuple(pairs))\n'
++    '        if _colours(p0) == _colours(p1):\n'
++    '            return dict(base, verb="resize", delta=sum(map(sum, _mask(p1))) - sum(map(sum, _mask(p0))))\n'
++    '        return dict(base, verb="reshape")\n'
++    '\n'
++    '    for sym, l, r in d["moved"]:\n'
++    '        ev.append({"verb": "move", "obj": i0[(sym, l)], "sym": sym, "d": (r[0] - l[0], r[1] - l[1]), "at": r})\n'
++    '    for s0, s1, at in d["became"]:\n'
++    '        ev.append(change(s0, at, s1, at))\n'
++    '    gone, new = list(d["disappeared"]), list(d["appeared"])\n'
++    '    for s0, a0 in list(gone):\n'
++    '        for s1, a1 in new:\n'
++    '            if cells0[(s0, a0)] & cells1[(s1, a1)]:\n'
++    '                ev.append(change(s0, a0, s1, a1))\n'
++    '                gone.remove((s0, a0))\n'
++    '                new.remove((s1, a1))\n'
++    '                break\n'
++    '    for s, a in gone:\n'
++    '        ev.append({"verb": "vanish", "obj": i0[(s, a)], "sym": s, "at": a})\n'
++    '    for s, a in new:\n'
++    '        ev.append({"verb": "appear", "obj": None, "sym": s, "at": a})\n'
++    '    return ev\n'
++    '\n'
++    '\n'
++    '# --------------------------------------------------------------------------- one step, with cached selections\n'
++    '\n'
++    'class Step:\n'
++    '    def __init__(self, state, action, click, events):\n'
++    '        self.state, self.action, self.events = state, action, events\n'
++    '        self.click = state.cell_of(*click) if click else None\n'
++    '        self.clicked = state.object_at(self.click) if self.click else None\n'
++    '        self._sel = {}\n'
++    '\n'
++    '    def click_features(self):\n'
++    '        if self.click is None:\n'
++    '            return ()\n'
++    '        if self.clicked is None:\n'
++    '            return ("click:none",)\n'
++    '        return tuple(f"click:c{v}" for v in sorted(self.state.colours[self.clicked]))\n'
++    '\n'
++    '    def select(self, sel):\n'
++    '        if sel not in self._sel:\n'
++    '            self._sel[sel] = select(sel, self.state, self.clicked)\n'
++    '        return self._sel[sel]\n'
++    '\n'
++    '\n'
++    'def select(sel, st, clicked):\n'
++    '    """Objects picked by a selector on state `st` (a list of indices)."""\n'
++    '    if sel == "clicked":\n'
++    '        return [clicked] if clicked is not None else []\n'
++    '    if sel == "all":\n'
++    '        return st.free\n'
++    '    if sel == "same_as_clicked":\n'
++    '        return list(st.by_sym[st.objs[clicked]["sym"]]) if clicked is not None else []\n'
++    '    if sel == "touching_clicked":\n'
++    '        return sorted(st.adjacent(clicked)) if clicked is not None else []\n'
++    '    kind, _, arg = sel.partition(":")\n'
++    '    if kind == "pic":\n'
++    '        return st.by_sym.get(arg, [])\n'
++    '    if kind == "colour":\n'
++    '        c = int(arg)\n'
++    '        return [i for i in st.free if c in st.colours[i]]\n'
++    '    if kind == "touching":\n'
++    '        near = set()\n'
++    '        for j in st.by_sym.get(arg, []):\n'
++    '            near |= st.adjacent(j)\n'
++    '        return sorted(i for i in near if st.objs[i]["sym"] != arg)\n'
++    '    return []\n'
++    '\n'
++    '\n'
++    'def selectors_for(step, i):\n'
++    '    """Every selector that picks object i on this step (the ways to say "this object")."""\n'
++    '    st = step.state\n'
++    '    out = ["all", f"pic:{st.objs[i][\'sym\']}"]\n'
++    '    out += [f"colour:{c}" for c in sorted(st.colours[i])[:3]]\n'
++    '    if step.clicked is not None:\n'
++    '        if i == step.clicked:\n'
++    '            out.append("clicked")\n'
++    '        if st.objs[i]["sym"] == st.objs[step.clicked]["sym"]:\n'
++    '            out.append("same_as_clicked")\n'
++    '        if i in st.adjacent(step.clicked):\n'
++    '            out.append("touching_clicked")\n'
++    '    out += [f"touching:{s}" for s in sorted({st.objs[j]["sym"] for j in st.adjacent(i)})[:4]]\n'
++    '    return out\n'
++    '\n'
++    '\n'
++    'def effects_for(step, e):\n'
++    '    """The ways to state what happened to the object."""\n'
++    '    v = e["verb"]\n'
++    '    if v == "move":\n'
++    '        return [("move", e["d"])]\n'
++    '    if v == "recolor":\n'
++    '        return [("recolor", e["map"])]\n'
++    '    if v == "turn":\n'
++    '        return [("turn", e["transform"])]\n'
++    '    if v == "resize":\n'
++    '        return [("resize", e["delta"])]\n'
++    '    if v == "reshape":\n'
++    '        return [("reshape", e["to"])]\n'
++    '    if v == "vanish":\n'
++    '        return [("vanish",)]\n'
++    '    out = [("appear", e["sym"], ("somewhere",)), ("appear", e["sym"], ("at", e["at"]))]\n'
++    '    if step.click:\n'
++    '        out.append(("appear", e["sym"], ("click", (e["at"][0] - step.click[0], e["at"][1] - step.click[1]))))\n'
++    '    return out\n'
++    '\n'
++    '\n'
++    'def applicable(eff, st, i):\n'
++    '    """recolor only fires on objects that carry a colour it maps."""\n'
++    '    if eff[0] == "recolor":\n'
++    '        return any(a in st.colours[i] for a, _ in eff[1])\n'
++    '    return True\n'
++    '\n'
++    '\n'
++    'def matches(eff, i, e, click):\n'
++    '    kind = eff[0]\n'
++    '    if kind == "appear":\n'
++    '        if e["verb"] != "appear" or e["sym"] != eff[1]:\n'
++    '            return False\n'
++    '        where = eff[2]\n'
++    '        if where[0] == "at":\n'
++    '            return e["at"] == where[1]\n'
++    '        if where[0] == "click":\n'
++    '            return click is not None and (e["at"][0] - click[0], e["at"][1] - click[1]) == where[1]\n'
++    '        return True\n'
++    '    if e.get("obj") != i:\n'
++    '        return False\n'
++    '    if kind == "move":\n'
++    '        return e["verb"] == "move" and e["d"] == eff[1]\n'
++    '    if kind == "recolor":\n'
++    '        return e["verb"] == "recolor" and set(e["map"]) <= set(eff[1])\n'
++    '    if kind == "turn":\n'
++    '        return e["verb"] == "turn" and e["transform"] == eff[1]\n'
++    '    if kind == "resize":\n'
++    '        return e["verb"] == "resize" and e["delta"] == eff[1]\n'
++    '    if kind == "reshape":\n'
++    '        return e["verb"] != "move" and e.get("to") == eff[1]\n'
++    '    if kind == "vanish":\n'
++    '        return e["verb"] == "vanish"\n'
++    '    return False\n'
++    '\n'
++    '\n'
++    'def features(step, i, eff):\n'
++    '    """Relations that a condition may test: of object i, and of the step\'s click target."""\n'
++    '    st = step.state\n'
++    '    f = set(step.click_features())\n'
++    '    if i is not None:\n'
++    '        f |= {f"touch:{c}" for c in st.touch(i)}\n'
++    '        if eff[0] == "move":\n'
++    '            f |= {f"path:{c}" for c in st.path(i, eff[1])}\n'
++    '    return frozenset(f)\n'
++    '\n'
++    '\n'
++    'def trigger_matches(trig, action):\n'
++    '    return trig == "any" or trig == action\n'
++    '\n'
++    '\n'
++    'def cost(trig, sel, eff, cond=None):\n'
++    '    c = COST["any"] if trig == "any" else COST["action"]\n'
++    '    c += COST.get(sel.split(":")[0], 1.5)\n'
++    '    c += COST[eff[0]]\n'
++    '    if eff[0] == "recolor":\n'
++    '        c += 0.25 * max(0, len(eff[1]) - 1)\n'
++    '    return c + (COST["condition"] if cond else 0.0)\n'
++    '\n'
++    '\n'
++    '# --------------------------------------------------------------------------- rules and learning\n'
++    '\n'
++    'def _label(trig):\n'
++    '    """Short name of an action inside a family: ACTION3 -> A3; model-facing names (UP, MOUSE) stay."""\n'
++    '    return f"A{trig[-1]}" if trig.startswith("ACTION") and len(trig) == 7 else trig\n'
++    '\n'
++    '\n'
++    'class Rule:\n'
++    '    """One rule, or (parts) one selector and verb with a parameter per action."""\n'
++    '\n'
++    '    def __init__(self, trig, sel, eff, cond, hits, false, explained, parts=None):\n'
++    '        self.trig, self.sel, self.eff, self.cond = trig, sel, eff, cond\n'
++    '        self.hits, self.false, self.explained = hits, false, explained\n'
++    '        self.parts = parts\n'
++    '\n'
++    '    def for_action(self, action):\n'
++    '        """The rule (or the family\'s part) that applies to this action, or None."""\n'
++    '        if self.parts:\n'
++    '            return next((p for p in self.parts if p.trig == action), None)\n'
++    '        return self if trigger_matches(self.trig, action) else None\n'
++    '\n'
++    '    def fires_on(self, step, i):\n'
++    '        if i is not None and not applicable(self.eff, step.state, i):\n'
++    '            return False\n'
++    '        if self.cond:\n'
++    '            pol, f = self.cond\n'
++    '            return (f in features(step, i, self.eff)) == (pol == "if")\n'
++    '        return True\n'
++    '\n'
++    '    def _how(self, sel_shown=True):\n'
++    '        e = self.eff\n'
++    '        sel = f"{self.sel}, " if sel_shown else ""\n'
++    '        return {"move": lambda: f"move({sel}({e[1][0]:+d},{e[1][1]:+d}))",\n'
++    '                "recolor": lambda: f"recolor({sel}{{{\', \'.join(f\'{a}:{b}\' for a, b in e[1])}}})",\n'
++    '                "turn": lambda: f"turn({sel}{e[1]})",\n'
++    '                "resize": lambda: f"resize({sel}{e[1]:+d})",\n'
++    '                "reshape": lambda: f"reshape({sel}to {e[1]})",\n'
++    '                "vanish": lambda: f"vanish({self.sel})",\n'
++    '                "appear": lambda: f"appear({e[1]}, {e[2][0]}{\'\' if len(e[2]) == 1 else \' \' + str(e[2][1])})"}[e[0]]()\n'
++    '\n'
++    '    def text(self):\n'
++    '        if self.parts:\n'
++    '            per = " | ".join(f"{_label(p.trig)}{\' \' + p.cond[0] + \' \' + p.cond[1] if p.cond else \'\'} "\n'
++    '                             + (p._how(False)[len(p.eff[0]) + 1:-1] if p.eff[0] != "vanish" else "")\n'
++    '                             for p in self.parts)\n'
++    '            return f"when {\'|\'.join(p.trig for p in self.parts)} then {self.eff[0]}({self.sel}, by action: {per})"\n'
++    '        e = self.eff\n'
++    '        how = {"move": lambda: f"move({self.sel}, ({e[1][0]:+d},{e[1][1]:+d}))",\n'
++    '               "recolor": lambda: f"recolor({self.sel}, {{{\', \'.join(f\'{a}:{b}\' for a, b in e[1])}}})",\n'
++    '               "turn": lambda: f"turn({self.sel}, {e[1]})",\n'
++    '               "resize": lambda: f"resize({self.sel}, {e[1]:+d})",\n'
++    '               "reshape": lambda: f"reshape({self.sel}, to {e[1]})",\n'
++    '               "vanish": lambda: f"vanish({self.sel})",\n'
++    '               "appear": lambda: f"appear({e[1]}, {e[2][0]}{\'\' if len(e[2]) == 1 else \' \' + str(e[2][1])})"}[e[0]]()\n'
++    '        cond = f" {self.cond[0]} {self.cond[1]}" if self.cond else ""\n'
++    '        return f"when {self.trig}{cond} then {how}"\n'
++    '\n'
++    '    def line(self):\n'
++    '        return f"{self.text():<62s} # {self.hits} right, {self.false} wrong"\n'
++    '\n'
++    '    def uses_names(self):\n'
++    '        if self.parts:\n'
++    '            return any(p.uses_names() for p in self.parts)\n'
++    '        return self.sel.startswith(("pic:", "touching:")) or self.eff[0] in ("reshape", "appear")\n'
++    '\n'
++    '\n'
++    'class _Cand:\n'
++    '    __slots__ = ("key", "inst", "hits", "n", "dead")\n'
++    '\n'
++    '    def __init__(self, key):\n'
++    '        self.key = key            # (trigger, selector, effect)\n'
++    '        self.inst = []            # (step, obj, explained event ids, features)\n'
++    '        self.hits = self.n = 0\n'
++    '        self.dead = False\n'
++    '\n'
++    '\n'
++    'class Learner:\n'
++    '    """Rules for one level, re-chosen after every step from everything seen on the level so far."""\n'
++    '\n'
++    '    def __init__(self, min_count=3):\n'
++    '        self.min_count = min_count\n'
++    '        self.steps = []\n'
++    '        self.cands = {}\n'
++    '        self.proposed = collections.Counter()\n'
++    '        self._rules = None\n'
++    '\n'
++    '    def observe(self, state, action, click, events):\n'
++    '        step = Step(state, action, click, events)\n'
++    '        t = len(self.steps)\n'
++    '        self.steps.append(step)\n'
++    '        for c in self.cands.values():\n'
++    '            if not c.dead:\n'
++    '                self._score(c, t)\n'
++    '        for e in events:\n'
++    '            sels = ["none"] if e["verb"] == "appear" else selectors_for(step, e["obj"])\n'
++    '            for eff in effects_for(step, e):\n'
++    '                for trig in (action, "any"):\n'
++    '                    for sel in sels:\n'
++    '                        key = (trig, sel, eff)\n'
++    '                        if key in self.cands:\n'
++    '                            continue\n'
++    '                        self.proposed[key] += 1\n'
++    '                        if self.proposed[key] >= 2:        # seen twice: worth scoring on the whole level\n'
++    '                            c = self.cands[key] = _Cand(key)\n'
++    '                            for s in range(t + 1):\n'
++    '                                self._score(c, s)\n'
++    '            if e["verb"] == "recolor":                   # also propose the union of this selector\'s maps\n'
++    '                self._propose_union(step, e, t)\n'
++    '        self._rules = None\n'
++    '\n'
++    '    def _propose_union(self, step, e, t):\n'
++    '        for trig in (step.action, "any"):\n'
++    '            for sel in selectors_for(step, e["obj"]):\n'
++    '                union = dict(e["map"])\n'
++    '                for (tg, sl, ef) in self.cands:\n'
++    '                    if tg == trig and sl == sel and ef[0] == "recolor":\n'
++    '                        for a, b in ef[1]:\n'
++    '                            if union.setdefault(a, b) != b:\n'
++    '                                break\n'
++    '                key = (trig, sel, ("recolor", tuple(sorted(union.items()))))\n'
++    '                if key not in self.cands and len(union) > len(e["map"]):\n'
++    '                    c = self.cands[key] = _Cand(key)\n'
++    '                    for s in range(t + 1):\n'
++    '                        self._score(c, s)\n'
++    '\n'
++    '    def _score(self, c, s):\n'
++    '        trig, sel, eff = c.key\n'
++    '        step = self.steps[s]\n'
++    '        if not trigger_matches(trig, step.action):\n'
++    '            return\n'
++    '        if eff[0] == "appear":\n'
++    '            ev = tuple(k for k, e in enumerate(step.events) if matches(eff, None, e, step.click))\n'
++    '            c.inst.append((s, None, ev, features(step, None, eff)))\n'
++    '            c.n += 1\n'
++    '            c.hits += bool(ev)\n'
++    '        else:\n'
++    '            st = step.state\n'
++    '            for i in step.select(sel):\n'
++    '                if not applicable(eff, st, i):\n'
++    '                    continue\n'
++    '                ev = tuple(k for k, e in enumerate(step.events) if matches(eff, i, e, step.click))\n'
++    '                c.inst.append((s, i, ev, features(step, i, eff)))\n'
++    '                c.n += 1\n'
++    '                c.hits += bool(ev)\n'
++    '        if c.n >= 30 and c.hits < 0.1 * c.n:              # hopeless: stop scoring it\n'
++    '            c.dead = True\n'
++    '            c.inst = []\n'
++    '\n'
++    '    def _options(self, c):\n'
++    '        """The candidate as it stands, and with its best condition."""\n'
++    '        trig, sel, eff = c.key\n'
++    '        base_ex = {(s, k) for s, _, ev, _ in c.inst for k in ev}\n'
++    '        out = [(trig, sel, eff, None, c.hits, c.n - c.hits, base_ex)]\n'
++    '        miss = c.n - c.hits\n'
++    '        if miss >= self.min_count:\n'
++    '            hit_f, miss_f = collections.Counter(), collections.Counter()\n'
++    '            for _, _, ev, f in c.inst:\n'
++    '                (hit_f if ev else miss_f).update(f)\n'
++    '            best, best_gain = None, 0\n'
++    '            for f in set(hit_f) | set(miss_f):\n'
++    '                for pol, h, m in (("unless", c.hits - hit_f[f], miss - miss_f[f]), ("if", hit_f[f], miss_f[f])):\n'
++    '                    gain = (miss - m) - (c.hits - h)\n'
++    '                    if h >= self.min_count and gain > best_gain:\n'
++    '                        best, best_gain = (pol, f), gain\n'
++    '            if best:\n'
++    '                pol, f = best\n'
++    '                keep = [(s, ev) for s, _, ev, fs in c.inst if (f in fs) == (pol == "if")]\n'
++    '                hits = sum(bool(ev) for _, ev in keep)\n'
++    '                out.append((trig, sel, eff, best, hits, len(keep) - hits, {(s, k) for s, ev in keep for k in ev}))\n'
++    '        return out\n'
++    '\n'
++    '    def rules(self):\n'
++    '        """Greedy minimum-description choice among the scored candidates (and families of them)."""\n'
++    '        if self._rules is not None:\n'
++    '            return self._rules\n'
++    '        options, per_action = [], collections.defaultdict(dict)\n'
++    '        for c in self.cands.values():\n'
++    '            if c.dead or not c.hits:\n'
++    '                continue\n'
++    '            opts = [Rule(*o) for o in self._options(c)]\n'
++    '            if c.hits >= self.min_count:\n'
++    '                options += opts\n'
++    '            trig, sel, eff = c.key\n'
++    '            if trig != "any" and eff[0] != "appear":\n'
++    '                best = per_action[(sel, eff[0])]\n'
++    '                for o in opts:\n'
++    '                    cur = best.get(trig)\n'
++    '                    if cur is None or (o.hits - o.false, -_cost(o)) > (cur.hits - cur.false, -_cost(cur)):\n'
++    '                        best[trig] = o\n'
++    '        for (sel, verb), best in per_action.items():          # one selector and verb, a parameter per action\n'
++    '            if len(best) >= 2:\n'
++    '                parts = [best[a] for a in sorted(best)]\n'
++    '                options.append(Rule("by_action", sel, parts[0].eff, None, sum(p.hits for p in parts),\n'
++    '                                    sum(p.false for p in parts), set().union(*(p.explained for p in parts)), parts))\n'
++    '        covered, chosen = set(), []\n'
++    '        while True:\n'
++    '            best = None\n'
++    '            for o in options:\n'
++    '                new = len(o.explained - covered)\n'
++    '                if new < self.min_count:\n'
++    '                    continue\n'
++    '                gain = new - o.false - _cost(o)\n'
++    '                key = (gain, -_cost(o), o.text())\n'
++    '                if gain > 0 and (best is None or key > best[0]):\n'
++    '                    best = (key, o)\n'
++    '            if best is None:\n'
++    '                break\n'
++    '            chosen.append(best[1])\n'
++    '            covered |= best[1].explained\n'
++    '            options.remove(best[1])\n'
++    '        self._rules = chosen\n'
++    '        return chosen\n'
++    '\n'
++    '    def residual(self):\n'
++    '        """Events of the level that no chosen rule explains: (step, event)."""\n'
++    '        covered = set().union(*(r.explained for r in self.rules())) if self.rules() else set()\n'
++    '        return [(s, e) for s, st in enumerate(self.steps) for k, e in enumerate(st.events) if (s, k) not in covered]\n'
++    '\n'
++    '\n'
++    'def _cost(r):\n'
++    '    """Description length of a rule; a family pays for its selector and verb once."""\n'
++    '    if r.parts:\n'
++    '        return _cost(r.parts[0]) + sum(0.25 + (COST["condition"] if p.cond else 0) for p in r.parts[1:])\n'
++    '    return cost(r.trig, r.sel, r.eff, r.cond)\n'
++    '\n'
++    '\n'
++    'def predict(rules, state, action, click=None):\n'
++    '    """Closed-world prediction for the next step: [(rule, object index or None, effect)]."""\n'
++    '    step = Step(state, action, click, [])\n'
++    '    out = []\n'
++    '    for rule in rules:\n'
++    '        r = rule.for_action(action)\n'
++    '        if r is None:\n'
++    '            continue\n'
++    '        if r.eff[0] == "appear":\n'
++    '            if r.fires_on(step, None):\n'
++    '                out.append((r, None, r.eff))\n'
++    '            continue\n'
++    '        for i in step.select(r.sel):\n'
++    '            if r.fires_on(step, i):\n'
++    '                out.append((r, i, r.eff))\n'
++    '    return out, step.click\n'
++    '\n'
++    '\n'
++    'def score(predictions, click, events):\n'
++    '    """(predictions right, predictions, events explained, events, exact) for one step."""\n'
++    '    right, explained = 0, set()\n'
++    '    for _, i, eff in predictions:\n'
++    '        ks = [k for k, e in enumerate(events) if matches(eff, i, e, click)]\n'
++    '        right += bool(ks)\n'
++    '        explained |= set(ks)\n'
++    '    exact = right == len(predictions) and len(explained) == len(events)\n'
++    '    return right, len(predictions), len(explained), len(events), exact\n'
++)
++ARCAID3_RULES_VIEW_SOURCE = (
++    '"""Sandbox side of `current_frame.rules` (notebook version 3). Stdlib only.\n'
++    '\n'
++    "Given one level's history as (action text, frame) pairs, it reads every frame with the lexicon,\n"
++    "learns rules with the rule grammar (design/2026-10-07__rule-grammar/rule_grammar.py) from the level's\n"
++    'recent steps, and reports them with the changes of the last step that no rule explained.\n'
++    '\n'
++    'The harness writes actions as model-facing strings: UP, DOWN, LEFT, RIGHT, SPACE, UNDO, RESET, and\n'
++    "MOUSE(row=R, col=C) with R, C on the 64x64 screen. The level's first entry has an empty action.\n"
++    '"""\n'
++    'import re\n'
++    'import time\n'
++    '\n'
++    '_MOUSE = re.compile(r"^\\s*MOUSE\\s*\\(\\s*(?:row\\s*=\\s*)?(-?\\d+)\\s*,\\s*(?:col\\s*=\\s*)?(-?\\d+)\\s*\\)\\s*$", re.I)\n'
++    '_COLOUR = re.compile(r"\\b(colour:|touch:c|path:c|click:c)(\\d+)\\b")\n'
++    '_MAP = re.compile(r"\\{(\\d+:\\d+(?:, \\d+:\\d+)*)\\}")\n'
++    '\n'
++    '\n'
++    'def parse_action(text):\n'
++    '    """\'MOUSE(row=4, col=7)\' -> (\'MOUSE\', (7, 4)) as screen (x, y); \'UP\' -> (\'UP\', None)."""\n'
++    '    m = _MOUSE.match(text or "")\n'
++    '    if m:\n'
++    '        return "MOUSE", (int(m.group(2)), int(m.group(1)))\n'
++    '    return (text or "").strip().upper(), None\n'
++    '\n'
++    '\n'
++    'def with_chars(text, chars):\n'
++    '    """Write colours as the board\'s characters (colour:12 -> colour:O), as `.code` and `.ascii` do."""\n'
++    '    if not chars:\n'
++    '        return text\n'
++    '\n'
++    '    def ch(n):\n'
++    '        n = int(n)\n'
++    '        return chars[n] if 0 <= n < len(chars) else str(n)\n'
++    '\n'
++    '    text = _COLOUR.sub(lambda m: m.group(1).rstrip("c") + ch(m.group(2)) if m.group(1).endswith(":c")\n'
++    '                       else m.group(1) + ch(m.group(2)), text)\n'
++    '    return _MAP.sub(lambda m: "{" + ", ".join(f"{ch(a)}:{ch(b)}" for a, b in (p.split(":") for p in m.group(1).split(", "))) + "}", text)\n'
++    '\n'
++    '\n'
++    'def describe(e):\n'
++    '    v, s, at = e["verb"], e["sym"], e.get("at")\n'
++    '    if v == "move":\n'
++    '        return f"{s} moved by ({e[\'d\'][0]:+d},{e[\'d\'][1]:+d}) to {at}"\n'
++    '    if v == "recolor":\n'
++    '        return f"{s} at {at} recoloured {{{\', \'.join(f\'{a}:{b}\' for a, b in e[\'map\'])}}}"\n'
++    '    if v == "turn":\n'
++    '        return f"{s} at {at} turned ({e[\'transform\']})"\n'
++    '    if v == "resize":\n'
++    '        return f"{s} at {at} changed size by {e[\'delta\']:+d} cells"\n'
++    '    if v == "reshape":\n'
++    '        return f"{s} at {at} became {e[\'to\']}"\n'
++    '    if v == "vanish":\n'
++    '        return f"{s} vanished from {at}"\n'
++    '    return f"{s} appeared at {at}"\n'
++    '\n'
++    '\n'
++    'def report(g, seq, encode, level=None, chars=None, window=60, budget=8.0, max_rules=10, max_lines=6):\n'
++    '    """Text for `current_frame.rules`.\n'
++    '\n'
++    "    g       the rule grammar's namespace (State, observe, Learner, predict, matches)\n"
++    '    seq     [(action text, frame)] for one level, oldest first; frame i is the result of action i\n'
++    '    encode  frame -> lexicon encoding (shared Lexicon, per-level scale lock)\n'
++    '    """\n'
++    '    t0 = time.time()\n'
++    '    seq = seq[-(window + 1):]\n'
++    '    states = {}\n'
++    '\n'
++    '    def state(i):\n'
++    '        if i not in states:\n'
++    '            states[i] = g["State"](encode(seq[i][1]))\n'
++    '        return states[i]\n'
++    '\n'
++    '    steps = []\n'
++    '    for i in range(1, len(seq)):\n'
++    '        name, click = parse_action(seq[i][0])\n'
++    '        if not name or name == "RESET":\n'
++    '            continue\n'
++    '        a, b = state(i - 1), state(i)\n'
++    '        if (a.code["scale"], a.code["offset"]) != (b.code["scale"], b.code["offset"]):\n'
++    '            continue\n'
++    '        steps.append((a, name, click, g["observe"](a, b), seq[i][0]))\n'
++    '        if time.time() - t0 > budget:\n'
++    '            break\n'
++    '    where = f"level {level}" if level is not None else "this level"\n'
++    '    if not steps:\n'
++    '        return f"RULES for {where}: no steps yet. Act, then look again."\n'
++    '    learner = g["Learner"]()\n'
++    '    for a, name, click, evs, _ in steps[:-1]:\n'
++    '        learner.observe(a, name, click, evs)\n'
++    '    preds, crc = g["predict"](learner.rules(), steps[-1][0], steps[-1][1], steps[-1][2])\n'
++    '    a, name, click, evs, text = steps[-1]\n'
++    '    right, explained = 0, set()\n'
++    '    for _, i, eff in preds:\n'
++    '        ks = {k for k, e in enumerate(evs) if g["matches"](eff, i, e, crc)}\n'
++    '        right += bool(ks)\n'
++    '        explained |= ks\n'
++    '    learner.observe(a, name, click, evs)\n'
++    '    rules = learner.rules()\n'
++    '    lines = [f"RULES for {where}, learned from its last {len(steps)} steps "\n'
++    '             "(when <action> [if/unless <relation>] then <change>; counts: right / wrong on this level):"]\n'
++    '    lines += ["  " + r.line() for r in rules[:max_rules]]\n'
++    '    if len(rules) > max_rules:\n'
++    '        lines.append(f"  ... and {len(rules) - max_rules} more")\n'
++    '    if not rules:\n'
++    '        lines.append("  (none yet: no change has repeated often enough)")\n'
++    '    unexplained = [e for k, e in enumerate(evs) if k not in explained]\n'
++    '    lines.append(f"LAST STEP {text}: rules predicted {len(preds)} change(s), {right} came true; "\n'
++    '                 f"{len(evs)} change(s) seen, {len(unexplained)} that no rule explains" + (":" if unexplained else "."))\n'
++    '    lines += ["  " + describe(e) for e in unexplained[:max_lines]]\n'
++    '    if len(unexplained) > max_lines:\n'
++    '        lines.append(f"  ... and {len(unexplained) - max_lines} more")\n'
++    '    return with_chars("\\n".join(lines), chars)\n'
++)
+ 
+ ARCAID3_NOTE = (
+@@ -615,4 +1337,6 @@
+     "`current_frame.changes_since(previous_frame)` lists objects that moved, appeared, disappeared or "
+     "changed; `current_frame.objects` gives each object's screen row/col for MOUSE.\n"
++    "- `current_frame.rules` lists rules learned from this level's steps (when <action> then <change>, "
++    "with right/wrong counts) and the changes of the last step that no rule explains.\n"
+ )
+ 
+@@ -684,4 +1408,43 @@
+                               lock=_arcaid3_lock(view))
+ 
++_ARCAID3_RULES_ON = __A3RULESON__
++_A3R = {}
++if _ARCAID3_RULES_ON and "error" not in _ARCAID3:
++    try:
++        class _A3Lexicon:
++            pass
++        _a3lx = _A3Lexicon()
++        _a3lx.__dict__.update(_ARCAID3)
++        _A3R = {"LX": _a3lx, "__name__": "arcaid3_rules"}
++        exec(compile(__A3RULESSRC__, "<arcaid3_rules>", "exec"), _A3R)
++        _a3view = {"__name__": "arcaid3_rules_view"}
++        exec(compile(__A3VIEWSRC__, "<arcaid3_rules_view>", "exec"), _a3view)
++        _A3R["_view"] = _a3view
++    except Exception as _arcaid3_rexc:
++        _A3R = {"error": repr(_arcaid3_rexc)}
++
++
++def _arcaid3_rules(view):
++    """Rules learned from the level's recent steps in `history`, and the last step's unexplained changes."""
++    if not _ARCAID3_RULES_ON:
++        return "rules are switched off (ARCAID3_RULES=0)"
++    if "_view" not in _A3R:
++        return "rules unavailable: " + str(_A3R.get("error", _ARCAID3.get("error", "not loaded")))
++    rt = _arcaid3_runtime()
++    level = getattr(view, "level", None)
++    seq = []
++    for entry in ((rt.get("history") or []) if rt else []):
++        fr = getattr(entry, "frame", None)
++        if fr is None:
++            continue
++        if getattr(fr, "level", None) != level:
++            seq = []
++            continue
++        seq.append((str(getattr(entry, "action", "") or ""), fr))
++        if fr is view:
++            break
++    lex = _arcaid3_lexicon()
++    return _A3R["_view"]["report"](_A3R, seq, lambda fr: _arcaid3_encode(fr, lex), level=level, chars=COLOR_CHARS)
++
+ '''
+ 
+@@ -714,4 +1477,9 @@
+         return _ARCAID3["native_ascii"](_arcaid3_encode(self))
+ 
++    @property
++    def rules(self):
++        """Rules learned from this level's recent steps, and the last step's changes that no rule explains."""
++        return _arcaid3_rules(self)
++
+     def changes_since(self, other):
+         """Object-level change from `other` (an earlier frame) to this frame."""
+@@ -726,9 +1494,12 @@
+ # v2 prompt edits: (where, exact harness text, replacement). Anchors were checked against the prompts
+ # the v1 run actually sent (experiments/2026-10-04__arcaid3-lexicon-view-py312__v1__.../outputs/prompts).
+-_A3_MEMBERS = "`.code`, `.objects`, `.native` and `.changes_since(frame)`"
++_A3_MEMBERS = "`.code`, `.objects`, `.native`, `.rules` and `.changes_since(frame)`"
+ _A3_TRIGGER = (
+     "- When a level starts, or when you cannot tell what your last action did, print `current_frame.code` "
+     "(every object with a stable name and position) and `current_frame.changes_since(previous_frame)` "
+     "(objects that moved, appeared, disappeared or changed) before writing your own diff.\n"
++    "- When you are unsure what an action does, or the board did something you did not expect, print "
++    "`current_frame.rules`: rules learned from this level's steps (`when <action> [if ...] then <change>`, "
++    "each with how often it was right and wrong) and the last step's changes that no rule explains.\n"
+ )
+ _A3_RECENT = (
+@@ -760,5 +1531,5 @@
+ _A3_ANCHOR_METHODS = "    @property\n    def segmentation(self):"
+ ARCAID3_STATS = {"tool_calls": 0, "calls_using_view": 0, "code": 0, "objects": 0, "native": 0,
+-                 "changes_since": 0, "cue_turns": 0, "errors": 0}
++                 "changes_since": 0, "rules": 0, "cue_turns": 0, "errors": 0}
+ 
+ 
+@@ -810,5 +1581,5 @@
+ 
+ 
+-def arcaid3_patch_sandbox_source(source, lock=True):
++def arcaid3_patch_sandbox_source(source, lock=True, rules=True):
+     """Return the sandbox program with the lexicon view added.
+ 
+@@ -823,7 +1594,9 @@
+         if found != 1:
+             raise RuntimeError(f"anchor found {found} times, expected 1: {anchor.splitlines()[-1]!r}")
++    template = (_A3_SB_GLOBALS.replace("__LOCK__", repr(bool(lock))).replace("__A3RULESON__", repr(bool(rules)))
++                .replace("__A3RULESSRC__", repr(ARCAID3_RULES_SOURCE))
++                .replace("__A3VIEWSRC__", repr(ARCAID3_RULES_VIEW_SOURCE)))
+     text = text.replace(_A3_ANCHOR_GLOBALS,
+-                        _A3_SB_GLOBALS.replace("__SRC__", repr(ARCAID3_LEXICON_SOURCE))
+-                        .replace("__LOCK__", repr(bool(lock))) + "\n" + _A3_ANCHOR_GLOBALS)
++                        template.replace("__SRC__", repr(ARCAID3_LEXICON_SOURCE)) + "\n" + _A3_ANCHOR_GLOBALS)
+     text = text.replace(_A3_ANCHOR_METHODS, _A3_SB_METHODS + _A3_ANCHOR_METHODS)
+     compile(text, "<sandbox>", "exec")                 # never ship an unparsable child program
+@@ -898,4 +1671,36 @@
+ 
+ 
++def _arcaid3_rules_self_test(sb):
++    """A 3x3 block steps right on RIGHT, with one inert click between; `.rules` must state the move
++    and predict the last step."""
++    chars = sb.ARC_COLOR_CHARS
++
++    def board(c0):
++        world = [[5] * 32 for _ in range(32)]
++        world[25][3] = 8
++        for r in range(10, 13):
++            for c in range(c0, c0 + 3):
++                world[r][c] = 9
++        return [[world[y // 2][x // 2] for x in range(64)] for y in range(64)]
++
++    def frame(g, step):
++        return {"ascii": "\n".join("".join(chars[v] for v in row) for row in g), "step": step, "level": 1,
++                "shape": [64, 64], "grid": g}
++
++    acts = ["", "RIGHT", "RIGHT", "MOUSE(row=60, col=60)", "RIGHT", "RIGHT", "RIGHT"]
++    hist, c0 = [], 2
++    for i, a in enumerate(acts):
++        c0 += 1 if a == "RIGHT" else 0
++        hist.append({"action": a, "frame": frame(board(c0), i + 1)})
++    state = {"current_frame": hist[-1]["frame"], "history": hist, "last_action_result": {},
++             "valid_actions": ["RIGHT", "MOUSE"]}
++    res = sb.run_sandboxed_python(code="print(current_frame.rules)\n", timeout_seconds=30, initial_state=state,
++                                  action_handler=lambda actions: {})
++    out = str(res.get("stdout", ""))
++    ok = ("when RIGHT then move(" in out and "LAST STEP RIGHT" in out and "1 came true" in out
++          and not res.get("error"))
++    return ok, out, res.get("error")
++
++
+ def install_arcaid3_lexicon():
+     report = {"enabled": ARCAID3_ON, "installed": False}
+@@ -907,9 +1712,10 @@
+     stock = _a3_sb._SANDBOX_BOOTSTRAP
+     try:
+-        patched = arcaid3_patch_sandbox_source(stock, lock=ARCAID3_SCALE_LOCK)
++        patched = arcaid3_patch_sandbox_source(stock, lock=ARCAID3_SCALE_LOCK, rules=ARCAID3_RULES)
+     except Exception as exc:                          # stock sandbox stays in place
+         report["error"] = f"sandbox patch: {type(exc).__name__}: {exc}"
+         return report
+     _a3_sb._SANDBOX_BOOTSTRAP = patched
++    lock_on = ARCAID3_SCALE_LOCK
+     report["scale_lock"] = "off (ARCAID3_SCALE_LOCK=0)"
+     if ARCAID3_SCALE_LOCK:
+@@ -917,6 +1723,12 @@
+         report["scale_lock"] = "on, self-test ok" if lok else f"off, self-test failed: {lerr!r} :: {lout[:200]!r}"
+         if not lok:                                   # keep the view, drop only the lock
+-            patched = arcaid3_patch_sandbox_source(stock, lock=False)
+-            _a3_sb._SANDBOX_BOOTSTRAP = patched
++            lock_on = False
++            _a3_sb._SANDBOX_BOOTSTRAP = arcaid3_patch_sandbox_source(stock, lock=False, rules=ARCAID3_RULES)
++    report["rules"] = "off (ARCAID3_RULES=0)"
++    if ARCAID3_RULES:
++        rok, rout, rerr = _arcaid3_rules_self_test(_a3_sb)
++        report["rules"] = "on, self-test ok" if rok else f"off, self-test failed: {rerr!r} :: {rout[:300]!r}"
++        if not rok:                                   # keep the view and the lock, drop only the rules
++            _a3_sb._SANDBOX_BOOTSTRAP = arcaid3_patch_sandbox_source(stock, lock=lock_on, rules=False)
+     ok, out, err = _arcaid3_self_test(_a3_sb)
+     if not ok:                                        # roll back: the run continues exactly as stock
+@@ -943,5 +1755,5 @@
+                 used = False
+                 for key, needle in (("code", ".code"), ("objects", ".objects"), ("native", ".native"),
+-                                    ("changes_since", ".changes_since(")):
++                                    ("changes_since", ".changes_since("), ("rules", ".rules")):
+                     if needle in src:
+                         ARCAID3_STATS[key] += 1

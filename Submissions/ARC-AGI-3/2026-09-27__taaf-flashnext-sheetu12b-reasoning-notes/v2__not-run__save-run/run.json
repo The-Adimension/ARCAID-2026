@@ -1,0 +1,67 @@
+{
+ "kernel": "habanwer/taaf-flashnext-sheetu12b-reasoning-notes",
+ "title": "taaf-flashnext-sheetu12b+reasoning_notes",
+ "version": 2,
+ "script_version_id": 353236280,
+ "url": "https://www.kaggle.com/code/habanwer/taaf-flashnext-sheetu12b-reasoning-notes?scriptVersionId=353236280",
+ "track": "ARC-AGI-3",
+ "private_on_kaggle_at_collection": true,
+ "placement": {
+  "place": "submissions",
+  "note": "Change A arm on the sheetu base"
+ },
+ "inputs_now": {
+  "competition_sources": [
+   "arc-prize-2026-arc-agi-3"
+  ],
+  "dataset_sources": [
+   "keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1",
+   "keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1"
+  ],
+  "model_sources": [
+   ""
+  ],
+  "kernel_sources": []
+ },
+ "inputs_as_run": [
+  {
+   "sourceId": 133468,
+   "sourceType": "competition"
+  },
+  {
+   "sourceId": 19306148,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 19333078,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 977939,
+   "sourceType": "modelInstanceVersion"
+  }
+ ],
+ "accelerator": "nvidiaRtxPro6000",
+ "run": {
+  "start": null,
+  "end": null,
+  "duration_s": null,
+  "exception": null
+ },
+ "submissions": [],
+ "files": {
+  "__notebook__.ipynb": "ed02f3b6bfdc6d52858760fdb58327e6570857246e48e63039e2ff5543bca0f5",
+  "__output__.json": "29a0f9941ac98e0549be1718093cd301dc3135b489cc1a441696fcb8cb34ac12"
+ },
+ "collected_at": "2026-11-06T11:56:56Z",
+ "notebook_sha256_original": "ed02f3b6bfdc6d52858760fdb58327e6570857246e48e63039e2ff5543bca0f5",
+ "log_sha256_original": "29a0f9941ac98e0549be1718093cd301dc3135b489cc1a441696fcb8cb34ac12",
+ "inferred_parent": {
+  "notebook": "habanwer/taaf-flashnext-sheetu12b-reasoning-notes@v1",
+  "distance_lines": 0,
+  "runner_up": "scottlegrand/taaf-flashnext-sheetu12b-0922@v1",
+  "runner_up_distance": 74,
+  "method": "Tools/lineage/infer_parents.py"
+ },
+ "root_base": "scottlegrand/taaf-flashnext-sheetu12b-0922@v1"
+}

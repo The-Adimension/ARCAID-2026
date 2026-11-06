@@ -11,6 +11,9 @@ symmetric difference over code cells; markdown and outputs ignored). The nearest
 reported as the inferred parent, with the runner-up, so a close call is visible. On a tie the
 earliest-started candidate wins, so an unchanged copy is never credited over its original. Start times come
 from the notebook's own papermill metadata. Distance 0 means the code is identical.
+A candidate counts only if the two notebooks share at least 30% of the newer one's code lines; otherwise
+the version is reported with no parent (its code is mostly new). A version with no recorded start time
+(a quick save that never ran) is compared with every other version except later versions of itself.
 This is evidence, not a declaration: Documentation and ARCAID/LINEAGE.md state where an inferred
 parent was checked against the author's own records.
 """
@@ -49,8 +52,19 @@ def main():
     for n in nodes:
         if not n["ours"]:
             continue
-        cands = [m for m in nodes if m is not n and m["start"] and n["start"] and m["start"] < n["start"]]
-        scored = sorted((dist(n["lines"], m["lines"]), m["start"], m["id"]) for m in cands)  # ties: the earliest original wins
+        kernel, ver = n["id"].split("@v")
+        if n["start"]:
+            cands = [m for m in nodes if m is not n and m["start"] and m["start"] < n["start"]]
+        else:
+            cands = [m for m in nodes if m is not n and not (m["id"].split("@v")[0] == kernel and int(m["id"].split("@v")[1]) > int(ver))]
+        size = sum(n["lines"].values())
+        scored = []
+        for m in cands:
+            d = dist(n["lines"], m["lines"])
+            shared = (size + sum(m["lines"].values()) - d) / 2
+            if size and shared >= 0.3 * size:
+                scored.append((d, m["start"] or "", m["id"]))
+        scored.sort()                                   # ties: the earliest original wins
         best = (scored[0][0], scored[0][2]) if scored else (None, "")
         second = (scored[1][0], scored[1][2]) if len(scored) > 1 else (None, "")
         rows.append([n["id"], n["start"] or "", sum(n["lines"].values()), best[1], best[0], second[1], second[0]])

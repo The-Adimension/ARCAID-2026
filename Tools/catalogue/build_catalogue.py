@@ -130,6 +130,7 @@ def main():
             vdir.mkdir()
             run = {"kernel": f"{meta['owner']}/{slug}", "title": meta["title"], "version": v,
                    "script_version_id": meta["script_version_id"], "url": meta["url"], "track": track,
+                   "private_on_kaggle_at_collection": meta.get("private_now"),
                    "placement": {k: p[k] for k in ("place", "group", "arm", "note") if p.get(k)},
                    "inputs_now": {k: meta[k] for k in ("competition_sources", "dataset_sources", "model_sources", "kernel_sources")},
                    "inputs_as_run": (nbmeta.get("kaggle") or {}).get("dataSources"),

@@ -1,0 +1,67 @@
+      9.0 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+      9.0 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+      9.0 err | 0.00s - to python to disable frozen modules.
+      9.0 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+      9.8 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+      9.8 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+      9.8 err | 0.00s - to python to disable frozen modules.
+      9.8 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+     11.2 out | == /kaggle/input tree (depth 4)
+     11.2 out | /kaggle/input | dirs: ['competitions', 'datasets', 'models'] | files: 0
+     11.2 out | /kaggle/input/datasets | dirs: ['dfranzen'] | files: 0
+     11.2 out | /kaggle/input/datasets/dfranzen | dirs: ['pennyroyal-v253', 'taaf-kaggle-source-bundle-copy'] | files: 0
+     11.2 out | /kaggle/input/datasets/dfranzen/pennyroyal-v253 | dirs: ['wheels'] | files: 3
+     11.2 out | /kaggle/input/datasets/dfranzen/taaf-kaggle-source-bundle-copy | dirs: ['src'] | files: 8
+     11.2 out | /kaggle/input/models | dirs: ['dfranzen'] | files: 0
+     11.2 out | /kaggle/input/models/dfranzen | dirs: ['albucino-qwen3-8-flash-next-drafter', 'intel-qwen3.8-flash-next-w4a16-autoround'] | files: 0
+     11.2 out | /kaggle/input/models/dfranzen/albucino-qwen3-8-flash-next-drafter | dirs: ['transformers'] | files: 0
+     11.2 out | /kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround | dirs: ['transformers'] | files: 0
+     11.2 out | /kaggle/input/competitions | dirs: ['arc-prize-2026-arc-agi-3'] | files: 0
+     11.2 out | /kaggle/input/competitions/arc-prize-2026-arc-agi-3 | dirs: ['ARC-AGI-3-Agents', 'arc_agi_3_wheels', 'environment_files'] | files: 0
+     11.2 out | /kaggle/input/competitions/arc-prize-2026-arc-agi-3/environment_files | dirs: ['ar25', 'bp35', 'cd82', 'cn04', 'dc22', 'ft09', 'g50t', 'ka59', 'lf52', 'lp85', 'ls20', 'm0r0'] | files: 0
+     11.2 out | /kaggle/input/competitions/arc-prize-2026-arc-agi-3/ARC-AGI-3-Agents | dirs: ['.git', 'agents', 'tests'] | files: 11
+     11.2 out | /kaggle/input/competitions/arc-prize-2026-arc-agi-3/arc_agi_3_wheels | dirs: [] | files: 31
+     11.2 out | Filesystem                                                                  Size  Used Avail Use% Mounted on
+     11.2 out | overlay                                                                     8.0T  7.0T  1.1T  87% /
+     11.2 out | tmpfs                                                                        64M     0   64M   0% /dev
+     11.2 out | shm                                                                          14G     0   14G   0% /dev/shm
+     11.2 out | /dev/loop2                                                                   20G  168K   20G   1% /kaggle/src
+     11.2 out | 192.168.11.2:/data/kagglesdsdata/models/755057/1007009/dlqwgfdu8u6j          93T   69T   24T  75% /kaggle/input/models/dfranzen/albucino-qwen3-8-flash-next-drafter/transformers/default/1
+     11.2 out | 192.168.11.2:/data/kagglesdsdata/models/755365/1007514/dlr8t7z9l167          93T   69T   24T  75% /kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1
+     11.2 out | 192.168.11.2:/data/kagglesdsdata/competitions/133468/16741059/dhvpdgh9lm3b   93T   69T   24T  75% /kaggle/input/competitions/arc-prize-2026-arc-agi-3
+     11.2 out | 192.168.11.2:/data/kagglesdsdata/datasets/12250142/20092813/dlqzykoc32fp     93T   69T   24T  75% /kaggle/input/datasets/dfranzen/taaf-kaggle-source-bundle-copy
+     11.2 out | 192.168.11.2:/data/kagglesdsdata/datasets/12273106/20134793/dlrvhljskpjc     93T   69T   24T  75% /kaggle/input/datasets/dfranzen/pennyroyal-v253
+     11.2 out | /dev/mapper/snap                                                            8.0T  7.0T  1.1T  87% /etc/hosts
+     11.2 out | tmpfs                                                                       4.0K     0  4.0K   0% /proc/acpi
+     11.2 out | 
+     11.2 out | nsformers/default/1 type nfs (ro,relatime,vers=3,rsize=524288,wsize=524288,namlen=255,hard,nolock,fatal_neterrors=none,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=192.168.11.2,mountvers=3,mountport=2050,mountproto=tcp,local_lock=all,addr=192.168.11.2)
+     11.2 out | 192.168.11.2:/data/kagglesdsdata/models/755365/1007514/dlr8t7z9l167 on /kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1 type nfs (ro,relatime,vers=3,rsize=524288,wsize=524288,namlen=255,hard,nolock,fatal_neterrors=none,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=192.168.11.2,mountvers=3,mountport=2050,mountproto=tcp,local_lock=all,addr=192.168.11.2)
+     11.2 out | 192.168.11.2:/data/kagglesdsdata/competitions/133468/16741059/dhvpdgh9lm3b on /kaggle/input/competitions/arc-prize-2026-arc-agi-3 type nfs (ro,relatime,vers=3,rsize=524288,wsize=524288,namlen=255,hard,nolock,fatal_neterrors=none,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=192.168.11.2,mountvers=3,mountport=2050,mountproto=tcp,local_lock=all,addr=192.168.11.2)
+     11.2 out | 192.168.11.2:/data/kagglesdsdata/datasets/12250142/20092813/dlqzykoc32fp on /kaggle/input/datasets/dfranzen/taaf-kaggle-source-bundle-copy type nfs (ro,relatime,vers=3,rsize=524288,wsize=524288,namlen=255,hard,nolock,fatal_neterrors=none,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=192.168.11.2,mountvers=3,mountport=2050,mountproto=tcp,local_lock=all,addr=192.168.11.2)
+     11.2 out | 192.168.11.2:/data/kagglesdsdata/datasets/12273106/20134793/dlrvhljskpjc on /kaggle/input/datasets/dfranzen/pennyroyal-v253 type nfs (ro,relatime,vers=3,rsize=524288,wsize=524288,namlen=255,hard,nolock,fatal_neterrors=none,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=192.168.11.2,mountvers=3,mountport=2050,mountproto=tcp,local_lock=all,addr=192.168.11.2)
+     11.2 out | /tmp/fs/kaggle_swr4BqDfD1GP9rdkkXcCTlrsJ5PuXdfeSYtDhrFhwY-358306306-webtier/srcfile on /kaggle/working type ext4 (rw,relatime)
+     11.2 out | /dev/mapper/snap on /etc/resolv.conf type ext4 (rw,relatime,discard)
+     11.2 out | /dev/mapper/snap on /etc/hostname type ext4 (rw,relatime,discard)
+     11.2 out | /dev/mapper/snap on /etc/hosts type ext4 (rw,relatime,discard)
+     11.2 out | /tmp/fs/kaggle_swr4BqDfD1GP9rdkkXcCTlrsJ5PuXdfeSYtDhrFhwY-358306306-webtier/srcfile on /etc/secrets/kaggle type ext4 (ro,relatime)
+     11.2 out | proc on /proc/bus type proc (ro,nosuid,nodev,noexec,relatime)
+     11.2 out | proc on /proc/fs type proc (ro,nosuid,nodev,noexec,relatime)
+     11.2 out | proc on /proc/irq type proc (ro,nosuid,nodev,noexec,relatime)
+     11.2 out | proc on /proc/sys type proc (ro,nosuid,nodev,noexec,relatime)
+     11.2 out | proc on /proc/sysrq-trigger type proc (ro,nosuid,nodev,noexec,relatime)
+     11.2 out | tmpfs on /proc/acpi type tmpfs (ro,relatime,size=4k,nr_inodes=1)
+     11.2 out | tmpfs on /proc/interrupts type tmpfs (rw,nosuid,size=65536k,mode=755)
+     11.2 out | tmpfs on /proc/kcore type tmpfs (rw,nosuid,size=65536k,mode=755)
+     11.2 out | tmpfs on /proc/keys type tmpfs (rw,nosuid,size=65536k,mode=755)
+     11.2 out | tmpfs on /proc/scsi type tmpfs (ro,relatime,size=4k,nr_inodes=1)
+     11.2 out | tmpfs on /proc/timer_list type tmpfs (rw,nosuid,size=65536k,mode=755)
+     11.2 out | tmpfs on /sys/firmware type tmpfs (ro,relatime,size=4k,nr_inodes=1)
+     11.2 out | 
+     14.5 err | /usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+     14.5 err |   cells[i][c] = re.sub('\\\\\|', '|', cell)
+     14.7 err | /usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+     14.7 err |   text = re.sub(r'_', '\_', text) # Escape underscores in display text
+     15.7 err | [NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+     16.1 err | [NbConvertApp] Writing 8651 bytes to __notebook__.ipynb
+     19.5 err | [NbConvertApp] Converting notebook __notebook__.ipynb to html
+     20.6 err | [NbConvertApp] Writing 282115 bytes to __results__.html

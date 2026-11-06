@@ -1,0 +1,62 @@
+--- base cell 14
++++ new cell 14
+@@ -55,2 +55,59 @@
+ assert arc3_batch.MARKER in _built3 and 'stuck_warning' in _built3, 'an earlier patch was lost'
+ print('ARC3_LEDGER_READY chars=%d' % len(_built3), flush=True)
++# arc3_select: a highlight-only click is a selection. PROMPT-ONLY.
++# Local arcade frame sb26-7fbdac44 seed 0 (2026-09-22), 44 actions, level stayed 0/8.
++# Not a Kaggle score. A click on a solid piece changed only a white border. The next
++# click on a gray mark turned that mark into the selected color. ACTION5 flipped one
++# cell of the full-width bar and placed nothing. The blank center of the red frame
++# and the top outlines changed nothing. MODE stays warn.
++ARC3_SELECT_SOURCE = "\"\"\"arc3_select: a highlight-only click is a selection. PROMPT-ONLY.\n\nLocal arcade, sb26-7fbdac44, seed 0. Not a measured RHAE. The opening frame shows the\nsame colors twice: outlines in one left-to-right order, solid pieces in another, plus\nempty gray marks. Clicking a solid changed only a border around it. Clicking an empty\nmark after that turned the mark into the selected color. A click in the blank center of\nan outline changed nothing. ACTION5 changed one cell of a full-width bar and did not\nplace a piece.\n\nSame binding trap as arc3_batch: tool_agent binds PYTHON_ADDENDUM at import, so both\nbindings are patched and the result is asserted against _build_system_prompt.\n\"\"\"\nfrom __future__ import annotations\n\nMARKER = \"SELECT THEN PLACE\"\n\nRULE = (\n    \"- SELECT THEN PLACE: a click that changes only a border around the object you hit \"\n    \"has selected it and has not moved anything. Do not end the turn on a selection, and \"\n    \"do not read an unchanged board as proof the control does nothing. In the same snippet, \"\n    \"click the empty mark you want that object to fill and predict that the mark takes the \"\n    \"object's color. If it does not, stop and re-plan. Click a pixel of the object, not the \"\n    \"blank center of an outline. When the same colors appear once as outlines and once as \"\n    \"solid pieces, the outline order is one hypothesis for the goal; the order the solids \"\n    \"sit in is only their current position.\\n\"\n)\n\n\ndef install() -> dict:\n    \"\"\"Append the select-then-place rule. Idempotent; verified against the real prompt.\"\"\"\n    from inference.agent import prompts as P\n    from inference.agent import tool_agent as TA\n\n    if MARKER in TA.PYTHON_ADDENDUM:\n        return {\"installed\": \"already\"}\n    before = len(TA.PYTHON_ADDENDUM)\n    new = TA.PYTHON_ADDENDUM + RULE\n    TA.PYTHON_ADDENDUM = new\n    P.PYTHON_ADDENDUM = new\n    built = TA._build_system_prompt(tool_output_tokens=1024)\n    if MARKER not in built:\n        raise RuntimeError(\"arc3_select: rule did not reach _build_system_prompt\")\n    return {\"installed\": True, \"delta_chars\": len(new) - before, \"system_prompt_chars\": len(built)}\n"
++Path('/kaggle/working/arc3_select.py').write_text(ARC3_SELECT_SOURCE, encoding='utf-8')
++if '/kaggle/working' not in sys.path:
++    sys.path.insert(0, '/kaggle/working')
++importlib.invalidate_caches()
++import arc3_select
++arc3_select = importlib.reload(arc3_select)
++print('arc3_select:', arc3_select.install(), flush=True)
++_built4 = _ta._build_system_prompt(tool_output_tokens=1024)
++assert 'SELECT THEN PLACE' in _built4, 'arc3_select did not reach the system prompt'
++assert arc3_ledger.MARKER in _built4 and 'stuck_warning' in _built4 and arc3_batch.MARKER in _built4, 'an earlier patch was lost'
++assert arc3_stall.MODE == 'warn', 'stall must stay in warn mode'
++print('ARC3_SELECT_READY chars=%d' % len(_built4), flush=True)
++# arc3_path: a join is the order of the marks. PROMPT-ONLY.
++# Local arcade sb26-7fbdac44 seed 0 (2026-09-22). Not a Kaggle score.
++# Connector frame: upper-then-lower submit stayed on the level. Walking the
++# line (marks before the join, the joined marks, the marks after it) and
++# submitting advanced. The next frame has two joins; the same walk advanced.
++# 40 actions, level index 3/8, NOT_FINISHED. MODE stays warn.
++ARC3_PATH_SOURCE = '"""arc3_path: a join is the order of the marks. PROMPT-ONLY.\n\nLocal arcade, sb26-7fbdac44, seed 0. Not a measured RHAE.\nOn the frame with two boxes of marks joined by a green line, placing the\noutline colors across the upper marks and only then the lower marks, then\nsubmitting, left the level unchanged. Walking the line advanced it: marks\nbefore the join, the joined marks left to right, then the marks after the\njoin. On the next frame a row of marks is interrupted by a green block and\na blue block, each above a same-colored box. The same walk, one join at a\ntime, advanced on submit.\n\nSame binding trap as arc3_batch: tool_agent binds PYTHON_ADDENDUM at import,\nso both bindings are patched and the result is asserted against\n_build_system_prompt.\n"""\nfrom __future__ import annotations\n\nMARKER = "PATH BEFORE READING ORDER"\n\nRULE = (\n    "- PATH BEFORE READING ORDER: read the outline left to right as the color "\n    "sequence, and choose the mark order separately. When a line or a colored "\n    "block joins a row of empty marks to another group of marks, walk the marks "\n    "in path order. Marks already passed, then that group\'s marks left to right, "\n    "then the marks on the far side of the join. Do this at every join from left "\n    "to right. Place color 1 on the first mark of the walk, color 2 on the next, "\n    "and so on, then submit. The other order, every upper mark left to right and "\n    "only then the lower marks, is the fallback, and only after a path submit "\n    "leaves the level unchanged. Do not spend those later turns re-testing a "\n    "control you have already seen work.\\n"\n)\n\n\ndef install() -> dict:\n    """Append the path rule. Idempotent; verified against the real prompt."""\n    from inference.agent import prompts as P\n    from inference.agent import tool_agent as TA\n\n    if MARKER in TA.PYTHON_ADDENDUM:\n        return {"installed": "already"}\n    before = len(TA.PYTHON_ADDENDUM)\n    new = TA.PYTHON_ADDENDUM + RULE\n    TA.PYTHON_ADDENDUM = new\n    P.PYTHON_ADDENDUM = new\n    built = TA._build_system_prompt(tool_output_tokens=1024)\n    if MARKER not in built:\n        raise RuntimeError("arc3_path: rule did not reach _build_system_prompt")\n    return {"installed": True, "delta_chars": len(new) - before, "system_prompt_chars": len(built)}\n'
++Path('/kaggle/working/arc3_path.py').write_text(ARC3_PATH_SOURCE, encoding='utf-8')
++if '/kaggle/working' not in sys.path:
++    sys.path.insert(0, '/kaggle/working')
++importlib.invalidate_caches()
++import arc3_path
++arc3_path = importlib.reload(arc3_path)
++print('arc3_path:', arc3_path.install(), flush=True)
++_built5 = _ta._build_system_prompt(tool_output_tokens=1024)
++assert 'PATH BEFORE READING ORDER' in _built5, 'arc3_path did not reach the system prompt'
++assert 'SELECT THEN PLACE' in _built5 and arc3_ledger.MARKER in _built5 and 'stuck_warning' in _built5 and arc3_batch.MARKER in _built5, 'an earlier patch was lost'
++assert arc3_stall.MODE == 'warn', 'stall must stay in warn mode'
++print('ARC3_PATH_READY chars=%d' % len(_built5), flush=True)
++# arc3_map: the center picture is the grid. PROMPT-ONLY.
++# Local arcade ft09-0d8bbf25 seed 0 (2026-09-22). Not a Kaggle score.
++# Finished grids: light-gray in the center picture sits on blue, white sits on red.
++# Painting the editable grid with that key advanced the level. 5 actions, level index 1/6.
++# A same-day vc33 play cleared level 0 by the control that still moved. Not this rule.
++# MODE stays warn.
++ARC3_MAP_SOURCE = '"""arc3_map: the center picture is the grid. PROMPT-ONLY.\n\nLocal arcade, ft09-0d8bbf25, seed 0. Not a measured RHAE.\nTwo finished grids on the opening frame carry a picture in the center cell.\nLight-gray in that picture sits on blue cells, and white sits on red cells.\nThe unfinished grid\'s own picture, painted with that key, advanced the level.\nFlipping a cell and flipping it back both spend the bar.\n\nSame binding trap as arc3_batch: tool_agent binds PYTHON_ADDENDUM at import,\nso both bindings are patched and the result is asserted against\n_build_system_prompt.\n"""\nfrom __future__ import annotations\n\nMARKER = "CENTER MAP"\n\nRULE = (\n    "- CENTER MAP: a small picture in the center of a grid is a map of that grid. "\n    "Read the color key from a finished grid whose picture lines up with its cells: "\n    "each picture color corresponds to one cell color. Paint the editable grid\'s "\n    "other cells once so they match its own picture under that key. Do not paint "\n    "the center. Flipping a cell back does not refund the bar, so stop after one "\n    "pass. If the level stays, the picture was not the whole goal.\\n"\n)\n\n\ndef install() -> dict:\n    """Append the center-map rule. Idempotent; verified against the real prompt."""\n    from inference.agent import prompts as P\n    from inference.agent import tool_agent as TA\n\n    if MARKER in TA.PYTHON_ADDENDUM:\n        return {"installed": "already"}\n    before = len(TA.PYTHON_ADDENDUM)\n    new = TA.PYTHON_ADDENDUM + RULE\n    TA.PYTHON_ADDENDUM = new\n    P.PYTHON_ADDENDUM = new\n    built = TA._build_system_prompt(tool_output_tokens=1024)\n    if MARKER not in built:\n        raise RuntimeError("arc3_map: rule did not reach _build_system_prompt")\n    return {"installed": True, "delta_chars": len(new) - before, "system_prompt_chars": len(built)}\n'
++Path('/kaggle/working/arc3_map.py').write_text(ARC3_MAP_SOURCE, encoding='utf-8')
++if '/kaggle/working' not in sys.path:
++    sys.path.insert(0, '/kaggle/working')
++importlib.invalidate_caches()
++import arc3_map
++arc3_map = importlib.reload(arc3_map)
++print('arc3_map:', arc3_map.install(), flush=True)
++_built6 = _ta._build_system_prompt(tool_output_tokens=1024)
++assert 'CENTER MAP' in _built6, 'arc3_map did not reach the system prompt'
++assert 'PATH BEFORE READING ORDER' in _built6 and 'SELECT THEN PLACE' in _built6 and arc3_ledger.MARKER in _built6 and 'stuck_warning' in _built6 and arc3_batch.MARKER in _built6, 'an earlier patch was lost'
++assert arc3_stall.MODE == 'warn', 'stall must stay in warn mode'
++print('ARC3_MAP_READY chars=%d' % len(_built6), flush=True)

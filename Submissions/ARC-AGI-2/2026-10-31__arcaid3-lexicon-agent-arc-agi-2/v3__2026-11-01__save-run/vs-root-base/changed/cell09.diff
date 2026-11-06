@@ -1,0 +1,108 @@
+--- base cell 8
++++ new cell 9
+@@ -84,11 +84,31 @@
+ 
+ 
+-def repl_prompt(task, early_submit=True, in_python=False):
++# ARCAID3 lexicon cue: on ARC-AGI-3 the view was only used once the first-turn cue named it.
++LEXICON_CUE = """
++
++The `python` tool has a lexicon of this task: `print(changes(0))` shows what happens to each object in Example 1, `print(rules())` lists facts that hold on every example, `print(lexicon(g))` names a grid's objects. Read them first; they are measurements, not the rule -- the rule is yours to find."""
++
++
++def lexicon_digest(task):
++    """rules() measured by the harness itself, for the first prompt ('' if it fails)."""
++    try:
++        import numpy as np
++        import lexicon2
++        pairs = [(np.array(p["input"]), np.array(p["output"])) for p in task["train"]]
++        return lexicon2.rules(pairs, [np.array(t["input"]) for t in task["test"]])
++    except Exception:
++        return ""
++
++
++def repl_prompt(task, early_submit=True, in_python=False, lexicon_cue=False, digest=False):
+     head = REPL_INSTRUCTIONS if early_submit else REPL_INSTRUCTIONS_V1
+-    parts = [head + (IN_PYTHON_RULE if in_python else ""), ""]
++    parts = [head + (IN_PYTHON_RULE if in_python else "") + (LEXICON_CUE if lexicon_cue else ""), ""]
+     for i, p in enumerate(task["train"], 1):
+         parts += [f"## Example {i}", show(p["input"], "Input"), show(p["output"], "Output"), ""]
+     for j, t in enumerate(task["test"], 1):
+         parts += [f"## Test input {j}", show(t["input"], "Input"), ""]
++    facts = lexicon_digest(task) if digest else ""
++    if facts:
++        parts += ["## Lexicon (measured by the harness)", facts, ""]
+     return "\n".join(parts).rstrip()
+ 
+@@ -213,5 +233,5 @@
+         # ARC-AGI-3 takeaways (all zero unless their option is on)
+         self.effort_steps = self.timeouts = self.degenerate = self.kept_used = 0
+-        self.evictions = 0
++        self.evictions = self.restarts = 0
+         self.wall = 0.0
+         # Everything the model thought, ran and saw -- so a failure can be read as
+@@ -229,5 +249,6 @@
+                 force_submit_after=0, effort_ladder=None, retain_functions=False,
+                 keep_reasoning=False, reasoning_key="reasoning_content", keep_recent=6,
+-                trim_drain=0, degenerate_guard=False, timeout_as_cut=False):
++                trim_drain=0, degenerate_guard=False, timeout_as_cut=False,
++                lexicon_cue=False, digest=False, restart_at=0, max_restarts=1):
+     """One attempt at one task. The options after force_submit_after are the ARC-AGI-3
+     (dfranzen / duck harness) takeaways, each off by default so the baseline is unchanged:
+@@ -247,10 +268,21 @@
+                       Loops are COUNTED in every arm (att.degenerate).
+     timeout_as_cut    a request timeout before the deadline is treated like a cut turn
+-                      (retry, one rung lower) instead of failing the attempt."""
++                      (retry, one rung lower) instead of failing the attempt.
++
++    ARCAID3 options (habanwer's ARC-AGI-3 notebooks), also off by default:
++    lexicon_cue       the first prompt names the lexicon helpers (lexicon2.py).
++    digest            the first prompt carries rules() as measured by the harness.
++    restart_at        after this many generated tokens without a verified program the
++                      attempt starts again from a fresh context (restart.patch: 4/10 stuck
++                      levels completed after a restart vs 19.6% control); programs already
++                      submitted stay candidates. At most `max_restarts` times."""
+     t0 = time.time()
+     # The early-submit wording and the nudge are ONE treatment: off means probe24's harness.
+-    messages = [{"role": "system", "content": SYSTEM},
+-                {"role": "user", "content": repl_prompt(task, early_submit=bool(nudge_every),
+-                                                        in_python=in_python)}]
++    first = [{"role": "system", "content": SYSTEM},
++             {"role": "user", "content": repl_prompt(task, early_submit=bool(nudge_every),
++                                                     in_python=in_python, lexicon_cue=lexicon_cue,
++                                                     digest=digest)}]
++    messages = list(first)
++    since_restart = 0
+     tools = make_tools(retain_functions)
+     store = new_store() if retain_functions else None
+@@ -275,4 +307,15 @@
+             att.status, att.note = "failed", "token budget"
+             break
++        if (restart_at and att.restarts < max_restarts and att.gen_tokens - since_restart >= restart_at
++                and max_gen_tokens - att.gen_tokens >= restart_at // 2):
++            # Stuck: start again from the task prompt, as restart.patch did on ARC-AGI-3.
++            att.restarts += 1
++            since_restart = att.gen_tokens
++            messages = list(first)
++            store = new_store() if retain_functions else None
++            trim_state = {} if trim_drain else None
++            rung, best_ok = -1, -1
++            att.python_at_submit = att.python_calls
++            att.transcript.append({"turn": att.turns, "restart": att.restarts, "tokens": att.gen_tokens})
+         att.turns += 1
+         # A request may not outlive the deadline by more than a minute.
+@@ -410,5 +453,6 @@
+ AGENT_OPTS = ("turn_max_tokens", "in_python", "force_submit_after", "effort_ladder",
+               "retain_functions", "keep_reasoning", "reasoning_key", "keep_recent", "trim_drain",
+-              "degenerate_guard", "timeout_as_cut", "snippet_timeout")
++              "degenerate_guard", "timeout_as_cut", "snippet_timeout",
++              "lexicon_cue", "digest", "restart_at", "max_restarts")
+ 
+ 
+@@ -419,5 +463,5 @@
+             "prompt_tokens": a.prompt_tokens, "wall": a.wall,
+             "effort_steps": a.effort_steps, "timeouts": a.timeouts, "degenerate": a.degenerate,
+-            "kept_used": a.kept_used, "evictions": a.evictions,
++            "kept_used": a.kept_used, "evictions": a.evictions, "restarts": a.restarts,
+             "best_ok": max((p["n_ok"] for p in a.programs), default=-1),
+             "n_train": len(task["train"]),

@@ -1,0 +1,871 @@
+      5.0 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+      5.0 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+      5.0 err | 0.00s - to python to disable frozen modules.
+      5.0 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+      5.3 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+      5.3 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+      5.3 err | 0.00s - to python to disable frozen modules.
+      5.3 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+      6.1 out | PUBLIC25_VLLM_PROFILE name=kv5-bf16-mtp3-c8-cg32 env={"TAAF_VLLM_ENABLE_PREFIX_CACHING": "0", "TAAF_VLLM_KV_CACHE_DTYPE": "auto", "TAAF_VLLM_KV_CACHE_MEMORY_BYTES": "5368709120", "TAAF_VLLM_MAX_CUDAGRAPH_CAPTURE_SIZE": "32", "TAAF_VLLM_MAX_NUM_BATCHED_TOKENS": "8192", "TAAF_VLLM_MAX_NUM_SEQS": "8", "TAAF_VLLM_MTP_TOKENS": "3", "TAAF_VLLM_OMP_THREADS": "1"}
+      6.1 out | taaf.kaggle: TRUE_SUBMISSION=False
+      8.3 out | taaf.kaggle: source bundle = /kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1
+      8.3 out | taaf.kaggle: input paths = {"keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1": "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1", "keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1": "/kaggle/input/datasets/keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1"}
+      8.3 out | taaf.kaggle: wrote /usr/local/lib/python3.12/dist-packages/taaf_kaggle_sources.pth (5 source roots)
+      8.3 out | taaf.kaggle: setup command: "$PYTHON" "$TAAF_KAGGLE_BUNDLE_DIR/serving_setup.py"
+      8.4 out | VLLM_SETUP_MODE fast TAAF_KAGGLE_FAST_START=1
+      8.4 out | PINNED_VLLM_RUNTIME_PATH /kaggle/input/datasets/keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1
+      8.4 out | PINNED_MODEL_PATH /kaggle/input/models/keithtyser/qwen3-8-flash-next-nvfp4/pytorch/radixark-modelopt-fp4/1
+      8.4 out | RUNTIME_LAYER_FAST_CHECK index=8 bytes=1374796713 manifest_sha256=f4f325a97c3e4739640b0e472a818bb299e7ce8e585bdbfe5586e9d3b5a2c475
+      8.5 out | VLLM_SETUP_MODE fast TAAF_KAGGLE_FAST_START=1
+      8.5 out | PINNED_VLLM_RUNTIME_PATH /kaggle/input/datasets/keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1
+      8.5 out | PINNED_MODEL_PATH /kaggle/input/models/keithtyser/qwen3-8-flash-next-nvfp4/pytorch/radixark-modelopt-fp4/1
+      8.5 out | RUNTIME_LAYER_FAST_CHECK index=8 bytes=1374796713 manifest_sha256=f4f325a97c3e4739640b0e472a818bb299e7ce8e585bdbfe5586e9d3b5a2c475
+     24.4 out | RUNTIME_LAYER_FAST_CHECK index=17 bytes=4634843373 manifest_sha256=a5881cf32fc46f24318a6fc7015ccae863706075d4434d186b8b1b4e5bafb36e
+     24.6 out | RUNTIME_LAYER_FAST_CHECK index=17 bytes=4634843373 manifest_sha256=a5881cf32fc46f24318a6fc7015ccae863706075d4434d186b8b1b4e5bafb36e
+     91.2 out | RUNTIME_LAYER_FAST_CHECK index=18 bytes=1511319261 manifest_sha256=692ea0d28a87e9cea6db254c830f650f29804522045c9201f8ea63f30471b33b
+     91.4 out | RUNTIME_LAYER_FAST_CHECK index=18 bytes=1511319261 manifest_sha256=692ea0d28a87e9cea6db254c830f650f29804522045c9201f8ea63f30471b33b
+    107.0 out | RUNTIME_LAYER_FAST_CHECK index=21 bytes=61571140 manifest_sha256=651e9c6638c77d15bf671d9264badcba80ea551f84109de486427b87d2ddbf75
+    107.2 out | RUNTIME_LAYER_FAST_CHECK index=21 bytes=61571140 manifest_sha256=651e9c6638c77d15bf671d9264badcba80ea551f84109de486427b87d2ddbf75
+    107.9 out | RUNTIME_LAYER_FAST_CHECK index=24 bytes=309686893 manifest_sha256=10dce885652a53a2e644a75d256b90830663330988b8599c3c0e56cd6c8a4675
+    108.1 out | RUNTIME_LAYER_FAST_CHECK index=24 bytes=309686893 manifest_sha256=10dce885652a53a2e644a75d256b90830663330988b8599c3c0e56cd6c8a4675
+    112.3 out | RUNTIME_LAYER_FAST_CHECK index=27 bytes=14479724 manifest_sha256=49a63ac9d116f92e5a8b006ae5665b940fcbc3d22d53aa7c01a3753ef341c53e
+    112.5 out | RUNTIME_LAYER_FAST_CHECK index=27 bytes=14479724 manifest_sha256=49a63ac9d116f92e5a8b006ae5665b940fcbc3d22d53aa7c01a3753ef341c53e
+    112.7 out | MODEL_IDENTITY_ONLY files=419 bytes=135253622894 payload_check=vllm_load
+    112.7 out | VLLM_START_COMMAND ["/usr/bin/python3", "-m", "vllm.entrypoints.cli.main", "serve", "/kaggle/input/models/keithtyser/qwen3-8-flash-next-nvfp4/pytorch/radixark-modelopt-fp4/1", "--served-model-name", "Qwen/Qwen3.8-Flash-Next-NVFP4", "--host", "127.0.0.1", "--port", "1234", "--load-format", "safetensors", "--dtype", "bfloat16", "--quantization", "modelopt_fp4", "--tensor-parallel-size", "1", "--distributed-executor-backend", "mp", "--kv-cache-memory-bytes", "5368709120", "--max-model-len", "32768", "--max-num-seqs", "8", "--max-num-batched-tokens", "8192", "--async-scheduling", "--enable-chunked-prefill", "--max-cudagraph-capture-size", "32", "--no-enable-prefix-caching", "--enable-auto-tool-choice", "--tool-call-parser", "qwen3_coder", "--reasoning-parser", "qwen3", "--chat-template", "/kaggle/input/models/keithtyser/qwen3-8-flash-next-nvfp4/pytorch/radixark-modelopt-fp4/1/chat_template.jinja", "--speculative-config", "{\"method\":\"mtp\",\"num_speculative_tokens\":3}", "--no-enable-log-requests", "--disable-uvicorn-access-log", "--uvicorn-log-level", "info"]
+    112.7 out | VLLM_WAIT elapsed_s=0
+    112.7 out | 
+    112.9 out | MODEL_IDENTITY_ONLY files=419 bytes=135253622894 payload_check=vllm_load
+    112.9 out | VLLM_START_COMMAND ["/usr/bin/python3", "-m", "vllm.entrypoints.cli.main", "serve", "/kaggle/input/models/keithtyser/qwen3-8-flash-next-nvfp4/pytorch/radixark-modelopt-fp4/1", "--served-model-name", "Qwen/Qwen3.8-Flash-Next-NVFP4", "--host", "127.0.0.1", "--port", "1234", "--load-format", "safetensors", "--dtype", "bfloat16", "--quantization", "modelopt_fp4", "--tensor-parallel-size", "1", "--distributed-executor-backend", "mp", "--kv-cache-memory-bytes", "5368709120", "--max-model-len", "32768", "--max-num-seqs", "8", "--max-num-batched-tokens", "8192", "--async-scheduling", "--enable-chunked-prefill", "--max-cudagraph-capture-size", "32", "--no-enable-prefix-caching", "--enable-auto-tool-choice", "--tool-call-parser", "qwen3_coder", "--reasoning-parser", "qwen3", "--chat-template", "/kaggle/input/models/keithtyser/qwen3-8-flash-next-nvfp4/pytorch/radixark-modelopt-fp4/1/chat_template.jinja", "--speculative-config", "{\"method\":\"mtp\",\"num_speculative_tokens\":3}", "--no-enable-log-requests", "--disable-uvicorn-access-log", "--uvicorn-log-level", "info"]
+    112.9 out | VLLM_WAIT elapsed_s=0
+    112.9 out | 
+    172.7 out | VLLM_WAIT elapsed_s=60
+    172.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.7 out | (APIServer pid=151) INFO 09-23 11:48:08 [model.py:672] Resolved architecture: Qwen4ExpForConditionalGeneration
+    172.7 out | (APIServer pid=151) INFO 09-23 11:48:08 [model.py:1965] Using max model len 32768
+    172.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.7 out | (APIServer pid=151) [ERROR] `min_frames` is part of Qwen3VLVideoProcessorInitKwargs, but not documented. Make sure to add it to the docstring of the function in /tmp/qwen38-flash-next-vllm-runtime/usr/local/lib/python3.12/dist-packages/transformers/models/qwen3_vl/video_processing_qwen3_vl.py.
+    172.7 out | (APIServer pid=151) [ERROR] `max_frames` is part of Qwen3VLVideoProcessorInitKwargs, but not documented. Make sure to add it to the docstring of the function in /tmp/qwen38-flash-next-vllm-runtime/usr/local/lib/python3.12/dist-packages/transformers/models/qwen3_vl/video_processing_qwen3_vl.py.
+    172.7 out | (APIServer pid=151) INFO 09-23 11:48:23 [model.py:672] Resolved architecture: Qwen3_8FlashNextMTP
+    172.7 out | (APIServer pid=151) INFO 09-23 11:48:23 [model.py:1965] Using max model len 262144
+    172.7 out | (APIServer pid=151) WARNING 09-23 11:48:23 [speculative.py:1010] Enabling num_speculative_tokens > 1 will run multiple times of forward on same MTP layer,which may result in lower acceptance rate
+    172.7 out | (APIServer pid=151) INFO 09-23 11:48:23 [speculative.py:1268] Overriding draft model max model len from 262144 to 32768
+    172.7 out | (APIServer pid=151) INFO 09-23 11:48:23 [scheduler.py:246] Chunked prefill is enabled with max_num_batched_tokens=8192.
+    172.7 out | (APIServer pid=151) WARNING 09-23 11:48:23 [modelopt.py:1011] Detected ModelOpt NVFP4 checkpoint (quant_algo=NVFP4). Please note that the format is experimental and could change in future.
+    172.7 out | (APIServer pid=151) INFO 09-23 11:48:23 [kernel.py:308] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'])
+    172.7 out | (APIServer pid=151) INFO 09-23 11:48:24 [compilation.py:329] Enabled custom fusions: act_quant
+    172.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.7 out | (APIServer pid=151) [transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+    172.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.9 out | VLLM_WAIT elapsed_s=60
+    172.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.9 out | (APIServer pid=151) INFO 09-23 11:48:08 [model.py:672] Resolved architecture: Qwen4ExpForConditionalGeneration
+    172.9 out | (APIServer pid=151) INFO 09-23 11:48:08 [model.py:1965] Using max model len 32768
+    172.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.9 out | (APIServer pid=151) [ERROR] `min_frames` is part of Qwen3VLVideoProcessorInitKwargs, but not documented. Make sure to add it to the docstring of the function in /tmp/qwen38-flash-next-vllm-runtime/usr/local/lib/python3.12/dist-packages/transformers/models/qwen3_vl/video_processing_qwen3_vl.py.
+    172.9 out | (APIServer pid=151) [ERROR] `max_frames` is part of Qwen3VLVideoProcessorInitKwargs, but not documented. Make sure to add it to the docstring of the function in /tmp/qwen38-flash-next-vllm-runtime/usr/local/lib/python3.12/dist-packages/transformers/models/qwen3_vl/video_processing_qwen3_vl.py.
+    172.9 out | (APIServer pid=151) INFO 09-23 11:48:23 [model.py:672] Resolved architecture: Qwen3_8FlashNextMTP
+    172.9 out | (APIServer pid=151) INFO 09-23 11:48:23 [model.py:1965] Using max model len 262144
+    172.9 out | (APIServer pid=151) WARNING 09-23 11:48:23 [speculative.py:1010] Enabling num_speculative_tokens > 1 will run multiple times of forward on same MTP layer,which may result in lower acceptance rate
+    172.9 out | (APIServer pid=151) INFO 09-23 11:48:23 [speculative.py:1268] Overriding draft model max model len from 262144 to 32768
+    172.9 out | (APIServer pid=151) INFO 09-23 11:48:23 [scheduler.py:246] Chunked prefill is enabled with max_num_batched_tokens=8192.
+    172.9 out | (APIServer pid=151) WARNING 09-23 11:48:23 [modelopt.py:1011] Detected ModelOpt NVFP4 checkpoint (quant_algo=NVFP4). Please note that the format is experimental and could change in future.
+    172.9 out | (APIServer pid=151) INFO 09-23 11:48:23 [kernel.py:308] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'])
+    172.9 out | (APIServer pid=151) INFO 09-23 11:48:24 [compilation.py:329] Enabled custom fusions: act_quant
+    172.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.9 out | (APIServer pid=151) [transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+    172.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    172.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    232.7 out | VLLM_WAIT elapsed_s=120
+    232.7 out | (PleOffloadWorker pid=301) 
+    232.7 out | Loading safetensors checkpoint shards(PLE-offload):  32% Completed | 65/206 [00:14<01:49,  1.29it/s]
+    232.7 out | (PleOffloadWorker pid=301) 
+    232.7 out | Loading safetensors checkpoint shards(PLE-offload):  34% Completed | 71/206 [00:14<00:38,  3.50it/s]
+    232.7 out | (Worker pid=238) 
+    232.7 out | Loading safetensors checkpoint shards:  32% Completed | 65/206 [00:26<01:52,  1.25it/s]
+    232.7 out | (Worker pid=238) 
+    232.7 out | Loading safetensors checkpoint shards:  32% Completed | 66/206 [00:26<01:28,  1.57it/s]
+    232.7 out | (Worker pid=238) 
+    232.7 out | Loading safetensors checkpoint shards:  33% Completed | 67/206 [00:27<01:12,  1.92it/s]
+    232.7 out | (Worker pid=238) 
+    232.7 out | Loading safetensors checkpoint shards:  33% Completed | 68/206 [00:27<01:00,  2.27it/s]
+    232.7 out | (Worker pid=238) 
+    232.7 out | Loading safetensors checkpoint shards:  33% Completed | 69/206 [00:27<00:52,  2.61it/s]
+    232.7 out | (Worker pid=238) 
+    232.7 out | Loading safetensors checkpoint shards:  34% Completed | 70/206 [00:27<00:46,  2.92it/s]
+    232.7 out | (Worker pid=238) 
+    232.7 out | Loading safetensors checkpoint shards:  34% Completed | 71/206 [00:28<00:42,  3.17it/s]
+    232.7 out | (PleOffloadWorker pid=301) 
+    232.7 out | Loading safetensors checkpoint shards(PLE-offload):  35% Completed | 73/206 [00:15<00:55,  2.41it/s]
+    232.7 out | (Worker pid=238) 
+    232.7 out | Loading safetensors checkpoint shards:  35% Completed | 72/206 [00:28<00:39,  3.37it/s]
+    232.7 out | (PleOffloadWorker pid=301) 
+    232.7 out | Loading safetensors checkpoint shards(PLE-offload):  36% Completed | 75/206 [00:16<00:45,  2.88it/s]
+    232.7 out | (Worker pid=238) 
+    232.7 out | Loading safetensors checkpoint shards:  35% Completed | 73/206 [00:28<00:37,  3.52it/s]
+    232.7 out | (Worker pid=238) 
+    232.7 out | Loading safetensors checkpoint shards:  36% Completed | 74/206 [00:28<00:36,  3.63it/s]
+    232.7 out | (PleOffloadWorker pid=301) 
+    232.7 out | Loading safetensors checkpoint shards(PLE-offload):  37% Completed | 77/206 [00:16<00:39,  3.30it/s]
+    232.9 out | VLLM_WAIT elapsed_s=120
+    232.9 out | (PleOffloadWorker pid=301) 
+    232.9 out | Loading safetensors checkpoint shards(PLE-offload):  32% Completed | 65/206 [00:14<01:49,  1.29it/s]
+    232.9 out | (PleOffloadWorker pid=301) 
+    232.9 out | Loading safetensors checkpoint shards(PLE-offload):  34% Completed | 71/206 [00:14<00:38,  3.50it/s]
+    232.9 out | (Worker pid=238) 
+    232.9 out | Loading safetensors checkpoint shards:  32% Completed | 65/206 [00:26<01:52,  1.25it/s]
+    232.9 out | (Worker pid=238) 
+    232.9 out | Loading safetensors checkpoint shards:  32% Completed | 66/206 [00:26<01:28,  1.57it/s]
+    232.9 out | (Worker pid=238) 
+    232.9 out | Loading safetensors checkpoint shards:  33% Completed | 67/206 [00:27<01:12,  1.92it/s]
+    232.9 out | (Worker pid=238) 
+    232.9 out | Loading safetensors checkpoint shards:  33% Completed | 68/206 [00:27<01:00,  2.27it/s]
+    232.9 out | (Worker pid=238) 
+    232.9 out | Loading safetensors checkpoint shards:  33% Completed | 69/206 [00:27<00:52,  2.61it/s]
+    232.9 out | (Worker pid=238) 
+    232.9 out | Loading safetensors checkpoint shards:  34% Completed | 70/206 [00:27<00:46,  2.92it/s]
+    232.9 out | (Worker pid=238) 
+    232.9 out | Loading safetensors checkpoint shards:  34% Completed | 71/206 [00:28<00:42,  3.17it/s]
+    232.9 out | (PleOffloadWorker pid=301) 
+    232.9 out | Loading safetensors checkpoint shards(PLE-offload):  35% Completed | 73/206 [00:15<00:55,  2.41it/s]
+    232.9 out | (Worker pid=238) 
+    232.9 out | Loading safetensors checkpoint shards:  35% Completed | 72/206 [00:28<00:39,  3.37it/s]
+    232.9 out | (PleOffloadWorker pid=301) 
+    232.9 out | Loading safetensors checkpoint shards(PLE-offload):  36% Completed | 75/206 [00:16<00:45,  2.88it/s]
+    232.9 out | (Worker pid=238) 
+    232.9 out | Loading safetensors checkpoint shards:  35% Completed | 73/206 [00:28<00:37,  3.52it/s]
+    232.9 out | (Worker pid=238) 
+    232.9 out | Loading safetensors checkpoint shards:  36% Completed | 74/206 [00:28<00:36,  3.63it/s]
+    232.9 out | (PleOffloadWorker pid=301) 
+    232.9 out | Loading safetensors checkpoint shards(PLE-offload):  37% Completed | 77/206 [00:16<00:39,  3.30it/s]
+    292.7 out | VLLM_WAIT elapsed_s=180
+    292.7 out | (PleOffloadWorker pid=301) 
+    292.7 out | Loading safetensors checkpoint shards(PLE-offload):  91% Completed | 187/206 [00:57<00:05,  3.35it/s]
+    292.7 out | (Worker pid=238) 
+    292.7 out | Loading safetensors checkpoint shards:  91% Completed | 187/206 [01:10<00:05,  3.25it/s]
+    292.7 out | (Worker pid=238) 
+    292.7 out | Loading safetensors checkpoint shards:  91% Completed | 188/206 [01:10<00:05,  3.40it/s]
+    292.7 out | (PleOffloadWorker pid=301) 
+    292.7 out | Loading safetensors checkpoint shards(PLE-offload):  92% Completed | 189/206 [00:58<00:06,  2.72it/s]
+    292.7 out | (Worker pid=238) 
+    292.7 out | Loading safetensors checkpoint shards:  92% Completed | 189/206 [01:10<00:05,  2.87it/s]
+    292.7 out | (PleOffloadWorker pid=301) 
+    292.7 out | Loading safetensors checkpoint shards(PLE-offload):  92% Completed | 190/206 [00:58<00:06,  2.53it/s]
+    292.7 out | (Worker pid=238) 
+    292.7 out | Loading safetensors checkpoint shards:  92% Completed | 190/206 [01:11<00:06,  2.58it/s]
+    292.7 out | (PleOffloadWorker pid=301) 
+    292.7 out | Loading safetensors checkpoint shards(PLE-offload):  93% Completed | 191/206 [00:59<00:06,  2.39it/s]
+    292.7 out | (Worker pid=238) 
+    292.7 out | Loading safetensors checkpoint shards:  93% Completed | 191/206 [01:11<00:06,  2.38it/s]
+    292.7 out | (PleOffloadWorker pid=301) 
+    292.7 out | Loading safetensors checkpoint shards(PLE-offload):  93% Completed | 192/206 [00:59<00:05,  2.65it/s]
+    292.7 out | (Worker pid=238) 
+    292.7 out | Loading safetensors checkpoint shards:  93% Completed | 192/206 [01:12<00:05,  2.69it/s]
+    292.7 out | (PleOffloadWorker pid=301) 
+    292.7 out | Loading safetensors checkpoint shards(PLE-offload):  94% Completed | 193/206 [01:00<00:06,  2.11it/s]
+    292.7 out | (PleOffloadWorker pid=301) 
+    292.7 out | Loading safetensors checkpoint shards(PLE-offload):  95% Completed | 195/206 [01:04<00:11,  1.07s/it]
+    292.7 out | (PleOffloadWorker pid=301) 
+    292.7 out | Loading safetensors checkpoint shards(PLE-offload):  95% Completed | 196/206 [01:04<00:09,  1.01it/s]
+    292.7 out | (Worker pid=238) 
+    292.7 out | Loading safetensors checkpoint shards:  94% Completed | 193/206 [01:21<00:38,  2.96s/it]
+    292.9 out | VLLM_WAIT elapsed_s=180
+    292.9 out | (PleOffloadWorker pid=301) 
+    292.9 out | Loading safetensors checkpoint shards(PLE-offload):  91% Completed | 187/206 [00:57<00:05,  3.35it/s]
+    292.9 out | (Worker pid=238) 
+    292.9 out | Loading safetensors checkpoint shards:  91% Completed | 187/206 [01:10<00:05,  3.25it/s]
+    292.9 out | (Worker pid=238) 
+    292.9 out | Loading safetensors checkpoint shards:  91% Completed | 188/206 [01:10<00:05,  3.40it/s]
+    292.9 out | (PleOffloadWorker pid=301) 
+    292.9 out | Loading safetensors checkpoint shards(PLE-offload):  92% Completed | 189/206 [00:58<00:06,  2.72it/s]
+    292.9 out | (Worker pid=238) 
+    292.9 out | Loading safetensors checkpoint shards:  92% Completed | 189/206 [01:10<00:05,  2.87it/s]
+    292.9 out | (PleOffloadWorker pid=301) 
+    292.9 out | Loading safetensors checkpoint shards(PLE-offload):  92% Completed | 190/206 [00:58<00:06,  2.53it/s]
+    292.9 out | (Worker pid=238) 
+    292.9 out | Loading safetensors checkpoint shards:  92% Completed | 190/206 [01:11<00:06,  2.58it/s]
+    292.9 out | (PleOffloadWorker pid=301) 
+    292.9 out | Loading safetensors checkpoint shards(PLE-offload):  93% Completed | 191/206 [00:59<00:06,  2.39it/s]
+    292.9 out | (Worker pid=238) 
+    292.9 out | Loading safetensors checkpoint shards:  93% Completed | 191/206 [01:11<00:06,  2.38it/s]
+    292.9 out | (PleOffloadWorker pid=301) 
+    292.9 out | Loading safetensors checkpoint shards(PLE-offload):  93% Completed | 192/206 [00:59<00:05,  2.65it/s]
+    292.9 out | (Worker pid=238) 
+    292.9 out | Loading safetensors checkpoint shards:  93% Completed | 192/206 [01:12<00:05,  2.69it/s]
+    292.9 out | (PleOffloadWorker pid=301) 
+    292.9 out | Loading safetensors checkpoint shards(PLE-offload):  94% Completed | 193/206 [01:00<00:06,  2.11it/s]
+    292.9 out | (PleOffloadWorker pid=301) 
+    292.9 out | Loading safetensors checkpoint shards(PLE-offload):  95% Completed | 195/206 [01:04<00:11,  1.07s/it]
+    292.9 out | (PleOffloadWorker pid=301) 
+    292.9 out | Loading safetensors checkpoint shards(PLE-offload):  95% Completed | 196/206 [01:04<00:09,  1.01it/s]
+    292.9 out | (Worker pid=238) 
+    292.9 out | Loading safetensors checkpoint shards:  94% Completed | 193/206 [01:21<00:38,  2.96s/it]
+    352.8 out | VLLM_WAIT elapsed_s=240
+    352.8 out | (PleOffloadWorker pid=301) 
+    352.8 out | Loading safetensors checkpoint shards(PLE-offload):  93% Completed | 192/206 [00:59<00:05,  2.65it/s]
+    352.8 out | (Worker pid=238) 
+    352.8 out | Loading safetensors checkpoint shards:  93% Completed | 192/206 [01:12<00:05,  2.69it/s]
+    352.8 out | (PleOffloadWorker pid=301) 
+    352.8 out | Loading safetensors checkpoint shards(PLE-offload):  94% Completed | 193/206 [01:00<00:06,  2.11it/s]
+    352.8 out | (PleOffloadWorker pid=301) 
+    352.8 out | Loading safetensors checkpoint shards(PLE-offload):  95% Completed | 195/206 [01:04<00:11,  1.07s/it]
+    352.8 out | (PleOffloadWorker pid=301) 
+    352.8 out | Loading safetensors checkpoint shards(PLE-offload):  95% Completed | 196/206 [01:04<00:09,  1.01it/s]
+    352.8 out | (Worker pid=238) 
+    352.8 out | Loading safetensors checkpoint shards:  94% Completed | 193/206 [01:21<00:38,  2.96s/it]
+    352.8 out | (PleOffloadWorker pid=301) 
+    352.8 out | Loading safetensors checkpoint shards(PLE-offload):  96% Completed | 197/206 [01:37<01:20,  8.90s/it]
+    352.8 out | (PleOffloadWorker pid=301) 
+    352.8 out | Loading safetensors checkpoint shards(PLE-offload):  96% Completed | 198/206 [01:38<00:54,  6.83s/it]
+    352.8 out | (PleOffloadWorker pid=301) 
+    352.8 out | Loading safetensors checkpoint shards(PLE-offload):  97% Completed | 199/206 [01:39<00:37,  5.29s/it]
+    352.8 out | (PleOffloadWorker pid=301) 
+    352.8 out | Loading safetensors checkpoint shards(PLE-offload):  97% Completed | 200/206 [01:40<00:24,  4.11s/it]
+    352.8 out | (PleOffloadWorker pid=301) 
+    352.8 out | Loading safetensors checkpoint shards(PLE-offload):  98% Completed | 201/206 [01:41<00:16,  3.27s/it]
+    352.8 out | (PleOffloadWorker pid=301) 
+    352.8 out | Loading safetensors checkpoint shards(PLE-offload):  98% Completed | 202/206 [01:46<00:14,  3.61s/it]
+    352.8 out | (PleOffloadWorker pid=301) 
+    352.8 out | Loading safetensors checkpoint shards(PLE-offload):  99% Completed | 203/206 [01:59<00:19,  6.34s/it]
+    352.8 out | (Worker pid=238) 
+    352.8 out | Loading safetensors checkpoint shards:  95% Completed | 195/206 [02:16<02:36, 14.25s/it]
+    352.8 out | (PleOffloadWorker pid=301) 
+    352.8 out | Loading safetensors checkpoint shards(PLE-offload):  99% Completed | 204/206 [02:08<00:14,  7.11s/it]
+    353.0 out | VLLM_WAIT elapsed_s=240
+    353.0 out | (PleOffloadWorker pid=301) 
+    353.0 out | Loading safetensors checkpoint shards(PLE-offload):  93% Completed | 192/206 [00:59<00:05,  2.65it/s]
+    353.0 out | (Worker pid=238) 
+    353.0 out | Loading safetensors checkpoint shards:  93% Completed | 192/206 [01:12<00:05,  2.69it/s]
+    353.0 out | (PleOffloadWorker pid=301) 
+    353.0 out | Loading safetensors checkpoint shards(PLE-offload):  94% Completed | 193/206 [01:00<00:06,  2.11it/s]
+    353.0 out | (PleOffloadWorker pid=301) 
+    353.0 out | Loading safetensors checkpoint shards(PLE-offload):  95% Completed | 195/206 [01:04<00:11,  1.07s/it]
+    353.0 out | (PleOffloadWorker pid=301) 
+    353.0 out | Loading safetensors checkpoint shards(PLE-offload):  95% Completed | 196/206 [01:04<00:09,  1.01it/s]
+    353.0 out | (Worker pid=238) 
+    353.0 out | Loading safetensors checkpoint shards:  94% Completed | 193/206 [01:21<00:38,  2.96s/it]
+    353.0 out | (PleOffloadWorker pid=301) 
+    353.0 out | Loading safetensors checkpoint shards(PLE-offload):  96% Completed | 197/206 [01:37<01:20,  8.90s/it]
+    353.0 out | (PleOffloadWorker pid=301) 
+    353.0 out | Loading safetensors checkpoint shards(PLE-offload):  96% Completed | 198/206 [01:38<00:54,  6.83s/it]
+    353.0 out | (PleOffloadWorker pid=301) 
+    353.0 out | Loading safetensors checkpoint shards(PLE-offload):  97% Completed | 199/206 [01:39<00:37,  5.29s/it]
+    353.0 out | (PleOffloadWorker pid=301) 
+    353.0 out | Loading safetensors checkpoint shards(PLE-offload):  97% Completed | 200/206 [01:40<00:24,  4.11s/it]
+    353.0 out | (PleOffloadWorker pid=301) 
+    353.0 out | Loading safetensors checkpoint shards(PLE-offload):  98% Completed | 201/206 [01:41<00:16,  3.27s/it]
+    353.0 out | (PleOffloadWorker pid=301) 
+    353.0 out | Loading safetensors checkpoint shards(PLE-offload):  98% Completed | 202/206 [01:46<00:14,  3.61s/it]
+    353.0 out | (PleOffloadWorker pid=301) 
+    353.0 out | Loading safetensors checkpoint shards(PLE-offload):  99% Completed | 203/206 [01:59<00:19,  6.34s/it]
+    353.0 out | (Worker pid=238) 
+    353.0 out | Loading safetensors checkpoint shards:  95% Completed | 195/206 [02:16<02:36, 14.25s/it]
+    353.0 out | (PleOffloadWorker pid=301) 
+    353.0 out | Loading safetensors checkpoint shards(PLE-offload):  99% Completed | 204/206 [02:08<00:14,  7.11s/it]
+    412.8 out | VLLM_WAIT elapsed_s=300
+    412.8 out | (Worker pid=238) 
+    412.8 out | Loading safetensors checkpoint shards:  44% Completed | 91/206 [00:04<00:01, 66.11it/s]
+    412.8 out | (Worker pid=238) 
+    412.8 out | Loading safetensors checkpoint shards:  48% Completed | 99/206 [00:04<00:01, 68.94it/s]
+    412.8 out | (Worker pid=238) 
+    412.8 out | Loading safetensors checkpoint shards:  52% Completed | 107/206 [00:04<00:01, 70.94it/s]
+    412.8 out | (Worker pid=238) 
+    412.8 out | Loading safetensors checkpoint shards:  56% Completed | 115/206 [00:05<00:01, 72.49it/s]
+    412.8 out | (Worker pid=238) 
+    412.8 out | Loading safetensors checkpoint shards:  60% Completed | 123/206 [00:05<00:01, 73.64it/s]
+    412.8 out | (Worker pid=238) 
+    412.8 out | Loading safetensors checkpoint shards:  64% Completed | 131/206 [00:05<00:01, 74.34it/s]
+    412.8 out | (Worker pid=238) 
+    412.8 out | Loading safetensors checkpoint shards:  67% Completed | 139/206 [00:05<00:00, 75.31it/s]
+    412.8 out | (Worker pid=238) 
+    412.8 out | Loading safetensors checkpoint shards:  71% Completed | 147/206 [00:05<00:00, 75.61it/s]
+    412.8 out | (Worker pid=238) 
+    412.8 out | Loading safetensors checkpoint shards:  75% Completed | 155/206 [00:05<00:00, 75.75it/s]
+    412.8 out | (Worker pid=238) 
+    412.8 out | Loading safetensors checkpoint shards:  79% Completed | 163/206 [00:05<00:00, 76.12it/s]
+    412.8 out | (Worker pid=238) 
+    412.8 out | Loading safetensors checkpoint shards:  83% Completed | 171/206 [00:05<00:00, 76.18it/s]
+    412.8 out | (Worker pid=238) 
+    412.8 out | Loading safetensors checkpoint shards:  87% Completed | 179/206 [00:05<00:00, 76.02it/s]
+    412.8 out | (Worker pid=238) 
+    412.8 out | Loading safetensors checkpoint shards:  91% Completed | 187/206 [00:06<00:00, 76.18it/s]
+    412.8 out | (PleOffloadWorker pid=301) 
+    412.8 out | Loading safetensors checkpoint shards(PLE-offload): 100% Completed | 205/206 [02:51<00:17, 17.76s/it]
+    412.8 out | (Worker pid=238) 
+    412.8 out | Loading safetensors checkpoint shards:  91% Completed | 187/206 [00:18<00:00, 76.18it/s]
+    413.0 out | VLLM_WAIT elapsed_s=300
+    413.0 out | (Worker pid=238) 
+    413.0 out | Loading safetensors checkpoint shards:  44% Completed | 91/206 [00:04<00:01, 66.11it/s]
+    413.0 out | (Worker pid=238) 
+    413.0 out | Loading safetensors checkpoint shards:  48% Completed | 99/206 [00:04<00:01, 68.94it/s]
+    413.0 out | (Worker pid=238) 
+    413.0 out | Loading safetensors checkpoint shards:  52% Completed | 107/206 [00:04<00:01, 70.94it/s]
+    413.0 out | (Worker pid=238) 
+    413.0 out | Loading safetensors checkpoint shards:  56% Completed | 115/206 [00:05<00:01, 72.49it/s]
+    413.0 out | (Worker pid=238) 
+    413.0 out | Loading safetensors checkpoint shards:  60% Completed | 123/206 [00:05<00:01, 73.64it/s]
+    413.0 out | (Worker pid=238) 
+    413.0 out | Loading safetensors checkpoint shards:  64% Completed | 131/206 [00:05<00:01, 74.34it/s]
+    413.0 out | (Worker pid=238) 
+    413.0 out | Loading safetensors checkpoint shards:  67% Completed | 139/206 [00:05<00:00, 75.31it/s]
+    413.0 out | (Worker pid=238) 
+    413.0 out | Loading safetensors checkpoint shards:  71% Completed | 147/206 [00:05<00:00, 75.61it/s]
+    413.0 out | (Worker pid=238) 
+    413.0 out | Loading safetensors checkpoint shards:  75% Completed | 155/206 [00:05<00:00, 75.75it/s]
+    413.0 out | (Worker pid=238) 
+    413.0 out | Loading safetensors checkpoint shards:  79% Completed | 163/206 [00:05<00:00, 76.12it/s]
+    413.0 out | (Worker pid=238) 
+    413.0 out | Loading safetensors checkpoint shards:  83% Completed | 171/206 [00:05<00:00, 76.18it/s]
+    413.0 out | (Worker pid=238) 
+    413.0 out | Loading safetensors checkpoint shards:  87% Completed | 179/206 [00:05<00:00, 76.02it/s]
+    413.0 out | (Worker pid=238) 
+    413.0 out | Loading safetensors checkpoint shards:  91% Completed | 187/206 [00:06<00:00, 76.18it/s]
+    413.0 out | (PleOffloadWorker pid=301) 
+    413.0 out | Loading safetensors checkpoint shards(PLE-offload): 100% Completed | 205/206 [02:51<00:17, 17.76s/it]
+    413.0 out | (Worker pid=238) 
+    413.0 out | Loading safetensors checkpoint shards:  91% Completed | 187/206 [00:18<00:00, 76.18it/s]
+    472.8 out | VLLM_WAIT elapsed_s=360
+    472.8 out | (Worker pid=238) INFO 09-23 11:52:44 [connector.py:231] PleOffload: registered 1 PleOffloadLayer(s) (dp_rank=0, tp_rank=0, ipc_addr=ipc:///tmp/qwen38-flash-next-vllm-tmp/6c65d138-7a77-4433-8954-13da0891afc7): ['language_model.model.layers.1.ple.ple_embedding']
+    472.8 out | (PleOffloadWorker pid=301) 
+    472.8 out | Loading safetensors checkpoint shards(PLE-offload): 100% Completed | 206/206 [03:35<00:00, 25.69s/it]
+    472.8 out | (PleOffloadWorker pid=301) 
+    472.8 out | Loading safetensors checkpoint shards(PLE-offload): 100% Completed | 206/206 [03:35<00:00,  1.05s/it]
+    472.8 out | (PleOffloadWorker pid=301) 
+    472.8 out | (PleOffloadWorker pid=301) INFO 09-23 11:52:51 [worker.py:448] PLE offload matched 132 checkpoint tensor(s), loaded 5 offload entries, and verified 2/2 materialized parameter(s) for layers: ['language_model.model.layers.1.ple.ple_embedding']
+    472.8 out | (PleOffloadWorker pid=301) INFO 09-23 11:52:51 [worker.py:471] PLE weight loading complete.
+    472.8 out | (PleOffloadWorker pid=301) INFO 09-23 11:52:51 [worker.py:289] Bound IPC address ipc:///tmp/qwen38-flash-next-vllm-tmp/6c65d138-7a77-4433-8954-13da0891afc7; waiting for 1 GPU worker registration(s).
+    472.8 out | (PleOffloadWorker pid=301) INFO 09-23 11:52:51 [worker.py:479] Waiting for 1 GPU worker registration(s) ...
+    472.8 out | (PleOffloadWorker pid=301) INFO 09-23 11:52:51 [worker.py:489] GPU worker 0 registered (dp_rank=0, tp_rank=0, layers=['language_model.model.layers.1.ple.ple_embedding']).
+    472.8 out | (PleOffloadWorker pid=301) INFO 09-23 11:52:51 [worker.py:576] Registrations complete (dp_size=1, tp_size=1, layers=['language_model.model.layers.1.ple.ple_embedding']).
+    472.8 out | (PleOffloadWorker pid=301) INFO 09-23 11:52:51 [worker.py:590] Busy-loop started.
+    472.8 out | (Worker pid=238) INFO 09-23 11:52:51 [worker.py:232] Worker ready - 1 PleOffloadLayer(s): ['language_model.model.layers.1.ple.ple_embedding']
+    472.8 out | (Worker pid=238) INFO 09-23 11:52:51 [interface.py:915] Setting attention block size to 1600 tokens to ensure that attention page size is >= mamba page size.
+    472.8 out | (Worker pid=238) INFO 09-23 11:52:51 [interface.py:939] Padding mamba page size by 0.25% to ensure that mamba page size and attention page size are exactly equal.
+    472.8 out | (Worker pid=238) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    472.8 out | (Worker pid=238) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    472.8 out | (Worker pid=238) [transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+    472.8 out | (Worker pid=238) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    472.8 out | (Worker pid=238) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    472.8 out | (Worker pid=238) INFO 09-23 11:52:55 [encoder_runner.py:120] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
+    472.8 out | (Worker pid=238) INFO 09-23 11:53:11 [backends.py:1094] Using cache directory: /tmp/qwen38-flash-next-vllm-cache/vllm/torch_compile_cache/eee0b6c579/rank_0_0/backbone for vLLM's torch.compile
+    472.8 out | (Worker pid=238) INFO 09-23 11:53:11 [backends.py:1155] Dynamo bytecode transform time: 5.18 s
+    472.8 out | (Worker pid=238) INFO 09-23 11:53:20 [backends.py:393] Compiling a graph for compile range (1, 8192) takes 8.39 s
+    472.8 out | (Worker pid=238) INFO 09-23 11:53:22 [backends.py:920] collected artifacts: 50 entries, 18 artifacts, 7510042 bytes total
+    472.8 out | (Worker pid=238) INFO 09-23 11:53:22 [decorators.py:708] saved AOT compiled function to /tmp/qwen38-flash-next-vllm-cache/vllm/torch_compile_cache/torch_aot_compile/d7bdc0a9a814e2d94f14207e772c1e37a64a688fad5a47335798630ce58ed339/rank_0_0/model
+    472.8 out | (Worker pid=238) INFO 09-23 11:53:22 [monitor.py:53] torch.compile took 16.90 s in total
+    472.8 out | (Worker pid=238) /tmp/qwen38-flash-next-vllm-runtime/usr/local/lib/python3.12/dist-packages/triton/language/core.py:2284: UserWarning: tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.
+    472.8 out | (Worker pid=238)   warn("tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.")
+    473.0 out | VLLM_WAIT elapsed_s=360
+    473.0 out | (Worker pid=238) INFO 09-23 11:52:44 [connector.py:231] PleOffload: registered 1 PleOffloadLayer(s) (dp_rank=0, tp_rank=0, ipc_addr=ipc:///tmp/qwen38-flash-next-vllm-tmp/6c65d138-7a77-4433-8954-13da0891afc7): ['language_model.model.layers.1.ple.ple_embedding']
+    473.0 out | (PleOffloadWorker pid=301) 
+    473.0 out | Loading safetensors checkpoint shards(PLE-offload): 100% Completed | 206/206 [03:35<00:00, 25.69s/it]
+    473.0 out | (PleOffloadWorker pid=301) 
+    473.0 out | Loading safetensors checkpoint shards(PLE-offload): 100% Completed | 206/206 [03:35<00:00,  1.05s/it]
+    473.0 out | (PleOffloadWorker pid=301) 
+    473.0 out | (PleOffloadWorker pid=301) INFO 09-23 11:52:51 [worker.py:448] PLE offload matched 132 checkpoint tensor(s), loaded 5 offload entries, and verified 2/2 materialized parameter(s) for layers: ['language_model.model.layers.1.ple.ple_embedding']
+    473.0 out | (PleOffloadWorker pid=301) INFO 09-23 11:52:51 [worker.py:471] PLE weight loading complete.
+    473.0 out | (PleOffloadWorker pid=301) INFO 09-23 11:52:51 [worker.py:289] Bound IPC address ipc:///tmp/qwen38-flash-next-vllm-tmp/6c65d138-7a77-4433-8954-13da0891afc7; waiting for 1 GPU worker registration(s).
+    473.0 out | (PleOffloadWorker pid=301) INFO 09-23 11:52:51 [worker.py:479] Waiting for 1 GPU worker registration(s) ...
+    473.0 out | (PleOffloadWorker pid=301) INFO 09-23 11:52:51 [worker.py:489] GPU worker 0 registered (dp_rank=0, tp_rank=0, layers=['language_model.model.layers.1.ple.ple_embedding']).
+    473.0 out | (PleOffloadWorker pid=301) INFO 09-23 11:52:51 [worker.py:576] Registrations complete (dp_size=1, tp_size=1, layers=['language_model.model.layers.1.ple.ple_embedding']).
+    473.0 out | (PleOffloadWorker pid=301) INFO 09-23 11:52:51 [worker.py:590] Busy-loop started.
+    473.0 out | (Worker pid=238) INFO 09-23 11:52:51 [worker.py:232] Worker ready - 1 PleOffloadLayer(s): ['language_model.model.layers.1.ple.ple_embedding']
+    473.0 out | (Worker pid=238) INFO 09-23 11:52:51 [interface.py:915] Setting attention block size to 1600 tokens to ensure that attention page size is >= mamba page size.
+    473.0 out | (Worker pid=238) INFO 09-23 11:52:51 [interface.py:939] Padding mamba page size by 0.25% to ensure that mamba page size and attention page size are exactly equal.
+    473.0 out | (Worker pid=238) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    473.0 out | (Worker pid=238) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    473.0 out | (Worker pid=238) [transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+    473.0 out | (Worker pid=238) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    473.0 out | (Worker pid=238) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    473.0 out | (Worker pid=238) INFO 09-23 11:52:55 [encoder_runner.py:120] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
+    473.0 out | (Worker pid=238) INFO 09-23 11:53:11 [backends.py:1094] Using cache directory: /tmp/qwen38-flash-next-vllm-cache/vllm/torch_compile_cache/eee0b6c579/rank_0_0/backbone for vLLM's torch.compile
+    473.0 out | (Worker pid=238) INFO 09-23 11:53:11 [backends.py:1155] Dynamo bytecode transform time: 5.18 s
+    473.0 out | (Worker pid=238) INFO 09-23 11:53:20 [backends.py:393] Compiling a graph for compile range (1, 8192) takes 8.39 s
+    473.0 out | (Worker pid=238) INFO 09-23 11:53:22 [backends.py:920] collected artifacts: 50 entries, 18 artifacts, 7510042 bytes total
+    473.0 out | (Worker pid=238) INFO 09-23 11:53:22 [decorators.py:708] saved AOT compiled function to /tmp/qwen38-flash-next-vllm-cache/vllm/torch_compile_cache/torch_aot_compile/d7bdc0a9a814e2d94f14207e772c1e37a64a688fad5a47335798630ce58ed339/rank_0_0/model
+    473.0 out | (Worker pid=238) INFO 09-23 11:53:22 [monitor.py:53] torch.compile took 16.90 s in total
+    473.0 out | (Worker pid=238) /tmp/qwen38-flash-next-vllm-runtime/usr/local/lib/python3.12/dist-packages/triton/language/core.py:2284: UserWarning: tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.
+    473.0 out | (Worker pid=238)   warn("tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.")
+    532.8 out | VLLM_WAIT elapsed_s=420
+    532.8 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm1:  81%|████████  | 17/21 [00:02<00:00,  5.37profile/s]2026-09-23 11:54:21,450 - INFO - autotuner.py:1699 - flashinfer.jit: [Autotuner]: Skipped 2 unsupported tactic(s) for trtllm::fused_moe::gemm1 (enable debug logs to see details)
+    532.8 out | (Worker pid=238) 
+    532.8 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm1:  86%|████████▌ | 18/21 [00:02<00:00,  4.93profile/s]2026-09-23 11:54:21,788 - INFO - autotuner.py:1699 - flashinfer.jit: [Autotuner]: Skipped 2 unsupported tactic(s) for trtllm::fused_moe::gemm1 (enable debug logs to see details)
+    532.8 out | (Worker pid=238) 
+    532.8 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm1:  90%|█████████ | 19/21 [00:02<00:00,  4.18profile/s]2026-09-23 11:54:22,165 - INFO - autotuner.py:1699 - flashinfer.jit: [Autotuner]: Skipped 2 unsupported tactic(s) for trtllm::fused_moe::gemm1 (enable debug logs to see details)
+    532.8 out | (Worker pid=238) 
+    532.8 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm1:  95%|█████████▌| 20/21 [00:03<00:00,  3.61profile/s]2026-09-23 11:54:22,608 - INFO - autotuner.py:1699 - flashinfer.jit: [Autotuner]: Skipped 2 unsupported tactic(s) for trtllm::fused_moe::gemm1 (enable debug logs to see details)
+    532.8 out | (Worker pid=238) 
+    532.8 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 21/21 [00:03<00:00,  3.08profile/s]
+    532.8 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 21/21 [00:03<00:00,  5.50profile/s]
+    532.8 out | (Worker pid=238) 
+    532.8 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm2:   0%|          | 0/21 [00:00<?, ?profile/s]
+    532.8 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm2:  29%|██▊       | 6/21 [00:00<00:00, 43.30profile/s]
+    532.8 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm2:  52%|█████▏    | 11/21 [00:00<00:00, 13.05profile/s]
+    532.8 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm2:  67%|██████▋   | 14/21 [00:01<00:00, 10.29profile/s]
+    532.8 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm2:  76%|███████▌  | 16/21 [00:01<00:00,  9.19profile/s]
+    532.8 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm2:  86%|████████▌ | 18/21 [00:01<00:00,  8.30profile/s]
+    532.8 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm2:  95%|█████████▌| 20/21 [00:02<00:00,  7.53profile/s]
+    532.8 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 21/21 [00:02<00:00,  6.77profile/s]
+    532.8 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 21/21 [00:02<00:00,  8.98profile/s]
+    532.8 out | (Worker pid=238) 2026-09-23 11:54:26,138 - INFO - autotuner.py:852 - flashinfer.jit: [Autotuner]: Autotuning process ends
+    532.8 out | (Worker pid=238) 2026-09-23 11:54:26,172 - INFO - autotuner.py:2269 - flashinfer.jit: [Autotuner]: Saved 84 configs to /tmp/qwen38-flash-next-vllm-cache/vllm/flashinfer_autotune_cache/0.6.17/120f/2337f5d767de4b8fceac10261772f02a857b3555d57d36a242576a11dbf4ef95/autotune_configs.json (84 new, 0 from previous config)
+    532.8 out | (Worker pid=238) 
+    532.8 out | Capturing CUDA graphs (PIECEWISE):   0%|          | 0/7 [00:00<?, ?it/s]
+    532.8 out | Capturing CUDA graphs (PIECEWISE):  14%|█▍        | 1/7 [00:01<00:08,  1.49s/it]
+    532.8 out | Capturing CUDA graphs (PIECEWISE):  29%|██▊       | 2/7 [00:02<00:06,  1.22s/it]
+    532.8 out | Capturing CUDA graphs (PIECEWISE):  43%|████▎     | 3/7 [00:02<00:02,  1.35it/s]
+    532.8 out | Capturing CUDA graphs (PIECEWISE):  57%|█████▋    | 4/7 [00:03<00:02,  1.37it/s]
+    532.8 out | Capturing CUDA graphs (PIECEWISE):  71%|███████▏  | 5/7 [00:03<00:01,  1.86it/s]
+    532.8 out | Capturing CUDA graphs (PIECEWISE):  86%|████████▌ | 6/7 [00:04<00:00,  1.66it/s]
+    533.0 out | VLLM_WAIT elapsed_s=420
+    533.0 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm1:  81%|████████  | 17/21 [00:02<00:00,  5.37profile/s]2026-09-23 11:54:21,450 - INFO - autotuner.py:1699 - flashinfer.jit: [Autotuner]: Skipped 2 unsupported tactic(s) for trtllm::fused_moe::gemm1 (enable debug logs to see details)
+    533.0 out | (Worker pid=238) 
+    533.0 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm1:  86%|████████▌ | 18/21 [00:02<00:00,  4.93profile/s]2026-09-23 11:54:21,788 - INFO - autotuner.py:1699 - flashinfer.jit: [Autotuner]: Skipped 2 unsupported tactic(s) for trtllm::fused_moe::gemm1 (enable debug logs to see details)
+    533.0 out | (Worker pid=238) 
+    533.0 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm1:  90%|█████████ | 19/21 [00:02<00:00,  4.18profile/s]2026-09-23 11:54:22,165 - INFO - autotuner.py:1699 - flashinfer.jit: [Autotuner]: Skipped 2 unsupported tactic(s) for trtllm::fused_moe::gemm1 (enable debug logs to see details)
+    533.0 out | (Worker pid=238) 
+    533.0 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm1:  95%|█████████▌| 20/21 [00:03<00:00,  3.61profile/s]2026-09-23 11:54:22,608 - INFO - autotuner.py:1699 - flashinfer.jit: [Autotuner]: Skipped 2 unsupported tactic(s) for trtllm::fused_moe::gemm1 (enable debug logs to see details)
+    533.0 out | (Worker pid=238) 
+    533.0 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 21/21 [00:03<00:00,  3.08profile/s]
+    533.0 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm1: 100%|██████████| 21/21 [00:03<00:00,  5.50profile/s]
+    533.0 out | (Worker pid=238) 
+    533.0 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm2:   0%|          | 0/21 [00:00<?, ?profile/s]
+    533.0 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm2:  29%|██▊       | 6/21 [00:00<00:00, 43.30profile/s]
+    533.0 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm2:  52%|█████▏    | 11/21 [00:00<00:00, 13.05profile/s]
+    533.0 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm2:  67%|██████▋   | 14/21 [00:01<00:00, 10.29profile/s]
+    533.0 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm2:  76%|███████▌  | 16/21 [00:01<00:00,  9.19profile/s]
+    533.0 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm2:  86%|████████▌ | 18/21 [00:01<00:00,  8.30profile/s]
+    533.0 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm2:  95%|█████████▌| 20/21 [00:02<00:00,  7.53profile/s]
+    533.0 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 21/21 [00:02<00:00,  6.77profile/s]
+    533.0 out | [AutoTuner]: Tuning trtllm::fused_moe::gemm2: 100%|██████████| 21/21 [00:02<00:00,  8.98profile/s]
+    533.0 out | (Worker pid=238) 2026-09-23 11:54:26,138 - INFO - autotuner.py:852 - flashinfer.jit: [Autotuner]: Autotuning process ends
+    533.0 out | (Worker pid=238) 2026-09-23 11:54:26,172 - INFO - autotuner.py:2269 - flashinfer.jit: [Autotuner]: Saved 84 configs to /tmp/qwen38-flash-next-vllm-cache/vllm/flashinfer_autotune_cache/0.6.17/120f/2337f5d767de4b8fceac10261772f02a857b3555d57d36a242576a11dbf4ef95/autotune_configs.json (84 new, 0 from previous config)
+    533.0 out | (Worker pid=238) 
+    533.0 out | Capturing CUDA graphs (PIECEWISE):   0%|          | 0/7 [00:00<?, ?it/s]
+    533.0 out | Capturing CUDA graphs (PIECEWISE):  14%|█▍        | 1/7 [00:01<00:08,  1.49s/it]
+    533.0 out | Capturing CUDA graphs (PIECEWISE):  29%|██▊       | 2/7 [00:02<00:06,  1.22s/it]
+    533.0 out | Capturing CUDA graphs (PIECEWISE):  43%|████▎     | 3/7 [00:02<00:02,  1.35it/s]
+    533.0 out | Capturing CUDA graphs (PIECEWISE):  57%|█████▋    | 4/7 [00:03<00:02,  1.37it/s]
+    533.0 out | Capturing CUDA graphs (PIECEWISE):  71%|███████▏  | 5/7 [00:03<00:01,  1.86it/s]
+    533.0 out | Capturing CUDA graphs (PIECEWISE):  86%|████████▌ | 6/7 [00:04<00:00,  1.66it/s]
+    562.8 out | VLLM_SETUP_COMPLETE {"mode": "fast", "pid": 151, "ready_seconds": 450.06098272899976}
+    562.8 out | VLLM_SETUP_COMPLETE {"mode": "fast", "pid": 151, "ready_seconds": 450.06098272899976}
+    564.9 out | PUBLIC25_SETTINGS budget_s=7920.0 concurrency=28 analyzer_timeout=1800.0 action_cap=None request_logs=False
+    564.9 out | arc3_batch: {'installed': True, 'addendum_chars': 5202, 'delta_chars': 1385, 'system_prompt_chars': 14066}
+    564.9 out | ARC3_BATCH_PROMPT chars=14066 marker=PREDICT-THEN-COMMIT
+    565.0 out | arc3_stall: {'installed': True, 'mode': 'warn', 'repeat_n': 10, 'window': 40, 'uniq_frac': 0.2, 'grind_mult': 3.0, 'grind_floor': 60, 'min_on_level': 45, 'arm_mult': 3.0, 'bans_armed': 0, 'actions_dropped': 0}
+    565.0 out | arc3_stall prompt: {'installed': True}
+    565.0 out | ARC3_STALL_READY chars=14522
+    565.0 out | ARC3_POLICY mode=warn dead_signature=on reset_injector=absent ledger=absent profile=kv5-bf16-mtp3-c8-cg32 only_reset_levels=true
+    565.6 out | DEPTH_PROBE_SELECTION games=6 passes=1 cap_s=3600
+   1166.5 out | benchmark: duck-harness-kaggle
+   1166.5 out | solver:    duck-harness
+   1166.5 out | games:     6
+   1166.5 out | passes:    2
+   1166.5 out | runs:      12 (won: 0)
+   1166.5 out | started:   2026-09-23 11:55:05
+   1166.5 out | ended:     in progress
+   1166.5 out | mean score:    3.08
+   1166.5 out | median score:  2.78
+   1166.5 out | total actions: 307
+   1166.5 out | total tokens:  139348
+   1166.5 out | generated tokens/sec: 231.98 (job wallclock)
+   1166.5 out | total wallclock: 5974.4s
+   1166.5 out | 
+   1166.5 out | per-game (mean across passes):
+   1166.5 out |   ar25-0c556536: score=2.78, levels=1.0/8, actions=32, tokens=12021
+   1166.5 out |   ft09-0d8bbf25: score=4.76, levels=1.0/6, actions=5, tokens=12599
+   1166.5 out |   lp85-305b61c3: score=2.78, levels=1.0/8, actions=12, tokens=13450
+   1166.5 out |   re86-8af5384d: score=5.28, levels=1.5/8, actions=50, tokens=12801
+   1166.5 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=27, tokens=8609
+   1166.5 out |   vc33-5430563c: score=0.09, levels=0.5/7, actions=27, tokens=10193
+   1166.5 out | 
+   1766.6 out | benchmark: duck-harness-kaggle
+   1766.6 out | solver:    duck-harness
+   1766.6 out | games:     6
+   1766.6 out | passes:    2
+   1766.6 out | runs:      12 (won: 0)
+   1766.6 out | started:   2026-09-23 11:55:05
+   1766.6 out | ended:     in progress
+   1766.6 out | mean score:    7.38
+   1766.6 out | median score:  8.27
+   1766.6 out | total actions: 657
+   1766.6 out | total tokens:  288777
+   1766.6 out | generated tokens/sec: 240.49 (job wallclock)
+   1766.6 out | total wallclock: 13387.6s
+   1766.6 out | 
+   1766.6 out | per-game (mean across passes):
+   1766.6 out |   ar25-0c556536: score=5.56, levels=1.5/8, actions=67, tokens=25576
+   1766.6 out |   ft09-0d8bbf25: score=14.29, levels=2.0/6, actions=19, tokens=22280
+   1766.6 out |   lp85-305b61c3: score=5.56, levels=1.5/8, actions=24, tokens=26636
+   1766.6 out |   re86-8af5384d: score=8.33, levels=2.0/8, actions=72, tokens=26494
+   1766.6 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=93, tokens=20044
+   1766.6 out |   vc33-5430563c: score=7.76, levels=2.0/7, actions=52, tokens=23356
+   1766.6 out | 
+   2366.7 out | benchmark: duck-harness-kaggle
+   2366.7 out | solver:    duck-harness
+   2366.7 out | games:     6
+   2366.7 out | passes:    2
+   2366.7 out | runs:      12 (won: 0)
+   2366.7 out | started:   2026-09-23 11:55:05
+   2366.7 out | ended:     in progress
+   2366.7 out | mean score:    9.23
+   2366.7 out | median score:  8.33
+   2366.7 out | total actions: 940
+   2366.7 out | total tokens:  415387
+   2366.7 out | generated tokens/sec: 230.66 (job wallclock)
+   2366.7 out | total wallclock: 19153.3s
+   2366.7 out | 
+   2366.7 out | per-game (mean across passes):
+   2366.7 out |   ar25-0c556536: score=9.72, levels=2.0/8, actions=101, tokens=36525
+   2366.7 out |   ft09-0d8bbf25: score=14.29, levels=2.0/6, actions=37, tokens=33823
+   2366.7 out |   lp85-305b61c3: score=12.50, levels=2.5/8, actions=41, tokens=42304
+   2366.7 out |   re86-8af5384d: score=8.33, levels=2.0/8, actions=101, tokens=36172
+   2366.7 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=110, tokens=24895
+   2366.7 out |   vc33-5430563c: score=7.76, levels=2.0/7, actions=80, tokens=33974
+   2366.7 out | 
+   2966.7 out | benchmark: duck-harness-kaggle
+   2966.7 out | solver:    duck-harness
+   2966.7 out | games:     6
+   2966.7 out | passes:    2
+   2966.7 out | runs:      12 (won: 0)
+   2966.7 out | started:   2026-09-23 11:55:05
+   2966.7 out | ended:     in progress
+   2966.7 out | mean score:    11.54
+   2966.7 out | median score:  11.31
+   2966.7 out | total actions: 1202
+   2966.7 out | total tokens:  580138
+   2966.7 out | generated tokens/sec: 241.63 (job wallclock)
+   2966.7 out | total wallclock: 26978.4s
+   2966.7 out | 
+   2966.7 out | per-game (mean across passes):
+   2966.7 out |   ar25-0c556536: score=15.28, levels=2.5/8, actions=109, tokens=47742
+   2966.7 out |   ft09-0d8bbf25: score=14.29, levels=2.0/6, actions=76, tokens=38493
+   2966.7 out |   lp85-305b61c3: score=12.50, levels=2.5/8, actions=72, tokens=58164
+   2966.7 out |   re86-8af5384d: score=12.50, levels=2.5/8, actions=124, tokens=47799
+   2966.7 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=121, tokens=48792
+   2966.7 out |   vc33-5430563c: score=11.91, levels=2.5/7, actions=97, tokens=49077
+   2966.7 out | 
+   3566.7 out | benchmark: duck-harness-kaggle
+   3566.7 out | solver:    duck-harness
+   3566.7 out | games:     6
+   3566.7 out | passes:    2
+   3566.7 out | runs:      12 (won: 0)
+   3566.7 out | started:   2026-09-23 11:55:05
+   3566.7 out | ended:     in progress
+   3566.7 out | mean score:    12.91
+   3566.7 out | median score:  14.44
+   3566.7 out | total actions: 1467
+   3566.7 out | total tokens:  726658
+   3566.7 out | generated tokens/sec: 242.15 (job wallclock)
+   3566.7 out | total wallclock: 33899.1s
+   3566.7 out | 
+   3566.7 out | per-game (mean across passes):
+   3566.7 out |   ar25-0c556536: score=15.28, levels=2.5/8, actions=121, tokens=61338
+   3566.7 out |   ft09-0d8bbf25: score=14.29, levels=2.0/6, actions=89, tokens=41040
+   3566.7 out |   lp85-305b61c3: score=17.32, levels=3.5/8, actions=92, tokens=75046
+   3566.7 out |   re86-8af5384d: score=15.87, levels=3.0/8, actions=165, tokens=61279
+   3566.7 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=147, tokens=62222
+   3566.7 out |   vc33-5430563c: score=11.91, levels=2.5/7, actions=118, tokens=62401
+   3566.7 out | 
+   4166.7 out | benchmark: duck-harness-kaggle
+   4166.7 out | solver:    duck-harness
+   4166.7 out | games:     6
+   4166.7 out | passes:    2
+   4166.7 out | runs:      12 (won: 0)
+   4166.7 out | started:   2026-09-23 11:55:05
+   4166.7 out | ended:     in progress
+   4166.7 out | mean score:    14.75
+   4166.7 out | median score:  14.44
+   4166.7 out | total actions: 1646
+   4166.7 out | total tokens:  850728
+   4166.7 out | generated tokens/sec: 236.25 (job wallclock)
+   4166.7 out | total wallclock: 39478.4s
+   4166.7 out | 
+   4166.7 out | per-game (mean across passes):
+   4166.7 out |   ar25-0c556536: score=15.28, levels=2.5/8, actions=143, tokens=74366
+   4166.7 out |   ft09-0d8bbf25: score=14.29, levels=2.0/6, actions=99, tokens=45843
+   4166.7 out |   lp85-305b61c3: score=25.30, levels=4.0/8, actions=99, tokens=79949
+   4166.7 out |   re86-8af5384d: score=15.87, levels=3.0/8, actions=192, tokens=72389
+   4166.7 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=162, tokens=73702
+   4166.7 out |   vc33-5430563c: score=14.99, levels=3.0/7, actions=127, tokens=79114
+   4166.7 out | 
+   4766.8 out | benchmark: duck-harness-kaggle
+   4766.8 out | solver:    duck-harness
+   4766.8 out | games:     6
+   4766.8 out | passes:    2
+   4766.8 out | runs:      12 (won: 0)
+   4766.8 out | started:   2026-09-23 11:55:05
+   4766.8 out | ended:     in progress
+   4766.8 out | mean score:    15.68
+   4766.8 out | median score:  14.44
+   4766.8 out | total actions: 1864
+   4766.8 out | total tokens:  991838
+   4766.8 out | generated tokens/sec: 236.10 (job wallclock)
+   4766.8 out | total wallclock: 47455.1s
+   4766.8 out | 
+   4766.8 out | per-game (mean across passes):
+   4766.8 out |   ar25-0c556536: score=15.28, levels=2.5/8, actions=157, tokens=89874
+   4766.8 out |   ft09-0d8bbf25: score=14.29, levels=2.0/6, actions=102, tokens=53339
+   4766.8 out |   lp85-305b61c3: score=25.30, levels=4.0/8, actions=136, tokens=86139
+   4766.8 out |   re86-8af5384d: score=21.42, levels=3.5/8, actions=201, tokens=76589
+   4766.8 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=187, tokens=93306
+   4766.8 out |   vc33-5430563c: score=14.99, levels=3.0/7, actions=147, tokens=96670
+   4766.8 out | 
+   5366.8 out | benchmark: duck-harness-kaggle
+   5366.8 out | solver:    duck-harness
+   5366.8 out | games:     6
+   5366.8 out | passes:    2
+   5366.8 out | runs:      12 (won: 0)
+   5366.8 out | started:   2026-09-23 11:55:05
+   5366.8 out | ended:     in progress
+   5366.8 out | mean score:    15.68
+   5366.8 out | median score:  14.44
+   5366.8 out | total actions: 2028
+   5366.8 out | total tokens:  1127930
+   5366.8 out | generated tokens/sec: 234.94 (job wallclock)
+   5366.8 out | total wallclock: 54027.9s
+   5366.8 out | 
+   5366.8 out | per-game (mean across passes):
+   5366.8 out |   ar25-0c556536: score=15.28, levels=2.5/8, actions=172, tokens=100135
+   5366.8 out |   ft09-0d8bbf25: score=14.29, levels=2.0/6, actions=123, tokens=67228
+   5366.8 out |   lp85-305b61c3: score=25.30, levels=4.0/8, actions=137, tokens=86139
+   5366.8 out |   re86-8af5384d: score=21.42, levels=3.5/8, actions=215, tokens=100074
+   5366.8 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=198, tokens=100679
+   5366.8 out |   vc33-5430563c: score=14.99, levels=3.0/7, actions=168, tokens=109708
+   5366.8 out | 
+   5966.9 out | benchmark: duck-harness-kaggle
+   5966.9 out | solver:    duck-harness
+   5966.9 out | games:     6
+   5966.9 out | passes:    2
+   5966.9 out | runs:      12 (won: 0)
+   5966.9 out | started:   2026-09-23 11:55:05
+   5966.9 out | ended:     in progress
+   5966.9 out | mean score:    16.83
+   5966.9 out | median score:  14.44
+   5966.9 out | total actions: 2317
+   5966.9 out | total tokens:  1321392
+   5966.9 out | generated tokens/sec: 244.65 (job wallclock)
+   5966.9 out | total wallclock: 63175.2s
+   5966.9 out | 
+   5966.9 out | per-game (mean across passes):
+   5966.9 out |   ar25-0c556536: score=15.28, levels=2.5/8, actions=183, tokens=110677
+   5966.9 out |   ft09-0d8bbf25: score=14.29, levels=2.0/6, actions=136, tokens=72676
+   5966.9 out |   lp85-305b61c3: score=25.30, levels=4.0/8, actions=149, tokens=128439
+   5966.9 out |   re86-8af5384d: score=28.37, levels=4.0/8, actions=274, tokens=112598
+   5966.9 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=222, tokens=112736
+   5966.9 out |   vc33-5430563c: score=14.99, levels=3.0/7, actions=194, tokens=123569
+   5966.9 out | 
+   6566.9 out | benchmark: duck-harness-kaggle
+   6566.9 out | solver:    duck-harness
+   6566.9 out | games:     6
+   6566.9 out | passes:    2
+   6566.9 out | runs:      12 (won: 0)
+   6566.9 out | started:   2026-09-23 11:55:05
+   6566.9 out | ended:     in progress
+   6566.9 out | mean score:    17.82
+   6566.9 out | median score:  14.44
+   6566.9 out | total actions: 2680
+   6566.9 out | total tokens:  1436795
+   6566.9 out | generated tokens/sec: 239.42 (job wallclock)
+   6566.9 out | total wallclock: 69899.0s
+   6566.9 out | 
+   6566.9 out | per-game (mean across passes):
+   6566.9 out |   ar25-0c556536: score=15.28, levels=2.5/8, actions=186, tokens=112989
+   6566.9 out |   ft09-0d8bbf25: score=14.29, levels=2.0/6, actions=171, tokens=84512
+   6566.9 out |   lp85-305b61c3: score=28.30, levels=4.5/8, actions=153, tokens=138393
+   6566.9 out |   re86-8af5384d: score=31.29, levels=4.5/8, actions=320, tokens=123014
+   6566.9 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=278, tokens=127682
+   6566.9 out |   vc33-5430563c: score=14.99, levels=3.0/7, actions=230, tokens=131807
+   6566.9 out | 
+   7166.9 out | benchmark: duck-harness-kaggle
+   7166.9 out | solver:    duck-harness
+   7166.9 out | games:     6
+   7166.9 out | passes:    2
+   7166.9 out | runs:      12 (won: 0)
+   7166.9 out | started:   2026-09-23 11:55:05
+   7166.9 out | ended:     in progress
+   7166.9 out | mean score:    19.68
+   7166.9 out | median score:  14.44
+   7166.9 out | total actions: 2873
+   7166.9 out | total tokens:  1521577
+   7166.9 out | generated tokens/sec: 230.50 (job wallclock)
+   7166.9 out | total wallclock: 74018.1s
+   7166.9 out | 
+   7166.9 out | per-game (mean across passes):
+   7166.9 out |   ar25-0c556536: score=15.28, levels=2.5/8, actions=196, tokens=119005
+   7166.9 out |   ft09-0d8bbf25: score=14.29, levels=2.0/6, actions=172, tokens=85081
+   7166.9 out |   lp85-305b61c3: score=39.48, levels=5.0/8, actions=169, tokens=145667
+   7166.9 out |   re86-8af5384d: score=31.29, levels=4.5/8, actions=330, tokens=131570
+   7166.9 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=314, tokens=134978
+   7166.9 out |   vc33-5430563c: score=14.99, levels=3.0/7, actions=254, tokens=144486
+   7166.9 out | 
+   7767.1 out | benchmark: duck-harness-kaggle
+   7767.1 out | solver:    duck-harness
+   7767.1 out | games:     6
+   7767.1 out | passes:    2
+   7767.1 out | runs:      12 (won: 0)
+   7767.1 out | started:   2026-09-23 11:55:05
+   7767.1 out | ended:     in progress
+   7767.1 out | mean score:    19.68
+   7767.1 out | median score:  14.44
+   7767.1 out | total actions: 3247
+   7767.1 out | total tokens:  1678384
+   7767.1 out | generated tokens/sec: 233.07 (job wallclock)
+   7767.1 out | total wallclock: 81421.1s
+   7767.1 out | 
+   7767.1 out | per-game (mean across passes):
+   7767.1 out |   ar25-0c556536: score=15.28, levels=2.5/8, actions=213, tokens=144576
+   7767.1 out |   ft09-0d8bbf25: score=14.29, levels=2.0/6, actions=172, tokens=85081
+   7767.1 out |   lp85-305b61c3: score=39.48, levels=5.0/8, actions=182, tokens=157764
+   7767.1 out |   re86-8af5384d: score=31.29, levels=4.5/8, actions=410, tokens=148094
+   7767.1 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=361, tokens=146491
+   7767.1 out |   vc33-5430563c: score=14.99, levels=3.0/7, actions=284, tokens=157184
+   7767.1 out | 
+   8367.0 out | benchmark: duck-harness-kaggle
+   8367.0 out | solver:    duck-harness
+   8367.0 out | games:     6
+   8367.0 out | passes:    2
+   8367.0 out | runs:      12 (won: 0)
+   8367.0 out | started:   2026-09-23 11:55:05
+   8367.0 out | ended:     in progress
+   8367.0 out | mean score:    19.68
+   8367.0 out | median score:  14.44
+   8367.0 out | total actions: 3401
+   8367.0 out | total tokens:  1812788
+   8367.0 out | generated tokens/sec: 232.37 (job wallclock)
+   8367.0 out | total wallclock: 87438.1s
+   8367.0 out | 
+   8367.0 out | per-game (mean across passes):
+   8367.0 out |   ar25-0c556536: score=15.28, levels=2.5/8, actions=226, tokens=154872
+   8367.0 out |   ft09-0d8bbf25: score=14.29, levels=2.0/6, actions=181, tokens=113126
+   8367.0 out |   lp85-305b61c3: score=39.48, levels=5.0/8, actions=188, tokens=164218
+   8367.0 out |   re86-8af5384d: score=31.29, levels=4.5/8, actions=411, tokens=150566
+   8367.0 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=381, tokens=157983
+   8367.0 out |   vc33-5430563c: score=14.99, levels=3.0/7, actions=312, tokens=165627
+   8367.0 out | 
+   8486.5 err | analyzer request failed at action 371: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=11.999997725999492)
+   8486.5 err | 
+   8486.5 err | analyzer request failed at action 371: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=11.999997725999492)
+   8486.5 err | analyzer request failed at action 81: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=2.0653973820008105)
+   8486.5 err | 
+   8486.5 err | analyzer request failed at action 81: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=2.0653973820008105)
+   8486.5 err | analyzer request failed at action 190: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=50.74911882000015)
+   8486.5 err | 
+   8486.5 err | analyzer request failed at action 190: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=50.74911882000015)
+   8486.5 err | analyzer request failed at action 277: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=73.36179381300008)
+   8486.5 err | 
+   8486.5 err | analyzer request failed at action 277: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=73.36179381300008)
+   8486.6 err | analyzer request failed at action 233: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=8.001426393000656)
+   8486.6 err | 
+   8486.6 err | analyzer request failed at action 233: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=8.001426393000656)
+   8486.6 err | analyzer request failed at action 291: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=28.197940805001053)
+   8486.6 err | 
+   8486.6 err | analyzer request failed at action 291: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=28.197940805001053)
+   8486.6 err | analyzer request failed at action 453: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=16.872762427999078)
+   8486.6 err | 
+   8486.6 err | analyzer request failed at action 453: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=16.872762427999078)
+   8486.7 err | analyzer request failed at action 131: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=46.649814093000714)
+   8486.7 err | 
+   8486.7 err | analyzer request failed at action 131: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=46.649814093000714)
+   8486.7 err | analyzer request failed at action 361: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=66.68508206700062)
+   8486.7 err | 
+   8486.7 err | analyzer request failed at action 361: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=66.68508206700062)
+   8486.7 err | analyzer request failed at action 267: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=50.94896275799874)
+   8486.7 err | 
+   8486.7 err | analyzer request failed at action 267: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=50.94896275799874)
+   8486.7 err | analyzer request failed at action 302: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=33.13775595400057)
+   8486.7 err | 
+   8486.7 err | analyzer request failed at action 302: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=33.13775595400057)
+   8486.8 out | [finished] re86-8af5384d state=gave_up level=5/8 score=41.67 actions=370 tokens=142883 per-level=29/26,38/42,56/86,85/108,90/189,72/139,0/424,0/241 note="tokens=165384"
+   8486.8 out | [finished] lp85-305b61c3 state=gave_up level=3/8 score=14.59 actions=80 tokens=159373 per-level=8/17,23/38,40/31,9/16,0/41,0/60,0/26,0/159 note="tokens=208442"
+   8486.8 out | [finished] sb26-7fbdac44 state=gave_up level=1/8 score=2.78 actions=276 tokens=171799 per-level=11/18,265/28,0/18,0/19,0/31,0/23,0/58,0/18 note="tokens=176346"
+   8486.8 out | [finished] ft09-0d8bbf25 state=gave_up level=2/6 score=14.29 actions=232 tokens=70500 per-level=5/43,7/12,220/23,0/28,0/65,0/37 note="tokens=85821"
+   8486.8 out | [finished] ar25-0c556536 state=gave_up level=4/8 score=27.78 actions=189 tokens=172038 per-level=17/32,23/50,45/75,23/37,81/89,0/159,0/233,0/73 note="tokens=175127"
+   8486.8 out | [finished] vc33-5430563c state=gave_up level=3/7 score=16.50 actions=290 tokens=193726 per-level=30/7,17/18,50/44,193/61,0/131,0/34,0/152 note="tokens=193726"
+   8486.8 out | [finished] re86-8af5384d state=gave_up level=4/8 score=20.91 actions=452 tokens=158250 per-level=21/26,39/42,106/86,149/108,137/189,0/139,0/424,0/241 note="tokens=178174"
+   8486.8 out | [finished] vc33-5430563c state=gave_up level=3/7 score=13.48 actions=360 tokens=144094 per-level=32/7,18/18,58/44,252/61,0/131,0/34,0/152 note="tokens=144094"
+   8486.8 out | [finished] ft09-0d8bbf25 state=gave_up level=2/6 score=14.29 actions=130 tokens=155752 per-level=4/43,7/12,119/23,0/28,0/65,0/37 note="tokens=160079"
+   8486.8 out | [finished] ar25-0c556536 state=gave_up level=1/8 score=2.78 actions=266 tokens=140309 per-level=19/32,247/50,0/75,0/37,0/89,0/159,0/233,0/73 note="tokens=140309"
+   8487.0 out | [finished] lp85-305b61c3 state=gave_up level=7/8 score=64.38 actions=301 tokens=171136 per-level=8/17,14/38,20/31,57/16,21/41,100/60,9/26,72/159 note="tokens=172790"
+   8487.0 out | [finished] sb26-7fbdac44 state=gave_up level=1/8 score=2.78 actions=489 tokens=145102 per-level=14/18,475/28,0/18,0/19,0/31,0/23,0/58,0/18 note="tokens=146430"
+   8487.0 out | benchmark: duck-harness-kaggle
+   8487.0 out | solver:    duck-harness
+   8487.0 out | games:     6
+   8487.0 out | passes:    2
+   8487.0 out | runs:      12 (won: 0)
+   8487.0 out | started:   2026-09-23 11:55:05
+   8487.0 out | ended:     2026-09-23 14:07:06
+   8487.0 out | duration:  2h 12m 1s
+   8487.0 out | mean score:    19.68
+   8487.0 out | median score:  14.44
+   8487.0 out | total actions: 3435
+   8487.0 out | total tokens:  1824962
+   8487.0 out | generated tokens/sec: 230.38 (job wallclock)
+   8487.0 out | total wallclock: 95045.7s
+   8487.0 out | 
+   8487.0 out | per-game (mean across passes):
+   8487.0 out |   ar25-0c556536: score=15.28, levels=2.5/8, actions=227, tokens=156173
+   8487.0 out |   ft09-0d8bbf25: score=14.29, levels=2.0/6, actions=181, tokens=113126
+   8487.0 out |   lp85-305b61c3: score=39.48, levels=5.0/8, actions=190, tokens=165254
+   8487.0 out |   re86-8af5384d: score=31.29, levels=4.5/8, actions=411, tokens=150566
+   8487.0 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=382, tokens=158450
+   8487.0 out |   vc33-5430563c: score=14.99, levels=3.0/7, actions=325, tokens=168910
+   8487.0 out | 
+   8487.8 out | PUBLIC25_AUDIT runs=25 actions=3435 score_path=/kaggle/working/score.json
+   8487.8 out | taaf.kaggle: teardown command: "$PYTHON" "$TAAF_KAGGLE_BUNDLE_DIR/serving_teardown.py"
+   8490.3 out | VLLM_SERVER_TEARDOWN {"cpu_survivors": 0, "elapsed_seconds": 2.2944578229999024, "metrics_preserved": true, "port_closed": true, "required_artifacts_preserved": true, "result": "/kaggle/working/vllm-server-teardown.json", "shutdown_ok": true, "vllm_gpu_survivors": 0}
+   8490.3 out | VLLM_SERVER_TEARDOWN {"cpu_survivors": 0, "elapsed_seconds": 2.2944578229999024, "metrics_preserved": true, "port_closed": true, "required_artifacts_preserved": true, "result": "/kaggle/working/vllm-server-teardown.json", "shutdown_ok": true, "vllm_gpu_survivors": 0}
+   8490.3 out | ARC3_RESET_RESULT {"actions": 3435, "actions_per_decision": 6.67, "baseline_depthrun1_all": 24.47, "baseline_depthrun1_without_sb26": 28.81, "baseline_stallrun2_all": 32.41, "baseline_stallrun2_without_sb26": 23.33, "decisions": 515, "mean_all": 22.62, "mean_without_sb26": 26.59, "mode": "warn", "rhae_mean_per_game": {"ar25": 15.28, "ft09": 14.29, "lp85": 47.23, "re86": 34.73, "sb26": 2.78, "vc33": 21.43}, "runs": [{"actions": 276, "game": "sb26", "levels": 1, "loop_metric": 0.14, "rhae": 2.78, "state": "gave_up", "wall_actions": 265, "wall_top_repeat": 37, "wall_uniq_frac": 0.132}, {"actions": 290, "game": "vc33", "levels": 3, "loop_metric": 0.187, "rhae": 21.43, "state": "gave_up", "wall_actions": 193, "wall_top_repeat": 36, "wall_uniq_frac": 0.119}, {"actions": 232, "game": "ft09", "levels": 2, "loop_metric": 0.059, "rhae": 14.29, "state": "gave_up", "wall_actions": 220, "wall_top_repeat": 13, "wall_uniq_frac": 0.318}, {"actions": 301, "game": "lp85", "levels": 7, "loop_metric": 0.556, "rhae": 77.78, "state": "gave_up", "wall_actions": 72, "wall_top_repeat": 40, "wall_uniq_frac": 0.208}, {"actions": 370, "game": "re86", "levels": 5, "loop_metric": 0.403, "rhae": 41.67, "state": "gave_up", "wall_actions": 72, "wall_top_repeat": 29, "wall_uniq_frac": 0.069}, {"actions": 266, "game": "ar25", "levels": 1, "loop_metric": 0.348, "rhae": 2.78, "state": "gave_up", "wall_actions": 247, "wall_top_repeat": 86, "wall_uniq_frac": 0.04}, {"actions": 489, "game": "sb26", "levels": 1, "loop_metric": 0.122, "rhae": 2.78, "state": "gave_up", "wall_actions": 475, "wall_top_repeat": 58, "wall_uniq_frac": 0.112}, {"actions": 360, "game": "vc33", "levels": 3, "loop_metric": 0.218, "rhae": 21.43, "state": "gave_up", "wall_actions": 252, "wall_top_repeat": 55, "wall_uniq_frac": 0.135}, {"actions": 130, "game": "ft09", "levels": 2, "loop_metric": 0.101, "rhae": 14.29, "state": "gave_up", "wall_actions": 119, "wall_top_repeat": 12, "wall_uniq_frac": 0.319}, {"actions": 80, "game": "lp85", "levels": 3, "loop_metric": 0.556, "rhae": 16.67, "state": "gave_up", "wall_actions": 9, "wall_top_repeat": 5, "wall_uniq_frac": 0.556}, {"actions": 452, "game": "re86", "levels": 4, "loop_metric": 0.292, "rhae": 27.78, "state": "gave_up", "wall_actions": 137, "wall_top_repeat": 40, "wall_uniq_frac": 0.036}, {"actions": 189, "game": "ar25", "levels": 4, "loop_metric": 0.259, "rhae": 27.78, "state": "gave_up", "wall_actions": 81, "wall_top_repeat": 21, "wall_uniq_frac": 0.123}], "stall_stats": {"actions_dropped": 7, "bans_armed": 67, "levels_seen": 48, "trips": 105, "warnings_shown": 105}, "tokens_per_action": 531.3}
+   8490.3 out | 
+   8490.3 out | game   levels  rhae    actions   wall_act    loop_metric  state
+   8490.3 out | sb26   1       2.78    276       265         0.14         gave_up
+   8490.3 out | vc33   3       21.43   290       193         0.187        gave_up
+   8490.3 out | ft09   2       14.29   232       220         0.059        gave_up
+   8490.3 out | lp85   7       77.78   301       72          0.556        gave_up
+   8490.3 out | re86   5       41.67   370       72          0.403        gave_up
+   8490.3 out | ar25   1       2.78    266       247         0.348        gave_up
+   8490.3 out | sb26   1       2.78    489       475         0.122        gave_up
+   8490.3 out | vc33   3       21.43   360       252         0.218        gave_up
+   8490.3 out | ft09   2       14.29   130       119         0.101        gave_up
+   8490.3 out | lp85   3       16.67   80        9           0.556        gave_up
+   8490.3 out | re86   4       27.78   452       137         0.292        gave_up
+   8490.3 out | ar25   4       27.78   189       81          0.259        gave_up
+   8490.3 out | 
+   8490.3 out | RHAE mean  all 6: 22.62   (depthrun1 24.47, stallrun2 32.41)
+   8490.3 out | RHAE mean  WITHOUT sb26: 26.59   (depthrun1 28.81, stallrun2 23.33)  <-- THE VERDICT
+   8490.3 out | loop metric to beat (depthrun1 / stallrun2 means): 0.234 / 0.219
+   8490.3 out | actions 3435, a/d 6.67, tok/act 531  (depthrun1 1766 / 6.20 / 493; stallrun2 2509 / 6.66 / 328)
+   8490.3 out | stall stats: {'levels_seen': 48, 'trips': 105, 'warnings_shown': 105, 'bans_armed': 67, 'actions_dropped': 7}
+   8492.3 err | /usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+   8492.3 err |   cells[i][c] = re.sub('\\\\\|', '|', cell)
+   8492.5 err | /usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+   8492.5 err |   text = re.sub(r'_', '\_', text) # Escape underscores in display text
+   8492.8 err | [NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+   8492.9 err | [NbConvertApp] Writing 131315 bytes to __notebook__.ipynb
+   8494.1 err | [NbConvertApp] Converting notebook __notebook__.ipynb to html
+   8494.7 err | [NbConvertApp] Writing 518157 bytes to __results__.html

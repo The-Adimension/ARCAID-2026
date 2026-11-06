@@ -1,0 +1,64 @@
+--- base cell 8
++++ new cell 9
+@@ -9,34 +9,15 @@
+ 
+ Q38_P1_PUBLIC_GAME_IDS = [
+-    "ar25-0c556536",
+-    "bp35-0a0ad940",
+-    "cd82-fb555c5d",
++    "ft09-0d8bbf25",
++    "sb26-7fbdac44",
++    "s5i5-18d95033",
++    "re86-8af5384d",
++    "m0r0-492f87ba",
+     "cn04-2fe56bfb",
+-    "dc22-fdcac232",
+-    "ft09-0d8bbf25",
+-    "g50t-5849a774",
+-    "ka59-38d34dbb",
+-    "lf52-271a04aa",
+-    "lp85-305b61c3",
+-    "ls20-9607627b",
+-    "m0r0-492f87ba",
+-    "r11l-495a7899",
+-    "re86-8af5384d",
+-    "s5i5-18d95033",
+-    "sb26-7fbdac44",
+-    "sc25-635fd71a",
+-    "sk48-d8078629",
+-    "sp80-589a99af",
+-    "su15-1944f8ab",
+-    "tn36-ef4dde99",
+-    "tr87-cd924810",
+-    "tu93-0768757b",
+-    "vc33-5430563c",
+-    "wa30-ee6fef47",
+ ]
+ 
+ if not true_submission:
+-    if len(Q38_P1_PUBLIC_GAME_IDS) != 25 or len(set(Q38_P1_PUBLIC_GAME_IDS)) != 25:
+-        raise RuntimeError("Q38 P1 public game list must contain exactly 25 unique games.")
++    if len(Q38_P1_PUBLIC_GAME_IDS) < 1 or len(set(Q38_P1_PUBLIC_GAME_IDS)) != len(Q38_P1_PUBLIC_GAME_IDS):
++        raise RuntimeError("Public smoke game list must contain unique games.")
+     if not bm.games:
+         raise RuntimeError("benchmark_initial.pkl contains no template public game.")
+@@ -58,5 +39,5 @@
+         for game_id in Q38_P1_PUBLIC_GAME_IDS
+     ]
+-    bm.n_passes = 1
++    bm.n_passes = 6
+     bm.game_weights = None
+ 
+@@ -64,9 +45,9 @@
+     # intended evaluation configuration is visible and stable.
+     if hasattr(bm.solver, "concurrency"):
+-        bm.solver.concurrency = 28
++        bm.solver.concurrency = 18
+     if hasattr(bm.solver, "max_runtime_s_per_game"):
+-        bm.solver.max_runtime_s_per_game = 7920.0
++        bm.solver.max_runtime_s_per_game = 1800.0
+ 
+-    bm.label = f"{bm.label}-25g-p1"
++    bm.label = f"{bm.label}-arc3-ab-6g"
+     print(f"Public evaluation override: {len(bm.games)} games × {bm.n_passes} pass = {len(bm.games) * bm.n_passes} runs")
+     print("Public evaluation concurrency:", getattr(bm.solver, "concurrency", None))

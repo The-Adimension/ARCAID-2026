@@ -1,0 +1,17 @@
+--- base cell 2
++++ new cell 3
+@@ -22,8 +22,12 @@
+ 
+ # Apply the measured vLLM winner before any serving setup command runs.
+-PUBLIC25_VLLM_PROFILE_NAME = 'kv5-bf16-mtp3-c8-cg32'
++# arc3 v5 (2026-09-26): fp8 KV in the same 5 GiB. Every FP4 run so far had KV full at 3-4
++# running requests (~28k-token contexts) with ~20 of 25-28 games queued, and generation rose
++# with batch (1->122, 3->240, 5->340 tok/s). fp8 KV ~1.84x capacity at 32k on GDN hybrids.
++# No --calculate-kv-scales (vLLM #37554 corrupts fp8 KV on hybrids); serving_setup never passes it.
++PUBLIC25_VLLM_PROFILE_NAME = 'kv5-fp8-mtp3-c8-cg32'
+ PUBLIC25_VLLM_PROFILE_ENV = {
+     "TAAF_VLLM_ENABLE_PREFIX_CACHING": "0",
+-    "TAAF_VLLM_KV_CACHE_DTYPE": "auto",
++    "TAAF_VLLM_KV_CACHE_DTYPE": "fp8",
+     "TAAF_VLLM_KV_CACHE_MEMORY_BYTES": "5368709120",
+     "TAAF_VLLM_MAX_CUDAGRAPH_CAPTURE_SIZE": "32",

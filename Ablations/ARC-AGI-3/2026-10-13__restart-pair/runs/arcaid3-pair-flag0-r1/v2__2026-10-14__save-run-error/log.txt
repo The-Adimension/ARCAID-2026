@@ -1,0 +1,60 @@
+      4.4 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+      4.4 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+      4.4 err | 0.00s - to python to disable frozen modules.
+      4.4 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+      4.7 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+      4.7 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+      4.7 err | 0.00s - to python to disable frozen modules.
+      4.7 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+      5.6 out | Writing /kaggle/harness-changes.patch
+      5.6 out | Writing /kaggle/restart.patch
+      5.7 out | cp: cannot stat '/kaggle/input/datasets/dfranzen/taaf-kaggle-source-bundle-copy': No such file or directory
+      6.1 err | Traceback (most recent call last):
+      6.1 err |   File "<string>", line 1, in <module>
+      6.1 err |   File "/usr/local/lib/python3.12/dist-packages/papermill/execute.py", line 131, in execute_notebook
+      6.1 err |     raise_for_execution_errors(nb, output_path)
+      6.1 err |   File "/usr/local/lib/python3.12/dist-packages/papermill/execute.py", line 251, in raise_for_execution_errors
+      6.1 err |     raise error
+      6.1 err | papermill.exceptions.PapermillExecutionError: 
+      6.1 err | ---------------------------------------------------------------------------
+      6.1 err | Exception encountered at "In [3]":
+      6.1 err | ---------------------------------------------------------------------------
+      6.1 err | FileNotFoundError                         Traceback (most recent call last)
+      6.1 err | /tmp/ipykernel_65/2954462793.py in <cell line: 0>()
+      6.1 err |      29 get_ipython().system('rm -Rf $BUNDLE_DIR')
+      6.1 err |      30 get_ipython().system('cp -a $ORIG_BUNDLE_DIR $BUNDLE_DIR')
+      6.1 err | ---> 31 subprocess.run(["git", "apply", "--include=ARC3-Inference/*", "-v", "/kaggle/harness-changes.patch"], cwd=f"{BUNDLE_DIR}/src", check=True)
+      6.1 err |      32 print('harness patch applied successfully')
+      6.1 err |      33 # ARCAID3: stuck-level restart, applied after Franzen's patch (kaggle/restart-dfranzen/restart.patch)
+      6.1 err | 
+      6.1 err | /usr/lib/python3.12/subprocess.py in run(input, capture_output, timeout, check, *popenargs, **kwargs)
+      6.1 err |     546         kwargs['stderr'] = PIPE
+      6.1 err |     547 
+      6.1 err | --> 548     with Popen(*popenargs, **kwargs) as process:
+      6.1 err |     549         try:
+      6.1 err |     550             stdout, stderr = process.communicate(input, timeout=timeout)
+      6.1 err | 
+      6.1 err | /usr/lib/python3.12/subprocess.py in __init__(self, args, bufsize, executable, stdin, stdout, stderr, preexec_fn, close_fds, shell, cwd, env, universal_newlines, startupinfo, creationflags, restore_signals, start_new_session, pass_fds, user, group, extra_groups, encoding, errors, text, umask, pipesize, process_group)
+      6.1 err |    1024                             encoding=encoding, errors=errors)
+      6.1 err |    1025 
+      6.1 err | -> 1026             self._execute_child(args, executable, preexec_fn, close_fds,
+      6.1 err |    1027                                 pass_fds, cwd, env,
+      6.1 err |    1028                                 startupinfo, creationflags, shell,
+      6.1 err | 
+      6.1 err | /usr/lib/python3.12/subprocess.py in _execute_child(self, args, executable, preexec_fn, close_fds, pass_fds, cwd, env, startupinfo, creationflags, shell, p2cread, p2cwrite, c2pread, c2pwrite, errread, errwrite, restore_signals, gid, gids, uid, umask, start_new_session, process_group)
+      6.1 err |    1953                         err_msg = os.strerror(errno_num)
+      6.1 err |    1954                     if err_filename is not None:
+      6.1 err | -> 1955                         raise child_exception_type(errno_num, err_msg, err_filename)
+      6.1 err |    1956                     else:
+      6.1 err |    1957                         raise child_exception_type(errno_num, err_msg)
+      6.1 err | 
+      6.1 err | FileNotFoundError: [Errno 2] No such file or directory: '/kaggle/taaf-kaggle-source-share/src'
+      6.1 err | 
+      7.2 err | /usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+      7.2 err |   cells[i][c] = re.sub('\\\\\|', '|', cell)
+      7.3 err | /usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+      7.3 err |   text = re.sub(r'_', '\_', text) # Escape underscores in display text
+      7.6 err | [NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+      7.7 err | [NbConvertApp] Writing 682192 bytes to __notebook__.ipynb
+      8.8 err | [NbConvertApp] Converting notebook __notebook__.ipynb to html
+      9.6 err | [NbConvertApp] Writing 2297197 bytes to __results__.html

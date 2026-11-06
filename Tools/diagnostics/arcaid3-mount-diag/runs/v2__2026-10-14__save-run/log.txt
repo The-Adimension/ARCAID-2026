@@ -1,0 +1,33 @@
+      4.5 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+      4.5 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+      4.5 err | 0.00s - to python to disable frozen modules.
+      4.5 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+      4.8 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+      4.8 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+      4.8 err | 0.00s - to python to disable frozen modules.
+      4.8 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+      5.5 out | t=    0s exists=True input=['competitions', 'datasets', 'models']
+      5.5 out | ['README.dataset.md', 'benchmark_initial.pkl', 'deploy_target.pkl', 'git_status.txt', 'preamble.txt', 'setup_commands.json', 'src', 'taaf-kaggle-bundle.json', 'teardown_commands.json']
+      5.5 out | /kaggle/input ['competitions', 'datasets', 'models'] 0
+      5.5 out | /kaggle/input/datasets ['dfranzen'] 0
+      5.5 out | /kaggle/input/datasets/dfranzen ['pennyroyal-v253', 'taaf-kaggle-source-bundle-copy'] 0
+      5.5 out | /kaggle/input/models ['dfranzen'] 0
+      5.5 out | /kaggle/input/models/dfranzen ['albucino-qwen3-8-flash-next-drafter', 'intel-qwen3.8-flash-next-w4a16-autoround'] 0
+      5.5 out | /kaggle/input/competitions ['arc-prize-2026-arc-agi-3'] 0
+      5.5 out | /kaggle/input/competitions/arc-prize-2026-arc-agi-3 ['ARC-AGI-3-Agents', 'arc_agi_3_wheels', 'environment_files'] 0
+      5.5 out | /tmp/fs/kaggle_pO792Gf1Cw5Q4G1yBkKWaAswuOE29zIZbA4NmIg4FE-358306814-webtier/srcfile on /kaggle/input type ext4 (ro,relatime)
+      5.5 out | 192.168.11.2:/data/kagglesdsdata/datasets/12250142/20092813/dlqzykoc32fp on /kaggle/input/datasets/dfranzen/taaf-kaggle-source-bundle-copy type nfs (ro,relatime,vers=3,rsize=524288,wsize=524288,namlen=255,hard,nolock,fatal_neterrors=none,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=192.168.11.2,mountvers=3,mountport=2050,mountproto=tcp,local_lock=all,addr=192.168.11.2)
+      5.5 out | 192.168.11.2:/data/kagglesdsdata/competitions/133468/16741059/dhvpdgh9lm3b on /kaggle/input/competitions/arc-prize-2026-arc-agi-3 type nfs (ro,relatime,vers=3,rsize=524288,wsize=524288,namlen=255,hard,nolock,fatal_neterrors=none,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=192.168.11.2,mountvers=3,mountport=2050,mountproto=tcp,local_lock=all,addr=192.168.11.2)
+      5.5 out | 192.168.11.2:/data/kagglesdsdata/datasets/12273106/20134793/dlrvhljskpjc on /kaggle/input/datasets/dfranzen/pennyroyal-v253 type nfs (ro,relatime,vers=3,rsize=524288,wsize=524288,namlen=255,hard,nolock,fatal_neterrors=none,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=192.168.11.2,mountvers=3,mountport=2050,mountproto=tcp,local_lock=all,addr=192.168.11.2)
+      5.5 out | 192.168.11.2:/data/kagglesdsdata/models/755057/1007009/dlqwgfdu8u6j on /kaggle/input/models/dfranzen/albucino-qwen3-8-flash-next-drafter/transformers/default/1 type nfs (ro,relatime,vers=3,rsize=524288,wsize=524288,namlen=255,hard,nolock,fatal_neterrors=none,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=192.168.11.2,mountvers=3,mountport=2050,mountproto=tcp,local_lock=all,addr=192.168.11.2)
+      5.5 out | 192.168.11.2:/data/kagglesdsdata/models/755365/1007514/dlr8t7z9l167 on /kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1 type nfs (ro,relatime,vers=3,rsize=524288,wsize=524288,namlen=255,hard,nolock,fatal_neterrors=none,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=192.168.11.2,mountvers=3,mountport=2050,mountproto=tcp,local_lock=all,addr=192.168.11.2)
+      5.5 out | GPU 0: NVIDIA RTX PRO 6000 Blackwell Server Edition (UUID: GPU-6fa092ba-652c-3336-1578-5d03dff8abe7)
+      5.5 out | 
+      6.8 err | /usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+      6.8 err |   cells[i][c] = re.sub('\\\\\|', '|', cell)
+      6.9 err | /usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+      6.9 err |   text = re.sub(r'_', '\_', text) # Escape underscores in display text
+      7.3 err | [NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+      7.4 err | [NbConvertApp] Writing 5443 bytes to __notebook__.ipynb
+      8.6 err | [NbConvertApp] Converting notebook __notebook__.ipynb to html
+      8.9 err | [NbConvertApp] Writing 280840 bytes to __results__.html

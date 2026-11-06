@@ -1,0 +1,81 @@
+      7.1 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+      7.1 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+      7.1 err | 0.00s - to python to disable frozen modules.
+      7.1 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+      7.7 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+      7.7 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+      7.7 err | 0.00s - to python to disable frozen modules.
+      7.7 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+      8.8 out | PUBLIC25_VLLM_PROFILE name=kv5-bf16-mtp3-c8-cg32 env={"TAAF_VLLM_ENABLE_PREFIX_CACHING": "0", "TAAF_VLLM_KV_CACHE_DTYPE": "auto", "TAAF_VLLM_KV_CACHE_MEMORY_BYTES": "5368709120", "TAAF_VLLM_MAX_CUDAGRAPH_CAPTURE_SIZE": "32", "TAAF_VLLM_MAX_NUM_BATCHED_TOKENS": "8192", "TAAF_VLLM_MAX_NUM_SEQS": "8", "TAAF_VLLM_MTP_TOKENS": "3", "TAAF_VLLM_OMP_THREADS": "1"}
+      8.8 out | taaf.kaggle: TRUE_SUBMISSION=False
+     12.5 out | taaf.kaggle: source bundle = /kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1
+     12.5 out | taaf.kaggle: input paths = {"keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1": "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1", "keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1": "/kaggle/input/datasets/keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1"}
+     12.6 out | taaf.kaggle: wrote /usr/local/lib/python3.12/dist-packages/taaf_kaggle_sources.pth (5 source roots)
+     12.6 out | taaf.kaggle: setup command: "$PYTHON" "$TAAF_KAGGLE_BUNDLE_DIR/serving_setup.py"
+     12.8 out | VLLM_SETUP_MODE fast TAAF_KAGGLE_FAST_START=1
+     12.9 out | VLLM_SETUP_FAILED {"cleanup": {"identity_exists": false, "stopped": true}, "error": "Expected one RTX PRO 6000, found: ['0, Tesla T4, GPU-60eb79cb-7634-76a8-0114-0a33f1bce8e5, 15360, 14912, 580.159.04, 7.5', '1, Tesla T4, GPU-b700fdf3-13b6-cf06-90bd-9ef4c04e2fbb, 15360, 14912, 580.159.04, 7.5']", "error_type": "RuntimeError", "failed_epoch": 1790416632.130965, "server_log_tail": "", "traceback": "Traceback (most recent call last):\n  File \"/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py\", line 3094, in <module>\n    main()\n  File \"/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py\", line 2968, in main\n    inventory = gpu_inventory()\n                ^^^^^^^^^^^^^^^\n  File \"/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py\", line 1830, in gpu_inventory\n    raise RuntimeError(f\"Expected one RTX PRO 6000, found: {rows}\")\nRuntimeError: Expected one RTX PRO 6000, found: ['0, Tesla T4, GPU-60eb79cb-7634-76a8-0114-0a33f1bce8e5, 15360, 14912, 580.159.04, 7.5', '1, Tesla T4, GPU-b700fdf3-13b6-cf06-90bd-9ef4c04e2fbb, 15360, 14912, 580.159.04, 7.5']\n"}
+     12.9 err | Traceback (most recent call last):
+     12.9 err |   File "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py", line 3094, in <module>
+     12.9 err |     main()
+     12.9 err |   File "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py", line 2968, in main
+     12.9 err |     inventory = gpu_inventory()
+     12.9 err |                 ^^^^^^^^^^^^^^^
+     12.9 err |   File "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py", line 1830, in gpu_inventory
+     12.9 err |     raise RuntimeError(f"Expected one RTX PRO 6000, found: {rows}")
+     12.9 err | RuntimeError: Expected one RTX PRO 6000, found: ['0, Tesla T4, GPU-60eb79cb-7634-76a8-0114-0a33f1bce8e5, 15360, 14912, 580.159.04, 7.5', '1, Tesla T4, GPU-b700fdf3-13b6-cf06-90bd-9ef4c04e2fbb, 15360, 14912, 580.159.04, 7.5']
+     12.9 out | VLLM_SETUP_MODE fast TAAF_KAGGLE_FAST_START=1
+     12.9 out | VLLM_SETUP_FAILED {"cleanup": {"identity_exists": false, "stopped": true}, "error": "Expected one RTX PRO 6000, found: ['0, Tesla T4, GPU-60eb79cb-7634-76a8-0114-0a33f1bce8e5, 15360, 14912, 580.159.04, 7.5', '1, Tesla T4, GPU-b700fdf3-13b6-cf06-90bd-9ef4c04e2fbb, 15360, 14912, 580.159.04, 7.5']", "error_type": "RuntimeError", "failed_epoch": 1790416632.130965, "server_log_tail": "", "traceback": "Traceback (most recent call last):\n  File \"/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py\", line 3094, in <module>\n    main()\n  File \"/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py\", line 2968, in main\n    inventory = gpu_inventory()\n                ^^^^^^^^^^^^^^^\n  File \"/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py\", line 1830, in gpu_inventory\n    raise RuntimeError(f\"Expected one RTX PRO 6000, found: {rows}\")\nRuntimeError: Expected one RTX PRO 6000, found: ['0, Tesla T4, GPU-60eb79cb-7634-76a8-0114-0a33f1bce8e5, 15360, 14912, 580.159.04, 7.5', '1, Tesla T4, GPU-b700fdf3-13b6-cf06-90bd-9ef4c04e2fbb, 15360, 14912, 580.159.04, 7.5']\n"}
+     12.9 err | Traceback (most recent call last):
+     12.9 err |   File "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py", line 3094, in <module>
+     12.9 err |     main()
+     12.9 err |   File "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py", line 2968, in main
+     12.9 err |     inventory = gpu_inventory()
+     12.9 err |                 ^^^^^^^^^^^^^^^
+     12.9 err |   File "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py", line 1830, in gpu_inventory
+     12.9 err |     raise RuntimeError(f"Expected one RTX PRO 6000, found: {rows}")
+     12.9 err | RuntimeError: Expected one RTX PRO 6000, found: ['0, Tesla T4, GPU-60eb79cb-7634-76a8-0114-0a33f1bce8e5, 15360, 14912, 580.159.04, 7.5', '1, Tesla T4, GPU-b700fdf3-13b6-cf06-90bd-9ef4c04e2fbb, 15360, 14912, 580.159.04, 7.5']
+     12.9 err | 
+     12.9 err | Traceback (most recent call last):
+     12.9 err |   File "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py", line 3094, in <module>
+     12.9 err |     main()
+     12.9 err |   File "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py", line 2968, in main
+     12.9 err |     inventory = gpu_inventory()
+     12.9 err |                 ^^^^^^^^^^^^^^^
+     12.9 err |   File "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py", line 1830, in gpu_inventory
+     12.9 err |     raise RuntimeError(f"Expected one RTX PRO 6000, found: {rows}")
+     12.9 err | RuntimeError: Expected one RTX PRO 6000, found: ['0, Tesla T4, GPU-60eb79cb-7634-76a8-0114-0a33f1bce8e5, 15360, 14912, 580.159.04, 7.5', '1, Tesla T4, GPU-b700fdf3-13b6-cf06-90bd-9ef4c04e2fbb, 15360, 14912, 580.159.04, 7.5']
+     13.1 err | Traceback (most recent call last):
+     13.1 err |   File "<string>", line 1, in <module>
+     13.1 err |   File "/usr/local/lib/python3.12/dist-packages/papermill/execute.py", line 131, in execute_notebook
+     13.1 err |     raise_for_execution_errors(nb, output_path)
+     13.1 err |   File "/usr/local/lib/python3.12/dist-packages/papermill/execute.py", line 251, in raise_for_execution_errors
+     13.1 err |     raise error
+     13.1 err | papermill.exceptions.PapermillExecutionError: 
+     13.1 err | ---------------------------------------------------------------------------
+     13.1 err | Exception encountered at "In [4]":
+     13.1 err | ---------------------------------------------------------------------------
+     13.1 err | CalledProcessError                        Traceback (most recent call last)
+     13.1 err | /tmp/ipykernel_25/2137133893.py in <cell line: 0>()
+     13.1 err |      36 for command in json.loads((BUNDLE_DIR / "setup_commands.json").read_text()):
+     13.1 err |      37     print(f"taaf.kaggle: setup command: {command}", flush=True)
+     13.1 err | ---> 38     subprocess.run(command, shell=True, check=True, cwd=WORKING_DIR, env=env)
+     13.1 err |      39     # Re-read in case the command persisted new env keys.
+     13.1 err |      40     env = _command_env()
+     13.1 err | 
+     13.1 err | /usr/lib/python3.12/subprocess.py in run(input, capture_output, timeout, check, *popenargs, **kwargs)
+     13.1 err |     569         retcode = process.poll()
+     13.1 err |     570         if check and retcode:
+     13.1 err | --> 571             raise CalledProcessError(retcode, process.args,
+     13.1 err |     572                                      output=stdout, stderr=stderr)
+     13.1 err |     573     return CompletedProcess(process.args, retcode, stdout, stderr)
+     13.1 err | 
+     13.1 err | CalledProcessError: Command '"$PYTHON" "$TAAF_KAGGLE_BUNDLE_DIR/serving_setup.py"' returned non-zero exit status 1.
+     13.1 err | 
+     15.3 err | /usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+     15.3 err |   cells[i][c] = re.sub('\\\\\|', '|', cell)
+     15.4 err | /usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+     15.4 err |   text = re.sub(r'_', '\_', text) # Escape underscores in display text
+     16.2 err | [NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+     16.5 err | [NbConvertApp] Writing 105251 bytes to __notebook__.ipynb
+     18.9 err | [NbConvertApp] Converting notebook __notebook__.ipynb to html
+     19.9 err | [NbConvertApp] Writing 525183 bytes to __results__.html

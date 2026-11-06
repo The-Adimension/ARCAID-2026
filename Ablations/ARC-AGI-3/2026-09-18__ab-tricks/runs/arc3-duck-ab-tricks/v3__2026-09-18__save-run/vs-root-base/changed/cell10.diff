@@ -1,0 +1,27 @@
+--- base cell 9
++++ new cell 10
+@@ -44,4 +44,24 @@
+         bm.game_weights = None
+ 
++    # arc3 item 2c: derive the per-game cap from the time actually left in the kernel, and
++    # keep a soft deadline in submission mode so Benchmark.run's teardown always executes.
++    import math
++
++    KERNEL_LIMIT_S = float(getattr(target, 'max_runtime_s', 0.0) or 32400.0)
++    TEARDOWN_RESERVE_S = 900.0
++    _elapsed = time.time() - NOTEBOOK_START_EPOCH
++    _remaining = max(600.0, KERNEL_LIMIT_S - _elapsed - TEARDOWN_RESERVE_S)
++    _waves = max(1, math.ceil(len(bm.games) * max(1, bm.n_passes) / max(1, int(bm.solver.concurrency))))
++    _derived_cap = _remaining / _waves
++    if true_submission:
++        bm.solver.max_runtime_s_per_game = _derived_cap
++        soft_end = datetime.fromtimestamp(NOTEBOOK_START_EPOCH) + timedelta(
++            seconds=KERNEL_LIMIT_S - TEARDOWN_RESERVE_S)
++    else:
++        bm.solver.max_runtime_s_per_game = min(bm.solver.max_runtime_s_per_game, _derived_cap)
++    print(f'arc3 budget: kernel={KERNEL_LIMIT_S:.0f}s elapsed={_elapsed:.0f}s remaining={_remaining:.0f}s '
++          f'games={len(bm.games)} passes={bm.n_passes} waves={_waves} '
++          f'per_game={bm.solver.max_runtime_s_per_game:.0f}s soft_end={soft_end}', flush=True)
++
+     try:
+         await bm.run(

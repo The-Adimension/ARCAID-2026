@@ -1,0 +1,156 @@
+--- base cell 2
++++ new cell 2
+@@ -147,4 +147,13 @@
+     "dead_coarse": False,     # bucket area/bbox by log2 so a 40-long line and a 44-long one are one class
+     "dead_epoch_clear": False,  # a world change (switch, door) forgets dead classes, like walls
++    # Effect-first clicking, lifted from the local LLM tests (2026-09-11): on
++    # vc33 Qwen3-14B cleared level 1 in 19 actions (this agent: 366) by clicking
++    # the two objects that changed the most pixels, over and over. 0 = off;
++    # 1 = greedy, at every new state click the class with the largest mean
++    # masked change; 2 = scan every visible class once first, then exploit.
++    # At 1200 actions on 25 public games: off 8 levels, greedy 7 (loses tn36,
++    # though lp85 falls in 16 actions vs 117), scan 9 (sc25 cleared for the
++    # first time; tn36 in 340 vs 1048). Hold ties on levels. (lab, 2026-09-11)
++    "click_effect": 2,
+     # Outcome head, separate from dynamics: what the winning transition touched
+     # (a colour walked onto, an object class clicked) is a prior for the next
+@@ -152,4 +161,10 @@
+     # counts. "win" must be in `tiers` for the navigator to use it.
+     "win_prior": True,
++    # Principle P7 (memory/principles.md): anchor the player on the patch of its
++    # own colours that has its size and sits nearest where the measured step
++    # puts it, instead of re-fitting its outline each frame. A player sprite with
++    # an inner pixel that changes (tu93) or a ghost copy (g50t) made the outline
++    # fit wobble by a pixel, and every walk built on it broke.
++    "blob_anchor": True,
+     # Retrodiction gate (Retrodict 99.9%, Tycho, Twin): a world model may only
+     # plan live actions if it replays the recorded transitions at this ratio.
+@@ -689,4 +704,7 @@
+         self.click_dead: Counter = Counter()
+         self.click_live: Counter = Counter()
++        # Effect size per class: masked pixels changed, summed, and click count.
++        self.click_gain: Counter = Counter()
++        self.click_n: Counter = Counter()
+         # Outcome head: what the transition that finished a level touched.
+         self.win_sigs: set = set()
+@@ -806,7 +824,52 @@
+         return len(set(remap.values())) == len(remap)
+ 
++    def _player_blob(self, grid: list[list[int]], near: tuple[int, int]) -> Optional[tuple[int, int]]:
++        """Top-left of the player-coloured patch of the player's size nearest `near`.
++
++        Robust where outline matching is not: an inner pixel that changes colour
++        leaves the patch's bounding box alone, and a ghost copy elsewhere loses on
++        distance. None when no patch of exactly the player's size is in reach.
++        """
++        cols = {c for _rx, _ry, c in self.template}
++        h = len(grid)
++        w = len(grid[0]) if h else 0
++        if not cols or not h or not w:
++            return None
++        sw, sh = self.size
++        reach = TUNE["max_shift"] + max(sw, sh)
++        x0, x1 = max(0, near[0] - reach), min(w - 1, near[0] + sw + reach)
++        y0, y1 = max(0, near[1] - reach), min(h - 1, near[1] + sh + reach)
++        seen: set = set()
++        best, best_d = None, None
++        for y in range(y0, y1 + 1):
++            for x in range(x0, x1 + 1):
++                if (x, y) in seen or int(grid[y][x]) not in cols:
++                    continue
++                stack, cells = [(x, y)], []
++                seen.add((x, y))
++                while stack:
++                    cx, cy = stack.pop()
++                    cells.append((cx, cy))
++                    for dx, dy in _N4:
++                        nx, ny = cx + dx, cy + dy
++                        if (x0 <= nx <= x1 and y0 <= ny <= y1 and (nx, ny) not in seen
++                                and int(grid[ny][nx]) in cols):
++                            seen.add((nx, ny))
++                            stack.append((nx, ny))
++                bx, by = min(c[0] for c in cells), min(c[1] for c in cells)
++                if (max(c[0] for c in cells) - bx + 1, max(c[1] for c in cells) - by + 1) != (sw, sh):
++                    continue
++                d = abs(bx - near[0]) + abs(by - near[1])
++                if best is None or d < best_d:
++                    best, best_d = (bx, by), d
++        return best
++
+     def locate(self, grid: list[list[int]]) -> Optional[tuple[int, int]]:
+         if not self.template:
+             return None
++        if TUNE["blob_anchor"] and self.anchor is not None:
++            found = self._player_blob(grid, self.anchor)
++            if found is not None:
++                return found
+         h = len(grid)
+         w = len(grid[0]) if h else 0
+@@ -949,5 +1012,24 @@
+         explained: set = set()
+         moved = False
+-        if res is not None:
++        # P7: once we know what the player looks like, measure its step from its
++        # own patch. "stayed" means it was blocked: nothing else that moved (a
++        # ghost, a patrolling piece) may be mistaken for it.
++        blob_state = None
++        if TUNE["blob_anchor"] and self.template and before is not None and aid in (1, 2, 3, 4):
++            d = self.known_deltas().get(aid)
++            guess = (before[0] + d[0], before[1] + d[1]) if d else before
++            blob = self._player_blob(g1, guess)
++            if blob == before:
++                blob_state = "stayed"
++            elif blob is not None and max(abs(blob[0] - before[0]), abs(blob[1] - before[1])) <= TUNE["max_shift"]:
++                blob_state = "moved"
++                self.moves += 1
++                moved = True
++                self.delta_votes[aid][(blob[0] - before[0], blob[1] - before[1])] += 1
++                self.anchor = blob
++                explained = self.cells_at(before) | self.cells_at(blob)
++        if blob_state is not None:
++            pass
++        elif res is not None:
+             dx, dy, colors, old, new = res
+             explained = set(old) | set(new)
+@@ -991,8 +1073,15 @@
+         """
+         sig = blob_at(g0, x, y)
+-        if to_tuple(self.mask_grid(g0)) == to_tuple(self.mask_grid(g1)):
++        changed = len(diff(self.mask_grid(g0), self.mask_grid(g1)))
++        if changed == 0:
+             self.click_dead[sig] += 1
+         else:
+             self.click_live[sig] += 1
++        self.click_gain[sig] += changed
++        self.click_n[sig] += 1
++
++    def click_effect(self) -> dict:
++        """Mean masked pixels changed per click, for every class clicked so far."""
++        return {s: self.click_gain[s] / n for s, n in self.click_n.items() if n}
+ 
+     def dead_sigs(self) -> frozenset:
+@@ -1180,4 +1269,6 @@
+         """
+         self.color_floor.clear()
++        self.click_gain.clear()
++        self.click_n.clear()
+         if TUNE["dead_scope"] == "level":
+             self.click_dead.clear()
+@@ -1877,4 +1968,17 @@
+         tried = mem.tried.get(h, set())
+         untried = [k for k in cands if k not in tried]
++        mode = TUNE["click_effect"]
++        if untried and mode and self.tracker is not None:
++            eff = self.tracker.click_effect()
++            sig_of = {}
++            for k in untried:
++                if k.startswith("6:"):
++                    _a, x, y = parse_key(k)
++                    sig_of[k] = blob_at(grid, int(x or 0), int(y or 0))
++            # Mode 2 scans every visible class once before exploiting any.
++            scanning = mode == 2 and any(s not in eff for s in sig_of.values())
++            best = [k for k, s in sig_of.items() if eff.get(s, 0) > 0]
++            if best and not scanning:
++                return min(best, key=lambda k: (-eff[sig_of[k]], global_counts.get(k, 0), k))
+         if untried:
+             return min(untried, key=lambda k: (global_counts.get(k, 0), k))

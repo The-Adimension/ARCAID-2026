@@ -1,0 +1,374 @@
+--- base cell 2
++++ new cell 2
+@@ -131,7 +131,28 @@
+     # never reaches the control that matters; too many bury it in a tail the
+     # explorer never works through. (scripts/lab.py, 2026-09-07)
++    "avoid_fatal": True,      # refuse to re-walk an edge that has killed us
+     "click_cap": 24,
+     "consume_hits": 2,        # touches before a colour counts as collectable
+     "goal_min_obs": 6,        # observations before the goal channel may fire
++    # Dead-signature (Reki, Milestone #1 2nd place): an object class -- colour,
++    # area, bbox -- that has been clicked `dead_clicks` times without changing
++    # the masked grid is dropped from the click targets. 0 disables. Measured
++    # before the patch: lp85 spent 339 of 398 clicks on 14 classes that never
++    # did anything; ft09 spent all 398 on 9 such classes. At the 1200-action
++    # budget {0,1,2} gives 7/8/8 levels; 1 beats 2 on `first` (275 vs 317) and
++    # ties it on the hold half. vc33 is the first public game to finish a
++    # second level. (scripts/lab.py --suite deep, 2026-09-08)
++    "dead_clicks": 1,
++    "dead_scope": "level",    # "level": forget dead classes on a new level; "game": keep
++    "dead_coarse": False,     # bucket area/bbox by log2 so a 40-long line and a 44-long one are one class
++    "dead_epoch_clear": False,  # a world change (switch, door) forgets dead classes, like walls
++    # Outcome head, separate from dynamics: what the winning transition touched
++    # (a colour walked onto, an object class clicked) is a prior for the next
++    # level. Only ever learned from a levels_completed tick, never from colour
++    # counts. "win" must be in `tiers` for the navigator to use it.
++    "win_prior": True,
++    # Retrodiction gate (Retrodict 99.9%, Tycho, Twin): a world model may only
++    # plan live actions if it replays the recorded transitions at this ratio.
++    "plan_min_ratio": 0.75,
+ }
+ 
+@@ -214,4 +235,45 @@
+             })
+     return out
++
++
++def blob_at(grid: list[list[int]], x: int, y: int) -> tuple[int, int, int, int]:
++    """Class signature of the object under (x, y): (colour, area, bbox w, bbox h).
++
++    A local flood fill, so a click costs one object and not the whole board.
++    The signature is what a dead-click record is keyed on: the same button
++    drawn in the same place on the next level has the same signature, while
++    the exact cell clicked does not survive even a small redraw.
++    """
++    h = len(grid)
++    w = len(grid[0]) if h else 0
++    if not (0 <= y < h and 0 <= x < w):
++        return (-1, 0, 0, 0)
++    col = int(grid[y][x])
++    seen = {(x, y)}
++    stack = [(x, y)]
++    minx = maxx = x
++    miny = maxy = y
++    while stack:
++        cx, cy = stack.pop()
++        for dx, dy in _N4:
++            nx, ny = cx + dx, cy + dy
++            if 0 <= nx < w and 0 <= ny < h and (nx, ny) not in seen and int(grid[ny][nx]) == col:
++                seen.add((nx, ny))
++                stack.append((nx, ny))
++                minx, maxx = min(minx, nx), max(maxx, nx)
++                miny, maxy = min(miny, ny), max(maxy, ny)
++    return click_sig(col, len(seen), maxx - minx + 1, maxy - miny + 1)
++
++
++def click_sig(color: int, area: int, bw: int, bh: int) -> tuple[int, int, int, int]:
++    """The class key a dead-click record is filed under.
++
++    Exact by default. With `dead_coarse` the three sizes are log2-bucketed:
++    on vc33 the board is ruled with one-pixel lines of every length, and an
++    exact key makes each length a class that has to die on its own.
++    """
++    if not TUNE["dead_coarse"]:
++        return (color, area, bw, bh)
++    return (color, area.bit_length(), bw.bit_length(), bh.bit_length())
+ 
+ 
+@@ -614,4 +676,6 @@
+         self.blocked_at: set = set()
+         self.retry: set = set()
++        self.fatal: set = set()
++        self.deaths: int = 0
+         self.epoch_stood: set = set()
+         self.occ_rows: set = set()
+@@ -621,4 +685,11 @@
+         self.consume: Counter = Counter()
+         self.color_floor: dict[int, int] = {}
++        # Dead-signature channel: object classes clicked without effect, and
++        # classes that did something at least once (which are never dead).
++        self.click_dead: Counter = Counter()
++        self.click_live: Counter = Counter()
++        # Outcome head: what the transition that finished a level touched.
++        self.win_sigs: set = set()
++        self.win_colors: set[int] = set()
+         self.moves: int = 0
+         self.n_obs: int = 0
+@@ -686,4 +757,6 @@
+                 self.retry = set(self.blocked_at)
+                 self.epoch_stood.clear()
++                if TUNE["dead_epoch_clear"]:
++                    self.click_dead.clear()
+                 if self.anchor is not None:
+                     self.switches[self.anchor] += 1
+@@ -897,4 +970,6 @@
+         self._mark_occupied(self.anchor)
+         self._learn_terrain(g0, aid, before)
++        if aid == 6 and _x is not None and _y is not None:
++            self._learn_click(g0, g1, _x, _y)
+         if "goal" in TUNE["tiers"]:
+             # REFUTED 2026-09-07 (see LAB.md): fires on only 2 of 8 sampled games
+@@ -906,4 +981,68 @@
+         self._refresh_mask()
+         self.bump_epoch(g0, g1, explained)
++
++    def _learn_click(self, g0: list[list[int]], g1: list[list[int]], x: int, y: int) -> None:
++        """Did clicking this class of object change anything outside the HUD?
++
++        Reki (Milestone #1, 2nd) reports this as the one heuristic that earned
++        its keep without a GPU: stop clicking a class of object that never
++        changes the frame. Measured here before the patch, lp85 spent 339 of
++        398 clicks on fourteen such classes and ft09 all 398 on nine.
++        """
++        sig = blob_at(g0, x, y)
++        if to_tuple(self.mask_grid(g0)) == to_tuple(self.mask_grid(g1)):
++            self.click_dead[sig] += 1
++        else:
++            self.click_live[sig] += 1
++
++    def dead_sigs(self) -> frozenset:
++        """Object classes not worth another click. Empty when the knob is 0."""
++        need = TUNE["dead_clicks"]
++        if not need:
++            return frozenset()
++        return frozenset(
++            s for s, n in self.click_dead.items()
++            if n >= need and not self.click_live.get(s)
++        )
++
++    def note_win(
++        self, g0: list[list[int]], akey: str, anchor: Optional[tuple[int, int]]
++    ) -> None:
++        """The level just fell on this transition: remember what it touched.
++
++        This is the outcome head, kept apart from `step`. Twin and Tycho both
++        report that dynamics were the easy half and goal identification the
++        failure mode that survived. Nothing here is inferred from colour
++        counts; it is learned only from a `levels_completed` tick.
++        """
++        if not TUNE["win_prior"]:
++            return
++        aid, x, y = parse_key(akey)
++        if aid == 6 and x is not None and y is not None:
++            self.win_sigs.add(blob_at(g0, x, y))
++            return
++        if aid in (1, 2, 3, 4) and anchor is not None and self.template:
++            d = self.known_deltas().get(aid)
++            if d is None:
++                return
++            dst = (anchor[0] + d[0], anchor[1] + d[1])
++            h = len(g0)
++            w = len(g0[0]) if h else 0
++            bg = modal_color(g0)
++            for fx, fy in self.footprint(dst, anchor):
++                if 0 <= fy < h and 0 <= fx < w:
++                    c = int(g0[fy][fx])
++                    if c != bg and c not in self.colors:
++                        self.win_colors.add(c)
++
++    def win_cells(self, grid: list[list[int]]) -> set:
++        if not self.win_colors:
++            return set()
++        return {
++            (x, y)
++            for y, row in enumerate(grid)
++            for x, v in enumerate(row)
++            if int(v) in self.win_colors
++        }
+ 
+     def _learn_consumables(self, g0: list[list[int]], g1: list[list[int]]) -> None:
+@@ -1012,4 +1151,25 @@
+             self.noise_cols[x] += 1
+ 
++    def note_death(self, anchor: Optional[tuple[int, int]], aid: int) -> None:
++        """Record the edge that just ended a life.
++
++        Deaths were only ever written to Memory.known_dead, which is keyed on a
++        hash of the whole screen and read by the phase-5 fallback. The phase-4
++        navigator plans in avatar-anchor space and never consulted it, so nothing
++        the agent learned from dying could reach the planner that produced 1178
++        of ls20's 1199 actions. It walked into the same death seventeen times.
++
++        The same bug is reported independently in Nurmi & Toivonen, "Graph-Based
++        Exploration for ARC-AGI-3" (arXiv:2512.24156), whose agent placed 3rd:
++        actions that triggered a reset were not marked as tested, so the agent
++        re-selected reset-inducing state-action pairs and looped.
++        """
++        self.deaths += 1
++        if anchor is not None and aid in (1, 2, 3, 4):
++            self.fatal.add((anchor, aid))
++        # The world is back at the level's start state, so a switch we already
++        # flipped in the life that just ended is worth flipping again.
++        self.epoch_stood.clear()
++
+     def new_level(self) -> None:
+         """Walls and coverage are per-level; colours and deltas are not.
+@@ -1020,4 +1180,7 @@
+         """
+         self.color_floor.clear()
++        if TUNE["dead_scope"] == "level":
++            self.click_dead.clear()
++            self.click_live.clear()
+         self.edges.clear()
+         self.blocked.clear()
+@@ -1027,4 +1190,5 @@
+         self.blocked_at.clear()
+         self.retry.clear()
++        self.fatal.clear()
+         self.epoch_stood.clear()
+         self.epoch += 1
+@@ -1046,4 +1210,8 @@
+         for aid, (dx, dy) in moves:
+             if (cur, aid) in self.blocked:
++                continue
++            # Unlike a colour-guessed wall, a death is an observed fact, so it is
++            # skipped on the permissive pass too -- there is no point retrying it.
++            if TUNE["avoid_fatal"] and (cur, aid) in self.fatal:
+                 continue
+             nxt = self.edges.get((cur, aid))
+@@ -1103,4 +1271,5 @@
+         start = self.anchor
+         want = self.goal_cells(grid) if "goal" in TUNE["tiers"] else set()
++        win = self.win_cells(grid) if "win" in TUNE["tiers"] else set()
+         for strict in (True, False):
+             q: deque = deque([(start, 0)])
+@@ -1119,4 +1288,6 @@
+                     if want and self.cells_at(nxt) & want:
+                         tiers.setdefault("goal", nxt)
++                    if win and self.stand.get(nxt, 0) == 0 and self.cells_at(nxt) & win:
++                        tiers.setdefault("win", nxt)
+                     if nxt in self.retry:
+                         tiers.setdefault("door", nxt)
+@@ -1158,6 +1329,16 @@
+ 
+ 
+-def click_targets(grid: list[list[int]], cap: int = 0) -> list[tuple[int, int]]:
++def click_targets(
++    grid: list[list[int]],
++    cap: int = 0,
++    dead: frozenset = frozenset(),
++    prefer: frozenset = frozenset(),
++) -> list[tuple[int, int]]:
+     """One click target per connected component, rarest and smallest first.
++
++    `dead` is the Tracker's set of object classes that never changed the frame:
++    those components are skipped *before* the cap, so a dead button no longer
++    shadows the live one behind it. `prefer` ranks classes that once finished
++    a level ahead of everything else.
+ 
+     ACTION6 is legal in 19 of the 25 public games and picks one of 4096 cells.
+@@ -1181,5 +1362,5 @@
+     if not h or not w:
+         return [(0, 0)]
+-    key = (digest(grid), cap)
++    key = (digest(grid), cap, dead, prefer)
+     hit = _CLICK_CACHE.get(key)
+     if hit is not None:
+@@ -1192,4 +1373,8 @@
+         if b["color"] == bg:
+             continue
++        x0, y0, x1, y1 = b["bbox"]
++        sig = click_sig(b["color"], b["area"], x1 - x0 + 1, y1 - y0 + 1)
++        if sig in dead:
++            continue
+         cells = b["cells"]
+         cx = sum(c[0] for c in cells) // len(cells)
+@@ -1197,8 +1382,8 @@
+         if (cx, cy) not in set(cells):
+             cx, cy = min(cells, key=lambda c: abs(c[0] - cx) + abs(c[1] - cy))
+-        ranked.append((hist.get(b["color"], 0), b["area"], cx, cy))
++        ranked.append((0 if sig in prefer else 1, hist.get(b["color"], 0), b["area"], cx, cy))
+     ranked.sort()
+     seen: set[tuple[int, int]] = set()
+-    for _n, _a, cx, cy in ranked:
++    for _p, _n, _a, cx, cy in ranked:
+         if (cx, cy) not in seen:
+             seen.add((cx, cy))
+@@ -1642,6 +1827,7 @@
+ 
+ class ExplorePolicy:
+-    def __init__(self, rng: random.Random) -> None:
++    def __init__(self, rng: random.Random, tracker: Optional[Tracker] = None) -> None:
+         self.rng = rng
++        self.tracker = tracker
+ 
+     def candidates(self, grid: list[list[int]], ids: list[int]) -> list[str]:
+@@ -1652,5 +1838,8 @@
+                 keys.append(str(i))
+         if 6 in idset:
+-            for x, y in click_targets(grid):
++            tr = self.tracker
++            dead = tr.dead_sigs() if tr is not None else frozenset()
++            prefer = frozenset(tr.win_sigs) if tr is not None and TUNE["win_prior"] else frozenset()
++            for x, y in click_targets(grid, dead=dead, prefer=prefer):
+                 keys.append(make_key(6, x, y))
+         for i in ids:
+@@ -1854,5 +2043,5 @@
+         self.best: Report | None = None
+         self.assessor = Assessor(self.tracker)
+-        self.explore = ExplorePolicy(self._rng)
++        self.explore = ExplorePolicy(self._rng, self.tracker)
+         self.pending_plan: list[str] = []
+         self.nav_plan: list[str] = []
+@@ -1862,4 +2051,5 @@
+         self._prev_g: list[list[int]] | None = None
+         self._prev_key: str | None = None
++        self._prev_anchor: tuple[int, int] | None = None
+         self._prev_levels: int = 0
+         self._explore_used: int = 0
+@@ -1908,4 +2098,7 @@
+                 if self._prev_key:
+                     self.mem.tried[self._hash(self._prev_g)].add(self._prev_key)
++                    self.tracker.note_death(
++                        self._prev_anchor, parse_key(self._prev_key)[0]
++                    )
+             self.pending_plan.clear()
+             self.nav_plan.clear()
+@@ -1927,4 +2120,8 @@
+         # PHASE 1 — LOG the real transition, then re-read the screen
+         if self._prev_g is not None and self._prev_key and self._prev_key != "0":
++            if levels > self._prev_levels:
++                # Outcome before dynamics: the anchor and deltas that produced
++                # the winning move are the ones from before this frame.
++                self.tracker.note_win(self._prev_g, self._prev_key, self._prev_anchor)
+             self.tracker.observe(self._prev_g, self._prev_key, grid)
+             if levels > self._prev_levels:
+@@ -2181,4 +2378,8 @@
+         if self.best is None or self.best.n_ok < 3:
+             return None
++        # Retrodiction gate: a model that cannot replay the log does not get to
++        # spend live actions. Retrodict's 99.9% card is this rule and little else.
++        if self.best.ratio < TUNE["plan_min_ratio"]:
++            return None
+         clicks = distinctive_cells(grid) if 6 in ids else []
+         gcounts: Counter = Counter()
+@@ -2233,4 +2434,5 @@
+         self._prev_g = copy_grid(grid)
+         self._prev_key = key
++        self._prev_anchor = self.tracker.anchor
+         self._level_keys.append(key)
+         return self._emit(key, frame, why)
+@@ -2493,4 +2695,23 @@
+     assert agent._replay(start, [1, 2, 3, 4]) is None, "and not restarted"
+ 
++    # Dead-signature: a class of object that never changes the frame leaves the
++    # click list; a class that changed it once never counts as dead.
++    board = [[3] * 16 for _ in range(16)]
++    board[2][2] = board[2][3] = 9          # a 2x1 button that does nothing
++    board[10][10] = 5                      # a 1x1 token that does something
++    dead_tr = Tracker()
++    dead_tr.observe(board, "6:2,2", board)  # no change
++    assert blob_at(board, 2, 2) in dead_tr.dead_sigs(), dead_tr.dead_sigs()
++    lit = copy_grid(board)
++    lit[10][10] = 6
++    dead_tr.observe(board, "6:10,10", lit)  # changed
++    dead_tr.observe(board, "6:10,10", board)  # then once did not
++    assert blob_at(board, 10, 10) not in dead_tr.dead_sigs(), "a live class is never dead"
++    targets = click_targets(board, dead=dead_tr.dead_sigs())
++    assert (10, 10) in targets and (2, 2) not in targets and (3, 2) not in targets, targets
++    dead_tr.note_win(board, "6:10,10", None)
++    assert blob_at(board, 10, 10) in dead_tr.win_sigs
++    assert click_targets(board, prefer=frozenset(dead_tr.win_sigs))[0] == (10, 10)
++
+ 
+ 

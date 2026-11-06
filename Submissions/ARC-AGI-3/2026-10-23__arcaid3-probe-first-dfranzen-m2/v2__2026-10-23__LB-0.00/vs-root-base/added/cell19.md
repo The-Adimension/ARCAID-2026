@@ -1,0 +1,3 @@
+## ARCAID3 probe-first governor (the one added code cell)
+
+Base: Daniel Franzen's Milestone 2 notebook v1, all original cells unchanged and in order. The next cell adds only the probe-first governor (per-level ledger, conditional opener nudge, max_tokens cap after a long no-action streak) and the lexicon-v6 contest-config guard. Kill switch: `PF=0`. Source: `kaggle/probefirst/probe_first_cell.py` in the HabAnwer ARCAID3 repository.

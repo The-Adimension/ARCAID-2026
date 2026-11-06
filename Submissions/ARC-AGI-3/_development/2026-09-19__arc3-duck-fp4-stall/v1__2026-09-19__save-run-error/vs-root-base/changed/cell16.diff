@@ -1,0 +1,39 @@
+--- base cell 14
++++ new cell 16
+@@ -105,8 +105,18 @@
+             f'Offline public game set changed; missing={missing}, extra={extra}.'
+         )
+-    bm.games = [offline_by_id[game_id] for game_id in PUBLIC_GAME_IDS]
+-    if len(bm.games) != 25:
+-        raise RuntimeError(f'Expected 25 public games, got {len(bm.games)}.')
+-    print(f'PUBLIC25_SELECTION games={len(bm.games)} passes=1', flush=True)
++    # arc3 depth probe: the 25-game integrity check above still runs, so upstream drift in the
++    # offline set is still caught; we then play a 6-game subset long enough to reach level 2.
++    DEPTH_PROBE_IDS = [
++        "sb26-7fbdac44",
++        "vc33-5430563c",
++        "ft09-0d8bbf25",
++        "lp85-305b61c3",
++        "re86-8af5384d",
++        "ar25-0c556536"
++    ]
++    bm.games = [offline_by_id[game_id] for game_id in DEPTH_PROBE_IDS]
++    if len(bm.games) != len(DEPTH_PROBE_IDS):
++        raise RuntimeError(f'Expected {len(DEPTH_PROBE_IDS)} probe games, got {len(bm.games)}.')
++    print(f'DEPTH_PROBE_SELECTION games={len(bm.games)} passes=1 cap_s=3600', flush=True)
+ 
+ bm.n_passes = 1
+@@ -155,7 +165,11 @@
+         public_runs = list(bm.game_runs)
+         public_run_ids = [run.game_id for run in public_runs]
+-        if len(public_runs) != 25 or public_run_ids != list(PUBLIC_GAME_IDS):
++        # arc3: audit against the set we actually selected, not the full 25. depthrun1 played
++        # all six games and then died here, losing the scorer call and the COMPLETE status.
++        _expected_ids = list(globals().get('DEPTH_PROBE_IDS') or PUBLIC_GAME_IDS)
++        if public_run_ids != _expected_ids:
+             raise RuntimeError(
+-                f'Public run coverage changed: count={len(public_runs)} ids={public_run_ids}.'
++                f'Public run coverage changed: count={len(public_runs)} ids={public_run_ids} '
++                f'expected={_expected_ids}.'
+             )
+         unfinished = [

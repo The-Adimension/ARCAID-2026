@@ -1,0 +1,893 @@
+      4.4 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+      4.4 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+      4.4 err | 0.00s - to python to disable frozen modules.
+      4.4 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+      4.7 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+      4.7 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+      4.7 err | 0.00s - to python to disable frozen modules.
+      4.7 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+      5.5 out | Writing /kaggle/harness-changes.patch
+      5.5 out | Writing /kaggle/restart.patch
+      6.4 err | Checking patch ARC3-Inference/inference/agent/action_names.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/noop_repeat_guard.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/priority_pace_reference.json...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/priority_scheduler.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/prompts.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/python_tool_sandbox.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/runtime_state.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/tool_agent.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/vision_context.py...
+      6.4 err | Checking patch ARC3-Inference/inference/framework/run.py...
+      6.4 err | Hunk #1 succeeded at 467 (offset 48 lines).
+      6.4 err | Hunk #2 succeeded at 1271 (offset 48 lines).
+      6.4 err | Checking patch ARC3-Inference/inference/framework/solver.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/animation.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/frame_diff.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/openai_compat.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/retained_functions.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/segmentation.py...
+      6.4 err | Applied patch ARC3-Inference/inference/agent/action_names.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/noop_repeat_guard.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/priority_pace_reference.json cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/priority_scheduler.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/prompts.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/python_tool_sandbox.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/runtime_state.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/tool_agent.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/vision_context.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/framework/run.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/framework/solver.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/animation.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/frame_diff.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/openai_compat.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/retained_functions.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/segmentation.py cleanly.
+      6.4 err | Checking patch ARC3-Inference/inference/agent/tool_agent.py...
+      6.4 err | Applied patch ARC3-Inference/inference/agent/tool_agent.py cleanly.
+      6.4 out | harness patch applied successfully
+      6.4 out | restart patch applied successfully
+      6.4 out | taaf.kaggle: TRUE_SUBMISSION=False
+      6.4 out | ARCAID3_RESTART_READY {'tokens': 100000, 'priority': True, 'true_submission': False}
+      6.4 err | Checking patch ARC3-Inference/inference/agent/action_names.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/noop_repeat_guard.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/priority_pace_reference.json...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/priority_scheduler.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/prompts.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/python_tool_sandbox.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/runtime_state.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/tool_agent.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/vision_context.py...
+      6.4 err | Checking patch ARC3-Inference/inference/framework/run.py...
+      6.4 err | Hunk #1 succeeded at 467 (offset 48 lines).
+      6.4 err | Hunk #2 succeeded at 1271 (offset 48 lines).
+      6.4 err | Checking patch ARC3-Inference/inference/framework/solver.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/animation.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/frame_diff.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/openai_compat.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/retained_functions.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/segmentation.py...
+      6.4 err | Applied patch ARC3-Inference/inference/agent/action_names.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/noop_repeat_guard.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/priority_pace_reference.json cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/priority_scheduler.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/prompts.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/python_tool_sandbox.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/runtime_state.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/tool_agent.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/vision_context.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/framework/run.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/framework/solver.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/animation.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/frame_diff.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/openai_compat.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/retained_functions.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/segmentation.py cleanly.
+      6.4 err | Checking patch ARC3-Inference/inference/agent/tool_agent.py...
+      6.4 err | Applied patch ARC3-Inference/inference/agent/tool_agent.py cleanly.
+      6.4 err | 
+      6.4 err | Checking patch ARC3-Inference/inference/agent/action_names.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/noop_repeat_guard.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/priority_pace_reference.json...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/priority_scheduler.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/prompts.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/python_tool_sandbox.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/runtime_state.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/tool_agent.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/vision_context.py...
+      6.4 err | Checking patch ARC3-Inference/inference/framework/run.py...
+      6.4 err | Hunk #1 succeeded at 467 (offset 48 lines).
+      6.4 err | Hunk #2 succeeded at 1271 (offset 48 lines).
+      6.4 err | Checking patch ARC3-Inference/inference/framework/solver.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/animation.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/frame_diff.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/openai_compat.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/retained_functions.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/segmentation.py...
+      6.4 err | Applied patch ARC3-Inference/inference/agent/action_names.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/noop_repeat_guard.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/priority_pace_reference.json cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/priority_scheduler.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/prompts.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/python_tool_sandbox.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/runtime_state.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/tool_agent.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/vision_context.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/framework/run.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/framework/solver.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/animation.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/frame_diff.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/openai_compat.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/retained_functions.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/segmentation.py cleanly.
+      6.4 err | Checking patch ARC3-Inference/inference/agent/tool_agent.py...
+      6.4 err | Applied patch ARC3-Inference/inference/agent/tool_agent.py cleanly.
+      6.5 out | Precaching: Started...
+     15.0 out | Precaching: loaded 211 files (6.70 GB) in 8.53 seconds.
+     15.0 out | 
+     16.9 out | taaf.kaggle: wrote /usr/local/lib/python3.12/dist-packages/taaf_kaggle_sources.pth (3 source roots)
+     17.1 out | === installing Pennyroyal (offline) ===
+     17.1 out | $ /tmp/sgl-intel/bin/uv venv --python /usr/bin/python3 /tmp/sgl-intel/venv
+     17.3 out | $ /tmp/sgl-intel/bin/uv pip install --python /tmp/sgl-intel/venv/bin/python --no-index --find-links /kaggle/input/datasets/dfranzen/pennyroyal-v253/wheels -r /kaggle/input/datasets/dfranzen/pennyroyal-v253/requirements.lock
+     20.2 out | $ /tmp/sgl-intel/bin/uv pip install --python /tmp/sgl-intel/venv/bin/python --no-index --find-links /kaggle/input/datasets/dfranzen/pennyroyal-v253/wheels --reinstall --no-deps /kaggle/input/datasets/dfranzen/pennyroyal-v253/wheels/sglang-0.5.19+gd00d88efc8d6-cp312-cp312-linux_x86_64.whl
+     20.4 out | $ /tmp/sgl-intel/venv/lib/python3.12/site-packages/nvidia/cu13/bin/nvcc --version
+     20.4 out | nvcc: NVIDIA (R) Cuda compiler driver
+     20.4 out | Copyright (c) 2005-2025 NVIDIA Corporation
+     20.4 out | Built on Wed_Aug_20_01:58:59_PM_PDT_2025
+     20.4 out | Cuda compilation tools, release 13.0, V13.0.88
+     20.4 out | Build cuda_13.0.r13.0/compiler.36424714_0
+     20.4 out | Host compiler: g++-11
+     20.4 out | $ /tmp/sgl-intel/venv/bin/python -c 'import pathlib, sglang, torch
+     20.4 out | print("sglang", sglang.__version__, "| torch", torch.__version__)
+     20.4 out | assert torch.cuda.is_available(), "CUDA unavailable"
+     20.4 out | print("GPU:", torch.cuda.get_device_name(0), "capability:", torch.cuda.get_device_capability(0))
+     20.4 out | '
+     52.9 out | sglang 0.5.19+gd00d88efc8d6 | torch 2.13.0+cu130
+     52.9 out | GPU: NVIDIA RTX PRO 6000 Blackwell Server Edition capability: (12, 0)
+     53.2 out | Target: /kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1 | shards: 38 | PLE dtype: checkpoint default (typically BF16)
+     53.2 out | Draft source: /kaggle/input/models/dfranzen/albucino-qwen3-8-flash-next-drafter/transformers/default/1
+     53.2 out | SGLang draft view: /tmp/sgl-intel/draft-view-746747f37bf36968 (2 linked weight shards)
+     53.2 out | 
+     53.2 out | /tmp/sgl-intel/venv/bin/sglang serve --model-path /kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1 --load-format safetensors --model-loader-extra-config '{"enable_multithread_load":false}' --served-model-name flashnext --host 127.0.0.1 --port 8001 --tensor-parallel-size 1 --dtype bfloat16 --quantization auto-round --kv-cache-dtype fp8_e4m3 --mem-fraction-static 0.96 --context-length 139264 --page-size 64 --max-running-requests 10 --chunked-prefill-size 8192 --max-prefill-tokens 16384 --cuda-graph-max-bs-decode 10 --cuda-graph-bs-decode 1 2 4 7 8 9 10 --mamba-ssm-dtype bfloat16 --max-mamba-cache-size 60 --mamba-radix-cache-strategy extra_buffer --mamba-track-interval 64 --mamba-backend flashinfer --linear-attn-decode-backend flashinfer --linear-attn-prefill-backend flashinfer --moe-runner-backend auto --ple-offload-embedding --trust-remote-code --mm-feature-transport cpu --image-processor-backend pil --reasoning-parser qwen3 --tool-call-parser qwen3_coder --default-chat-template-kwargs '{"preserve_thinking":true}' --watchdog-timeout 1800 --schedule-policy lpm --warmups structured_output --enable-cache-report --enable-metrics --enable-request-time-stats-logging --weight-loader-prefetch-checkpoints --weight-loader-drop-cache-after-load --chat-template /kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1/chat_template.jinja --gdn-mtp-cache-mode none --speculative-algorithm NEXTN --speculative-num-steps 3 --speculative-eagle-topk 1 --speculative-num-draft-tokens 4 --speculative-draft-model-path /tmp/sgl-intel/draft-view-746747f37bf36968 --speculative-draft-model-quantization compressed-tensors --speculative-moe-runner-backend auto --speculative-draft-kv-cache-dtype fp8_e4m3 --speculative-accept-threshold-single 1.0 --speculative-accept-threshold-acc 1.0 --speculative-token-map /kaggle/input/datasets/dfranzen/pennyroyal-v253/hot_tokens_64k.pt
+     53.2 out | 
+     53.2 out | pid 500 -> /kaggle/working/serve.log
+     53.2 out |   0s ...
+     83.2 out |   30s ...
+    113.2 out | Precaching: Started...
+    113.2 out |   60s ...
+    143.2 out |   90s ...
+    173.2 out |   120s ...
+    203.3 out |   150s ...
+    233.2 out |   180s ...
+    263.3 out |   210s ...
+    293.3 out |   240s ...
+    323.3 out |   270s ...
+    353.3 out |   300s ...
+    376.9 out | Precaching: loaded 62 files (185.40 GB) in 263.51 seconds.
+    376.9 out | 
+    383.3 out |   330s ...
+    413.3 out |   360s ...
+    443.3 out |   390s ...
+    473.3 out |   420s ...
+    503.3 out |   450s ...
+    533.3 out |   480s ...
+    558.3 out | 
+    558.3 out | READY after 505s -> http://127.0.0.1:8001/v1
+    560.3 out | benchmark.solver: HarnessSolver(label='duck-harness', runtime_environment=None, job_dir=None, soft_end_time=None, minimal_diagnostics=False, model='local', analyzer_timeout=900.0, max_actions_per_game=None, max_runtime_s_per_game=7254, max_generated_tokens_per_game=None, concurrency=25, save_request_logs=True, start_local_server=False, local_server_config='', local_server_api_key_file='', local_server_repo_dir='/Users/jeroencottaar/code/ARC3-Inference', local_server_port=None, local_server_tensor_parallel_size=None, local_server_count=1, cancel_drain_timeout_s=120.0)
+    560.4 out | [sys] RAM 106.5/176.9 | swap none | proc 0.3 GB, 60 threads, 64 fds | GPU0 91.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.0/19.5
+    560.4 out | [sys] RAM 106.5/176.9 | swap none | proc 0.3 GB, 60 threads, 64 fds | GPU0 91.1/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.0/19.5
+    560.5 out | Starting benchmark...
+    561.6 err | priority gate active: 10 concurrent streams
+    561.6 err | 
+    561.6 err | priority gate active: 10 concurrent streams
+    561.6 err | m0r0-492f87ba: warmup RESET issued before the analyzer is reachable
+    561.6 err | 
+    561.6 err | m0r0-492f87ba: warmup RESET issued before the analyzer is reachable
+    680.4 out | [sys] RAM 106.8/176.9 | swap none | proc 0.4 GB, 85 threads, 76 fds | GPU0 93.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.0/19.5
+    800.4 out | [sys] RAM 107.4/176.9 | swap none | proc 0.4 GB, 85 threads, 76 fds | GPU0 93.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.1/19.5
+    920.4 out | [sys] RAM 108.3/176.9 | swap none | proc 0.4 GB, 85 threads, 76 fds | GPU0 93.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.1/19.5
+   1040.5 out | [sys] RAM 109.3/176.9 | swap none | proc 0.5 GB, 85 threads, 76 fds | GPU0 93.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.1/19.5
+   1160.5 out | [sys] RAM 110.1/176.9 | swap none | proc 0.5 GB, 85 threads, 76 fds | GPU0 93.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.1/19.5
+   1164.4 out | benchmark: regenerated diagnostics in /kaggle/working in 2.57s
+   1164.4 out | benchmark: duck-harness-kaggle
+   1164.4 out | solver:    duck-harness
+   1164.4 out | games:     25
+   1164.4 out | passes:    1
+   1164.4 out | runs:      25 (won: 0)
+   1164.4 out | started:   2026-10-12 03:25:57
+   1164.4 out | ended:     in progress
+   1164.4 out | mean score:    1.52
+   1164.4 out | median score:  0.00
+   1164.4 out | total actions: 374
+   1164.4 out | total tokens:  363316
+   1164.4 out | generated tokens/sec: 602.11 (job wallclock)
+   1164.4 out | total wallclock: 5382.8s
+   1164.4 out | 
+   1164.4 out | per-game (mean across passes):
+   1164.4 out |   ar25-0c556536: score=0.00, levels=0.0/8, actions=0, tokens=0
+   1164.4 out |   bp35-0a0ad940: score=0.00, levels=0.0/9, actions=14, tokens=41236
+   1164.4 out |   cd82-fb555c5d: score=0.00, levels=0.0/6, actions=0, tokens=0
+   1164.4 out |   cn04-2fe56bfb: score=4.76, levels=1.0/6, actions=42, tokens=33847
+   1164.4 out |   dc22-fdcac232: score=0.00, levels=0.0/6, actions=41, tokens=39661
+   1164.4 out |   ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0
+   1164.4 out |   g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0
+   1164.4 out |   ka59-38d34dbb: score=3.33, levels=1.0/7, actions=41, tokens=40001
+   1164.4 out |   lf52-271a04aa: score=0.00, levels=0.0/10, actions=0, tokens=0
+   1164.4 out |   lp85-305b61c3: score=8.33, levels=2.0/8, actions=23, tokens=39357
+   1164.4 out |   ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0
+   1164.4 out |   m0r0-492f87ba: score=4.76, levels=1.0/6, actions=25, tokens=19996
+   1164.4 out |   r11l-495a7899: score=0.00, levels=0.0/6, actions=0, tokens=0
+   1164.4 out |   re86-8af5384d: score=0.00, levels=0.0/8, actions=0, tokens=0
+   1164.4 out |   s5i5-18d95033: score=0.00, levels=0.0/8, actions=0, tokens=0
+   1164.4 out |   sb26-7fbdac44: score=0.00, levels=0.0/8, actions=0, tokens=0
+   1164.4 out |   sc25-635fd71a: score=0.00, levels=0.0/6, actions=0, tokens=0
+   1164.4 out |   sk48-d8078629: score=0.00, levels=0.0/8, actions=33, tokens=32597
+   1164.4 out |   sp80-589a99af: score=0.00, levels=0.0/6, actions=0, tokens=0
+   1164.4 out |   su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0
+   1164.4 out |   tn36-ef4dde99: score=3.57, levels=1.0/7, actions=39, tokens=39568
+   1164.4 out |   tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0
+   1164.4 out |   tu93-0768757b: score=13.33, levels=3.0/9, actions=52, tokens=37514
+   1164.4 out |   vc33-5430563c: score=0.00, levels=0.0/7, actions=0, tokens=0
+   1164.4 out |   wa30-ee6fef47: score=0.00, levels=0.0/9, actions=64, tokens=39539
+   1164.4 out | 
+   1280.5 out | [sys] RAM 110.6/176.9 | swap none | proc 0.6 GB, 85 threads, 77 fds | GPU0 93.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.2/19.5
+   1400.5 out | [sys] RAM 112.4/176.9 | swap none | proc 0.6 GB, 85 threads, 77 fds | GPU0 93.4/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.2/19.5
+   1520.5 out | [sys] RAM 114.6/176.9 | swap none | proc 0.6 GB, 85 threads, 77 fds | GPU0 93.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.2/19.5
+   1640.5 out | [sys] RAM 115.5/176.9 | swap none | proc 0.7 GB, 85 threads, 77 fds | GPU0 93.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.2/19.5
+   1760.6 out | [sys] RAM 112.7/176.9 | swap none | proc 0.7 GB, 85 threads, 77 fds | GPU0 93.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.3/19.5
+   1766.7 out | benchmark: regenerated diagnostics in /kaggle/working in 2.29s
+   1766.7 out | benchmark: duck-harness-kaggle
+   1766.7 out | solver:    duck-harness
+   1766.7 out | games:     25
+   1766.7 out | passes:    1
+   1766.7 out | runs:      25 (won: 0)
+   1766.7 out | started:   2026-10-12 03:25:57
+   1766.7 out | ended:     in progress
+   1766.7 out | mean score:    4.43
+   1766.7 out | median score:  0.00
+   1766.7 out | total actions: 777
+   1766.7 out | total tokens:  681748
+   1766.7 out | generated tokens/sec: 565.42 (job wallclock)
+   1766.7 out | total wallclock: 21752.0s
+   1766.7 out | 
+   1766.7 out | per-game (mean across passes):
+   1766.7 out |   ar25-0c556536: score=0.00, levels=0.0/8, actions=3, tokens=5276
+   1766.7 out |   bp35-0a0ad940: score=2.22, levels=1.0/9, actions=19, tokens=50707
+   1766.7 out |   cd82-fb555c5d: score=0.00, levels=0.0/6, actions=10, tokens=5710
+   1766.7 out |   cn04-2fe56bfb: score=4.76, levels=1.0/6, actions=44, tokens=45064
+   1766.7 out |   dc22-fdcac232: score=14.29, levels=2.0/6, actions=98, tokens=58072
+   1766.7 out |   ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0
+   1766.7 out |   g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0
+   1766.7 out |   ka59-38d34dbb: score=10.71, levels=2.0/7, actions=103, tokens=66349
+   1766.7 out |   lf52-271a04aa: score=0.00, levels=0.0/10, actions=12, tokens=9159
+   1766.7 out |   lp85-305b61c3: score=16.67, levels=3.0/8, actions=40, tokens=70960
+   1766.7 out |   ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0
+   1766.7 out |   m0r0-492f87ba: score=14.29, levels=2.0/6, actions=61, tokens=61274
+   1766.7 out |   r11l-495a7899: score=0.00, levels=0.0/6, actions=5, tokens=8744
+   1766.7 out |   re86-8af5384d: score=0.00, levels=0.0/8, actions=2, tokens=5244
+   1766.7 out |   s5i5-18d95033: score=0.00, levels=0.0/8, actions=1, tokens=2104
+   1766.7 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=15, tokens=6164
+   1766.7 out |   sc25-635fd71a: score=0.00, levels=0.0/6, actions=12, tokens=6059
+   1766.7 out |   sk48-d8078629: score=0.00, levels=0.0/8, actions=45, tokens=69406
+   1766.7 out |   sp80-589a99af: score=4.76, levels=1.0/6, actions=9, tokens=4245
+   1766.7 out |   su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0
+   1766.7 out |   tn36-ef4dde99: score=3.57, levels=1.0/7, actions=61, tokens=60198
+   1766.7 out |   tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0
+   1766.7 out |   tu93-0768757b: score=33.33, levels=5.0/9, actions=114, tokens=67815
+   1766.7 out |   vc33-5430563c: score=2.16, levels=1.0/7, actions=10, tokens=14626
+   1766.7 out |   wa30-ee6fef47: score=1.12, levels=1.0/9, actions=113, tokens=64572
+   1766.7 out | 
+   1880.6 out | [sys] RAM 113.0/176.9 | swap none | proc 0.7 GB, 85 threads, 77 fds | GPU0 93.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.3/19.5
+   2000.6 out | [sys] RAM 113.2/176.9 | swap none | proc 0.8 GB, 86 threads, 79 fds | GPU0 93.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.3/19.5
+   2120.6 out | [sys] RAM 114.3/176.9 | swap none | proc 0.8 GB, 85 threads, 77 fds | GPU0 93.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.4/19.5
+   2240.6 out | [sys] RAM 115.5/176.9 | swap none | proc 0.9 GB, 85 threads, 77 fds | GPU0 93.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.4/19.5
+   2360.6 out | [sys] RAM 116.6/176.9 | swap none | proc 0.9 GB, 85 threads, 77 fds | GPU0 93.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.4/19.5
+   2368.1 out | benchmark: regenerated diagnostics in /kaggle/working in 1.27s
+   2368.1 out | benchmark: duck-harness-kaggle
+   2368.1 out | solver:    duck-harness
+   2368.1 out | games:     25
+   2368.1 out | passes:    1
+   2368.1 out | runs:      25 (won: 0)
+   2368.1 out | started:   2026-10-12 03:25:57
+   2368.1 out | ended:     in progress
+   2368.1 out | mean score:    8.49
+   2368.1 out | median score:  3.57
+   2368.1 out | total actions: 1271
+   2368.1 out | total tokens:  1058750
+   2368.1 out | generated tokens/sec: 585.88 (job wallclock)
+   2368.1 out | total wallclock: 27380.6s
+   2368.1 out | 
+   2368.1 out | per-game (mean across passes):
+   2368.1 out |   ar25-0c556536: score=16.67, levels=3.0/8, actions=77, tokens=45907
+   2368.1 out |   bp35-0a0ad940: score=2.22, levels=1.0/9, actions=19, tokens=50707
+   2368.1 out |   cd82-fb555c5d: score=0.00, levels=0.0/6, actions=30, tokens=42842
+   2368.1 out |   cn04-2fe56bfb: score=4.76, levels=1.0/6, actions=44, tokens=45064
+   2368.1 out |   dc22-fdcac232: score=14.29, levels=2.0/6, actions=98, tokens=58072
+   2368.1 out |   ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=0, tokens=0
+   2368.1 out |   g50t-5849a774: score=0.00, levels=0.0/7, actions=0, tokens=0
+   2368.1 out |   ka59-38d34dbb: score=10.71, levels=2.0/7, actions=103, tokens=66349
+   2368.1 out |   lf52-271a04aa: score=1.82, levels=1.0/10, actions=31, tokens=47961
+   2368.1 out |   lp85-305b61c3: score=16.67, levels=3.0/8, actions=40, tokens=70960
+   2368.1 out |   ls20-9607627b: score=0.00, levels=0.0/7, actions=0, tokens=0
+   2368.1 out |   m0r0-492f87ba: score=14.29, levels=2.0/6, actions=61, tokens=61274
+   2368.1 out |   r11l-495a7899: score=4.76, levels=1.0/6, actions=18, tokens=46878
+   2368.1 out |   re86-8af5384d: score=27.78, levels=4.0/8, actions=196, tokens=38107
+   2368.1 out |   s5i5-18d95033: score=2.78, levels=1.0/8, actions=24, tokens=27498
+   2368.1 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=70, tokens=44600
+   2368.1 out |   sc25-635fd71a: score=28.57, levels=3.0/6, actions=61, tokens=45740
+   2368.1 out |   sk48-d8078629: score=0.00, levels=0.0/8, actions=45, tokens=69406
+   2368.1 out |   sp80-589a99af: score=4.76, levels=1.0/6, actions=22, tokens=49372
+   2368.1 out |   su15-1944f8ab: score=0.00, levels=0.0/9, actions=0, tokens=0
+   2368.1 out |   tn36-ef4dde99: score=3.57, levels=1.0/7, actions=61, tokens=60198
+   2368.1 out |   tr87-cd924810: score=0.00, levels=0.0/6, actions=0, tokens=0
+   2368.1 out |   tu93-0768757b: score=33.33, levels=5.0/9, actions=114, tokens=67815
+   2368.1 out |   vc33-5430563c: score=21.43, levels=3.0/7, actions=44, tokens=55428
+   2368.1 out |   wa30-ee6fef47: score=1.12, levels=1.0/9, actions=113, tokens=64572
+   2368.1 out | 
+   2480.7 out | [sys] RAM 116.7/176.9 | swap none | proc 1.0 GB, 85 threads, 77 fds | GPU0 93.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.5/19.5
+   2600.7 out | [sys] RAM 117.8/176.9 | swap none | proc 1.0 GB, 85 threads, 77 fds | GPU0 93.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.5/19.5
+   2720.7 out | [sys] RAM 114.3/176.9 | swap none | proc 1.0 GB, 85 threads, 77 fds | GPU0 93.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.5/19.5
+   2840.7 out | [sys] RAM 115.5/176.9 | swap none | proc 1.0 GB, 85 threads, 77 fds | GPU0 93.5/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.5/19.5
+   2960.7 out | [sys] RAM 116.5/176.9 | swap none | proc 1.1 GB, 85 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.6/19.5
+   2970.3 out | benchmark: regenerated diagnostics in /kaggle/working in 2.05s
+   2970.3 out | benchmark: duck-harness-kaggle
+   2970.3 out | solver:    duck-harness
+   2970.3 out | games:     25
+   2970.3 out | passes:    1
+   2970.3 out | runs:      25 (won: 0)
+   2970.3 out | started:   2026-10-12 03:25:57
+   2970.3 out | ended:     in progress
+   2970.3 out | mean score:    13.38
+   2970.3 out | median score:  10.71
+   2970.3 out | total actions: 1653
+   2970.3 out | total tokens:  1430359
+   2970.3 out | generated tokens/sec: 593.69 (job wallclock)
+   2970.3 out | total wallclock: 46278.0s
+   2970.3 out | 
+   2970.3 out | per-game (mean across passes):
+   2970.3 out |   ar25-0c556536: score=27.78, levels=4.0/8, actions=100, tokens=65154
+   2970.3 out |   bp35-0a0ad940: score=2.22, levels=1.0/9, actions=19, tokens=50707
+   2970.3 out |   cd82-fb555c5d: score=28.57, levels=3.0/6, actions=66, tokens=78686
+   2970.3 out |   cn04-2fe56bfb: score=4.76, levels=1.0/6, actions=44, tokens=45064
+   2970.3 out |   dc22-fdcac232: score=14.29, levels=2.0/6, actions=119, tokens=76297
+   2970.3 out |   ft09-0d8bbf25: score=47.62, levels=4.0/6, actions=47, tokens=29293
+   2970.3 out |   g50t-5849a774: score=0.00, levels=0.0/7, actions=11, tokens=20973
+   2970.3 out |   ka59-38d34dbb: score=10.71, levels=2.0/7, actions=103, tokens=66349
+   2970.3 out |   lf52-271a04aa: score=1.82, levels=1.0/10, actions=39, tokens=68469
+   2970.3 out |   lp85-305b61c3: score=16.67, levels=3.0/8, actions=40, tokens=70960
+   2970.3 out |   ls20-9607627b: score=3.57, levels=1.0/7, actions=40, tokens=33256
+   2970.3 out |   m0r0-492f87ba: score=14.29, levels=2.0/6, actions=82, tokens=75866
+   2970.3 out |   r11l-495a7899: score=14.29, levels=2.0/6, actions=28, tokens=76264
+   2970.3 out |   re86-8af5384d: score=27.78, levels=4.0/8, actions=227, tokens=60570
+   2970.3 out |   s5i5-18d95033: score=8.33, levels=2.0/8, actions=56, tokens=55976
+   2970.3 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=84, tokens=52111
+   2970.3 out |   sc25-635fd71a: score=28.57, levels=3.0/6, actions=69, tokens=50088
+   2970.3 out |   sk48-d8078629: score=0.00, levels=0.0/8, actions=45, tokens=69406
+   2970.3 out |   sp80-589a99af: score=14.29, levels=2.0/6, actions=27, tokens=61969
+   2970.3 out |   su15-1944f8ab: score=2.03, levels=1.0/9, actions=29, tokens=26297
+   2970.3 out |   tn36-ef4dde99: score=3.57, levels=1.0/7, actions=61, tokens=60198
+   2970.3 out |   tr87-cd924810: score=4.76, levels=1.0/6, actions=34, tokens=21862
+   2970.3 out |   tu93-0768757b: score=33.33, levels=5.0/9, actions=121, tokens=81847
+   2970.3 out |   vc33-5430563c: score=21.43, levels=3.0/7, actions=49, tokens=68125
+   2970.3 out |   wa30-ee6fef47: score=1.12, levels=1.0/9, actions=113, tokens=64572
+   2970.3 out | 
+   3080.7 out | [sys] RAM 115.1/176.9 | swap none | proc 1.1 GB, 85 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.6/19.5
+   3200.8 out | [sys] RAM 116.7/176.9 | swap none | proc 1.2 GB, 86 threads, 79 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.7/19.5
+   3320.8 out | [sys] RAM 115.6/176.9 | swap none | proc 1.2 GB, 86 threads, 79 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.7/19.5
+   3440.8 out | [sys] RAM 115.4/176.9 | swap none | proc 1.3 GB, 85 threads, 77 fds | GPU0 93.6/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.7/19.5
+   3561.0 out | [sys] RAM 116.6/176.9 | swap none | proc 1.3 GB, 86 threads, 80 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.7/19.5
+   3572.0 out | benchmark: regenerated diagnostics in /kaggle/working in 1.59s
+   3572.0 out | benchmark: duck-harness-kaggle
+   3572.0 out | solver:    duck-harness
+   3572.0 out | games:     25
+   3572.0 out | passes:    1
+   3572.0 out | runs:      25 (won: 0)
+   3572.0 out | started:   2026-10-12 03:25:57
+   3572.0 out | ended:     in progress
+   3572.0 out | mean score:    17.52
+   3572.0 out | median score:  14.29
+   3572.0 out | total actions: 2155
+   3572.0 out | total tokens:  1771276
+   3572.0 out | generated tokens/sec: 588.27 (job wallclock)
+   3572.0 out | total wallclock: 55928.4s
+   3572.0 out | 
+   3572.0 out | per-game (mean across passes):
+   3572.0 out |   ar25-0c556536: score=41.67, levels=5.0/8, actions=161, tokens=86212
+   3572.0 out |   bp35-0a0ad940: score=2.22, levels=1.0/9, actions=19, tokens=50707
+   3572.0 out |   cd82-fb555c5d: score=28.57, levels=3.0/6, actions=73, tokens=121058
+   3572.0 out |   cn04-2fe56bfb: score=4.76, levels=1.0/6, actions=44, tokens=45064
+   3572.0 out |   dc22-fdcac232: score=14.29, levels=2.0/6, actions=143, tokens=91672
+   3572.0 out |   ft09-0d8bbf25: score=47.62, levels=4.0/6, actions=86, tokens=57966
+   3572.0 out |   g50t-5849a774: score=0.00, levels=0.0/7, actions=43, tokens=57967
+   3572.0 out |   ka59-38d34dbb: score=10.71, levels=2.0/7, actions=134, tokens=85009
+   3572.0 out |   lf52-271a04aa: score=1.82, levels=1.0/10, actions=39, tokens=68469
+   3572.0 out |   lp85-305b61c3: score=16.67, levels=3.0/8, actions=40, tokens=70960
+   3572.0 out |   ls20-9607627b: score=3.57, levels=1.0/7, actions=134, tokens=50858
+   3572.0 out |   m0r0-492f87ba: score=14.29, levels=2.0/6, actions=88, tokens=92589
+   3572.0 out |   r11l-495a7899: score=28.57, levels=3.0/6, actions=43, tokens=105261
+   3572.0 out |   re86-8af5384d: score=27.78, levels=4.0/8, actions=227, tokens=60570
+   3572.0 out |   s5i5-18d95033: score=8.33, levels=2.0/8, actions=56, tokens=55976
+   3572.0 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=84, tokens=52111
+   3572.0 out |   sc25-635fd71a: score=28.57, levels=3.0/6, actions=72, tokens=50331
+   3572.0 out |   sk48-d8078629: score=0.00, levels=0.0/8, actions=45, tokens=69406
+   3572.0 out |   sp80-589a99af: score=14.29, levels=2.0/6, actions=27, tokens=61969
+   3572.0 out |   su15-1944f8ab: score=6.67, levels=2.0/9, actions=54, tokens=67363
+   3572.0 out |   tn36-ef4dde99: score=3.57, levels=1.0/7, actions=61, tokens=60198
+   3572.0 out |   tr87-cd924810: score=47.62, levels=4.0/6, actions=147, tokens=51041
+   3572.0 out |   tu93-0768757b: score=61.16, levels=7.0/9, actions=169, tokens=125091
+   3572.0 out |   vc33-5430563c: score=21.43, levels=3.0/7, actions=53, tokens=68856
+   3572.0 out |   wa30-ee6fef47: score=1.12, levels=1.0/9, actions=113, tokens=64572
+   3572.0 out | 
+   3681.0 out | [sys] RAM 115.9/176.9 | swap none | proc 1.3 GB, 85 threads, 77 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.8/19.5
+   3801.0 out | [sys] RAM 115.8/176.9 | swap none | proc 1.4 GB, 85 threads, 77 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.8/19.5
+   3921.0 out | [sys] RAM 116.2/176.9 | swap none | proc 1.4 GB, 85 threads, 77 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.8/19.5
+   4041.0 out | [sys] RAM 117.2/176.9 | swap none | proc 1.4 GB, 86 threads, 79 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.9/19.5
+   4161.0 out | [sys] RAM 115.7/176.9 | swap none | proc 1.5 GB, 85 threads, 77 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.9/19.5
+   4173.8 out | benchmark: regenerated diagnostics in /kaggle/working in 1.70s
+   4173.8 out | benchmark: duck-harness-kaggle
+   4173.8 out | solver:    duck-harness
+   4173.8 out | games:     25
+   4173.8 out | passes:    1
+   4173.8 out | runs:      25 (won: 0)
+   4173.8 out | started:   2026-10-12 03:25:57
+   4173.8 out | ended:     in progress
+   4173.8 out | mean score:    21.52
+   4173.8 out | median score:  16.67
+   4173.8 out | total actions: 2521
+   4173.8 out | total tokens:  2127510
+   4173.8 out | generated tokens/sec: 588.88 (job wallclock)
+   4173.8 out | total wallclock: 65331.6s
+   4173.8 out | 
+   4173.8 out | per-game (mean across passes):
+   4173.8 out |   ar25-0c556536: score=58.33, levels=6.0/8, actions=186, tokens=111605
+   4173.8 out |   bp35-0a0ad940: score=2.22, levels=1.0/9, actions=19, tokens=50707
+   4173.8 out |   cd82-fb555c5d: score=28.57, levels=3.0/6, actions=79, tokens=145561
+   4173.8 out |   cn04-2fe56bfb: score=4.76, levels=1.0/6, actions=44, tokens=45064
+   4173.8 out |   dc22-fdcac232: score=14.29, levels=2.0/6, actions=143, tokens=91672
+   4173.8 out |   ft09-0d8bbf25: score=47.62, levels=4.0/6, actions=86, tokens=57966
+   4173.8 out |   g50t-5849a774: score=0.00, levels=0.0/7, actions=58, tokens=74588
+   4173.8 out |   ka59-38d34dbb: score=17.07, levels=3.0/7, actions=187, tokens=122989
+   4173.8 out |   lf52-271a04aa: score=1.82, levels=1.0/10, actions=39, tokens=68469
+   4173.8 out |   lp85-305b61c3: score=38.77, levels=5.0/8, actions=84, tokens=106988
+   4173.8 out |   ls20-9607627b: score=3.57, levels=1.0/7, actions=134, tokens=50858
+   4173.8 out |   m0r0-492f87ba: score=14.29, levels=2.0/6, actions=88, tokens=92589
+   4173.8 out |   r11l-495a7899: score=41.77, levels=4.0/6, actions=96, tokens=156110
+   4173.8 out |   re86-8af5384d: score=27.78, levels=4.0/8, actions=227, tokens=60570
+   4173.8 out |   s5i5-18d95033: score=16.67, levels=3.0/8, actions=99, tokens=94959
+   4173.8 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=84, tokens=52111
+   4173.8 out |   sc25-635fd71a: score=47.62, levels=4.0/6, actions=171, tokens=85538
+   4173.8 out |   sk48-d8078629: score=0.00, levels=0.0/8, actions=45, tokens=69406
+   4173.8 out |   sp80-589a99af: score=28.57, levels=3.0/6, actions=36, tokens=111711
+   4173.8 out |   su15-1944f8ab: score=6.67, levels=2.0/9, actions=54, tokens=67363
+   4173.8 out |   tn36-ef4dde99: score=3.57, levels=1.0/7, actions=61, tokens=60198
+   4173.8 out |   tr87-cd924810: score=47.62, levels=4.0/6, actions=147, tokens=51041
+   4173.8 out |   tu93-0768757b: score=61.16, levels=7.0/9, actions=173, tokens=146038
+   4173.8 out |   vc33-5430563c: score=21.43, levels=3.0/7, actions=68, tokens=88837
+   4173.8 out |   wa30-ee6fef47: score=1.12, levels=1.0/9, actions=113, tokens=64572
+   4173.8 out | 
+   4281.0 out | [sys] RAM 115.1/176.9 | swap none | proc 1.5 GB, 85 threads, 77 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.9/19.5
+   4401.1 out | [sys] RAM 115.5/176.9 | swap none | proc 1.5 GB, 85 threads, 77 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 0.9/19.5
+   4521.3 out | [sys] RAM 115.9/176.9 | swap none | proc 1.5 GB, 87 threads, 82 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.0/19.5
+   4641.5 out | [sys] RAM 115.6/176.9 | swap none | proc 1.6 GB, 86 threads, 79 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.0/19.5
+   4761.5 out | [sys] RAM 115.3/176.9 | swap none | proc 1.6 GB, 85 threads, 77 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.0/19.5
+   4777.3 out | benchmark: regenerated diagnostics in /kaggle/working in 3.23s
+   4777.3 out | benchmark: duck-harness-kaggle
+   4777.3 out | solver:    duck-harness
+   4777.3 out | games:     25
+   4777.3 out | passes:    1
+   4777.3 out | runs:      25 (won: 0)
+   4777.3 out | started:   2026-10-12 03:25:57
+   4777.3 out | ended:     in progress
+   4777.3 out | mean score:    25.44
+   4777.3 out | median score:  17.07
+   4777.3 out | total actions: 2984
+   4777.3 out | total tokens:  2534906
+   4777.3 out | generated tokens/sec: 601.22 (job wallclock)
+   4777.3 out | total wallclock: 80892.7s
+   4777.3 out | 
+   4777.3 out | per-game (mean across passes):
+   4777.3 out |   ar25-0c556536: score=58.33, levels=6.0/8, actions=203, tokens=146558
+   4777.3 out |   bp35-0a0ad940: score=2.22, levels=1.0/9, actions=27, tokens=102035
+   4777.3 out |   cd82-fb555c5d: score=28.57, levels=3.0/6, actions=79, tokens=145561
+   4777.3 out |   cn04-2fe56bfb: score=4.76, levels=1.0/6, actions=44, tokens=45064
+   4777.3 out |   dc22-fdcac232: score=14.29, levels=2.0/6, actions=143, tokens=91672
+   4777.3 out |   ft09-0d8bbf25: score=47.62, levels=4.0/6, actions=86, tokens=57966
+   4777.3 out |   g50t-5849a774: score=0.00, levels=0.0/7, actions=58, tokens=74588
+   4777.3 out |   ka59-38d34dbb: score=17.07, levels=3.0/7, actions=211, tokens=150462
+   4777.3 out |   lf52-271a04aa: score=1.82, levels=1.0/10, actions=39, tokens=68469
+   4777.3 out |   lp85-305b61c3: score=77.78, levels=7.0/8, actions=138, tokens=147309
+   4777.3 out |   ls20-9607627b: score=3.57, levels=1.0/7, actions=134, tokens=50858
+   4777.3 out |   m0r0-492f87ba: score=14.29, levels=2.0/6, actions=91, tokens=95131
+   4777.3 out |   r11l-495a7899: score=69.16, levels=5.0/6, actions=129, tokens=195373
+   4777.3 out |   re86-8af5384d: score=41.67, levels=5.0/8, actions=357, tokens=82360
+   4777.3 out |   s5i5-18d95033: score=27.78, levels=4.0/8, actions=133, tokens=126275
+   4777.3 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=84, tokens=52111
+   4777.3 out |   sc25-635fd71a: score=47.62, levels=4.0/6, actions=210, tokens=116406
+   4777.3 out |   sk48-d8078629: score=0.00, levels=0.0/8, actions=45, tokens=69406
+   4777.3 out |   sp80-589a99af: score=28.57, levels=3.0/6, actions=82, tokens=144581
+   4777.3 out |   su15-1944f8ab: score=13.33, levels=3.0/9, actions=68, tokens=80534
+   4777.3 out |   tn36-ef4dde99: score=3.57, levels=1.0/7, actions=61, tokens=60198
+   4777.3 out |   tr87-cd924810: score=47.62, levels=4.0/6, actions=147, tokens=51041
+   4777.3 out |   tu93-0768757b: score=61.16, levels=7.0/9, actions=174, tokens=160396
+   4777.3 out |   vc33-5430563c: score=21.43, levels=3.0/7, actions=70, tokens=117895
+   4777.3 out |   wa30-ee6fef47: score=1.12, levels=1.0/9, actions=171, tokens=102657
+   4777.3 out | 
+   4881.5 out | [sys] RAM 116.0/176.9 | swap none | proc 1.7 GB, 85 threads, 77 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.1/19.5
+   5001.5 out | [sys] RAM 116.5/176.9 | swap none | proc 1.7 GB, 85 threads, 77 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.1/19.5
+   5056.2 out | [finished] r11l-495a7899 state=won level=6/6 score=100.00 actions=153 tokens=217306 per-level=9/22,14/33,20/51,38/26,37/52,35/49 note="tokens=217306"
+   5121.5 out | [sys] RAM 116.6/176.9 | swap none | proc 1.7 GB, 85 threads, 78 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.1/19.5
+   5241.5 out | [sys] RAM 116.4/176.9 | swap none | proc 1.7 GB, 85 threads, 78 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.1/19.5
+   5361.6 out | [sys] RAM 115.6/176.9 | swap none | proc 1.7 GB, 85 threads, 78 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.2/19.5
+   5380.4 out | benchmark: regenerated diagnostics in /kaggle/working in 3.09s
+   5380.4 out | benchmark: duck-harness-kaggle
+   5380.4 out | solver:    duck-harness
+   5380.4 out | games:     25
+   5380.4 out | passes:    1
+   5380.4 out | runs:      25 (won: 1)
+   5380.4 out | started:   2026-10-12 03:25:57
+   5380.4 out | ended:     in progress
+   5380.4 out | mean score:    27.25
+   5380.4 out | median score:  21.43
+   5380.4 out | total actions: 3257
+   5380.4 out | total tokens:  2901127
+   5380.4 out | generated tokens/sec: 601.97 (job wallclock)
+   5380.4 out | total wallclock: 99530.6s
+   5380.4 out | 
+   5380.4 out | per-game (mean across passes):
+   5380.4 out |   ar25-0c556536: score=58.33, levels=6.0/8, actions=203, tokens=146558
+   5380.4 out |   bp35-0a0ad940: score=2.22, levels=1.0/9, actions=27, tokens=102035
+   5380.4 out |   cd82-fb555c5d: score=28.57, levels=3.0/6, actions=79, tokens=145561
+   5380.4 out |   cn04-2fe56bfb: score=4.76, levels=1.0/6, actions=46, tokens=84781
+   5380.4 out |   dc22-fdcac232: score=28.57, levels=3.0/6, actions=174, tokens=126026
+   5380.4 out |   ft09-0d8bbf25: score=47.62, levels=4.0/6, actions=86, tokens=57966
+   5380.4 out |   g50t-5849a774: score=0.00, levels=0.0/7, actions=58, tokens=74588
+   5380.4 out |   ka59-38d34dbb: score=17.07, levels=3.0/7, actions=221, tokens=168857
+   5380.4 out |   lf52-271a04aa: score=1.82, levels=1.0/10, actions=65, tokens=102015
+   5380.4 out |   lp85-305b61c3: score=77.78, levels=7.0/8, actions=173, tokens=179025
+   5380.4 out |   ls20-9607627b: score=3.57, levels=1.0/7, actions=134, tokens=50858
+   5380.4 out |   m0r0-492f87ba: score=14.29, levels=2.0/6, actions=93, tokens=125335
+   5380.4 out |   r11l-495a7899: score=100.00, levels=6.0/6, actions=153, tokens=217306
+   5380.4 out |   re86-8af5384d: score=41.67, levels=5.0/8, actions=397, tokens=123241
+   5380.4 out |   s5i5-18d95033: score=27.78, levels=4.0/8, actions=152, tokens=174834
+   5380.4 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=86, tokens=53327
+   5380.4 out |   sc25-635fd71a: score=47.62, levels=4.0/6, actions=210, tokens=116406
+   5380.4 out |   sk48-d8078629: score=0.00, levels=0.0/8, actions=45, tokens=69406
+   5380.4 out |   sp80-589a99af: score=28.57, levels=3.0/6, actions=102, tokens=152059
+   5380.4 out |   su15-1944f8ab: score=13.33, levels=3.0/9, actions=74, tokens=96768
+   5380.4 out |   tn36-ef4dde99: score=3.57, levels=1.0/7, actions=61, tokens=60198
+   5380.4 out |   tr87-cd924810: score=47.62, levels=4.0/6, actions=186, tokens=65218
+   5380.4 out |   tu93-0768757b: score=61.16, levels=7.0/9, actions=185, tokens=172975
+   5380.4 out |   vc33-5430563c: score=21.43, levels=3.0/7, actions=76, tokens=133127
+   5380.4 out |   wa30-ee6fef47: score=1.12, levels=1.0/9, actions=171, tokens=102657
+   5380.4 out | 
+   5481.6 out | [sys] RAM 115.2/176.9 | swap none | proc 1.7 GB, 40 threads, 78 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.2/19.5
+   5601.6 out | [sys] RAM 115.4/176.9 | swap none | proc 1.8 GB, 40 threads, 78 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.2/19.5
+   5721.6 out | [sys] RAM 116.1/176.9 | swap none | proc 1.9 GB, 40 threads, 78 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.2/19.5
+   5841.6 out | [sys] RAM 115.8/176.9 | swap none | proc 1.8 GB, 40 threads, 78 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.3/19.5
+   5961.6 out | [sys] RAM 114.9/176.9 | swap none | proc 1.8 GB, 40 threads, 78 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.3/19.5
+   5982.0 out | benchmark: regenerated diagnostics in /kaggle/working in 1.34s
+   5982.0 out | benchmark: duck-harness-kaggle
+   5982.0 out | solver:    duck-harness
+   5982.0 out | games:     25
+   5982.0 out | passes:    1
+   5982.0 out | runs:      25 (won: 1)
+   5982.0 out | started:   2026-10-12 03:25:57
+   5982.0 out | ended:     in progress
+   5982.0 out | mean score:    31.81
+   5982.0 out | median score:  28.57
+   5982.0 out | total actions: 3634
+   5982.0 out | total tokens:  3254618
+   5982.0 out | generated tokens/sec: 600.37 (job wallclock)
+   5982.0 out | total wallclock: 112850.6s
+   5982.0 out | 
+   5982.0 out | per-game (mean across passes):
+   5982.0 out |   ar25-0c556536: score=58.33, levels=6.0/8, actions=203, tokens=146558
+   5982.0 out |   bp35-0a0ad940: score=2.22, levels=1.0/9, actions=27, tokens=102035
+   5982.0 out |   cd82-fb555c5d: score=28.57, levels=3.0/6, actions=82, tokens=176754
+   5982.0 out |   cn04-2fe56bfb: score=4.76, levels=1.0/6, actions=53, tokens=105519
+   5982.0 out |   dc22-fdcac232: score=28.57, levels=3.0/6, actions=188, tokens=158001
+   5982.0 out |   ft09-0d8bbf25: score=47.62, levels=4.0/6, actions=92, tokens=100916
+   5982.0 out |   g50t-5849a774: score=0.00, levels=0.0/7, actions=58, tokens=74588
+   5982.0 out |   ka59-38d34dbb: score=17.07, levels=3.0/7, actions=221, tokens=168857
+   5982.0 out |   lf52-271a04aa: score=1.82, levels=1.0/10, actions=65, tokens=102015
+   5982.0 out |   lp85-305b61c3: score=77.78, levels=7.0/8, actions=173, tokens=179025
+   5982.0 out |   ls20-9607627b: score=3.57, levels=1.0/7, actions=134, tokens=50858
+   5982.0 out |   m0r0-492f87ba: score=14.29, levels=2.0/6, actions=93, tokens=125335
+   5982.0 out |   r11l-495a7899: score=100.00, levels=6.0/6, actions=153, tokens=217306
+   5982.0 out |   re86-8af5384d: score=41.67, levels=5.0/8, actions=424, tokens=145375
+   5982.0 out |   s5i5-18d95033: score=41.67, levels=5.0/8, actions=183, tokens=214850
+   5982.0 out |   sb26-7fbdac44: score=58.33, levels=6.0/8, actions=191, tokens=87461
+   5982.0 out |   sc25-635fd71a: score=47.62, levels=4.0/6, actions=210, tokens=116406
+   5982.0 out |   sk48-d8078629: score=0.00, levels=0.0/8, actions=45, tokens=69406
+   5982.0 out |   sp80-589a99af: score=28.57, levels=3.0/6, actions=102, tokens=152059
+   5982.0 out |   su15-1944f8ab: score=13.33, levels=3.0/9, actions=74, tokens=96768
+   5982.0 out |   tn36-ef4dde99: score=3.57, levels=1.0/7, actions=64, tokens=71500
+   5982.0 out |   tr87-cd924810: score=60.03, levels=5.0/6, actions=270, tokens=118455
+   5982.0 out |   tu93-0768757b: score=61.16, levels=7.0/9, actions=198, tokens=200111
+   5982.0 out |   vc33-5430563c: score=53.57, levels=5.0/7, actions=160, tokens=171803
+   5982.0 out |   wa30-ee6fef47: score=1.12, levels=1.0/9, actions=171, tokens=102657
+   5982.0 out | 
+   6081.7 out | [sys] RAM 114.5/176.9 | swap none | proc 1.9 GB, 40 threads, 78 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.3/19.5
+   6100.6 err | stuck_level_restart: level 4 after 110011 tokens and 17 actions; 40 messages dropped
+   6100.6 err | 
+   6100.6 err | stuck_level_restart: level 4 after 110011 tokens and 17 actions; 40 messages dropped
+   6201.7 out | [sys] RAM 115.1/176.9 | swap none | proc 1.9 GB, 40 threads, 79 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.3/19.5
+   6321.7 out | [sys] RAM 114.4/176.9 | swap none | proc 1.9 GB, 40 threads, 79 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.3/19.5
+   6342.0 out | [finished] sb26-7fbdac44 state=won level=8/8 score=100.00 actions=221 tokens=111248 per-level=14/18,94/28,15/18,15/19,17/31,19/23,30/58,17/18 note="tokens=111248"
+   6396.1 err | tail fade phase after 97.2 minutes: 23.7 minutes remaining; fading tail B to zero over the final 24.2 minutes, retaining hazard C
+   6396.1 err | 
+   6396.1 err | tail fade phase after 97.2 minutes: 23.7 minutes remaining; fading tail B to zero over the final 24.2 minutes, retaining hazard C
+   6441.7 out | [sys] RAM 114.7/176.9 | swap none | proc 1.9 GB, 40 threads, 81 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.4/19.5
+   6550.1 out | [finished] vc33-5430563c state=won level=7/7 score=100.00 actions=231 tokens=211717 per-level=9/7,8/18,27/44,49/61,67/131,20/34,51/152 note="tokens=211717"
+   6561.7 out | [sys] RAM 114.9/176.9 | swap none | proc 1.9 GB, 40 threads, 82 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.4/19.5
+   6568.9 err | stuck_level_restart: level 2 after 100322 tokens and 87 actions; 68 messages dropped
+   6568.9 err | 
+   6568.9 err | stuck_level_restart: level 2 after 100322 tokens and 87 actions; 68 messages dropped
+   6586.8 out | benchmark: regenerated diagnostics in /kaggle/working in 4.66s
+   6586.8 out | benchmark: duck-harness-kaggle
+   6586.8 out | solver:    duck-harness
+   6586.8 out | games:     25
+   6586.8 out | passes:    1
+   6586.8 out | runs:      25 (won: 3)
+   6586.8 out | started:   2026-10-12 03:25:57
+   6586.8 out | ended:     in progress
+   6586.8 out | mean score:    36.00
+   6586.8 out | median score:  28.57
+   6586.8 out | total actions: 3913
+   6586.8 out | total tokens:  3572891
+   6586.8 out | generated tokens/sec: 592.94 (job wallclock)
+   6586.8 out | total wallclock: 121701.3s
+   6586.8 out | 
+   6586.8 out | per-game (mean across passes):
+   6586.8 out |   ar25-0c556536: score=58.33, levels=6.0/8, actions=203, tokens=146558
+   6586.8 out |   bp35-0a0ad940: score=2.22, levels=1.0/9, actions=38, tokens=144059
+   6586.8 out |   cd82-fb555c5d: score=28.57, levels=3.0/6, actions=83, tokens=188697
+   6586.8 out |   cn04-2fe56bfb: score=4.76, levels=1.0/6, actions=53, tokens=105519
+   6586.8 out |   dc22-fdcac232: score=28.57, levels=3.0/6, actions=194, tokens=174382
+   6586.8 out |   ft09-0d8bbf25: score=47.62, levels=4.0/6, actions=113, tokens=109961
+   6586.8 out |   g50t-5849a774: score=0.00, levels=0.0/7, actions=58, tokens=74588
+   6586.8 out |   ka59-38d34dbb: score=17.07, levels=3.0/7, actions=221, tokens=168857
+   6586.8 out |   lf52-271a04aa: score=1.82, levels=1.0/10, actions=85, tokens=113251
+   6586.8 out |   lp85-305b61c3: score=77.78, levels=7.0/8, actions=173, tokens=179025
+   6586.8 out |   ls20-9607627b: score=3.57, levels=1.0/7, actions=134, tokens=50858
+   6586.8 out |   m0r0-492f87ba: score=14.29, levels=2.0/6, actions=93, tokens=125335
+   6586.8 out |   r11l-495a7899: score=100.00, levels=6.0/6, actions=153, tokens=217306
+   6586.8 out |   re86-8af5384d: score=41.67, levels=5.0/8, actions=424, tokens=145375
+   6586.8 out |   s5i5-18d95033: score=58.33, levels=6.0/8, actions=210, tokens=254322
+   6586.8 out |   sb26-7fbdac44: score=100.00, levels=8.0/8, actions=221, tokens=111248
+   6586.8 out |   sc25-635fd71a: score=47.62, levels=4.0/6, actions=210, tokens=116406
+   6586.8 out |   sk48-d8078629: score=0.00, levels=0.0/8, actions=45, tokens=69406
+   6586.8 out |   sp80-589a99af: score=28.57, levels=3.0/6, actions=102, tokens=152059
+   6586.8 out |   su15-1944f8ab: score=13.33, levels=3.0/9, actions=77, tokens=155880
+   6586.8 out |   tn36-ef4dde99: score=3.57, levels=1.0/7, actions=96, tokens=110095
+   6586.8 out |   tr87-cd924810: score=60.03, levels=5.0/6, actions=293, tokens=124168
+   6586.8 out |   tu93-0768757b: score=61.16, levels=7.0/9, actions=198, tokens=200111
+   6586.8 out |   vc33-5430563c: score=100.00, levels=7.0/7, actions=231, tokens=211717
+   6586.8 out |   wa30-ee6fef47: score=1.12, levels=1.0/9, actions=205, tokens=123708
+   6586.8 out | 
+   6672.6 err | stuck_level_restart: level 2 after 114796 tokens and 23 actions; 63 messages dropped
+   6672.6 err | 
+   6672.6 err | stuck_level_restart: level 2 after 114796 tokens and 23 actions; 63 messages dropped
+   6675.8 err | stuck_level_restart: level 4 after 118200 tokens and 13 actions; 93 messages dropped
+   6675.8 err | 
+   6675.8 err | stuck_level_restart: level 4 after 118200 tokens and 13 actions; 93 messages dropped
+   6681.7 out | [sys] RAM 114.5/176.9 | swap none | proc 1.9 GB, 40 threads, 85 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.4/19.5
+   6801.8 out | [sys] RAM 114.5/176.9 | swap none | proc 1.9 GB, 41 threads, 87 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.4/19.5
+   6922.0 out | [sys] RAM 115.3/176.9 | swap none | proc 1.9 GB, 42 threads, 89 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.4/19.5
+   6991.2 err | stuck_level_restart: level 3 after 104648 tokens and 35 actions; 54 messages dropped
+   6991.2 err | 
+   6991.2 err | stuck_level_restart: level 3 after 104648 tokens and 35 actions; 54 messages dropped
+   7042.2 out | [sys] RAM 115.0/176.9 | swap none | proc 1.9 GB, 40 threads, 86 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.5/19.5
+   7150.8 err | stuck_level_restart: level 2 completed after restart (35805 more tokens)
+   7150.8 err | 
+   7150.8 err | stuck_level_restart: level 2 completed after restart (35805 more tokens)
+   7162.2 out | [sys] RAM 115.3/176.9 | swap none | proc 2.0 GB, 40 threads, 85 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.5/19.5
+   7189.5 out | benchmark: regenerated diagnostics in /kaggle/working in 2.47s
+   7189.5 out | benchmark: duck-harness-kaggle
+   7189.5 out | solver:    duck-harness
+   7189.5 out | games:     25
+   7189.5 out | passes:    1
+   7189.5 out | runs:      25 (won: 3)
+   7189.5 out | started:   2026-10-12 03:25:57
+   7189.5 out | ended:     in progress
+   7189.5 out | mean score:    36.36
+   7189.5 out | median score:  28.57
+   7189.5 out | total actions: 4098
+   7189.5 out | total tokens:  3895452
+   7189.5 out | generated tokens/sec: 587.69 (job wallclock)
+   7189.5 out | total wallclock: 136827.1s
+   7189.5 out | 
+   7189.5 out | per-game (mean across passes):
+   7189.5 out |   ar25-0c556536: score=58.33, levels=6.0/8, actions=203, tokens=146558
+   7189.5 out |   bp35-0a0ad940: score=2.22, levels=1.0/9, actions=40, tokens=159883
+   7189.5 out |   cd82-fb555c5d: score=28.57, levels=3.0/6, actions=107, tokens=243678
+   7189.5 out |   cn04-2fe56bfb: score=4.76, levels=1.0/6, actions=53, tokens=105519
+   7189.5 out |   dc22-fdcac232: score=28.57, levels=3.0/6, actions=194, tokens=174382
+   7189.5 out |   ft09-0d8bbf25: score=47.62, levels=4.0/6, actions=113, tokens=109961
+   7189.5 out |   g50t-5849a774: score=0.00, levels=0.0/7, actions=58, tokens=74588
+   7189.5 out |   ka59-38d34dbb: score=17.07, levels=3.0/7, actions=221, tokens=168857
+   7189.5 out |   lf52-271a04aa: score=5.45, levels=2.0/10, actions=111, tokens=146531
+   7189.5 out |   lp85-305b61c3: score=77.78, levels=7.0/8, actions=173, tokens=179025
+   7189.5 out |   ls20-9607627b: score=3.57, levels=1.0/7, actions=153, tokens=72303
+   7189.5 out |   m0r0-492f87ba: score=14.29, levels=2.0/6, actions=95, tokens=163700
+   7189.5 out |   r11l-495a7899: score=100.00, levels=6.0/6, actions=153, tokens=217306
+   7189.5 out |   re86-8af5384d: score=41.67, levels=5.0/8, actions=424, tokens=145375
+   7189.5 out |   s5i5-18d95033: score=58.33, levels=6.0/8, actions=210, tokens=254322
+   7189.5 out |   sb26-7fbdac44: score=100.00, levels=8.0/8, actions=221, tokens=111248
+   7189.5 out |   sc25-635fd71a: score=47.62, levels=4.0/6, actions=210, tokens=116406
+   7189.5 out |   sk48-d8078629: score=1.46, levels=1.0/8, actions=95, tokens=102289
+   7189.5 out |   sp80-589a99af: score=28.57, levels=3.0/6, actions=102, tokens=152059
+   7189.5 out |   su15-1944f8ab: score=13.33, levels=3.0/9, actions=78, tokens=193306
+   7189.5 out |   tn36-ef4dde99: score=7.40, levels=2.0/7, actions=115, tokens=145900
+   7189.5 out |   tr87-cd924810: score=60.03, levels=5.0/6, actions=301, tokens=155549
+   7189.5 out |   tu93-0768757b: score=61.16, levels=7.0/9, actions=198, tokens=200111
+   7189.5 out |   vc33-5430563c: score=100.00, levels=7.0/7, actions=231, tokens=211717
+   7189.5 out |   wa30-ee6fef47: score=1.12, levels=1.0/9, actions=239, tokens=144879
+   7189.5 out | 
+   7282.3 out | [sys] RAM 115.0/176.9 | swap none | proc 2.0 GB, 40 threads, 85 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.5/19.5
+   7402.3 out | [sys] RAM 114.9/176.9 | swap none | proc 2.0 GB, 40 threads, 85 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.5/19.5
+   7454.7 err | stuck_level_restart: level 4 completed after restart (88612 more tokens)
+   7454.7 err | 
+   7454.7 err | stuck_level_restart: level 4 completed after restart (88612 more tokens)
+   7522.3 out | [sys] RAM 115.8/176.9 | swap none | proc 2.0 GB, 40 threads, 85 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.6/19.5
+   7642.3 out | [sys] RAM 116.0/176.9 | swap none | proc 2.0 GB, 40 threads, 85 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.6/19.5
+   7762.3 out | [sys] RAM 115.8/176.9 | swap none | proc 2.0 GB, 40 threads, 85 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.6/19.5
+   7790.8 out | benchmark: regenerated diagnostics in /kaggle/working in 1.22s
+   7790.8 out | benchmark: duck-harness-kaggle
+   7790.8 out | solver:    duck-harness
+   7790.8 out | games:     25
+   7790.8 out | passes:    1
+   7790.8 out | runs:      25 (won: 3)
+   7790.8 out | started:   2026-10-12 03:25:57
+   7790.8 out | ended:     in progress
+   7790.8 out | mean score:    37.60
+   7790.8 out | median score:  35.11
+   7790.8 out | total actions: 4331
+   7790.8 out | total tokens:  4279602
+   7790.8 out | generated tokens/sec: 591.94 (job wallclock)
+   7790.8 out | total wallclock: 144095.4s
+   7790.8 out | 
+   7790.8 out | per-game (mean across passes):
+   7790.8 out |   ar25-0c556536: score=58.33, levels=6.0/8, actions=203, tokens=146558
+   7790.8 out |   bp35-0a0ad940: score=2.22, levels=1.0/9, actions=40, tokens=159883
+   7790.8 out |   cd82-fb555c5d: score=35.11, levels=4.0/6, actions=128, tokens=294588
+   7790.8 out |   cn04-2fe56bfb: score=4.76, levels=1.0/6, actions=53, tokens=105519
+   7790.8 out |   dc22-fdcac232: score=47.62, levels=4.0/6, actions=256, tokens=191914
+   7790.8 out |   ft09-0d8bbf25: score=47.62, levels=4.0/6, actions=113, tokens=109961
+   7790.8 out |   g50t-5849a774: score=0.00, levels=0.0/7, actions=58, tokens=74588
+   7790.8 out |   ka59-38d34dbb: score=17.07, levels=3.0/7, actions=221, tokens=168857
+   7790.8 out |   lf52-271a04aa: score=10.91, levels=3.0/10, actions=160, tokens=187246
+   7790.8 out |   lp85-305b61c3: score=77.78, levels=7.0/8, actions=173, tokens=179025
+   7790.8 out |   ls20-9607627b: score=3.57, levels=1.0/7, actions=204, tokens=109993
+   7790.8 out |   m0r0-492f87ba: score=14.29, levels=2.0/6, actions=99, tokens=192415
+   7790.8 out |   r11l-495a7899: score=100.00, levels=6.0/6, actions=153, tokens=217306
+   7790.8 out |   re86-8af5384d: score=41.67, levels=5.0/8, actions=424, tokens=145375
+   7790.8 out |   s5i5-18d95033: score=58.33, levels=6.0/8, actions=214, tokens=326602
+   7790.8 out |   sb26-7fbdac44: score=100.00, levels=8.0/8, actions=221, tokens=111248
+   7790.8 out |   sc25-635fd71a: score=47.62, levels=4.0/6, actions=210, tokens=116406
+   7790.8 out |   sk48-d8078629: score=1.46, levels=1.0/8, actions=114, tokens=139752
+   7790.8 out |   sp80-589a99af: score=28.57, levels=3.0/6, actions=102, tokens=152059
+   7790.8 out |   su15-1944f8ab: score=13.33, levels=3.0/9, actions=80, tokens=261531
+   7790.8 out |   tn36-ef4dde99: score=7.40, levels=2.0/7, actions=136, tokens=176520
+   7790.8 out |   tr87-cd924810: score=60.03, levels=5.0/6, actions=301, tokens=155549
+   7790.8 out |   tu93-0768757b: score=61.16, levels=7.0/9, actions=198, tokens=200111
+   7790.8 out |   vc33-5430563c: score=100.00, levels=7.0/7, actions=231, tokens=211717
+   7790.8 out |   wa30-ee6fef47: score=1.12, levels=1.0/9, actions=239, tokens=144879
+   7790.8 out | 
+   7815.7 err | analyzer request timed out at action 100; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=28.629940992999764)
+   7815.7 err | 
+   7815.7 err | analyzer request timed out at action 100; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=28.629940992999764)
+   7815.7 err | analyzer request timed out at action 115; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=45.512901097000395)
+   7815.7 err | 
+   7815.7 err | analyzer request timed out at action 115; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=45.512901097000395)
+   7815.7 err | analyzer request timed out at action 174; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=31.616665754000678)
+   7815.7 err | 
+   7815.7 err | analyzer request timed out at action 174; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=31.616665754000678)
+   7815.9 err | analyzer request timed out at action 261; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=10.127350007999667)
+   7815.9 err | 
+   7815.9 err | analyzer request timed out at action 261; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=10.127350007999667)
+   7815.9 out | [finished] m0r0-492f87ba state=gave_up level=2/6 score=14.29 actions=99 tokens=192415 per-level=25/30,35/111,39/203,0/26,0/500,0/237 note="tokens=214927"
+   7815.9 out | [finished] sk48-d8078629 state=gave_up level=1/8 score=1.46 actions=114 tokens=139752 per-level=84/61,30/177,0/101,0/103,0/230,0/181,0/125,0/92 note="tokens=139752"
+   7815.9 out | [finished] lp85-305b61c3 state=gave_up level=7/8 score=77.78 actions=173 tokens=179025 per-level=9/17,12/38,17/31,28/16,11/41,39/60,22/26,35/159 note="tokens=188426"
+   7815.9 out | [finished] dc22-fdcac232 state=gave_up level=4/6 score=47.62 actions=260 tokens=198638 per-level=51/59,47/102,60/67,95/98,7/324,0/578 note="tokens=198638"
+   7816.1 err | analyzer request timed out at action 162; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=8.65031119699961)
+   7816.1 err | 
+   7816.1 err | analyzer request timed out at action 162; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=8.65031119699961)
+   7816.3 out | [finished] lf52-271a04aa state=gave_up level=3/10 score=10.91 actions=161 tokens=188998 per-level=23/32,69/81,54/60,15/71,0/205,0/148,0/244,0/109,0/164,0/225 note="tokens=188998"
+   7823.5 err | analyzer request timed out at action 137; yielding with 2 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=91.78744918499979)
+   7823.5 err | 
+   7823.5 err | analyzer request timed out at action 137; yielding with 2 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=91.78744918499979)
+   7823.7 out | [finished] tn36-ef4dde99 state=gave_up level=2/7 score=7.40 actions=136 tokens=176520 per-level=9/32,106/72,21/26,0/40,0/30,0/55,0/62 note="tokens=182337"
+   7832.1 err | analyzer request timed out at action 215; yielding with 1 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=24.052938791000997)
+   7832.1 err | 
+   7832.1 err | analyzer request timed out at action 215; yielding with 1 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=24.052938791000997)
+   7832.3 out | [finished] s5i5-18d95033 state=gave_up level=6/8 score=58.33 actions=214 tokens=326602 per-level=20/20,30/89,47/106,36/54,40/162,37/38,4/86,0/83 note="tokens=334652"
+   7834.1 err | analyzer request timed out at action 129; yielding with 1 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=81.90360514599888)
+   7834.1 err | 
+   7834.1 err | analyzer request timed out at action 129; yielding with 1 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=81.90360514599888)
+   7834.3 out | [finished] cd82-fb555c5d state=gave_up level=4/6 score=35.11 actions=128 tokens=294588 per-level=36/55,6/8,24/41,61/21,1/23,0/23 note="tokens=295723"
+   7834.5 err | analyzer request timed out at action 81; yielding with 1 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=20.114831086999402)
+   7834.5 err | 
+   7834.5 err | analyzer request timed out at action 81; yielding with 1 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=20.114831086999402)
+   7834.7 out | [finished] su15-1944f8ab state=gave_up level=3/9 score=13.33 actions=80 tokens=261531 per-level=23/22,17/42,25/26,15/115,0/36,0/31,0/8,0/40,0/41 note="tokens=272691"
+   7859.4 out | [finished] cn04-2fe56bfb state=gave_up level=1/6 score=4.76 actions=53 tokens=105519 per-level=14/29,39/54,0/85,0/300,0/208,0/113 note="tokens=113451"
+   7866.7 out | [finished] ar25-0c556536 state=gave_up level=6/8 score=58.33 actions=203 tokens=146558 per-level=22/32,15/50,40/75,22/37,29/89,53/159,22/233,0/73 note="tokens=197108"
+   7876.6 err | analyzer request timed out at action 41; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=53.05754065200108)
+   7876.6 err | 
+   7876.6 err | analyzer request timed out at action 41; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=53.05754065200108)
+   7876.8 out | [finished] bp35-0a0ad940 state=gave_up level=1/9 score=2.22 actions=40 tokens=159883 per-level=16/21,24/48,0/44,0/38,0/33,0/87,0/86,0/131,0/163 note="tokens=230416"
+   7877.4 out | [finished] g50t-5849a774 state=gave_up level=0/7 score=0.00 actions=58 tokens=74588 per-level=58/78,0/175,0/179,0/230,0/96,0/54,0/67 note="tokens=75126"
+   7882.5 out | [sys] RAM 114.9/176.9 | swap none | proc 2.0 GB, 40 threads, 90 fds | GPU0 93.8/95.6 | disk / 7102.4/8156.9, /kaggle/working 1.6/19.5
+   7883.2 out | [finished] re86-8af5384d state=gave_up level=5/8 score=41.67 actions=424 tokens=145375 per-level=29/26,38/42,50/86,79/108,145/189,83/139,0/424,0/241 note="tokens=158489"
+   7887.4 out | [finished] sc25-635fd71a state=gave_up level=4/6 score=47.62 actions=210 tokens=116406 per-level=34/36,5/6,22/32,75/83,74/143,0/50 note="tokens=117828"
+   7891.0 out | [finished] ls20-9607627b state=gave_up level=1/7 score=3.57 actions=204 tokens=109993 per-level=20/22,184/123,0/73,0/84,0/96,0/192,0/186 note="tokens=110321"
+   7894.7 out | [finished] ft09-0d8bbf25 state=gave_up level=4/6 score=47.62 actions=113 tokens=109961 per-level=4/43,8/12,14/23,21/28,66/65,0/37 note="tokens=112058"
+   7895.4 out | [finished] sp80-589a99af state=gave_up level=3/6 score=28.57 actions=102 tokens=152059 per-level=9/39,14/58,12/25,67/148,0/96,0/152 note="tokens=154342"
+   7899.6 out | [finished] tr87-cd924810 state=gave_up level=5/6 score=60.03 actions=301 tokens=155549 per-level=27/54,32/58,28/40,28/45,151/71,35/146 note="tokens=196754"
+   7935.0 out | [finished] tu93-0768757b state=gave_up level=7/9 score=61.16 actions=198 tokens=200111 per-level=18/19,15/16,19/34,33/42,29/123,29/80,20/14,35/23,0/111 note="tokens=219013"
+   7943.7 out | [finished] wa30-ee6fef47 state=gave_up level=1/9 score=1.12 actions=239 tokens=144879 per-level=100/71,139/119,0/183,0/98,0/368,0/68,0/79,0/442,0/415 note="tokens=154526"
+   7948.5 out | [finished] ka59-38d34dbb state=gave_up level=3/7 score=17.07 actions=221 tokens=168857 per-level=29/28,74/109,71/51,47/51,0/33,0/132,0/326 note="tokens=241142"
+   7953.8 out | benchmark: regenerated diagnostics in /kaggle/working in 5.00s
+   7953.8 out | benchmark: duck-harness-kaggle
+   7953.8 out | solver:    duck-harness
+   7953.8 out | games:     25
+   7953.8 out | passes:    1
+   7953.8 out | runs:      25 (won: 3)
+   7953.8 out | started:   2026-10-12 03:25:57
+   7953.8 out | ended:     2026-10-12 05:29:05
+   7953.8 out | duration:  2h 3m 7s
+   7953.8 out | mean score:    37.60
+   7953.8 out | median score:  35.11
+   7953.8 out | total actions: 4336
+   7953.8 out | total tokens:  4288078
+   7953.8 out | generated tokens/sec: 580.45 (job wallclock)
+   7953.8 out | total wallclock: 176974.2s
+   7953.8 out | 
+   7953.8 out | per-game (mean across passes):
+   7953.8 out |   ar25-0c556536: score=58.33, levels=6.0/8, actions=203, tokens=146558
+   7953.8 out |   bp35-0a0ad940: score=2.22, levels=1.0/9, actions=40, tokens=159883
+   7953.8 out |   cd82-fb555c5d: score=35.11, levels=4.0/6, actions=128, tokens=294588
+   7953.8 out |   cn04-2fe56bfb: score=4.76, levels=1.0/6, actions=53, tokens=105519
+   7953.8 out |   dc22-fdcac232: score=47.62, levels=4.0/6, actions=260, tokens=198638
+   7953.8 out |   ft09-0d8bbf25: score=47.62, levels=4.0/6, actions=113, tokens=109961
+   7953.8 out |   g50t-5849a774: score=0.00, levels=0.0/7, actions=58, tokens=74588
+   7953.8 out |   ka59-38d34dbb: score=17.07, levels=3.0/7, actions=221, tokens=168857
+   7953.8 out |   lf52-271a04aa: score=10.91, levels=3.0/10, actions=161, tokens=188998
+   7953.8 out |   lp85-305b61c3: score=77.78, levels=7.0/8, actions=173, tokens=179025
+   7953.8 out |   ls20-9607627b: score=3.57, levels=1.0/7, actions=204, tokens=109993
+   7953.8 out |   m0r0-492f87ba: score=14.29, levels=2.0/6, actions=99, tokens=192415
+   7953.8 out |   r11l-495a7899: score=100.00, levels=6.0/6, actions=153, tokens=217306
+   7953.8 out |   re86-8af5384d: score=41.67, levels=5.0/8, actions=424, tokens=145375
+   7953.8 out |   s5i5-18d95033: score=58.33, levels=6.0/8, actions=214, tokens=326602
+   7953.8 out |   sb26-7fbdac44: score=100.00, levels=8.0/8, actions=221, tokens=111248
+   7953.8 out |   sc25-635fd71a: score=47.62, levels=4.0/6, actions=210, tokens=116406
+   7953.8 out |   sk48-d8078629: score=1.46, levels=1.0/8, actions=114, tokens=139752
+   7953.8 out |   sp80-589a99af: score=28.57, levels=3.0/6, actions=102, tokens=152059
+   7953.8 out |   su15-1944f8ab: score=13.33, levels=3.0/9, actions=80, tokens=261531
+   7953.8 out |   tn36-ef4dde99: score=7.40, levels=2.0/7, actions=136, tokens=176520
+   7953.8 out |   tr87-cd924810: score=60.03, levels=5.0/6, actions=301, tokens=155549
+   7953.8 out |   tu93-0768757b: score=61.16, levels=7.0/9, actions=198, tokens=200111
+   7953.8 out |   vc33-5430563c: score=100.00, levels=7.0/7, actions=231, tokens=211717
+   7953.8 out |   wa30-ee6fef47: score=1.12, levels=1.0/9, actions=239, tokens=144879
+   7953.8 out | 
+   7953.8 out | diagnostics: /kaggle/working/diagnostics.html
+   7954.6 err | /usr/local/lib/python3.12/dist-packages/IPython/core/display.py:724: UserWarning: Consider using IPython.display.IFrame instead
+   7954.6 err |   warnings.warn("Consider using IPython.display.IFrame instead")
+   7954.6 err | 
+   7954.6 err | /usr/local/lib/python3.12/dist-packages/IPython/core/display.py:724: UserWarning: Consider using IPython.display.IFrame instead
+   7954.6 err |   warnings.warn("Consider using IPython.display.IFrame instead")
+   7954.6 out | ARCAID3_RESTART_FINAL {"threshold_tokens": 100000, "restarts": 5, "completed_after_restart": 2, "levels_restarted": [["/kaggle/working/artifacts/bp35-0a0ad940_p0_tool_runtime_state.json", 2], ["/kaggle/working/artifacts/cd82-fb555c5d_p0_tool_runtime_state.json", 4], ["/kaggle/working/artifacts/m0r0-492f87ba_p0_tool_runtime_state.json", 3], ["/kaggle/working/artifacts/su15-1944f8ab_p0_tool_runtime_state.json", 4], ["/kaggle/working/artifacts/tn36-ef4dde99_p0_tool_runtime_state.json", 2]]}
+   7954.6 out |   {"event": "restart", "state_path": "/kaggle/working/artifacts/cd82-fb555c5d_p0_tool_runtime_state.json", "slot": "g17", "level": 4, "tokens_before": 110011, "actions_before": 17, "messages_dropped": 40, "elapsed_s": 5538.71923076}
+   7954.6 out |   {"event": "restart", "state_path": "/kaggle/working/artifacts/tn36-ef4dde99_p0_tool_runtime_state.json", "slot": "g01", "level": 2, "tokens_before": 100322, "actions_before": 87, "messages_dropped": 68, "elapsed_s": 6005.577350488}
+   7954.6 out |   {"event": "restart", "state_path": "/kaggle/working/artifacts/bp35-0a0ad940_p0_tool_runtime_state.json", "slot": "g03", "level": 2, "tokens_before": 114796, "actions_before": 23, "messages_dropped": 63, "elapsed_s": 6110.738128923999}
+   7954.6 out |   {"event": "restart", "state_path": "/kaggle/working/artifacts/su15-1944f8ab_p0_tool_runtime_state.json", "slot": "g22", "level": 4, "tokens_before": 118200, "actions_before": 13, "messages_dropped": 93, "elapsed_s": 6113.763622785}
+   7954.6 out |   {"event": "restart", "state_path": "/kaggle/working/artifacts/m0r0-492f87ba_p0_tool_runtime_state.json", "slot": "g02", "level": 3, "tokens_before": 104648, "actions_before": 35, "messages_dropped": 54, "elapsed_s": 6429.129123557001}
+   7954.6 out |   {"event": "completed_after_restart", "state_path": "/kaggle/working/artifacts/tn36-ef4dde99_p0_tool_runtime_state.json", "slot": "g01", "level": 2, "tokens_before": 100322, "actions_before": 87, "messages_dropped": 68, "elapsed_s": 6005.577350488, "tokens_after": 35805, "actions_total": 106}
+   7954.6 out |   {"event": "completed_after_restart", "state_path": "/kaggle/working/artifacts/cd82-fb555c5d_p0_tool_runtime_state.json", "slot": "g17", "level": 4, "tokens_before": 110011, "actions_before": 17, "messages_dropped": 40, "elapsed_s": 5538.71923076, "tokens_after": 88612, "actions_total": 61}
+   7956.9 err | /usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+   7956.9 err |   cells[i][c] = re.sub('\\\\\|', '|', cell)
+   7957.1 err | /usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+   7957.1 err |   text = re.sub(r'_', '\_', text) # Escape underscores in display text
+   7957.8 err | [NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+   7957.9 err | [NbConvertApp] Writing 2856589 bytes to __notebook__.ipynb
+   7959.2 err | [NbConvertApp] Converting notebook __notebook__.ipynb to html
+   7960.3 err | [NbConvertApp] Writing 4459116 bytes to __results__.html

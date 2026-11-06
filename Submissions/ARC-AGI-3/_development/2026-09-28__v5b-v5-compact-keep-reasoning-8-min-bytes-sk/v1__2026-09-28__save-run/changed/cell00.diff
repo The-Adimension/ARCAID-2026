@@ -1,0 +1,9 @@
+--- base cell 0
++++ new cell 0
+@@ -1,2 +1,6 @@
++## v5b = v5 compact + KEEP_REASONING=8 + min-bytes skip
++
++Live knobs: `KEEP_REASONING=8` (self-test still runs at 2), `STRIP_INSTRUCTIONS=True`, `MIN_COMPACT_BYTES=40000`. Prefix cache stays off. Submit gates require `ar25>=27.78`, preemptions<40, oom==0, history>=0.9*v3.
++
+ ## v5 = v3 + arc3_compact (one change: smaller requests, same history)
+ 

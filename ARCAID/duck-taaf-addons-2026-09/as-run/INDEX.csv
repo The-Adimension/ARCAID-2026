@@ -1,0 +1,27 @@
+file,sha256,lines,ran_in
+arc3-duck-ab-tricks__v1__cell06.py,99c1594568bb56e03e5bbb059164128674c2c80d977adf2dacb543ea87502cd4,12,arc3-duck-ab-tricks@v1:cell06
+arc3-duck-ab-tricks__v2__cell06.py,c29bc61345b27fb4e48706372dd8bb803cc4f0b31e6961b7471e591bb91dd9ab,13,arc3-duck-ab-tricks@v2:cell06
+arc3-duck-ab-tricks__v3__cell06.py,de749c827f0a1bd8449fd92ad131bc2076a11ebbf4193b66ac2f904cc407dfcd,14,arc3-duck-ab-tricks@v3:cell06
+arc3-duck-fp4-batch__v1__cell14.py,c547b233c3dbe250de5c31eaff560fb3d2c2fc8c3d585ade1a0b16cd7682e546,20,arc3-duck-fp4-batch@v1:cell14 arc3-duck-fp4-depth@v2:cell14
+arc3-duck-fp4-kvfp8__v1__cell14.py,49d344c2d10ee7f0da05b232ec0eecf620269f21d139f4ed6e755bc00df8af2d,207,arc3-duck-fp4-kvfp8@v1:cell14
+arc3-duck-fp4-kvfp8__v1__cell19.py,01d53332d7b73781e4844f23aaee9e383bb46be5a36d6d3cd2c4934f8c4c792c,91,arc3-duck-fp4-kvfp8@v1:cell19 arc3-duck-fp4-reset@v1:cell19 arc3-duck-fp4-reset@v2:cell19 arc3-duck-fp4-reset@v3:cell19 arc3-duck-fp4-reset@v4:cell19 duck-nvfp4-batch-stall-warn-dead-sign@v1:cell19 duck-nvfp4-batch-stall-warn-dead-sign@v2:cell20 duck-nvfp4-batch-stall-warn-dead-sign@v3:cell19 duck-nvfp4-batch-stall-warn-dead-sign@v4:cell19 duck-v3-wmreason@v1:cell21
+arc3-duck-fp4-ledger__v1__cell14.py,5f0f21e6cd125e751bfbfe1e95cfd12ea3e9f28e3bd0419ca95f95c5e9fa460d,56,arc3-duck-fp4-ledger@v1:cell14
+arc3-duck-fp4-prompts__v1__cell14.py,ec369bcdfc49d571c268e26fdff80be08035d1fc37d2620a0f43de5c90508524,113,arc3-duck-fp4-prompts@v1:cell14
+arc3-duck-fp4-reset__v1__cell14.py,1bc5d8145efa28397cacc600efb011916c76f65737909f4f8c195127f4af8dcd,36,arc3-duck-fp4-reset@v1:cell14
+arc3-duck-fp4-reset__v2__cell14.py,493d798983c2ffa74f1cbce2a6f6ae67f3631a7981f3b22dee285175b3236ee0,42,arc3-duck-fp4-reset@v2:cell14 arc3-duck-fp4-reset@v3:cell14
+arc3-duck-fp4-reset__v4__cell14.py,1ef5c6d235f29da877f4a333a8809ae95a79ad07bba15e5c1bcd206be8f8876c,42,arc3-duck-fp4-reset@v4:cell14
+arc3-duck-fp4-stall__v1__cell14.py,691022a5f91f660513c421819589e11decc27208c706593b3f36e750d664e260,35,arc3-duck-fp4-stall@v1:cell14
+arc3-duck-fp4-stall__v1__cell19.py,543ef7e50e2a9e77ba08dda3a20e69746cf0069515e4dc5b072fdc7136b1ece1,58,arc3-duck-fp4-stall@v1:cell19 arc3-duck-fp4-stall@v2:cell19
+arc3-duck-fp4-stall__v2__cell14.py,fd9b5e77f3004e3ce95c882cdc27b953f775d9df58ff904f39a2a73c02378cee,35,arc3-duck-fp4-stall@v2:cell14
+duck-nvfp4-batch-stall-warn-dead-sign__v1__cell14.py,4655fbcc5afb9863a0b43b6051f839d81655025f17c72c2c3a5e19312fc17b4b,90,duck-nvfp4-batch-stall-warn-dead-sign@v1:cell14 duck-nvfp4-batch-stall-warn-dead-sign@v2:cell15
+duck-nvfp4-batch-stall-warn-dead-sign__v3__cell14.py,8d85818aa93e31c8e37cb738cacd4afced6e4bf20e71cb499f5c5886b7bcbf21,207,duck-nvfp4-batch-stall-warn-dead-sign-compact@v1:cell14 duck-nvfp4-batch-stall-warn-dead-sign@v3:cell14 duck-nvfp4-batch-stall-warn-dead-sign@v5:cell15 duck-v3-wmreason@v1:cell14 notebook7c0bf2022d@v1:cell15 v5b-v5-compact-keep-reasoning-8-min-bytes-sk@v1:cell14
+duck-nvfp4-batch-stall-warn-dead-sign__v4__cell14.py,2be89e80c08b483a52f6dc11324f7352bba5362836a7fde2b509b24dc4e7c3b6,129,duck-nvfp4-batch-stall-warn-dead-sign@v4:cell14
+duck-nvfp4-batch-stall-warn-dead-sign__v5__cell20.py,03411c8da78c0d356ceb3eea82f82259b19b29758e217cc13f666995391b2dbd,105,duck-nvfp4-batch-stall-warn-dead-sign@v5:cell20 notebook7c0bf2022d@v1:cell20
+duck-nvfp4-batch-stall-warn-dead-sign-compact__v1__cell15.py,572561287acc7121dd0f9daff033a63e66266f43e2c13715c0a81ac2a51695e3,42,duck-nvfp4-batch-stall-warn-dead-sign-compact@v1:cell15
+duck-nvfp4-batch-stall-warn-dead-sign-compact__v1__cell20.py,8eaa2f449d887e580db367535f3321acaf9b2854dadf652ab2c98eb57c36c748,139,duck-nvfp4-batch-stall-warn-dead-sign-compact@v1:cell20
+duck-nvfp4-batch-stall-warn-dead-sign-compact__v1__cell21.py,29334c7198ead0d06db97a8536db66ee4259b29f2552c0704d85b010cfe629d9,8,duck-nvfp4-batch-stall-warn-dead-sign-compact@v1:cell21
+duck-v3-wmreason__v1__cell16.py,875919297e027704da19398e8bd5991fc522c418600130996022243155c8d595,77,duck-v3-wmreason@v1:cell16 taaf-flashnext-sheetu12b-reasoning-notes@v1:cell13 taaf-flashnext-sheetu12b-reasoning-notes@v2:cell13 taaf-flashnext-sheetu12b-reasoning-notes@v3:cell13
+duck-v3-wmreason__v1__cell22.py,51c504a8a2a03af00f7cdb639948596e009484a8e84f5733982ca0e275cb98b7,2,duck-v3-wmreason@v1:cell22 taaf-flashnext-sheetu12b-reasoning-notes@v1:cell22 taaf-flashnext-sheetu12b-reasoning-notes@v2:cell22 taaf-flashnext-sheetu12b-reasoning-notes@v3:cell22
+v5b-v5-compact-keep-reasoning-8-min-bytes-sk__v1__cell15.py,08c3951768830889c160a8a1fde80702df7cfb0887ef4a887352429de6d14127,44,v5b-v5-compact-keep-reasoning-8-min-bytes-sk@v1:cell15
+v5b-v5-compact-keep-reasoning-8-min-bytes-sk__v1__cell20.py,34ff5e66ade6d85dcaf65c24fa1145ea3f5b237b282e20b86fc9fc8e9739855f,145,v5b-v5-compact-keep-reasoning-8-min-bytes-sk@v1:cell20
+v5b-v5-compact-keep-reasoning-8-min-bytes-sk__v1__cell21.py,597db4f44b899c2e94d8db6a11c90b02eff6eb0177cb1df186f750e00958cf72,14,v5b-v5-compact-keep-reasoning-8-min-bytes-sk@v1:cell21

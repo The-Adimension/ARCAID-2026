@@ -1,0 +1,12 @@
+--- base cell 0
++++ new cell 0
+@@ -76,8 +76,7 @@
+  "thinking_token_budget": 12288,
+  "template_kwargs": {
+-  "reasoning_effort": "high"
++  "reasoning_effort": "medium"
+  },
+  "effort_ladder": [
+-  "medium",
+   "low"
+  ],

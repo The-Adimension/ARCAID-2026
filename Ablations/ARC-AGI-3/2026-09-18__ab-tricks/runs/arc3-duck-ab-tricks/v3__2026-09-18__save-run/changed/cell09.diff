@@ -1,0 +1,19 @@
+--- base cell 9
++++ new cell 9
+@@ -39,5 +39,5 @@
+         for game_id in Q38_P1_PUBLIC_GAME_IDS
+     ]
+-    bm.n_passes = 6
++    bm.n_passes = 4
+     bm.game_weights = None
+ 
+@@ -45,7 +45,7 @@
+     # intended evaluation configuration is visible and stable.
+     if hasattr(bm.solver, "concurrency"):
+-        bm.solver.concurrency = 18
++        bm.solver.concurrency = 24
+     if hasattr(bm.solver, "max_runtime_s_per_game"):
+-        bm.solver.max_runtime_s_per_game = 1800.0
++        bm.solver.max_runtime_s_per_game = 2700.0
+ 
+     bm.label = f"{bm.label}-arc3-ab-6g"

@@ -1,0 +1,37 @@
+--- base cell 0
++++ new cell 0
+@@ -1,3 +1,3 @@
+-# ARCAID3 lexicon view on Scott Le Grand's sheetu12b (public LB 4.17 for our unchanged copy)
++# ARCAID3 lexicon view v2 on Scott Le Grand's sheetu12b (public LB 4.17 for our unchanged copy)
+ 
+ **What this is.** Scott Le Grand's public notebook `taaf-flashnext-sheetu12b-0922` (Apache-2.0), itself built on
+@@ -14,5 +14,16 @@
+ | `current_frame.native` | The board at its true resolution |
+ 
+-One sentence in the system prompt mentions it. Nothing else changes: same model, serving, images, prompts, schedule.
++**What v2 changes in the prompt, and why.** In version 1 the model never used the view: 0 of 1,130 tool calls.
++The harness's own prompt said, three times per request, that a frame exposes "only" `.ascii`, `.step`, `.level`,
++`.shape` and `.segmentation`, and our one sentence gave no reason to look
++(`arcaid3/part3/WHY-THE-VIEW-WAS-NOT-USED.md`). v2 therefore:
++1. adds the new members to those three "only" lines (tool description and two system-prompt lines);
++2. adds a "when" line next to the harness's "most recent change" line: on a new level, or when the last action's
++   effect is unclear, print `current_frame.code` and `current_frame.changes_since(previous_frame)`;
++3. on a game's first turn and after a level change, adds one line to the user message: start with
++   `print(current_frame.code)`.
++
++Nothing else changes: same model, serving, images, schedule. Every prompt edit is applied only if its exact anchor
++text is found, and the `ARCAID3_LEXICON_READY` line reports which edits applied.
+ 
+ **Why this change and not another.** In this lineage the only change ever reported to move the hidden leaderboard
+@@ -24,6 +35,10 @@
+ 2.30 for another team. Judge it on several draws against several draws of the unchanged base.
+ 
++**Environment:** Kaggle image `sha256:37c64f7d…fade02bfa8bf3fc647d461` (Python 3.12), set as "Pin to original environment".
++keithtyser's vLLM runtime stops on Python 3.13 with `The pinned vLLM runtime requires CPython 3.12`.
++
+ **Kill switch:** `ARCAID3_LEXICON=0`. **Log lines:** `ARCAID3_LEXICON_READY` near the start, `ARCAID3_LEXICON_STATS`
+-every 200 tool calls, `ARCAID3_LEXICON_FINAL` at the end.
++every 200 tool calls, `ARCAID3_LEXICON_FINAL` at the end. Success test for this save run: `calls_using_view` above
++5% of `tool_calls`.
+ 
+ Credits: Tufa Labs (Duck), keithtyser (Flash-Next serving), Scott Le Grand (sheetu12b, agentfix, F13/F19).

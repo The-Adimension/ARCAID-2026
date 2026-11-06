@@ -1,0 +1,84 @@
+{
+ "kernel": "habanwer/arcaid3-restart-dfranzen-m2",
+ "title": "arcaid3-restart-dfranzen-m2",
+ "version": 1,
+ "script_version_id": 357524957,
+ "url": "https://www.kaggle.com/code/habanwer/arcaid3-restart-dfranzen-m2?scriptVersionId=357524957",
+ "track": "ARC-AGI-3",
+ "private_on_kaggle_at_collection": false,
+ "placement": {
+  "place": "ablations",
+  "group": "2026-10-12__restart-v1",
+  "arm": "restart",
+  "note": "Also submitted (25.76)"
+ },
+ "inputs_now": {
+  "competition_sources": [
+   "arc-prize-2026-arc-agi-3"
+  ],
+  "dataset_sources": [
+   "dfranzen/pennyroyal-v253",
+   "dfranzen/taaf-kaggle-source-bundle-copy"
+  ],
+  "model_sources": [
+   "dfranzen/albucino-qwen3-8-flash-next-drafter/Transformers/default/1",
+   "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/Transformers/default/1"
+  ],
+  "kernel_sources": []
+ },
+ "inputs_as_run": [
+  {
+   "sourceId": 133468,
+   "sourceType": "competition"
+  },
+  {
+   "sourceId": 20092813,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 20134793,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 1007009,
+   "sourceType": "modelInstanceVersion"
+  },
+  {
+   "sourceId": 1007514,
+   "sourceType": "modelInstanceVersion"
+  }
+ ],
+ "accelerator": "nvidiaRtxPro6000",
+ "run": {
+  "start": "2026-10-12T03:16:40.841336+00:00",
+  "end": "2026-10-12T05:29:12.315419+00:00",
+  "duration_s": 7951.474083,
+  "exception": null
+ },
+ "submissions": [
+  {
+   "submission_ref": "57097755",
+   "submitted_utc": "2026-10-12T06:13:49.543000",
+   "status": "COMPLETE",
+   "public_score": "25.76",
+   "private_score": "",
+   "selected": "",
+   "after_deadline": ""
+  }
+ ],
+ "files": {
+  "__notebook__.ipynb": "1576ac2ff9edfaeeff1e98e016ad317cfe24ea1c6d9179750750d49b5a81ad03",
+  "__output__.json": "c2b864ff5feb7a03dde6b744f8fe16fc3243a4e729d5a93b725b84ececf17930"
+ },
+ "collected_at": "2026-11-06T11:48:45Z",
+ "notebook_sha256_original": "1576ac2ff9edfaeeff1e98e016ad317cfe24ea1c6d9179750750d49b5a81ad03",
+ "log_sha256_original": "c2b864ff5feb7a03dde6b744f8fe16fc3243a4e729d5a93b725b84ececf17930",
+ "inferred_parent": {
+  "notebook": "dfranzen/arc-agi-3-milestone-2-solution@v1",
+  "distance_lines": 145,
+  "runner_up": "amatlas/dfranzen-fork-d-prime@v1",
+  "runner_up_distance": 145,
+  "method": "Tools/lineage/infer_parents.py"
+ },
+ "root_base": "dfranzen/arc-agi-3-milestone-2-solution@v1"
+}

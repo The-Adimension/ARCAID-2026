@@ -1,0 +1,39 @@
+{
+ "kernel": "habanwer/arc3-duck-fp4-depth",
+ "title": "arc3-duck-fp4-depth",
+ "version": 1,
+ "script_version_id": null,
+ "url": "https://www.kaggle.com/code/habanwer/arc3-duck-fp4-depth",
+ "track": "ARC-AGI-3",
+ "private_on_kaggle_at_collection": true,
+ "placement": {
+  "place": "development"
+ },
+ "inputs_now": {
+  "competition_sources": [
+   "arc-prize-2026-arc-agi-3"
+  ],
+  "dataset_sources": [
+   "keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1",
+   "keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1"
+  ],
+  "model_sources": [
+   ""
+  ],
+  "kernel_sources": []
+ },
+ "inputs_as_run": null,
+ "accelerator": null,
+ "run": {
+  "start": null,
+  "end": null,
+  "duration_s": null,
+  "exception": null
+ },
+ "submissions": [],
+ "files": {
+  "__notebook__.ipynb": "unavailable (404)",
+  "__output__.json": "unavailable (404)"
+ },
+ "collected_at": "2026-11-06T12:14:19Z"
+}

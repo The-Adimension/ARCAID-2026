@@ -1,0 +1,25 @@
+--- base cell 4
++++ new cell 6
+@@ -31,4 +31,9 @@
+ subprocess.run(["git", "apply", "--include=ARC3-Inference/*", "-v", "/kaggle/harness-changes.patch"], cwd=f"{BUNDLE_DIR}/src", check=True)
+ print('harness patch applied successfully')
++# ARCAID3: stuck-level restart, applied after Franzen's patch (kaggle/restart-dfranzen/restart.patch)
++subprocess.run(["git", "apply", "--include=ARC3-Inference/*", "-v", "/kaggle/restart.patch"], cwd=f"{BUNDLE_DIR}/src", check=True)
++_restart_src = Path(f"{BUNDLE_DIR}/src/ARC3-Inference/inference/agent/tool_agent.py").read_text()
++assert "def _maybe_restart_stuck_level" in _restart_src and "restart_note = self._maybe_restart_stuck_level" in _restart_src
++print('restart patch applied successfully')
+ 
+ # True only inside a real competition rerun; switches diagnostics + soft deadline.
+@@ -53,4 +58,5 @@
+ SERVER_BASE_URL = f'http://{SERVED_MODEL_HOST}:{SERVED_MODEL_PORT}/v1'
+ USE_PRIORITY_SCHEDULING = True
++STUCK_RESTART_TOKENS = 100000  # ARCAID3: 0 = Franzen v1 behaviour
+ 
+ setup_env = {
+@@ -136,2 +142,6 @@
+ 
+ os.environ.update({k: str(v) for k,v in setup_env.items()})
++# ARCAID3: stuck-level restart flag and its event log
++os.environ['ARC3_STUCK_RESTART_TOKENS'] = str(STUCK_RESTART_TOKENS)
++os.environ['ARC3_STUCK_RESTART_LOG'] = str(WORKING_DIR / 'stuck_restarts.jsonl')
++print('ARCAID3_RESTART_READY', {'tokens': STUCK_RESTART_TOKENS, 'priority': USE_PRIORITY_SCHEDULING, 'true_submission': TRUE_SUBMISSION})

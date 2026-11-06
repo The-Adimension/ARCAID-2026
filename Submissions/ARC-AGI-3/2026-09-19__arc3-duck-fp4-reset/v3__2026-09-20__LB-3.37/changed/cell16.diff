@@ -1,0 +1,31 @@
+--- base cell 16
++++ new cell 16
+@@ -122,5 +122,5 @@
+ # arc3: two passes over the same games -- n_passes, never a repeated games list
+ # (duplicate game_ids raise in taaf/benchmark.py).
+-bm.n_passes = 1 if TRUE_SUBMISSION else 2
++bm.n_passes = 1 if TRUE_SUBMISSION else 1
+ bm.game_weights = None
+ 
+@@ -167,11 +167,17 @@
+         public_runs = list(bm.game_runs)
+         public_run_ids = [run.game_id for run in public_runs]
+-        # arc3: audit against the set we actually selected, not the full 25. depthrun1 played
+-        # all six games and then died here, losing the scorer call and the COMPLETE status.
++        # arc3: audit against the set we actually selected, and by MULTISET, not by order.
++        # Upstream asserts exactly 25 ids in PUBLIC_GAME_IDS order, so a subset run dies here
++        # (depthrun1) and so does a multi-pass run, where game_runs holds len(games)*n_passes
++        # entries (resetrun2). Both played every game first and then lost the scorer call and
++        # the COMPLETE status -- and an ERRORed version cannot be submitted.
++        from collections import Counter as _ArcCounter
+         _expected_ids = list(globals().get('DEPTH_PROBE_IDS') or PUBLIC_GAME_IDS)
+-        if public_run_ids != _expected_ids:
++        _passes = int(getattr(bm, 'n_passes', 1) or 1)
++        _want = _ArcCounter({_gid: _passes for _gid in _expected_ids})
++        if _ArcCounter(public_run_ids) != _want:
+             raise RuntimeError(
+                 f'Public run coverage changed: count={len(public_runs)} ids={public_run_ids} '
+-                f'expected={_expected_ids}.'
++                f'expected={_expected_ids} x{_passes} passes.'
+             )
+         unfinished = [

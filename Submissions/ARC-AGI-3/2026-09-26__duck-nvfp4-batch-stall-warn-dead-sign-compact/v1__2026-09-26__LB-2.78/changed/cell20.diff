@@ -1,0 +1,92 @@
+--- base cell 20
++++ new cell 20
+@@ -1,9 +1,9 @@
+ # Never let the printout fail a run (this cell also runs in the competition rerun).
+ def _arc3_eval():
+-    # v4A evaluation printout (replaces v3's completion-only "RHAE" table).
++    # v5 evaluation printout (replaces v3's completion-only "RHAE" table).
+     # Score = frozen scorer per game (benchmark.json final_score == score.json). Efficiency =
+     # actions on cleared levels / human baseline on those levels. vLLM concurrency from the
+-    # server log, token totals from the final metrics scrape. Baselines: v3 and v4 save runs,
+-    # same 6 games, 3600 s, concurrency 6, same serving profile.
++    # server log, token totals from the final metrics scrape, history depth from the transcripts.
++    # Baselines: v3, v4 and v4A save runs, same 6 games, 3600 s, concurrency 6, same serving.
+     import json as _json
+     import re as _re
+@@ -11,8 +11,10 @@
+ 
+     ARC3_BASELINES = {
+-        "v3 (LB 3.59)": {"score": 25.08, "levels": 19, "eff": 0.72, "gen_tokens": 880744,
+-                         "avg_prompt": 21494, "running": 3.07, "waiting": 2.65},
+-        "v4 (unsub.)": {"score": 16.23, "levels": 19, "eff": 1.41, "gen_tokens": 881771,
+-                        "avg_prompt": 21801, "running": 3.04, "waiting": 2.53},
++        "v3 (LB 3.59)": {"score": 25.08, "levels": 19, "eff": 0.72, "gen_tokens": 880744, "avg_prompt": 21494,
++                         "running": 3.07, "waiting": 2.65, "history": 23.9, "preemptions": 17},
++        "v4 (unsub.)": {"score": 16.23, "levels": 19, "eff": 1.41, "gen_tokens": 881771, "avg_prompt": 21801,
++                        "running": 3.04, "waiting": 2.53, "history": 22.8, "preemptions": 14},
++        "v4A (unsub.)": {"score": 13.41, "levels": 15, "eff": 2.26, "gen_tokens": 977801, "avg_prompt": 15627,
++                         "running": 3.63, "waiting": 1.08, "history": 17.8, "preemptions": 53},
+     }
+ 
+@@ -22,4 +24,9 @@
+     except Exception as _e:
+         _stall = {"error": repr(_e)}
++    try:
++        import arc3_compact as _ac
++        _compact = dict(_ac.STATS)
++    except Exception as _e:
++        _compact = {"error": repr(_e)}
+ 
+     _eval = {}
+@@ -67,5 +74,5 @@
+             if _mm and _mm.group(1) not in _m:
+                 _m[_mm.group(1)] = float(_mm.group(2))
+-        _cnt = _m.get("vllm:request_prompt_tokens_count") or 0
++        _cnt = _m.get("vllm:request_prompt_tokens_count") or _m.get("vllm:e2e_request_latency_seconds_count") or 0
+         _eval.update({
+             "gen_tokens": int(_m.get("vllm:generation_tokens_total", 0)),
+@@ -90,12 +97,39 @@
+         _eval["oom_warnings"] = _log.count("memory allocation failed with OOM")
+ 
++    _hist = []
++    for _tp in sorted((WORKING_DIR / "transcripts").glob("*.txt")):
++        _hist += [int(x) for x in _re.findall(r"^history_messages: (\d+)", _tp.read_text(errors="replace"), _re.M)]
++    if _hist:
++        _eval["history"] = round(_stat.mean(_hist), 1)
++
+     print(flush=True)
+     print("ARC3_EVAL " + _json.dumps(_eval, sort_keys=True), flush=True)
+-    print("%-14s %-7s %-7s %-6s %-11s %-10s %-8s %s" % ("run", "score", "levels", "eff", "gen_tokens", "avg_prompt", "running", "waiting"), flush=True)
+-    for _name, _v in list(ARC3_BASELINES.items()) + [("v4A (this run)", _eval)]:
+-        print("%-14s %-7s %-7s %-6s %-11s %-10s %-8s %s" % (
+-            _name, _v.get("score"), _v.get("levels"), _v.get("eff"), _v.get("gen_tokens"),
+-            _v.get("avg_prompt"), _v.get("running"), _v.get("waiting")), flush=True)
++    print("ARC3_COMPACT " + _json.dumps(_compact, sort_keys=True), flush=True)
++    _cols = ("score", "levels", "eff", "gen_tokens", "avg_prompt", "running", "waiting", "history", "preemptions")
++    print("%-14s " % "run" + " ".join("%-11s" % c for c in _cols), flush=True)
++    for _name, _v in list(ARC3_BASELINES.items()) + [("v5 (this run)", _eval)]:
++        print("%-14s " % _name + " ".join("%-11s" % (_v.get(c),) for c in _cols), flush=True)
+     print("stall stats:", _stall, flush=True)
++
++    # Verdict for the save run. Mechanism: prompts at least 20% smaller than v3 with v3's history
++    # depth, and more tokens generated. Quality: the failure signature of v4/v4A is efficiency on
++    # cleared levels collapsing (1.41x, 2.26x human vs v3's 0.72x) and fewer levels.
++    #   SUBMIT = mechanism and quality both pass.
++    #   REVIEW = mechanism passes, quality fails on this single noisy pass: submit if the loss sits
++    #            in one or two games, hold if efficiency got worse in most games (the v4A pattern).
++    #   HOLD   = mechanism failed: the change did not shrink prompts or did not free throughput.
++    if not TRUE_SUBMISSION:
++        _v3 = ARC3_BASELINES["v3 (LB 3.59)"]
++        _mech = {
++            "prompt<=0.8*v3": (_eval.get("avg_prompt") or 1e9) <= 0.8 * _v3["avg_prompt"],
++            "history>=0.9*v3": (_eval.get("history") or 0) >= 0.9 * _v3["history"],
++            "gen_tokens>=v3": (_eval.get("gen_tokens") or 0) >= _v3["gen_tokens"],
++        }
++        _qual = {
++            "eff<=1.0": (_eval.get("eff") or 9e9) <= 1.0,
++            "levels>=17": (_eval.get("levels") or 0) >= 17,
++        }
++        _verdict = "HOLD" if not all(_mech.values()) else ("SUBMIT" if all(_qual.values()) else "REVIEW")
++        print("ARC3_VERDICT %s mechanism=%s quality=%s" % (_verdict, _json.dumps(_mech), _json.dumps(_qual)), flush=True)
+ 
+ 

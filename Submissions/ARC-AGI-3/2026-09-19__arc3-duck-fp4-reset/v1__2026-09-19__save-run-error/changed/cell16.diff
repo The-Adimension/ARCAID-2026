@@ -1,0 +1,11 @@
+--- base cell 16
++++ new cell 16
+@@ -120,5 +120,7 @@
+     print(f'DEPTH_PROBE_SELECTION games={len(bm.games)} passes=1 cap_s=3600', flush=True)
+ 
+-bm.n_passes = 1
++# arc3: two passes over the same games -- n_passes, never a repeated games list
++# (duplicate game_ids raise in taaf/benchmark.py).
++bm.n_passes = 1 if TRUE_SUBMISSION else 2
+ bm.game_weights = None
+ 

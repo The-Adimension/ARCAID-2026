@@ -1,0 +1,9 @@
+--- base cell 4
++++ new cell 5
+@@ -52,5 +52,5 @@
+ SERVED_MODEL_PORT = 8001
+ SERVER_BASE_URL = f'http://{SERVED_MODEL_HOST}:{SERVED_MODEL_PORT}/v1'
+-USE_PRIORITY_SCHEDULING = True
++USE_PRIORITY_SCHEDULING = False  # ARCAID3 level trials: no priority gate, every trial plays on its own clock
+ 
+ setup_env = {

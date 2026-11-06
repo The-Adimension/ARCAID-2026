@@ -1,0 +1,12 @@
+--- base cell 0
++++ new cell 0
+@@ -1,3 +1,7 @@
+-# ARC-AGI-3 baseline: Duck harness + Qwen3.8-27B-FP8
++# ARC-AGI-3 A/B: Duck harness vs Duck + arc3 tricks
+ 
+-Copy of the public notebook foysalemonshanto/lb-9-arc3-duck-v12-with-qwen-3-8-27b (harness: TAAF/Tufa Labs Duck, CC0 bundle; model: Apache 2.0). One change: the offline save run plays 1 public game instead of 25, with a 30-minute cap, to save GPU quota. Competition reruns are unchanged and play the live hidden games.
++Harness: TAAF/Tufa Labs Duck (CC0 bundle); model Qwen3.8-27B-FP8 (Apache 2.0); wrapper from the public notebook foysalemonshanto/lb-9-arc3-duck-v12-with-qwen-3-8-27b.
++
++**Save run (not scored):** 8 public games x 2 passes. Pass 0 = plain Duck; pass 1 = Duck + two arc3-autoresearch tricks: (1) a no-op guard that ignores timer/step-counter border strips, (2) `nav_moves()` / `nav_path()` sandbox helpers that learn the player sprite and plan arrow paths. Output: `arc3_ab_report.md` / `.json` with levels, actions, score, time, tokens and trick counters per game and arm.
++
++**Competition rerun (scored):** every hidden game plays with the tricks on (ARC3_MODE=on).

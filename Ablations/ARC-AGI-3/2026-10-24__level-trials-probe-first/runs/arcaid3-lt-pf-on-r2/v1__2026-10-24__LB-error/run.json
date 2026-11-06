@@ -1,0 +1,84 @@
+{
+ "kernel": "habanwer/arcaid3-lt-pf-on-r2",
+ "title": "arcaid3-lt-pf-on-r2",
+ "version": 1,
+ "script_version_id": 361850417,
+ "url": "https://www.kaggle.com/code/habanwer/arcaid3-lt-pf-on-r2?scriptVersionId=361850417",
+ "track": "ARC-AGI-3",
+ "private_on_kaggle_at_collection": true,
+ "placement": {
+  "place": "ablations",
+  "group": "2026-10-24__level-trials-probe-first",
+  "arm": "on",
+  "note": "Also submitted (Kaggle error)"
+ },
+ "inputs_now": {
+  "competition_sources": [
+   "arc-prize-2026-arc-agi-3"
+  ],
+  "dataset_sources": [
+   "dfranzen/pennyroyal-v253",
+   "dfranzen/taaf-kaggle-source-bundle-copy"
+  ],
+  "model_sources": [
+   "dfranzen/albucino-qwen3-8-flash-next-drafter/Transformers/default/1",
+   "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/Transformers/default/1"
+  ],
+  "kernel_sources": []
+ },
+ "inputs_as_run": [
+  {
+   "sourceId": 133468,
+   "sourceType": "competition"
+  },
+  {
+   "sourceId": 20092813,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 20134793,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 1007009,
+   "sourceType": "modelInstanceVersion"
+  },
+  {
+   "sourceId": 1007514,
+   "sourceType": "modelInstanceVersion"
+  }
+ ],
+ "accelerator": "nvidiaRtxPro6000",
+ "run": {
+  "start": "2026-10-24T15:46:12.000823+00:00",
+  "end": "2026-10-24T22:11:33.304199+00:00",
+  "duration_s": 23121.303376,
+  "exception": null
+ },
+ "submissions": [
+  {
+   "submission_ref": "57608710",
+   "submitted_utc": "2026-10-24T22:53:49.323000",
+   "status": "ERROR",
+   "public_score": "",
+   "private_score": "",
+   "selected": "",
+   "after_deadline": ""
+  }
+ ],
+ "files": {
+  "__notebook__.ipynb": "0f6252688942f83c476ad61590f44cb38b0594ca7f636a98aa975852650d8305",
+  "__output__.json": "dbd621a4284457d88a8b17e8a2e4ddaeca5eb35c99a55ec1e6224b07f5e8f46a"
+ },
+ "collected_at": "2026-11-06T11:45:56Z",
+ "notebook_sha256_original": "0f6252688942f83c476ad61590f44cb38b0594ca7f636a98aa975852650d8305",
+ "log_sha256_original": "dbd621a4284457d88a8b17e8a2e4ddaeca5eb35c99a55ec1e6224b07f5e8f46a",
+ "inferred_parent": {
+  "notebook": "habanwer/arcaid3-lt-pf-on-r1@v1",
+  "distance_lines": 2,
+  "runner_up": "habanwer/arcaid3-lt-pf-off-r1@v1",
+  "runner_up_distance": 4,
+  "method": "Tools/lineage/infer_parents.py"
+ },
+ "root_base": "dfranzen/arc-agi-3-milestone-2-solution@v1"
+}

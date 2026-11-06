@@ -1,0 +1,18 @@
+--- base cell 2
++++ new cell 2
+@@ -2297,9 +2297,10 @@
+         # merely cycles a colour past its slot cannot hold the agent forever.
+         spread = color_spread(grid, TUNE["attract_cap"])
+-        if spread is not None and self._spread is not None and self._prev_key:
+-            # Only colours whose pixel count did not change: a piece that moved
+-            # keeps its pixels, a countdown bar that shortened loses them.
+-            gain = sum(self._spread[c][0] - v[0] for c, v in spread.items()
+-                       if c in self._spread and self._spread[c][1] == v[1])
++        if spread and self._spread and self._prev_key:
++            # Total span over every rare colour, as first measured (d60cfb5): the
++            # only form that raised hold (0.1436 -> 0.1584, lf52 117 -> 77). The
++            # count-conserving filter (2a5e481) protected dev and gave that back.
++            gain = (sum(v[0] for v in self._spread.values())
++                    - sum(v[0] for v in spread.values()))
+             if parse_key(self._prev_key)[0] != 6:
+                 pass

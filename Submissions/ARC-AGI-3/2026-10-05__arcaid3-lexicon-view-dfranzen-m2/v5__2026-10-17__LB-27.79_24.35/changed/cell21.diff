@@ -1,0 +1,183 @@
+--- base cell 21
++++ new cell 21
+@@ -48,4 +48,12 @@
+ # Version 5 (2026-10-09): picture names carry 4 hex digits (3 gave two pictures one name on 34 of 161 levels
+ # of recorded public play), and `.rules` skips older steps, not the newest, when it runs out of time.
++#
++# Version 6 (2026-10-17): (1) multi-step object permanence in `.code`, `.objects`, and `.changes_since(...)`
++# by chaining distinct predecessor grids on the level (matching `.rules`) and caching per FrameView;
++# (2) `.rules` "still" cue only fires after turns that actually executed game actions (`executed_count > 0`),
++# not read-only inspection turns where `stale=True`; (3) `.rules` skips mid-level death/auto-reset snaps back
++# to the level's initial board so they do not poison learned rules; (4) `scale_lock` deduplicates consecutive
++# identical frames and retains the level's initial distinct frames across >256-step levels; (5) contest
++# config guard when `TRUE_SUBMISSION=True`.
+ # ---------------------------------------------------------------------------
+ import os as _a3_os
+@@ -234,6 +242,8 @@
+     '    if not grids:\n'
+     '        return None\n'
++    '    grids = [g for i, g in enumerate(grids) if i == 0 or g != grids[i - 1]]\n'
+     '    if len(grids) > max_frames:\n'
+-    '        grids = grids[:1] + grids[-(max_frames - 1):]\n'
++    '        keep_head = min(32, max_frames // 4)\n'
++    '        grids = grids[:keep_head] + grids[-(max_frames - keep_head):]\n'
+     '    grids = [[list(r) for r in g] for g in grids]\n'
+     '    runs = [_interior_runs(g) for g in grids]\n'
+@@ -1452,6 +1462,10 @@
+     '    """\n'
+     '    t0 = time.time()\n'
++    '    start_frame = seq[0][1] if seq else None\n'
+     '    seq = seq[-(window + 1):]\n'
+     '    states = {}\n'
++    '    start_state = g["State"](encode(start_frame, None)) if start_frame is not None else None\n'
++    '    if seq and seq[0][1] is start_frame:\n'
++    '        states[0] = start_state\n'
+     '\n'
+     '    def state(i):\n'
+@@ -1460,4 +1474,9 @@
+     '            states[i] = g["State"](encode(seq[i][1], prev.code if prev is not None else None))\n'
+     '        return states[i]\n'
++    '\n'
++    '    def is_reset_snap(a, b, evs):\n'
++    '        if start_state is None or b.code["native"] != start_state.code["native"] or a.code["native"] == start_state.code["native"]:\n'
++    '            return False\n'
++    '        return len(evs) >= 2 or any(e["verb"] == "move" and abs(e["d"][0]) + abs(e["d"][1]) > 1 for e in evs)\n'
+     '\n'
+     '    steps, skipped, last = [], 0, len(seq) - 1\n'
+@@ -1472,5 +1491,7 @@
+     '            a, b = state(i - 1), state(i)\n'
+     '            if (a.code["scale"], a.code["offset"]) == (b.code["scale"], b.code["offset"]):\n'
+-    '                steps.append((a, name, click, g["observe"](a, b), seq[i][0]))\n'
++    '                evs = g["observe"](a, b)\n'
++    '                if not (i < last and is_reset_snap(a, b, evs)):\n'
++    '                    steps.append((a, name, click, evs, seq[i][0]))\n'
+     '        i += 1\n'
+     '    where = f"level {level}" if level is not None else "this level"\n'
+@@ -1487,5 +1508,6 @@
+     '        right += bool(ks)\n'
+     '        explained |= ks\n'
+-    '    learner.observe(a, name, click, evs)\n'
++    '    if not is_reset_snap(a, state(last), evs):\n'
++    '        learner.observe(a, name, click, evs)\n'
+     '    rules = learner.rules()\n'
+     '    lines = [f"RULES for {where}, learned from its last {len(steps)} steps "\n'
+@@ -1583,15 +1605,41 @@
+ 
+ 
+-def _arcaid3_with_prev(view, lex):
+-    """`view` encoded with its predecessor on the same level (from `history`), so that objects
+-    that merged on touching are cut apart again."""
++def _arcaid3_with_prev(view, lex=None, max_chain=8):
++    """`view` encoded along its level's predecessor chain (from `history`), so that objects
++    that merged on touching stay cut apart across consecutive contacts."""
++    lock = _arcaid3_lock(view)
++    cached = getattr(view, "_a3_enc", None)
++    if lex is None and cached is not None and cached[0] == lock:
++        return cached[1]
++    use_lex = lex if lex is not None else _arcaid3_lexicon()
+     rt = _arcaid3_runtime()
+-    before = None
++    level = getattr(view, "level", None)
++    vstep = getattr(view, "step", 0)
++    preds, last_g = [], None
+     for entry in ((rt.get("history") or []) if rt else []):
+         fr = getattr(entry, "frame", None)
+-        if fr is not None and getattr(fr, "level", None) == getattr(view, "level", None) \
+-                and getattr(fr, "step", 0) < getattr(view, "step", 0):
+-            before = fr
+-    return _arcaid3_encode(view, lex, prev=_arcaid3_encode(before, lex) if before is not None else None)
++        if fr is None:
++            continue
++        if getattr(fr, "level", None) != level:
++            preds, last_g = [], None
++            continue
++        if fr is view or getattr(fr, "step", 0) >= vstep:
++            break
++        g = _arcaid3_grid(fr)
++        if g != last_g:
++            preds.append(fr)
++            last_g = g
++    if len(preds) > max_chain:
++        preds = [preds[0]] + preds[-(max_chain - 1):]
++    enc = None
++    for fr in preds:
++        enc = _arcaid3_encode(fr, use_lex, prev=enc)
++    out = _arcaid3_encode(view, use_lex, prev=enc)
++    if lex is None:
++        try:
++            view._a3_enc = (lock, out)
++        except Exception:
++            pass
++    return out
+ 
+ _ARCAID3_RULES_ON = __A3RULESON__
+@@ -1642,10 +1690,10 @@
+         if "error" in _ARCAID3:
+             return "lexicon unavailable: " + _ARCAID3["error"]
+-        return _ARCAID3["to_text"](_arcaid3_with_prev(self, _arcaid3_lexicon()), max_kinds=24, max_list=8)   # fits the 1,024-token tool cap
++        return _ARCAID3["to_text"](_arcaid3_with_prev(self), max_kinds=24, max_list=8)   # fits the 1,024-token tool cap
+ 
+     @property
+     def objects(self):
+         """One dict per object: symbol, row/col (cells), size, and a screen row/col to click."""
+-        enc = _arcaid3_with_prev(self, _arcaid3_lexicon())
++        enc = _arcaid3_with_prev(self)
+         out = []
+         for p in sorted(enc["placed"], key=lambda q: q["at"]):    # reading order
+@@ -1673,7 +1721,19 @@
+         if other is None:
+             return "no earlier frame"
+-        lex = _arcaid3_lexicon()
+-        before = _arcaid3_encode(other, lex)
+-        return _ARCAID3["diff"](before, _arcaid3_encode(self, lex, prev=before))["text"]
++        before = _arcaid3_with_prev(other)
++        rt = _arcaid3_runtime()
++        has_hist = any(
++            getattr(e, "frame", None) is not None
++            and getattr(e.frame, "level", None) == getattr(self, "level", None)
++            and getattr(e.frame, "step", 0) < getattr(self, "step", 0)
++            for e in ((rt.get("history") or []) if rt else [])
++        )
++        if has_hist:
++            after = _arcaid3_with_prev(self)
++        else:
++            lex = _arcaid3_lexicon()
++            before = _arcaid3_encode(other, lex)
++            after = _arcaid3_encode(self, lex, prev=before)
++        return _ARCAID3["diff"](before, after)["text"]
+ 
+ '''
+@@ -1775,5 +1835,5 @@
+     if n < 3:
+         return None
+-    still = (summary.get("executed_count") and not summary.get("gameplay_changed")) or summary.get("stale")
++    still = bool(summary.get("executed_count")) and not summary.get("gameplay_changed")
+     if still and ("still", level, n // 5) not in memo["seen"]:
+         memo["seen"].add(("still", level, n // 5))
+@@ -1950,4 +2010,20 @@
+           and not res.get("error"))
+     return ok, out, res.get("error")
++
++
++def arcaid3_check_contest_config(g=None):
++    """Guard against accidental demo-mode settings on a real competition rerun."""
++    g = g if g is not None else globals()
++    if not g.get("TRUE_SUBMISSION") or g.get("bm") is None:
++        return "n/a (not TRUE_SUBMISSION)"
++    bm = g["bm"]
++    if not g.get("USE_PRIORITY_SCHEDULING", True):
++        raise RuntimeError("TRUE_SUBMISSION requires USE_PRIORITY_SCHEDULING=True")
++    if getattr(bm.solver, "concurrency", None) != 120 or getattr(bm.solver, "max_runtime_s_per_game", None) != 532 * 60:
++        raise RuntimeError(
++            f"TRUE_SUBMISSION solver config mismatch: concurrency={getattr(bm.solver, 'concurrency', None)}, "
++            f"max_runtime_s_per_game={getattr(bm.solver, 'max_runtime_s_per_game', None)}"
++        )
++    return "ok (concurrency=120, max_runtime_s_per_game=31920)"
+ 
+ 
+@@ -2017,4 +2093,5 @@
+         run_sandboxed_python._arcaid3 = True
+         _a3_ta.run_sandboxed_python = run_sandboxed_python
++    report["contest_config"] = arcaid3_check_contest_config()
+     report["installed"] = True
+     report["self_test"] = "ok"

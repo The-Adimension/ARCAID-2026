@@ -1,0 +1,78 @@
+{
+ "kernel": "habanwer/duck-v3-wmreason",
+ "title": "duck-v3-wmreason",
+ "version": 1,
+ "script_version_id": 353228476,
+ "url": "https://www.kaggle.com/code/habanwer/duck-v3-wmreason?scriptVersionId=353228476",
+ "track": "ARC-AGI-3",
+ "private_on_kaggle_at_collection": true,
+ "placement": {
+  "place": "submissions",
+  "note": "Change A arm on the dead-sign v3 base"
+ },
+ "inputs_now": {
+  "competition_sources": [
+   "arc-prize-2026-arc-agi-3"
+  ],
+  "dataset_sources": [
+   "keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1",
+   "keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1"
+  ],
+  "model_sources": [
+   ""
+  ],
+  "kernel_sources": []
+ },
+ "inputs_as_run": [
+  {
+   "sourceId": 133468,
+   "sourceType": "competition"
+  },
+  {
+   "sourceId": 19306148,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 19333078,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 977939,
+   "sourceType": "modelInstanceVersion"
+  }
+ ],
+ "accelerator": "nvidiaRtxPro6000",
+ "run": {
+  "start": "2026-09-27T08:25:52.548610+00:00",
+  "end": "2026-09-27T09:46:44.769794+00:00",
+  "duration_s": 4852.221184,
+  "exception": null
+ },
+ "submissions": [
+  {
+   "submission_ref": "56606477",
+   "submitted_utc": "2026-09-27T10:52:19.210000",
+   "status": "COMPLETE",
+   "public_score": "3.03",
+   "private_score": "",
+   "selected": "",
+   "after_deadline": ""
+  }
+ ],
+ "files": {
+  "__notebook__.ipynb": "2904edb8c4535bb0429e0dc089e02ee5011bd5a0be0e46511cb244f3ec47e806",
+  "__output__.json": "1259ccd1defe213889bbd5953fd0b5bd193efad4d466440ad99905aad2259ab1",
+  "outputs": "hashed from local copy 2026-09-27__duck-v3-wmreason__v1__score-3.03"
+ },
+ "collected_at": "2026-11-06T12:00:44Z",
+ "notebook_sha256_original": "2904edb8c4535bb0429e0dc089e02ee5011bd5a0be0e46511cb244f3ec47e806",
+ "log_sha256_original": "1259ccd1defe213889bbd5953fd0b5bd193efad4d466440ad99905aad2259ab1",
+ "inferred_parent": {
+  "notebook": "habanwer/duck-nvfp4-batch-stall-warn-dead-sign@v3",
+  "distance_lines": 74,
+  "runner_up": "habanwer/arc3-duck-fp4-kvfp8@v1",
+  "runner_up_distance": 134,
+  "method": "Tools/lineage/infer_parents.py"
+ },
+ "root_base": "keithtyser/duck-qwen3-8-flash-next-nvfp4-mtp@v13"
+}

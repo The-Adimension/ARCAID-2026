@@ -8,7 +8,7 @@
 
 ## What we changed
 
-The cell-by-cell diff against the base is in `as-run/v6/DIFF.md`.
+The cell-by-cell diff of the submitted version 6 against the base is in `Submissions/ARC-AGI-2/2026-10-31__arcaid3-lexicon-agent-arc-agi-2/v6__…/vs-root-base/DIFF.md`; every agent file as it ran, per version, is in `as-run/` (`INDEX.csv`).
 
 | File in the agent | Base | Ours |
 |---|---|---|

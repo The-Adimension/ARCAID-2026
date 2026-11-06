@@ -1,0 +1,196 @@
+--- base cell 19
++++ new cell 20
+@@ -1,91 +1,105 @@
+-# RESET branch. Judge on the five non-sb26 games and on actions, not on the mean.
+-import json as _json
+-from collections import Counter as _Counter
++# Never let the printout fail a run (this cell also runs in the competition rerun).
++def _arc3_eval():
++    # v4A evaluation printout (replaces v3's completion-only "RHAE" table).
++    # Score = frozen scorer per game (benchmark.json final_score == score.json). Efficiency =
++    # actions on cleared levels / human baseline on those levels. vLLM concurrency from the
++    # server log, token totals from the final metrics scrape. Baselines: v3 and v4 save runs,
++    # same 6 games, 3600 s, concurrency 6, same serving profile.
++    import json as _json
++    import re as _re
++    import statistics as _stat
+ 
+-# 6-game RHAE, one pass each, same games/cap/profile.
+-DEPTH1 = {'sb26': 2.78, 'vc33': 21.43, 'ft09': 47.62, 'lp85': 41.67, 're86': 16.67, 'ar25': 16.67}
+-STALL2 = {'sb26': 77.78, 'vc33': 21.43, 'ft09': 28.57, 'lp85': 41.67, 're86': 16.67, 'ar25': 8.33}
++    ARC3_BASELINES = {
++        "v3 (LB 3.59)": {"score": 25.08, "levels": 19, "eff": 0.72, "gen_tokens": 880744,
++                         "avg_prompt": 21494, "running": 3.07, "waiting": 2.65},
++        "v4 (unsub.)": {"score": 16.23, "levels": 19, "eff": 1.41, "gen_tokens": 881771,
++                        "avg_prompt": 21801, "running": 3.04, "waiting": 2.53},
++    }
++
++    try:
++        import arc3_stall as _st
++        _stall = dict(_st.STATS)
++    except Exception as _e:
++        _stall = {"error": repr(_e)}
++
++    _eval = {}
++    _bp = WORKING_DIR / "benchmark.json"
++    if _bp.exists():
++        _b = _json.loads(_bp.read_text(encoding="utf-8"))
++        _rows = []
++        for _r in _b["game_runs"]:
++            _apl, _base, _done = _r["actions_per_level"], _r["base_actions_per_level"] or [], _r["levels_completed"]
++            _clr = sum(_apl[:_done])
++            _hum = sum(_base[:_done]) if _base else 0
++            _tok = sum((_h.get("generated_tokens") or 0) for _h in _r["history"])
++            _dec = sum(1 for _h in _r["history"] if (_h.get("generated_tokens") or 0) > 0)
++            _rows.append({
++                "game": _r["game_id"][:4], "levels": _done, "of": _r["number_of_levels"],
++                "score": round(float(_r["final_score"] or 0.0), 2),
++                "cleared_actions": _clr, "human": _hum,
++                "eff": round(_clr / _hum, 2) if _hum else None,
++                "wall_actions": sum(_apl[_done:]), "actions": sum(_apl),
++                "gen_tokens": _tok, "decisions": _dec, "state": _r.get("state"),
++            })
++        _n = max(1, len(_rows))
++        _clr_all = sum(r["cleared_actions"] for r in _rows)
++        _hum_all = sum(r["human"] for r in _rows)
++        _eval.update({
++            "score": round(sum(r["score"] for r in _rows) / _n, 2),
++            "levels": sum(r["levels"] for r in _rows),
++            "eff": round(_clr_all / _hum_all, 2) if _hum_all else None,
++            "actions": sum(r["actions"] for r in _rows),
++            "actions_per_decision": round(sum(r["actions"] for r in _rows) / max(1, sum(r["decisions"] for r in _rows)), 2),
++        })
++        print("%-5s %-7s %-7s %-16s %-6s %-6s %-8s %s" % ("game", "levels", "score", "cleared/human", "eff", "wall", "gen_tok", "state"), flush=True)
++        for r in _rows:
++            print("%-5s %d/%-5d %-7.2f %4d/%-11d %-6s %-6d %-8d %s" % (
++                r["game"], r["levels"], r["of"], r["score"], r["cleared_actions"], r["human"],
++                r["eff"], r["wall_actions"], r["gen_tokens"], r["state"]), flush=True)
++    else:
++        print("ARC3_EVAL no benchmark.json", flush=True)
++
++    _mp = WORKING_DIR / "vllm-metrics-final.prom"
++    if _mp.exists():
++        _m = {}
++        for _line in _mp.read_text(errors="replace").splitlines():
++            _mm = _re.match(r"^(vllm:[a-z_]+)(?:\{[^}]*\})?\s+([0-9.eE+-]+)$", _line)
++            if _mm and _mm.group(1) not in _m:
++                _m[_mm.group(1)] = float(_mm.group(2))
++        _cnt = _m.get("vllm:request_prompt_tokens_count") or 0
++        _eval.update({
++            "gen_tokens": int(_m.get("vllm:generation_tokens_total", 0)),
++            "avg_prompt": int(_m.get("vllm:prompt_tokens_total", 0) / _cnt) if _cnt else None,
++            "requests": int(_cnt),
++            "preemptions": int(_m.get("vllm:num_preemptions_total", 0)),
++        })
++
++    _lp = WORKING_DIR / "vllm-openai-server.log"
++    if _lp.exists():
++        _run, _wait, _kv = [], [], []
++        _log = _lp.read_text(errors="replace")
++        for _mm in _re.finditer(r"Running: (\d+) reqs, Waiting: (\d+) reqs, GPU KV cache usage: ([\d.]+)%", _log):
++            _run.append(int(_mm.group(1)))
++            _wait.append(int(_mm.group(2)))
++            _kv.append(float(_mm.group(3)))
++        if _run:
++            _eval.update({"running": round(_stat.mean(_run), 2), "waiting": round(_stat.mean(_wait), 2),
++                          "kv_usage_pct": round(_stat.mean(_kv), 1)})
++        _kvs = _re.search(r"GPU KV cache size: ([\d,]+) tokens", _log)
++        _eval["kv_pool_tokens"] = _kvs.group(1) if _kvs else None
++        _eval["oom_warnings"] = _log.count("memory allocation failed with OOM")
++
++    print(flush=True)
++    print("ARC3_EVAL " + _json.dumps(_eval, sort_keys=True), flush=True)
++    print("%-14s %-7s %-7s %-6s %-11s %-10s %-8s %s" % ("run", "score", "levels", "eff", "gen_tokens", "avg_prompt", "running", "waiting"), flush=True)
++    for _name, _v in list(ARC3_BASELINES.items()) + [("v4A (this run)", _eval)]:
++        print("%-14s %-7s %-7s %-6s %-11s %-10s %-8s %s" % (
++            _name, _v.get("score"), _v.get("levels"), _v.get("eff"), _v.get("gen_tokens"),
++            _v.get("avg_prompt"), _v.get("running"), _v.get("waiting")), flush=True)
++    print("stall stats:", _stall, flush=True)
++
+ 
+ try:
+-    import arc3_stall as _st
+-    _stats = dict(_st.STATS)
+-    _mode = _st.MODE
+-except Exception as _e:
+-    _stats, _mode = {'error': repr(_e)}, '?'
+-
+-_p = WORKING_DIR / 'benchmark.json'
+-if not _p.exists():
+-    print('ARC3_RESET_RESULT no benchmark.json', flush=True)
+-else:
+-    _b = _json.loads(_p.read_text(encoding='utf-8'))
+-    def _key(a):
+-        d = a.get('data') or {}
+-        return '%s:%s,%s' % (a['id'], d.get('x'), d.get('y')) if d else a['id']
+-    _rows = []
+-    _acts = _dec = _tok = 0
+-    for _r in _b['game_runs']:
+-        _g = _r['game_id'][:4]
+-        _apl = _r['actions_per_level']
+-        _done = _r['levels_completed']
+-        _N = _r['number_of_levels']
+-        _cut = sum(_apl[:_done])
+-        _hist = [h['action'] for h in _r['history']]
+-        _wall = _hist[_cut:]
+-        _c = _Counter(_key(a) for a in _wall)
+-        _rows.append({
+-            'game': _g,
+-            'levels': _done,
+-            'rhae': round(100.0 * sum(range(1, _done + 1)) / (_N * (_N + 1) / 2), 2),
+-            'actions': sum(_apl),
+-            'wall_actions': len(_wall),
+-            'wall_uniq_frac': round(len(_c) / len(_wall), 3) if _wall else None,
+-            'wall_top_repeat': _c.most_common(1)[0][1] if _c else 0,
+-            'loop_metric': round(_c.most_common(1)[0][1] / len(_wall), 3) if _wall else None,
+-            'state': _r.get('state'),
+-        })
+-        for _h in _r['history']:
+-            _t = _h.get('generated_tokens', 0) or 0
+-            _tok += _t
+-            _acts += 1
+-            if _t > 0:
+-                _dec += 1
+-
+-    # average the passes per game
+-    _by = {}
+-    for _r in _rows:
+-        _by.setdefault(_r['game'], []).append(_r)
+-    _mean = {g: sum(r['rhae'] for r in v) / len(v) for g, v in _by.items()}
+-    _five = [g for g in _mean if g != 'sb26']
+-
+-    print('ARC3_RESET_RESULT ' + _json.dumps({
+-        'mode': _mode, 'stall_stats': _stats, 'runs': _rows,
+-        'rhae_mean_per_game': {g: round(v, 2) for g, v in _mean.items()},
+-        'mean_all': round(sum(_mean.values()) / len(_mean), 2),
+-        'mean_without_sb26': round(sum(_mean[g] for g in _five) / len(_five), 2),
+-        'baseline_depthrun1_all': round(sum(DEPTH1.values()) / 6, 2),
+-        'baseline_depthrun1_without_sb26': round(sum(v for k, v in DEPTH1.items() if k != 'sb26') / 5, 2),
+-        'baseline_stallrun2_all': round(sum(STALL2.values()) / 6, 2),
+-        'baseline_stallrun2_without_sb26': round(sum(v for k, v in STALL2.items() if k != 'sb26') / 5, 2),
+-        'actions': _acts, 'decisions': _dec,
+-        'actions_per_decision': round(_acts / max(_dec, 1), 2),
+-        'tokens_per_action': round(_tok / max(_acts, 1), 1),
+-    }, sort_keys=True), flush=True)
+-
+-    print(flush=True)
+-    print('%-6s %-7s %-7s %-9s %-11s %-12s %s' % (
+-        'game', 'levels', 'rhae', 'actions', 'wall_act', 'loop_metric', 'state'), flush=True)
+-    for _r in _rows:
+-        print('%-6s %-7d %-7s %-9d %-11d %-12s %s' % (
+-            _r['game'], _r['levels'], _r['rhae'], _r['actions'],
+-            _r['wall_actions'], _r['loop_metric'], _r['state']), flush=True)
+-    print(flush=True)
+-    print('RHAE mean  all 6: %.2f   (depthrun1 %.2f, stallrun2 %.2f)' % (
+-        sum(_mean.values()) / len(_mean), sum(DEPTH1.values()) / 6, sum(STALL2.values()) / 6), flush=True)
+-    print('RHAE mean  WITHOUT sb26: %.2f   (depthrun1 %.2f, stallrun2 %.2f)  <-- THE VERDICT' % (
+-        sum(_mean[g] for g in _five) / len(_five),
+-        sum(v for k, v in DEPTH1.items() if k != 'sb26') / 5,
+-        sum(v for k, v in STALL2.items() if k != 'sb26') / 5), flush=True)
+-    print('loop metric to beat (depthrun1 / stallrun2 means): 0.234 / 0.219', flush=True)
+-    print('actions %d, a/d %.2f, tok/act %.0f  (depthrun1 1766 / 6.20 / 493; stallrun2 2509 / 6.66 / 328)' % (
+-        _acts, _acts / max(_dec, 1), _tok / max(_acts, 1)), flush=True)
+-    print('stall stats:', _stats, flush=True)
++    _arc3_eval()
++except Exception as _eval_exc:
++    print('ARC3_EVAL failed: %r' % (_eval_exc,), flush=True)

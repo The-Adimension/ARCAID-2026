@@ -1,0 +1,13 @@
+--- base cell 0
++++ new cell 0
+@@ -1,7 +1,5 @@
+-## Our copy: Duck harness on the NVFP4 serving stack
++## Duck + NVFP4 + batching + stuck warning + hypothesis ledger
+ 
+-Forked from [wuliao0/duck-qwen3-8-anim-base](https://www.kaggle.com/code/wuliao0/duck-qwen3-8-anim-base), itself based on [Tufa Labs' Duck harness](https://www.kaggle.com/code/jeroencottaar/tufa-labs-duck-harness-june-30-milestone-winner) (Milestone-1 winner). Full credit to Jeroen Cottaar, Tufa Labs, and to ktyser/wuliao_0 for the NVFP4 serving work.
++Competition path = the 3.37 configuration (batching + `arc3_stall` in warn mode) plus one prompt rule from `consult/arc3_ledger.py`: when an attempt fails, keep CONFIRMED facts, blame the ASSUMED part, try its alternatives. Evidence: `consult/walls_2026-09-21.md` -- on sb26 L2 a 3-turn solve and a 153-action failure shared the same correct model of the controls and differed in one reading of the goal; the loser re-investigated confirmed facts for 57 turns.
+ 
+-The Duck prompts, tool-use loop, game policy and scorer are unchanged, and so is the serving profile (`kv5-bf16-mtp3-c8-cg32`: NVFP4 weights, BF16 compute, chunked prefill, 3-token NEXTN MTP, 8 vLLM sequences, CUDA graphs, prefix caching off).
+-
+-**Our only change:** a save run caps each game at 900 s instead of 7920 s, so the first end-to-end test of this stack costs ~40 min of GPU instead of ~2.5 h. The competition rerun path is untouched and keeps the full 7920 s budget. The 25-game audit and the frozen scorer still run, so the save run ends with a public-25 `score.json` we can compare against our FP8 baseline.
++**Save run is only for submittability:** 1 game (sb26), 1200 s. It also reports whether the model writes the ledger. It is not an effect measurement.

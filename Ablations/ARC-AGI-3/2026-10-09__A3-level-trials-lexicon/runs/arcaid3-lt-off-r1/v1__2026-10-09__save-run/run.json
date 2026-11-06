@@ -1,0 +1,74 @@
+{
+ "kernel": "habanwer/arcaid3-lt-off-r1",
+ "title": "arcaid3-lt-off-r1",
+ "version": 1,
+ "script_version_id": 356866223,
+ "url": "https://www.kaggle.com/code/habanwer/arcaid3-lt-off-r1?scriptVersionId=356866223",
+ "track": "ARC-AGI-3",
+ "private_on_kaggle_at_collection": false,
+ "placement": {
+  "place": "ablations",
+  "group": "2026-10-09__A3-level-trials-lexicon",
+  "arm": "off",
+  "note": "Round 1 (failed its validity check)"
+ },
+ "inputs_now": {
+  "competition_sources": [
+   "arc-prize-2026-arc-agi-3"
+  ],
+  "dataset_sources": [
+   "dfranzen/pennyroyal-v253",
+   "dfranzen/taaf-kaggle-source-bundle-copy"
+  ],
+  "model_sources": [
+   "dfranzen/albucino-qwen3-8-flash-next-drafter/Transformers/default/1",
+   "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/Transformers/default/1"
+  ],
+  "kernel_sources": []
+ },
+ "inputs_as_run": [
+  {
+   "sourceId": 133468,
+   "sourceType": "competition"
+  },
+  {
+   "sourceId": 20092813,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 20134793,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 1007009,
+   "sourceType": "modelInstanceVersion"
+  },
+  {
+   "sourceId": 1007514,
+   "sourceType": "modelInstanceVersion"
+  }
+ ],
+ "accelerator": "nvidiaRtxPro6000",
+ "run": {
+  "start": "2026-10-09T21:22:00.295984+00:00",
+  "end": "2026-10-10T00:37:18.516525+00:00",
+  "duration_s": 11718.220541,
+  "exception": null
+ },
+ "submissions": [],
+ "files": {
+  "__notebook__.ipynb": "e3e04221d8428b9892ebb194d01b41661e8b04168fba51985962f553061ea525",
+  "__output__.json": "ceea37e4f652fff55e271d6332b16abb4978fdf87816513fd5a2a3ea52560838"
+ },
+ "collected_at": "2026-11-06T12:10:49Z",
+ "notebook_sha256_original": "e3e04221d8428b9892ebb194d01b41661e8b04168fba51985962f553061ea525",
+ "log_sha256_original": "ceea37e4f652fff55e271d6332b16abb4978fdf87816513fd5a2a3ea52560838",
+ "inferred_parent": {
+  "notebook": "habanwer/arcaid3-lt-lex-r1@v1",
+  "distance_lines": 4,
+  "runner_up": "habanwer/arcaid3-lb-off-r1@v1",
+  "runner_up_distance": 58,
+  "method": "Tools/lineage/infer_parents.py"
+ },
+ "root_base": "dfranzen/arc-agi-3-milestone-2-solution@v1"
+}

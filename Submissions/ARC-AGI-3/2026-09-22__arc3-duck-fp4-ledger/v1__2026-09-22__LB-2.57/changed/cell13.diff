@@ -1,0 +1,9 @@
+--- base cell 13
++++ new cell 13
+@@ -2,5 +2,5 @@
+ # arc3: the rerun keeps their measured 7920 s; a save run is capped so our first
+ # end-to-end test of this serving stack is affordable.
+-bm.solver.max_runtime_s_per_game = 7920.0 if TRUE_SUBMISSION else 900.0
++bm.solver.max_runtime_s_per_game = 7920.0 if TRUE_SUBMISSION else 1200.0
+ bm.solver.analyzer_timeout = 900.0
+ bm.solver.concurrency = 28

@@ -1,0 +1,294 @@
+--- base cell 21
++++ new cell 21
+@@ -29,8 +29,15 @@
+ # (adds `.shape`), the trigger constant (PYTHON_ADDENDUM -> PYTHON_ADDENDUM_HEAD), and the new-level
+ # cue (LEVEL_START_USER_PROMPT under ARC3_LEVEL_TRANSFER_GUIDANCE=1).
++#
++# Version 2 (2026-10-07): per-level scale lock. The lexicon gains scale_lock(): one block size per
++# level, agreed across that level's frames in `history`, so a sparse frame can no longer flip to a
++# coarser grid and rename every object. Checked by its own sandbox self-test; ARCAID3_SCALE_LOCK=0 turns
++# it off. The camera scale changes between levels in 4 of the 25 public games, so the lock is per level.
+ # ---------------------------------------------------------------------------
+ import os as _a3_os
+ 
+ ARCAID3_ON = _a3_os.environ.get("ARCAID3_LEXICON", "1").strip() not in ("0", "", "false", "False")
++# Per-level scale lock (v2): read every frame of a level at one agreed block size. Kill switch: ARCAID3_SCALE_LOCK=0.
++ARCAID3_SCALE_LOCK = _a3_os.environ.get("ARCAID3_SCALE_LOCK", "1").strip() not in ("0", "", "false", "False")
+ 
+ ARCAID3_LEXICON_SOURCE = (
+@@ -136,25 +143,16 @@
+     '\n'
+     '\n'
+-    'def native_grid(grid, scales=(8, 7, 6, 5, 4, 3, 2), min_runs=0.85, min_uniform=0.75):\n'
+-    '    """Detect the scale-up block size and return the world at its native resolution.\n'
+-    '\n'
+-    '    A screen scaled up by k has colour runs whose lengths are multiples of k,\n'
+-    '    except where the game paints a HUD bar or counter over the picture. So k is\n'
+-    '    the largest block size that (a) divides at least `min_runs` of the interior\n'
+-    '    runs and (b) leaves at least `min_uniform` of the k x k blocks single-coloured.\n'
+-    '\n'
+-    '    Returns a dict:\n'
+-    '      scale       block size k (1 = no scaling found)\n'
+-    '      offset      (row, col) of the first block in screen pixels\n'
+-    '      cells       native grid, list of rows (majority colour of each k x k block)\n'
+-    '      uniform     share of blocks that are a single colour (1.0 = lossless)\n'
+-    '      residue     screen cells the upscaled native grid does not reproduce\n'
+-    '                  (HUD bars drawn over the scaled picture, odd margins)\n'
+-    '    """\n'
+-    '    grid = [list(r) for r in grid]\n'
++    'def _fits(grid, k, oy, ox, runs, min_runs, min_uniform):\n'
++    '    """True when block size k at offset (oy, ox) passes both per-frame tests on this grid."""\n'
++    '    if not runs or sum(1 for n in runs if n % k == 0) / len(runs) < min_runs:\n'
++    '        return False\n'
++    '    return _uniform_fraction(grid, k, oy, ox) >= min_uniform\n'
++    '\n'
++    '\n'
++    'def _detect(grid, scales=(8, 7, 6, 5, 4, 3, 2), min_runs=0.85, min_uniform=0.75):\n'
++    '    """Per-frame block size: (k, oy, ox, uniform share). (1, 0, 0, 1.0) when no scaling is found."""\n'
+     '    h, w = len(grid), len(grid[0]) if grid else 0\n'
+     '    rows_b, cols_b = _boundaries(grid, 0), _boundaries(grid, 1)\n'
+     '    runs = _interior_runs(grid) if h and w else []\n'
+-    '    chosen = (1, 0, 0, 1.0)\n'
+     '    for k in scales:\n'
+     '        if k * 2 > min(h, w) or not runs:\n'
+@@ -166,7 +164,77 @@
+     '        frac = _uniform_fraction(grid, k, oy, ox)\n'
+     '        if frac >= min_uniform:\n'
+-    '            chosen = (k, oy, ox, frac)\n'
+-    '            break\n'
+-    '    k, oy, ox, frac = chosen\n'
++    '            return (k, oy, ox, frac)\n'
++    '    return (1, 0, 0, 1.0)\n'
++    '\n'
++    '\n'
++    'def scale_lock(grids, scales=(8, 7, 6, 5, 4, 3, 2), min_runs=0.85, min_uniform=0.75, tolerance=0.0,\n'
++    '               max_frames=256):\n'
++    '    """One block size for a whole level, agreed across its frames.\n'
++    '\n'
++    '    A single sparse frame can look scaled by a coarser block than the game uses\n'
++    '    (everything on it happens to line up at that size), and then every name on\n'
++    '    that frame changes. The true block size passes the per-frame tests on every\n'
++    '    frame of the level, while a spurious coarse one fails on a frame with finer\n'
++    "    detail. So: take each frame's own detection as a candidate, and return the\n"
++    '    largest candidate that passes both tests on every frame given, as (k, oy, ox);\n'
++    '    `tolerance` is the share of frames allowed to fail (0 = strict).\n'
++    '\n'
++    '    All frames are used, not a sample, so the lock is monotone: once a frame has\n'
++    '    rejected a block size, the level keeps it rejected and the lock cannot flip\n'
++    "    back. Only the level's first frame and its last `max_frames - 1` frames are\n"
++    '    read, to bound the cost. Pass frames of one level only: the camera scale can\n'
++    '    change between levels (4 of the 25 public games do).\n'
++    '    """\n'
++    '    grids = [g for g in grids if g]\n'
++    '    if not grids:\n'
++    '        return None\n'
++    '    if len(grids) > max_frames:\n'
++    '        grids = grids[:1] + grids[-(max_frames - 1):]\n'
++    '    grids = [[list(r) for r in g] for g in grids]\n'
++    '    runs = [_interior_runs(g) for g in grids]\n'
++    '    cands = {}\n'
++    '    for g in grids:\n'
++    '        k, oy, ox, _ = _detect(g, scales, min_runs, min_uniform)\n'
++    '        if k > 1:\n'
++    '            cands[(k, oy, ox)] = cands.get((k, oy, ox), 0) + 1\n'
++    '    allowed = int(tolerance * len(grids))\n'
++    '    for k, oy, ox in sorted(cands, key=lambda c: (-c[0], -cands[c], c[1], c[2])):\n'
++    '        failed = 0\n'
++    '        for g, r in zip(grids, runs):\n'
++    '            if not _fits(g, k, oy, ox, r, min_runs, min_uniform):\n'
++    '                failed += 1\n'
++    '                if failed > allowed:\n'
++    '                    break\n'
++    '        if failed <= allowed:\n'
++    '            return (k, oy, ox)\n'
++    '    return (1, 0, 0)\n'
++    '\n'
++    '\n'
++    'def native_grid(grid, scales=(8, 7, 6, 5, 4, 3, 2), min_runs=0.85, min_uniform=0.75, lock=None):\n'
++    '    """Detect the scale-up block size and return the world at its native resolution.\n'
++    '\n'
++    '    A screen scaled up by k has colour runs whose lengths are multiples of k,\n'
++    '    except where the game paints a HUD bar or counter over the picture. So k is\n'
++    '    the largest block size that (a) divides at least `min_runs` of the interior\n'
++    '    runs and (b) leaves at least `min_uniform` of the k x k blocks single-coloured.\n'
++    '\n'
++    '    Returns a dict:\n'
++    '      scale       block size k (1 = no scaling found)\n'
++    '      offset      (row, col) of the first block in screen pixels\n'
++    '      cells       native grid, list of rows (majority colour of each k x k block)\n'
++    '      uniform     share of blocks that are a single colour (1.0 = lossless)\n'
++    '      residue     screen cells the upscaled native grid does not reproduce\n'
++    '                  (HUD bars drawn over the scaled picture, odd margins)\n'
++    '      locked      True when `lock` = (k, oy, ox) from `scale_lock` was used instead\n'
++    "                  of this frame's own detection\n"
++    '    """\n'
++    '    grid = [list(r) for r in grid]\n'
++    '    h, w = len(grid), len(grid[0]) if grid else 0\n'
++    '    if lock and 1 <= lock[0] and lock[0] * 2 <= min(h, w):\n'
++    '        k, oy, ox = lock\n'
++    '        frac = _uniform_fraction(grid, k, oy, ox) if k > 1 else 1.0\n'
++    '    else:\n'
++    '        lock = None\n'
++    '        k, oy, ox, frac = _detect(grid, scales, min_runs, min_uniform)\n'
+     '    cells = []\n'
+     '    for by in range(oy, h - k + 1, k):\n'
+@@ -188,5 +256,5 @@
+     '                residue += 1\n'
+     '    return {"scale": k, "offset": (oy, ox), "cells": cells, "uniform": round(frac, 4),\n'
+-    '            "residue": residue}\n'
++    '            "residue": residue, "locked": lock is not None}\n'
+     '\n'
+     '\n'
+@@ -394,8 +462,12 @@
+     '# --------------------------------------------------------------------------- encode / diff\n'
+     '\n'
+-    'def encode(grid, lexicon=None, connectivity=8, layered=True, seen_at=None):\n'
+-    '    """Encode one screen. Returns a dict that `to_text` renders as the code listing."""\n'
++    'def encode(grid, lexicon=None, connectivity=8, layered=True, seen_at=None, lock=None):\n'
++    '    """Encode one screen. Returns a dict that `to_text` renders as the code listing.\n'
++    '\n'
++    "    `lock` = (k, oy, ox) from `scale_lock` reads the screen at the level's agreed\n"
++    "    block size instead of this frame's own detection.\n"
++    '    """\n'
+     '    lexicon = lexicon if lexicon is not None else Lexicon()\n'
+-    '    nat = native_grid(grid)\n'
++    '    nat = native_grid(grid, lock=lock)\n'
+     '    cells = nat["cells"]\n'
+     '    bg = background_colour(cells)\n'
+@@ -411,5 +483,5 @@
+     '    return {"scale": nat["scale"], "offset": nat["offset"], "shape": (len(cells), len(cells[0]) if cells else 0),\n'
+     '            "background": bg, "residue": nat["residue"], "placed": placed, "lexicon": lexicon,\n'
+-    '            "native": cells}\n'
++    '            "native": cells, "locked": nat["locked"]}\n'
+     '\n'
+     '\n'
+@@ -435,5 +507,6 @@
+     '    order = order[:max_kinds]\n'
+     '    lines = [\n'
+-    '        f"SCREEN 64x64 = world {h}x{w} cells, each cell {k}x{k} px, first cell at px (row {oy}, col {ox}); "\n'
++    '        f"SCREEN 64x64 = world {h}x{w} cells, each cell {k}x{k} px"\n'
++    '        f"{\' (locked for this level)\' if code.get(\'locked\') else \'\'}, first cell at px (row {oy}, col {ox}); "\n'
+     '        f"background {cc[bg]} ({COLOR_NAMES[bg]}); {code[\'residue\']} px drawn outside the cell grid (HUD).",\n'
+     '        f"OBJECTS {len(code[\'placed\'])} in {len(groups)} kinds (symbol xcount @ (row, col) of top-left cell):",\n'
+@@ -566,6 +639,48 @@
+ 
+ 
++_ARCAID3_SCALE_LOCK = __LOCK__
++_ARCAID3_LOCKS = {}
++
++
++def _arcaid3_runtime():
++    """The globals of the snippet that asked (they hold `history` and `current_frame`)."""
++    f = sys._getframe(1)
++    while f is not None:
++        g = f.f_globals
++        if "history" in g and "current_frame" in g:
++            return g
++        f = f.f_back
++    return None
++
++
++def _arcaid3_lock(view):
++    """One block size for the level `view` is on, agreed across that level's frames in `history`.
++
++    The sandbox starts a fresh process for every call, so the lock is recomputed from the frames
++    each call can see, and cached for the rest of the call. None means: use per-frame detection.
++    """
++    if not _ARCAID3_SCALE_LOCK or "scale_lock" not in _ARCAID3:
++        return None
++    level = getattr(view, "level", None)
++    rt = _arcaid3_runtime()
++    if level is None or rt is None:
++        return None
++    frames = [getattr(e, "frame", None) for e in (rt.get("history") or [])]
++    frames = [fr for fr in frames if fr is not None and getattr(fr, "level", None) == level]
++    for extra in (rt.get("current_frame"), view):
++        if extra is not None and getattr(extra, "level", None) == level and not any(extra is fr for fr in frames):
++            frames.append(extra)
++    key = (level, len(frames), id(frames[0]), id(frames[-1]))
++    if key not in _ARCAID3_LOCKS:
++        try:
++            _ARCAID3_LOCKS[key] = _ARCAID3["scale_lock"]([_arcaid3_grid(fr) for fr in frames])
++        except Exception:
++            _ARCAID3_LOCKS[key] = None
++    return _ARCAID3_LOCKS[key]
++
++
+ def _arcaid3_encode(view, lex=None):
+-    return _ARCAID3["encode"](_arcaid3_grid(view), lex if lex is not None else _arcaid3_lexicon())
++    return _ARCAID3["encode"](_arcaid3_grid(view), lex if lex is not None else _arcaid3_lexicon(),
++                              lock=_arcaid3_lock(view))
+ 
+ '''
+@@ -695,5 +810,5 @@
+ 
+ 
+-def arcaid3_patch_sandbox_source(source):
++def arcaid3_patch_sandbox_source(source, lock=True):
+     """Return the sandbox program with the lexicon view added.
+ 
+@@ -709,5 +824,6 @@
+             raise RuntimeError(f"anchor found {found} times, expected 1: {anchor.splitlines()[-1]!r}")
+     text = text.replace(_A3_ANCHOR_GLOBALS,
+-                        _A3_SB_GLOBALS.replace("__SRC__", repr(ARCAID3_LEXICON_SOURCE)) + "\n" + _A3_ANCHOR_GLOBALS)
++                        _A3_SB_GLOBALS.replace("__SRC__", repr(ARCAID3_LEXICON_SOURCE))
++                        .replace("__LOCK__", repr(bool(lock))) + "\n" + _A3_ANCHOR_GLOBALS)
+     text = text.replace(_A3_ANCHOR_METHODS, _A3_SB_METHODS + _A3_ANCHOR_METHODS)
+     compile(text, "<sandbox>", "exec")                 # never ship an unparsable child program
+@@ -751,4 +867,35 @@
+ 
+ 
++def _arcaid3_lock_self_test(sb):
++    """A sparse frame whose own detection reads a 6 px grid; its level's earlier frames show 2 px.
++
++    With the lock the sandbox must read it at 2 px and keep the single red cell.
++    """
++    def board(blocks):
++        world = [[5] * 32 for _ in range(32)]
++        world[20][20] = 8
++        for r0, c0 in blocks:
++            for r in range(r0, r0 + 3):
++                for c in range(c0, c0 + 3):
++                    world[r][c] = 9
++        return [[world[y // 2][x // 2] for x in range(64)] for y in range(64)]
++    chars = sb.ARC_COLOR_CHARS
++
++    def frame(g, step):
++        return {"ascii": "\n".join("".join(chars[v] for v in row) for row in g), "step": step, "level": 1,
++                "shape": [64, 64], "grid": g}
++
++    seq = [board([(5, 5), (5, 12)]), board([(5, 5), (5, 8)]), board([(5, 5), (5, 11)])]
++    state = {"current_frame": frame(seq[2], 3),
++             "history": [{"action": "RESET", "frame": frame(seq[0], 1)}, {"action": "LEFT", "frame": frame(seq[1], 2)},
++                         {"action": "RIGHT", "frame": frame(seq[2], 3)}],
++             "last_action_result": {}, "valid_actions": ["LEFT", "RIGHT"]}
++    res = sb.run_sandboxed_python(code="print(current_frame.code)\n", timeout_seconds=30, initial_state=state,
++                                  action_handler=lambda actions: {})
++    out = str(res.get("stdout", ""))
++    ok = "each cell 2x2 px (locked for this level)" in out and "R761" in out and not res.get("error")
++    return ok, out, res.get("error")
++
++
+ def install_arcaid3_lexicon():
+     report = {"enabled": ARCAID3_ON, "installed": False}
+@@ -758,11 +905,18 @@
+     import inference.agent.tool_agent as _a3_ta
+ 
++    stock = _a3_sb._SANDBOX_BOOTSTRAP
+     try:
+-        patched = arcaid3_patch_sandbox_source(_a3_sb._SANDBOX_BOOTSTRAP)
++        patched = arcaid3_patch_sandbox_source(stock, lock=ARCAID3_SCALE_LOCK)
+     except Exception as exc:                          # stock sandbox stays in place
+         report["error"] = f"sandbox patch: {type(exc).__name__}: {exc}"
+         return report
+-    stock = _a3_sb._SANDBOX_BOOTSTRAP
+     _a3_sb._SANDBOX_BOOTSTRAP = patched
++    report["scale_lock"] = "off (ARCAID3_SCALE_LOCK=0)"
++    if ARCAID3_SCALE_LOCK:
++        lok, lout, lerr = _arcaid3_lock_self_test(_a3_sb)
++        report["scale_lock"] = "on, self-test ok" if lok else f"off, self-test failed: {lerr!r} :: {lout[:200]!r}"
++        if not lok:                                   # keep the view, drop only the lock
++            patched = arcaid3_patch_sandbox_source(stock, lock=False)
++            _a3_sb._SANDBOX_BOOTSTRAP = patched
+     ok, out, err = _arcaid3_self_test(_a3_sb)
+     if not ok:                                        # roll back: the run continues exactly as stock

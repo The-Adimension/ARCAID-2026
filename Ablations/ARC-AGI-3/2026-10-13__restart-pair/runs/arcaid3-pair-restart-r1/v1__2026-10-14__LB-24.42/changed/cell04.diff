@@ -1,0 +1,177 @@
+--- base cell 4
++++ new cell 4
+@@ -1,8 +1,8 @@
+ %%writefile /kaggle/restart.patch
+ diff --git a/ARC3-Inference/inference/agent/tool_agent.py b/ARC3-Inference/inference/agent/tool_agent.py
+-index 84a9cdd..3e926c5 100644
++index 84a9cdd..27e9a70 100644
+ --- a/ARC3-Inference/inference/agent/tool_agent.py
+ +++ b/ARC3-Inference/inference/agent/tool_agent.py
+-@@ -995,6 +995,30 @@ def _summary_interval_tokens() -> int:
++@@ -995,6 +995,33 @@ def _summary_interval_tokens() -> int:
+      return max(0, _get_env_int("ARC3_SUMMARY_INTERVAL_TOKENS", 0))
+  
+@@ -16,4 +16,7 @@
+ +    hypothesis on a level is the variance, so a stuck attempt is given a fresh
+ +    context (the board stays where it is) instead of more tokens in the old one.
+++    The level keeps its token count, so the priority gate prices the game as it
+++    would with the flag off; the only scheduling difference is one handover at
+++    the restart, as after any context trim.
+ +    """
+ +    return max(0, _get_env_int("ARC3_STUCK_RESTART_TOKENS", 0))
+@@ -35,42 +38,77 @@
+      """Whether the drain may stop early on a summary.
+  
+-@@ -3860,6 +3884,15 @@ class ToolAgent:
++@@ -3848,6 +3875,9 @@ class ToolAgent:
++         summary = self._last_step_summary
++         if not summary:
++             return
+++        if summary.get("run_complete") and not summary.get("level_transition"):
+++            # winning the final level reports run_complete, not a level transition
+++            self._log_stuck_restart_completion(int(summary.get("level") or 1), summary)
++         wipe_reason = ""
++         revise_reason = ""
++         if summary.get("level_transition"):
++@@ -3860,6 +3890,7 @@ class ToolAgent:
+                          _pace_reference_tokens(completed_level),
+                      )
+                      self._pace_last_completed_level = completed_level
+-+            restarted = getattr(self, "_stuck_restarts", None) or {}
+-+            completed = max(1, int(summary.get("level") or 2) - 1)
+-+            if completed in restarted:
+-+                event = dict(restarted[completed], event="completed_after_restart",
+-+                             tokens_after=self._session_generated_tokens - self._tokens_at_level_start,
+-+                             actions_total=_priority_action_count(summary) - self._actions_at_level_start)
+-+                log.warning("stuck_level_restart: level %d completed after restart (%d more tokens)",
+-+                            completed, event["tokens_after"])
+-+                _stuck_restart_log(event)
+++            self._log_stuck_restart_completion(max(1, int(summary.get("level") or 2) - 1), summary)
+              self._actions_at_level_start = _priority_action_count(summary)
+              self._tokens_at_level_start = self._session_generated_tokens
+          if summary.get("level_transition") and _persistent_functions_scope() == "levelup":
+-@@ -6369,6 +6402,54 @@ class ToolAgent:
++@@ -6369,6 +6400,97 @@ class ToolAgent:
+              log.warning("priority: total level count unavailable or invalid; using 10")
+          return 10
+  
+++    def _log_stuck_restart_completion(self, level: int, summary: dict[str, Any]) -> None:
+++        """Log, once, that a restarted level was then completed. No-op unless that level was restarted."""
+++        restarted = getattr(self, "_stuck_restarts", None) or {}
+++        event = restarted.get(level)
+++        if event is None or event.get("completion_logged"):
+++            return
+++        event["completion_logged"] = True
+++        done = {k: v for k, v in event.items() if k != "completion_logged"}
+++        done.update(
+++            event="completed_after_restart",
+++            tokens_after=self._session_generated_tokens - event["session_tokens_at_restart"],
+++            actions_total=_priority_action_count(summary) - self._actions_at_level_start,
+++        )
+++        log.warning("stuck_level_restart: level %d completed after restart (%d more tokens)",
+++                    level, done["tokens_after"])
+++        _stuck_restart_log(done)
+++
+ +    def _maybe_restart_stuck_level(self, state_path: Path, append_transcript) -> str:
+ +        """Clear this level's conversation once it has used ARC3_STUCK_RESTART_TOKENS.
+ +
+-+        Called at the start of a fresh turn (never on a yield resumption), where
+-+        nothing is in flight. At most once per level. The system prompt, the
+-+        retained functions and the board are kept; the level's messages go. The
+-+        level is re-priced as a fresh attempt, and the dropped prefix is flagged
+-+        to the scheduler as a trim. Returns the line to put before this turn's
+-+        prompt, or "" when nothing was cleared.
+++        Called at the start of every analyze() invocation, before the rollback
+++        snapshot, where nothing is in flight. It also fires on an invocation the
+++        solver re-issued after a turn that executed nothing: a model deliberating
+++        without acting is the most stuck case, and once the history is gone there
+++        is nothing to resume, so the turn opens as a fresh one with the full
+++        prompt and the board. At most once per level. The system prompt, the
+++        retained functions and the board stay; the level's messages go. The level
+++        keeps its token count, so the gate prices the game as with the flag off;
+++        the dropped prefix is flagged to it exactly as a context trim is, which
+++        gives up the slot once.
+++        Returns the line to put before this turn's prompt, or "" when nothing was
+++        cleared. If the turn that carried the line is rolled back (request
+++        failure, discarded multi-call turn), the line is sent again.
+ +        """
+ +        limit = _stuck_restart_tokens()
+-+        if limit <= 0 or getattr(self, "_resume_after_yield", False):
+++        if limit <= 0:
+ +            return ""
+-+        summary = self._last_step_summary or {}
+-+        level = int(summary.get("level") or 1)
+ +        restarted = getattr(self, "_stuck_restarts", None)
+ +        if restarted is None:
+ +            restarted = self._stuck_restarts = {}
+++        summary = self._last_step_summary or {}
+++        level = int(summary.get("level") or 1)
+++        pending = getattr(self, "_stuck_restart_note", "")
+++        if pending:
+++            same_attempt = getattr(self, "_stuck_restart_note_at", None) == (level, _priority_action_count(summary))
+++            if self._history_messages or not same_attempt:
+++                self._stuck_restart_note = ""      # the turn that carried it was kept, or the game moved on
+++            else:
+++                self._resume_after_yield = False   # it was rolled back: say it again
+++                self._resume_reason = ""
+++                return pending
+ +        tokens = self._session_generated_tokens - getattr(self, "_tokens_at_level_start", 0)
+ +        if level in restarted or tokens < limit or not self._history_messages:
+@@ -81,9 +119,13 @@
+ +            "level": level, "tokens_before": tokens, "actions_before": actions,
+ +            "messages_dropped": len(self._history_messages),
+++            "resumed_turn": bool(getattr(self, "_resume_after_yield", False)),
+++            "game_over": bool(summary.get("game_over")),
+++            "session_tokens_at_restart": self._session_generated_tokens,
+ +            "elapsed_s": getattr(self, "_game_elapsed_seconds", None),
+ +        }
+ +        restarted[level] = event
+ +        self._history_messages = []
+-+        self._tokens_at_level_start = self._session_generated_tokens
+++        self._resume_after_yield = False
+++        self._resume_reason = ""
+ +        self._note_history_evicted()
+ +        log.warning(
+@@ -97,14 +139,20 @@
+ +        )
+ +        _stuck_restart_log(event)
+-+        return (
+++        board = (
+++            "The board below is the level's starting state: it was reset after a game over."
+++            if event["game_over"] else
+++            "The board below is the level's current state, which may differ from its start."
+++        )
+++        self._stuck_restart_note_at = (level, _priority_action_count(summary))
+++        self._stuck_restart_note = (
+ +            f"Your earlier conversation on this level was cleared after {actions} actions "
+-+            "without completing it. The board below is the level's current state, not its "
+-+            "starting state. Your retained functions are still available."
+++            f"without completing it. {board} Your retained functions are still available."
+ +        )
+++        return self._stuck_restart_note
+ +
+      def _maybe_handover(self) -> None:
+          """Re-price this game, and yield the slot if a gate is running.
+  
+-@@ -6612,6 +6693,9 @@ class ToolAgent:
++@@ -6612,6 +6734,22 @@ class ToolAgent:
+  
+          append_transcript("SYSTEM PROMPT", self._system_prompt)
+@@ -112,4 +160,17 @@
+ +        restart_note = self._maybe_restart_stuck_level(state_path, append_transcript)
+ +        if restart_note:
+++            summary = self._last_step_summary or {}
+++            if summary.get("stale"):
+++                # On a re-issued no-action invocation the prompt built above is the
+++                # resumption restatement, which points at messages the restart has
+++                # just removed. Rebuild it from the last executed step instead, so
+++                # the fresh turn carries that step's full outcome and images.
+++                user_prompt = self._build_user_prompt(
+++                    action_num,
+++                    valid_actions=valid_actions,
+++                    current_frame=current_frame,
+++                    history_entries=history_entries,
+++                    previous_step_summary={k: v for k, v in summary.items() if k not in ("stale", "stale_reason")},
+++                )
+ +            user_prompt = restart_note + "\n\n" + user_prompt
+          previous_history_messages = list(self._history_messages)

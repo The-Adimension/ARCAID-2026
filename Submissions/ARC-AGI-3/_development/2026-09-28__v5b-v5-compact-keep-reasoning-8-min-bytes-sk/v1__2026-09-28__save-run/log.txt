@@ -1,0 +1,1392 @@
+      4.5 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+      4.5 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+      4.5 err | 0.00s - to python to disable frozen modules.
+      4.5 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+      4.8 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+      4.8 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+      4.8 err | 0.00s - to python to disable frozen modules.
+      4.8 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+      5.5 out | PUBLIC25_VLLM_PROFILE name=kv5-bf16-mtp3-c8-cg32 env={"TAAF_VLLM_ENABLE_PREFIX_CACHING": "0", "TAAF_VLLM_KV_CACHE_DTYPE": "auto", "TAAF_VLLM_KV_CACHE_MEMORY_BYTES": "5368709120", "TAAF_VLLM_MAX_CUDAGRAPH_CAPTURE_SIZE": "32", "TAAF_VLLM_MAX_NUM_BATCHED_TOKENS": "8192", "TAAF_VLLM_MAX_NUM_SEQS": "8", "TAAF_VLLM_MTP_TOKENS": "3", "TAAF_VLLM_OMP_THREADS": "1"}
+      5.5 out | taaf.kaggle: TRUE_SUBMISSION=False
+      8.3 out | taaf.kaggle: source bundle = /kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1
+      8.3 out | taaf.kaggle: input paths = {"keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1": "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1", "keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1": "/kaggle/input/datasets/keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1"}
+      8.3 out | taaf.kaggle: wrote /usr/local/lib/python3.12/dist-packages/taaf_kaggle_sources.pth (5 source roots)
+      8.3 out | taaf.kaggle: setup command: "$PYTHON" "$TAAF_KAGGLE_BUNDLE_DIR/serving_setup.py"
+      8.4 out | VLLM_SETUP_MODE fast TAAF_KAGGLE_FAST_START=1
+      8.4 out | PINNED_VLLM_RUNTIME_PATH /kaggle/input/datasets/keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1
+      8.4 out | PINNED_MODEL_PATH /kaggle/input/models/keithtyser/qwen3-8-flash-next-nvfp4/pytorch/radixark-modelopt-fp4/1
+      8.4 out | RUNTIME_LAYER_FAST_CHECK index=8 bytes=1374796713 manifest_sha256=f4f325a97c3e4739640b0e472a818bb299e7ce8e585bdbfe5586e9d3b5a2c475
+      8.5 out | VLLM_SETUP_MODE fast TAAF_KAGGLE_FAST_START=1
+      8.5 out | PINNED_VLLM_RUNTIME_PATH /kaggle/input/datasets/keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1
+      8.5 out | PINNED_MODEL_PATH /kaggle/input/models/keithtyser/qwen3-8-flash-next-nvfp4/pytorch/radixark-modelopt-fp4/1
+      8.5 out | RUNTIME_LAYER_FAST_CHECK index=8 bytes=1374796713 manifest_sha256=f4f325a97c3e4739640b0e472a818bb299e7ce8e585bdbfe5586e9d3b5a2c475
+     32.4 out | RUNTIME_LAYER_FAST_CHECK index=17 bytes=4634843373 manifest_sha256=a5881cf32fc46f24318a6fc7015ccae863706075d4434d186b8b1b4e5bafb36e
+     32.6 out | RUNTIME_LAYER_FAST_CHECK index=17 bytes=4634843373 manifest_sha256=a5881cf32fc46f24318a6fc7015ccae863706075d4434d186b8b1b4e5bafb36e
+    133.0 out | RUNTIME_LAYER_FAST_CHECK index=18 bytes=1511319261 manifest_sha256=692ea0d28a87e9cea6db254c830f650f29804522045c9201f8ea63f30471b33b
+    133.2 out | RUNTIME_LAYER_FAST_CHECK index=18 bytes=1511319261 manifest_sha256=692ea0d28a87e9cea6db254c830f650f29804522045c9201f8ea63f30471b33b
+    161.5 out | RUNTIME_LAYER_FAST_CHECK index=21 bytes=61571140 manifest_sha256=651e9c6638c77d15bf671d9264badcba80ea551f84109de486427b87d2ddbf75
+    161.7 out | RUNTIME_LAYER_FAST_CHECK index=21 bytes=61571140 manifest_sha256=651e9c6638c77d15bf671d9264badcba80ea551f84109de486427b87d2ddbf75
+    162.4 out | RUNTIME_LAYER_FAST_CHECK index=24 bytes=309686893 manifest_sha256=10dce885652a53a2e644a75d256b90830663330988b8599c3c0e56cd6c8a4675
+    162.6 out | RUNTIME_LAYER_FAST_CHECK index=24 bytes=309686893 manifest_sha256=10dce885652a53a2e644a75d256b90830663330988b8599c3c0e56cd6c8a4675
+    166.4 out | RUNTIME_LAYER_FAST_CHECK index=27 bytes=14479724 manifest_sha256=49a63ac9d116f92e5a8b006ae5665b940fcbc3d22d53aa7c01a3753ef341c53e
+    166.6 out | RUNTIME_LAYER_FAST_CHECK index=27 bytes=14479724 manifest_sha256=49a63ac9d116f92e5a8b006ae5665b940fcbc3d22d53aa7c01a3753ef341c53e
+    166.7 out | MODEL_IDENTITY_ONLY files=419 bytes=135253622894 payload_check=vllm_load
+    166.7 out | VLLM_START_COMMAND ["/usr/bin/python3", "-m", "vllm.entrypoints.cli.main", "serve", "/kaggle/input/models/keithtyser/qwen3-8-flash-next-nvfp4/pytorch/radixark-modelopt-fp4/1", "--served-model-name", "Qwen/Qwen3.8-Flash-Next-NVFP4", "--host", "127.0.0.1", "--port", "1234", "--load-format", "safetensors", "--dtype", "bfloat16", "--quantization", "modelopt_fp4", "--tensor-parallel-size", "1", "--distributed-executor-backend", "mp", "--kv-cache-memory-bytes", "5368709120", "--max-model-len", "32768", "--max-num-seqs", "8", "--max-num-batched-tokens", "8192", "--async-scheduling", "--enable-chunked-prefill", "--max-cudagraph-capture-size", "32", "--no-enable-prefix-caching", "--enable-auto-tool-choice", "--tool-call-parser", "qwen3_coder", "--reasoning-parser", "qwen3", "--chat-template", "/kaggle/input/models/keithtyser/qwen3-8-flash-next-nvfp4/pytorch/radixark-modelopt-fp4/1/chat_template.jinja", "--speculative-config", "{\"method\":\"mtp\",\"num_speculative_tokens\":3}", "--no-enable-log-requests", "--disable-uvicorn-access-log", "--uvicorn-log-level", "info"]
+    166.7 out | VLLM_WAIT elapsed_s=0
+    166.7 out | 
+    166.9 out | MODEL_IDENTITY_ONLY files=419 bytes=135253622894 payload_check=vllm_load
+    166.9 out | VLLM_START_COMMAND ["/usr/bin/python3", "-m", "vllm.entrypoints.cli.main", "serve", "/kaggle/input/models/keithtyser/qwen3-8-flash-next-nvfp4/pytorch/radixark-modelopt-fp4/1", "--served-model-name", "Qwen/Qwen3.8-Flash-Next-NVFP4", "--host", "127.0.0.1", "--port", "1234", "--load-format", "safetensors", "--dtype", "bfloat16", "--quantization", "modelopt_fp4", "--tensor-parallel-size", "1", "--distributed-executor-backend", "mp", "--kv-cache-memory-bytes", "5368709120", "--max-model-len", "32768", "--max-num-seqs", "8", "--max-num-batched-tokens", "8192", "--async-scheduling", "--enable-chunked-prefill", "--max-cudagraph-capture-size", "32", "--no-enable-prefix-caching", "--enable-auto-tool-choice", "--tool-call-parser", "qwen3_coder", "--reasoning-parser", "qwen3", "--chat-template", "/kaggle/input/models/keithtyser/qwen3-8-flash-next-nvfp4/pytorch/radixark-modelopt-fp4/1/chat_template.jinja", "--speculative-config", "{\"method\":\"mtp\",\"num_speculative_tokens\":3}", "--no-enable-log-requests", "--disable-uvicorn-access-log", "--uvicorn-log-level", "info"]
+    166.9 out | VLLM_WAIT elapsed_s=0
+    166.9 out | 
+    226.7 out | VLLM_WAIT elapsed_s=60
+    226.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.7 out | (APIServer pid=151) INFO 09-28 20:06:59 [model.py:672] Resolved architecture: Qwen4ExpForConditionalGeneration
+    226.7 out | (APIServer pid=151) INFO 09-28 20:06:59 [model.py:1965] Using max model len 32768
+    226.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.7 out | (APIServer pid=151) [ERROR] `min_frames` is part of Qwen3VLVideoProcessorInitKwargs, but not documented. Make sure to add it to the docstring of the function in /tmp/qwen38-flash-next-vllm-runtime/usr/local/lib/python3.12/dist-packages/transformers/models/qwen3_vl/video_processing_qwen3_vl.py.
+    226.7 out | (APIServer pid=151) [ERROR] `max_frames` is part of Qwen3VLVideoProcessorInitKwargs, but not documented. Make sure to add it to the docstring of the function in /tmp/qwen38-flash-next-vllm-runtime/usr/local/lib/python3.12/dist-packages/transformers/models/qwen3_vl/video_processing_qwen3_vl.py.
+    226.7 out | (APIServer pid=151) INFO 09-28 20:07:14 [model.py:672] Resolved architecture: Qwen3_8FlashNextMTP
+    226.7 out | (APIServer pid=151) INFO 09-28 20:07:14 [model.py:1965] Using max model len 262144
+    226.7 out | (APIServer pid=151) WARNING 09-28 20:07:14 [speculative.py:1010] Enabling num_speculative_tokens > 1 will run multiple times of forward on same MTP layer,which may result in lower acceptance rate
+    226.7 out | (APIServer pid=151) INFO 09-28 20:07:14 [speculative.py:1268] Overriding draft model max model len from 262144 to 32768
+    226.7 out | (APIServer pid=151) INFO 09-28 20:07:14 [scheduler.py:246] Chunked prefill is enabled with max_num_batched_tokens=8192.
+    226.7 out | (APIServer pid=151) WARNING 09-28 20:07:14 [modelopt.py:1011] Detected ModelOpt NVFP4 checkpoint (quant_algo=NVFP4). Please note that the format is experimental and could change in future.
+    226.7 out | (APIServer pid=151) INFO 09-28 20:07:14 [kernel.py:308] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'])
+    226.7 out | (APIServer pid=151) INFO 09-28 20:07:14 [compilation.py:329] Enabled custom fusions: act_quant
+    226.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.7 out | (APIServer pid=151) [transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+    226.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.7 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.9 out | VLLM_WAIT elapsed_s=60
+    226.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.9 out | (APIServer pid=151) INFO 09-28 20:06:59 [model.py:672] Resolved architecture: Qwen4ExpForConditionalGeneration
+    226.9 out | (APIServer pid=151) INFO 09-28 20:06:59 [model.py:1965] Using max model len 32768
+    226.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.9 out | (APIServer pid=151) [ERROR] `min_frames` is part of Qwen3VLVideoProcessorInitKwargs, but not documented. Make sure to add it to the docstring of the function in /tmp/qwen38-flash-next-vllm-runtime/usr/local/lib/python3.12/dist-packages/transformers/models/qwen3_vl/video_processing_qwen3_vl.py.
+    226.9 out | (APIServer pid=151) [ERROR] `max_frames` is part of Qwen3VLVideoProcessorInitKwargs, but not documented. Make sure to add it to the docstring of the function in /tmp/qwen38-flash-next-vllm-runtime/usr/local/lib/python3.12/dist-packages/transformers/models/qwen3_vl/video_processing_qwen3_vl.py.
+    226.9 out | (APIServer pid=151) INFO 09-28 20:07:14 [model.py:672] Resolved architecture: Qwen3_8FlashNextMTP
+    226.9 out | (APIServer pid=151) INFO 09-28 20:07:14 [model.py:1965] Using max model len 262144
+    226.9 out | (APIServer pid=151) WARNING 09-28 20:07:14 [speculative.py:1010] Enabling num_speculative_tokens > 1 will run multiple times of forward on same MTP layer,which may result in lower acceptance rate
+    226.9 out | (APIServer pid=151) INFO 09-28 20:07:14 [speculative.py:1268] Overriding draft model max model len from 262144 to 32768
+    226.9 out | (APIServer pid=151) INFO 09-28 20:07:14 [scheduler.py:246] Chunked prefill is enabled with max_num_batched_tokens=8192.
+    226.9 out | (APIServer pid=151) WARNING 09-28 20:07:14 [modelopt.py:1011] Detected ModelOpt NVFP4 checkpoint (quant_algo=NVFP4). Please note that the format is experimental and could change in future.
+    226.9 out | (APIServer pid=151) INFO 09-28 20:07:14 [kernel.py:308] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'])
+    226.9 out | (APIServer pid=151) INFO 09-28 20:07:14 [compilation.py:329] Enabled custom fusions: act_quant
+    226.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.9 out | (APIServer pid=151) [transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+    226.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    226.9 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+    286.7 out | VLLM_WAIT elapsed_s=120
+    286.7 out | (PleOffloadWorker pid=301) INFO 09-28 20:08:04 [flash_attn.py:911] Using FlashAttention version 2
+    286.7 out | (PleOffloadWorker pid=301) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
+    286.7 out | (PleOffloadWorker pid=301) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
+    286.7 out | (PleOffloadWorker pid=301) INFO 09-28 20:08:04 [worker.py:385] Found 1 PleOffloadLayer(s): ['language_model.model.layers.1.ple.ple_embedding']
+    286.7 out | (Worker pid=238) 
+    286.7 out | Loading safetensors checkpoint shards:   2% Completed | 4/206 [00:11<09:07,  2.71s/it]
+    286.7 out | (PleOffloadWorker pid=301) INFO 09-28 20:08:05 [weight_utils.py:866] Filesystem type for checkpoints: NFS. Checkpoint size: 125.91 GiB. Available RAM: 128.01 GiB.
+    286.7 out | (PleOffloadWorker pid=301) WARNING 09-28 20:08:05 [weight_utils.py:879] Network filesystem (NFS) detected but checkpoint total size (125.91 GiB) exceeds 90% of available RAM (128.01 GiB). Skipping auto-prefetch.
+    286.7 out | (PleOffloadWorker pid=301) 
+    286.7 out | Loading safetensors checkpoint shards(PLE-offload):   0% Completed | 0/206 [00:00<?, ?it/s]
+    286.7 out | (PleOffloadWorker pid=301) 
+    286.7 out | Loading safetensors checkpoint shards(PLE-offload):   2% Completed | 5/206 [00:01<01:18,  2.57it/s]
+    286.7 out | (Worker pid=238) 
+    286.7 out | Loading safetensors checkpoint shards:   2% Completed | 5/206 [00:14<09:13,  2.76s/it]
+    286.7 out | (PleOffloadWorker pid=301) 
+    286.7 out | Loading safetensors checkpoint shards(PLE-offload):   3% Completed | 6/206 [00:04<02:46,  1.20it/s]
+    286.7 out | (PleOffloadWorker pid=301) 
+    286.7 out | Loading safetensors checkpoint shards(PLE-offload):   3% Completed | 7/206 [00:06<03:51,  1.16s/it]
+    286.7 out | (Worker pid=238) 
+    286.7 out | Loading safetensors checkpoint shards:   3% Completed | 6/206 [00:17<10:16,  3.08s/it]
+    286.7 out | (PleOffloadWorker pid=301) 
+    286.7 out | Loading safetensors checkpoint shards(PLE-offload):   4% Completed | 8/206 [00:08<04:34,  1.38s/it]
+    286.7 out | (Worker pid=238) 
+    286.7 out | Loading safetensors checkpoint shards:   3% Completed | 7/206 [00:22<11:28,  3.46s/it]
+    286.7 out | (PleOffloadWorker pid=301) 
+    286.7 out | Loading safetensors checkpoint shards(PLE-offload):   4% Completed | 9/206 [00:13<07:54,  2.41s/it]
+    286.7 out | (Worker pid=238) 
+    286.7 out | Loading safetensors checkpoint shards:   4% Completed | 8/206 [00:25<11:11,  3.39s/it]
+    286.7 out | (PleOffloadWorker pid=301) 
+    286.7 out | Loading safetensors checkpoint shards(PLE-offload):   5% Completed | 10/206 [00:15<07:35,  2.33s/it]
+    286.9 out | VLLM_WAIT elapsed_s=120
+    286.9 out | (PleOffloadWorker pid=301) INFO 09-28 20:08:04 [flash_attn.py:911] Using FlashAttention version 2
+    286.9 out | (PleOffloadWorker pid=301) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
+    286.9 out | (PleOffloadWorker pid=301) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
+    286.9 out | (PleOffloadWorker pid=301) INFO 09-28 20:08:04 [worker.py:385] Found 1 PleOffloadLayer(s): ['language_model.model.layers.1.ple.ple_embedding']
+    286.9 out | (Worker pid=238) 
+    286.9 out | Loading safetensors checkpoint shards:   2% Completed | 4/206 [00:11<09:07,  2.71s/it]
+    286.9 out | (PleOffloadWorker pid=301) INFO 09-28 20:08:05 [weight_utils.py:866] Filesystem type for checkpoints: NFS. Checkpoint size: 125.91 GiB. Available RAM: 128.01 GiB.
+    286.9 out | (PleOffloadWorker pid=301) WARNING 09-28 20:08:05 [weight_utils.py:879] Network filesystem (NFS) detected but checkpoint total size (125.91 GiB) exceeds 90% of available RAM (128.01 GiB). Skipping auto-prefetch.
+    286.9 out | (PleOffloadWorker pid=301) 
+    286.9 out | Loading safetensors checkpoint shards(PLE-offload):   0% Completed | 0/206 [00:00<?, ?it/s]
+    286.9 out | (PleOffloadWorker pid=301) 
+    286.9 out | Loading safetensors checkpoint shards(PLE-offload):   2% Completed | 5/206 [00:01<01:18,  2.57it/s]
+    286.9 out | (Worker pid=238) 
+    286.9 out | Loading safetensors checkpoint shards:   2% Completed | 5/206 [00:14<09:13,  2.76s/it]
+    286.9 out | (PleOffloadWorker pid=301) 
+    286.9 out | Loading safetensors checkpoint shards(PLE-offload):   3% Completed | 6/206 [00:04<02:46,  1.20it/s]
+    286.9 out | (PleOffloadWorker pid=301) 
+    286.9 out | Loading safetensors checkpoint shards(PLE-offload):   3% Completed | 7/206 [00:06<03:51,  1.16s/it]
+    286.9 out | (Worker pid=238) 
+    286.9 out | Loading safetensors checkpoint shards:   3% Completed | 6/206 [00:17<10:16,  3.08s/it]
+    286.9 out | (PleOffloadWorker pid=301) 
+    286.9 out | Loading safetensors checkpoint shards(PLE-offload):   4% Completed | 8/206 [00:08<04:34,  1.38s/it]
+    286.9 out | (Worker pid=238) 
+    286.9 out | Loading safetensors checkpoint shards:   3% Completed | 7/206 [00:22<11:28,  3.46s/it]
+    286.9 out | (PleOffloadWorker pid=301) 
+    286.9 out | Loading safetensors checkpoint shards(PLE-offload):   4% Completed | 9/206 [00:13<07:54,  2.41s/it]
+    286.9 out | (Worker pid=238) 
+    286.9 out | Loading safetensors checkpoint shards:   4% Completed | 8/206 [00:25<11:11,  3.39s/it]
+    286.9 out | (PleOffloadWorker pid=301) 
+    286.9 out | Loading safetensors checkpoint shards(PLE-offload):   5% Completed | 10/206 [00:15<07:35,  2.33s/it]
+    346.7 out | VLLM_WAIT elapsed_s=180
+    346.7 out | (Worker pid=238) 
+    346.7 out | Loading safetensors checkpoint shards:   9% Completed | 19/206 [01:12<12:12,  3.92s/it]
+    346.7 out | (PleOffloadWorker pid=301) 
+    346.7 out | Loading safetensors checkpoint shards(PLE-offload):  15% Completed | 31/206 [01:01<07:49,  2.68s/it]
+    346.7 out | (PleOffloadWorker pid=301) 
+    346.7 out | Loading safetensors checkpoint shards(PLE-offload):  16% Completed | 32/206 [01:04<07:17,  2.51s/it]
+    346.7 out | (Worker pid=238) 
+    346.7 out | Loading safetensors checkpoint shards:  10% Completed | 20/206 [01:15<11:45,  3.79s/it]
+    346.7 out | (PleOffloadWorker pid=301) 
+    346.7 out | Loading safetensors checkpoint shards(PLE-offload):  16% Completed | 33/206 [01:05<06:42,  2.33s/it]
+    346.7 out | (Worker pid=238) 
+    346.7 out | Loading safetensors checkpoint shards:  10% Completed | 21/206 [01:18<11:06,  3.60s/it]
+    346.7 out | (PleOffloadWorker pid=301) 
+    346.7 out | Loading safetensors checkpoint shards(PLE-offload):  17% Completed | 34/206 [01:07<06:09,  2.15s/it]
+    346.7 out | (PleOffloadWorker pid=301) 
+    346.7 out | Loading safetensors checkpoint shards(PLE-offload):  17% Completed | 35/206 [01:09<05:50,  2.05s/it]
+    346.7 out | (Worker pid=238) 
+    346.7 out | Loading safetensors checkpoint shards:  11% Completed | 22/206 [01:21<10:18,  3.36s/it]
+    346.7 out | (PleOffloadWorker pid=301) 
+    346.7 out | Loading safetensors checkpoint shards(PLE-offload):  17% Completed | 36/206 [01:11<05:33,  1.96s/it]
+    346.7 out | (PleOffloadWorker pid=301) 
+    346.7 out | Loading safetensors checkpoint shards(PLE-offload):  18% Completed | 37/206 [01:12<05:16,  1.87s/it]
+    346.7 out | (Worker pid=238) 
+    346.7 out | Loading safetensors checkpoint shards:  11% Completed | 23/206 [01:24<09:49,  3.22s/it]
+    346.7 out | (PleOffloadWorker pid=301) 
+    346.7 out | Loading safetensors checkpoint shards(PLE-offload):  18% Completed | 38/206 [01:14<05:07,  1.83s/it]
+    346.7 out | (Worker pid=238) 
+    346.7 out | Loading safetensors checkpoint shards:  12% Completed | 24/206 [01:27<09:26,  3.11s/it]
+    346.7 out | (PleOffloadWorker pid=301) 
+    346.7 out | Loading safetensors checkpoint shards(PLE-offload):  19% Completed | 39/206 [01:16<05:00,  1.80s/it]
+    346.9 out | VLLM_WAIT elapsed_s=180
+    346.9 out | (Worker pid=238) 
+    346.9 out | Loading safetensors checkpoint shards:   9% Completed | 19/206 [01:12<12:12,  3.92s/it]
+    346.9 out | (PleOffloadWorker pid=301) 
+    346.9 out | Loading safetensors checkpoint shards(PLE-offload):  15% Completed | 31/206 [01:01<07:49,  2.68s/it]
+    346.9 out | (PleOffloadWorker pid=301) 
+    346.9 out | Loading safetensors checkpoint shards(PLE-offload):  16% Completed | 32/206 [01:04<07:17,  2.51s/it]
+    346.9 out | (Worker pid=238) 
+    346.9 out | Loading safetensors checkpoint shards:  10% Completed | 20/206 [01:15<11:45,  3.79s/it]
+    346.9 out | (PleOffloadWorker pid=301) 
+    346.9 out | Loading safetensors checkpoint shards(PLE-offload):  16% Completed | 33/206 [01:05<06:42,  2.33s/it]
+    346.9 out | (Worker pid=238) 
+    346.9 out | Loading safetensors checkpoint shards:  10% Completed | 21/206 [01:18<11:06,  3.60s/it]
+    346.9 out | (PleOffloadWorker pid=301) 
+    346.9 out | Loading safetensors checkpoint shards(PLE-offload):  17% Completed | 34/206 [01:07<06:09,  2.15s/it]
+    346.9 out | (PleOffloadWorker pid=301) 
+    346.9 out | Loading safetensors checkpoint shards(PLE-offload):  17% Completed | 35/206 [01:09<05:50,  2.05s/it]
+    346.9 out | (Worker pid=238) 
+    346.9 out | Loading safetensors checkpoint shards:  11% Completed | 22/206 [01:21<10:18,  3.36s/it]
+    346.9 out | (PleOffloadWorker pid=301) 
+    346.9 out | Loading safetensors checkpoint shards(PLE-offload):  17% Completed | 36/206 [01:11<05:33,  1.96s/it]
+    346.9 out | (PleOffloadWorker pid=301) 
+    346.9 out | Loading safetensors checkpoint shards(PLE-offload):  18% Completed | 37/206 [01:12<05:16,  1.87s/it]
+    346.9 out | (Worker pid=238) 
+    346.9 out | Loading safetensors checkpoint shards:  11% Completed | 23/206 [01:24<09:49,  3.22s/it]
+    346.9 out | (PleOffloadWorker pid=301) 
+    346.9 out | Loading safetensors checkpoint shards(PLE-offload):  18% Completed | 38/206 [01:14<05:07,  1.83s/it]
+    346.9 out | (Worker pid=238) 
+    346.9 out | Loading safetensors checkpoint shards:  12% Completed | 24/206 [01:27<09:26,  3.11s/it]
+    346.9 out | (PleOffloadWorker pid=301) 
+    346.9 out | Loading safetensors checkpoint shards(PLE-offload):  19% Completed | 39/206 [01:16<05:00,  1.80s/it]
+    406.7 out | VLLM_WAIT elapsed_s=240
+    406.7 out | (PleOffloadWorker pid=301) 
+    406.7 out | Loading safetensors checkpoint shards(PLE-offload):  29% Completed | 60/206 [01:59<04:33,  1.88s/it]
+    406.7 out | (Worker pid=238) 
+    406.7 out | Loading safetensors checkpoint shards:  18% Completed | 38/206 [02:11<08:01,  2.87s/it]
+    406.7 out | (PleOffloadWorker pid=301) 
+    406.7 out | Loading safetensors checkpoint shards(PLE-offload):  30% Completed | 61/206 [02:01<04:28,  1.85s/it]
+    406.7 out | (PleOffloadWorker pid=301) 
+    406.7 out | Loading safetensors checkpoint shards(PLE-offload):  30% Completed | 62/206 [02:03<04:30,  1.88s/it]
+    406.7 out | (Worker pid=238) 
+    406.7 out | Loading safetensors checkpoint shards:  19% Completed | 39/206 [02:14<08:02,  2.89s/it]
+    406.7 out | (PleOffloadWorker pid=301) 
+    406.7 out | Loading safetensors checkpoint shards(PLE-offload):  31% Completed | 63/206 [02:05<05:09,  2.16s/it]
+    406.7 out | (Worker pid=238) 
+    406.7 out | Loading safetensors checkpoint shards:  19% Completed | 40/206 [02:19<09:54,  3.58s/it]
+    406.7 out | (PleOffloadWorker pid=301) 
+    406.7 out | Loading safetensors checkpoint shards(PLE-offload):  31% Completed | 64/206 [02:08<05:44,  2.42s/it]
+    406.7 out | (PleOffloadWorker pid=301) 
+    406.7 out | Loading safetensors checkpoint shards(PLE-offload):  32% Completed | 65/206 [02:10<05:19,  2.27s/it]
+    406.7 out | (Worker pid=238) 
+    406.7 out | Loading safetensors checkpoint shards:  20% Completed | 41/206 [02:22<09:09,  3.33s/it]
+    406.7 out | (PleOffloadWorker pid=301) 
+    406.7 out | Loading safetensors checkpoint shards(PLE-offload):  32% Completed | 66/206 [02:12<04:58,  2.13s/it]
+    406.7 out | (Worker pid=238) 
+    406.7 out | Loading safetensors checkpoint shards:  20% Completed | 42/206 [02:24<08:32,  3.12s/it]
+    406.7 out | (PleOffloadWorker pid=301) 
+    406.7 out | Loading safetensors checkpoint shards(PLE-offload):  33% Completed | 67/206 [02:14<04:43,  2.04s/it]
+    406.7 out | (PleOffloadWorker pid=301) 
+    406.7 out | Loading safetensors checkpoint shards(PLE-offload):  33% Completed | 68/206 [02:16<04:26,  1.93s/it]
+    406.7 out | (Worker pid=238) 
+    406.7 out | Loading safetensors checkpoint shards:  21% Completed | 43/206 [02:27<08:19,  3.06s/it]
+    406.9 out | VLLM_WAIT elapsed_s=240
+    406.9 out | (PleOffloadWorker pid=301) 
+    406.9 out | Loading safetensors checkpoint shards(PLE-offload):  29% Completed | 60/206 [01:59<04:33,  1.88s/it]
+    406.9 out | (Worker pid=238) 
+    406.9 out | Loading safetensors checkpoint shards:  18% Completed | 38/206 [02:11<08:01,  2.87s/it]
+    406.9 out | (PleOffloadWorker pid=301) 
+    406.9 out | Loading safetensors checkpoint shards(PLE-offload):  30% Completed | 61/206 [02:01<04:28,  1.85s/it]
+    406.9 out | (PleOffloadWorker pid=301) 
+    406.9 out | Loading safetensors checkpoint shards(PLE-offload):  30% Completed | 62/206 [02:03<04:30,  1.88s/it]
+    406.9 out | (Worker pid=238) 
+    406.9 out | Loading safetensors checkpoint shards:  19% Completed | 39/206 [02:14<08:02,  2.89s/it]
+    406.9 out | (PleOffloadWorker pid=301) 
+    406.9 out | Loading safetensors checkpoint shards(PLE-offload):  31% Completed | 63/206 [02:05<05:09,  2.16s/it]
+    406.9 out | (Worker pid=238) 
+    406.9 out | Loading safetensors checkpoint shards:  19% Completed | 40/206 [02:19<09:54,  3.58s/it]
+    406.9 out | (PleOffloadWorker pid=301) 
+    406.9 out | Loading safetensors checkpoint shards(PLE-offload):  31% Completed | 64/206 [02:08<05:44,  2.42s/it]
+    406.9 out | (PleOffloadWorker pid=301) 
+    406.9 out | Loading safetensors checkpoint shards(PLE-offload):  32% Completed | 65/206 [02:10<05:19,  2.27s/it]
+    406.9 out | (Worker pid=238) 
+    406.9 out | Loading safetensors checkpoint shards:  20% Completed | 41/206 [02:22<09:09,  3.33s/it]
+    406.9 out | (PleOffloadWorker pid=301) 
+    406.9 out | Loading safetensors checkpoint shards(PLE-offload):  32% Completed | 66/206 [02:12<04:58,  2.13s/it]
+    406.9 out | (Worker pid=238) 
+    406.9 out | Loading safetensors checkpoint shards:  20% Completed | 42/206 [02:24<08:32,  3.12s/it]
+    406.9 out | (PleOffloadWorker pid=301) 
+    406.9 out | Loading safetensors checkpoint shards(PLE-offload):  33% Completed | 67/206 [02:14<04:43,  2.04s/it]
+    406.9 out | (PleOffloadWorker pid=301) 
+    406.9 out | Loading safetensors checkpoint shards(PLE-offload):  33% Completed | 68/206 [02:16<04:26,  1.93s/it]
+    406.9 out | (Worker pid=238) 
+    406.9 out | Loading safetensors checkpoint shards:  21% Completed | 43/206 [02:27<08:19,  3.06s/it]
+    466.7 out | VLLM_WAIT elapsed_s=300
+    466.7 out | (Worker pid=238) 
+    466.7 out | Loading safetensors checkpoint shards:  27% Completed | 55/206 [03:08<09:35,  3.81s/it]
+    466.7 out | (PleOffloadWorker pid=301) 
+    466.7 out | Loading safetensors checkpoint shards(PLE-offload):  43% Completed | 89/206 [02:57<03:47,  1.94s/it]
+    466.7 out | (PleOffloadWorker pid=301) 
+    466.7 out | Loading safetensors checkpoint shards(PLE-offload):  44% Completed | 90/206 [02:59<03:45,  1.94s/it]
+    466.7 out | (Worker pid=238) 
+    466.7 out | Loading safetensors checkpoint shards:  27% Completed | 56/206 [03:11<09:02,  3.62s/it]
+    466.7 out | (PleOffloadWorker pid=301) 
+    466.7 out | Loading safetensors checkpoint shards(PLE-offload):  44% Completed | 91/206 [03:01<03:55,  2.05s/it]
+    466.7 out | (Worker pid=238) 
+    466.7 out | Loading safetensors checkpoint shards:  28% Completed | 57/206 [03:15<08:55,  3.59s/it]
+    466.7 out | (PleOffloadWorker pid=301) 
+    466.7 out | Loading safetensors checkpoint shards(PLE-offload):  45% Completed | 92/206 [03:04<04:25,  2.33s/it]
+    466.7 out | (PleOffloadWorker pid=301) 
+    466.7 out | Loading safetensors checkpoint shards(PLE-offload):  45% Completed | 93/206 [03:06<04:06,  2.18s/it]
+    466.7 out | (Worker pid=238) 
+    466.7 out | Loading safetensors checkpoint shards:  28% Completed | 58/206 [03:18<08:21,  3.39s/it]
+    466.7 out | (PleOffloadWorker pid=301) 
+    466.7 out | Loading safetensors checkpoint shards(PLE-offload):  46% Completed | 94/206 [03:08<03:56,  2.12s/it]
+    466.7 out | (Worker pid=238) 
+    466.7 out | Loading safetensors checkpoint shards:  29% Completed | 59/206 [03:21<07:54,  3.23s/it]
+    466.7 out | (PleOffloadWorker pid=301) 
+    466.7 out | Loading safetensors checkpoint shards(PLE-offload):  46% Completed | 95/206 [03:10<03:41,  1.99s/it]
+    466.7 out | (PleOffloadWorker pid=301) 
+    466.7 out | Loading safetensors checkpoint shards(PLE-offload):  47% Completed | 96/206 [03:12<03:48,  2.08s/it]
+    466.7 out | (Worker pid=238) 
+    466.7 out | Loading safetensors checkpoint shards:  29% Completed | 60/206 [03:25<08:58,  3.69s/it]
+    466.7 out | (PleOffloadWorker pid=301) 
+    466.7 out | Loading safetensors checkpoint shards(PLE-offload):  47% Completed | 97/206 [03:16<04:40,  2.57s/it]
+    466.9 out | VLLM_WAIT elapsed_s=300
+    466.9 out | (Worker pid=238) 
+    466.9 out | Loading safetensors checkpoint shards:  27% Completed | 55/206 [03:08<09:35,  3.81s/it]
+    466.9 out | (PleOffloadWorker pid=301) 
+    466.9 out | Loading safetensors checkpoint shards(PLE-offload):  43% Completed | 89/206 [02:57<03:47,  1.94s/it]
+    466.9 out | (PleOffloadWorker pid=301) 
+    466.9 out | Loading safetensors checkpoint shards(PLE-offload):  44% Completed | 90/206 [02:59<03:45,  1.94s/it]
+    466.9 out | (Worker pid=238) 
+    466.9 out | Loading safetensors checkpoint shards:  27% Completed | 56/206 [03:11<09:02,  3.62s/it]
+    466.9 out | (PleOffloadWorker pid=301) 
+    466.9 out | Loading safetensors checkpoint shards(PLE-offload):  44% Completed | 91/206 [03:01<03:55,  2.05s/it]
+    466.9 out | (Worker pid=238) 
+    466.9 out | Loading safetensors checkpoint shards:  28% Completed | 57/206 [03:15<08:55,  3.59s/it]
+    466.9 out | (PleOffloadWorker pid=301) 
+    466.9 out | Loading safetensors checkpoint shards(PLE-offload):  45% Completed | 92/206 [03:04<04:25,  2.33s/it]
+    466.9 out | (PleOffloadWorker pid=301) 
+    466.9 out | Loading safetensors checkpoint shards(PLE-offload):  45% Completed | 93/206 [03:06<04:06,  2.18s/it]
+    466.9 out | (Worker pid=238) 
+    466.9 out | Loading safetensors checkpoint shards:  28% Completed | 58/206 [03:18<08:21,  3.39s/it]
+    466.9 out | (PleOffloadWorker pid=301) 
+    466.9 out | Loading safetensors checkpoint shards(PLE-offload):  46% Completed | 94/206 [03:08<03:56,  2.12s/it]
+    466.9 out | (Worker pid=238) 
+    466.9 out | Loading safetensors checkpoint shards:  29% Completed | 59/206 [03:21<07:54,  3.23s/it]
+    466.9 out | (PleOffloadWorker pid=301) 
+    466.9 out | Loading safetensors checkpoint shards(PLE-offload):  46% Completed | 95/206 [03:10<03:41,  1.99s/it]
+    466.9 out | (PleOffloadWorker pid=301) 
+    466.9 out | Loading safetensors checkpoint shards(PLE-offload):  47% Completed | 96/206 [03:12<03:48,  2.08s/it]
+    466.9 out | (Worker pid=238) 
+    466.9 out | Loading safetensors checkpoint shards:  29% Completed | 60/206 [03:25<08:58,  3.69s/it]
+    466.9 out | (PleOffloadWorker pid=301) 
+    466.9 out | Loading safetensors checkpoint shards(PLE-offload):  47% Completed | 97/206 [03:16<04:40,  2.57s/it]
+    526.7 out | VLLM_WAIT elapsed_s=360
+    526.7 out | (PleOffloadWorker pid=301) 
+    526.7 out | Loading safetensors checkpoint shards(PLE-offload):  58% Completed | 119/206 [03:58<02:51,  1.97s/it]
+    526.7 out | (PleOffloadWorker pid=301) 
+    526.7 out | Loading safetensors checkpoint shards(PLE-offload):  58% Completed | 120/206 [04:00<02:44,  1.92s/it]
+    526.7 out | (Worker pid=238) 
+    526.7 out | Loading safetensors checkpoint shards:  36% Completed | 75/206 [04:13<07:00,  3.21s/it]
+    526.7 out | (PleOffloadWorker pid=301) 
+    526.7 out | Loading safetensors checkpoint shards(PLE-offload):  59% Completed | 121/206 [04:02<02:40,  1.88s/it]
+    526.7 out | (PleOffloadWorker pid=301) 
+    526.7 out | Loading safetensors checkpoint shards(PLE-offload):  59% Completed | 122/206 [04:04<02:35,  1.85s/it]
+    526.7 out | (Worker pid=238) 
+    526.7 out | Loading safetensors checkpoint shards:  37% Completed | 76/206 [04:16<06:47,  3.14s/it]
+    526.7 out | (PleOffloadWorker pid=301) 
+    526.7 out | Loading safetensors checkpoint shards(PLE-offload):  60% Completed | 123/206 [04:06<02:36,  1.88s/it]
+    526.7 out | (PleOffloadWorker pid=301) 
+    526.7 out | Loading safetensors checkpoint shards(PLE-offload):  60% Completed | 124/206 [04:08<02:32,  1.86s/it]
+    526.7 out | (Worker pid=238) 
+    526.7 out | Loading safetensors checkpoint shards:  37% Completed | 77/206 [04:19<06:45,  3.14s/it]
+    526.7 out | (Worker pid=238) 
+    526.7 out | Loading safetensors checkpoint shards:  38% Completed | 78/206 [04:22<06:39,  3.12s/it]
+    526.7 out | (PleOffloadWorker pid=301) 
+    526.7 out | Loading safetensors checkpoint shards(PLE-offload):  61% Completed | 125/206 [04:11<03:03,  2.26s/it]
+    526.7 out | (PleOffloadWorker pid=301) 
+    526.7 out | Loading safetensors checkpoint shards(PLE-offload):  61% Completed | 126/206 [04:13<02:51,  2.15s/it]
+    526.7 out | (Worker pid=238) 
+    526.7 out | Loading safetensors checkpoint shards:  38% Completed | 79/206 [04:25<06:45,  3.19s/it]
+    526.7 out | (PleOffloadWorker pid=301) 
+    526.7 out | Loading safetensors checkpoint shards(PLE-offload):  62% Completed | 127/206 [04:14<02:42,  2.06s/it]
+    526.7 out | (PleOffloadWorker pid=301) 
+    526.7 out | Loading safetensors checkpoint shards(PLE-offload):  62% Completed | 128/206 [04:16<02:31,  1.95s/it]
+    526.9 out | VLLM_WAIT elapsed_s=360
+    526.9 out | (PleOffloadWorker pid=301) 
+    526.9 out | Loading safetensors checkpoint shards(PLE-offload):  58% Completed | 119/206 [03:58<02:51,  1.97s/it]
+    526.9 out | (PleOffloadWorker pid=301) 
+    526.9 out | Loading safetensors checkpoint shards(PLE-offload):  58% Completed | 120/206 [04:00<02:44,  1.92s/it]
+    526.9 out | (Worker pid=238) 
+    526.9 out | Loading safetensors checkpoint shards:  36% Completed | 75/206 [04:13<07:00,  3.21s/it]
+    526.9 out | (PleOffloadWorker pid=301) 
+    526.9 out | Loading safetensors checkpoint shards(PLE-offload):  59% Completed | 121/206 [04:02<02:40,  1.88s/it]
+    526.9 out | (PleOffloadWorker pid=301) 
+    526.9 out | Loading safetensors checkpoint shards(PLE-offload):  59% Completed | 122/206 [04:04<02:35,  1.85s/it]
+    526.9 out | (Worker pid=238) 
+    526.9 out | Loading safetensors checkpoint shards:  37% Completed | 76/206 [04:16<06:47,  3.14s/it]
+    526.9 out | (PleOffloadWorker pid=301) 
+    526.9 out | Loading safetensors checkpoint shards(PLE-offload):  60% Completed | 123/206 [04:06<02:36,  1.88s/it]
+    526.9 out | (PleOffloadWorker pid=301) 
+    526.9 out | Loading safetensors checkpoint shards(PLE-offload):  60% Completed | 124/206 [04:08<02:32,  1.86s/it]
+    526.9 out | (Worker pid=238) 
+    526.9 out | Loading safetensors checkpoint shards:  37% Completed | 77/206 [04:19<06:45,  3.14s/it]
+    526.9 out | (Worker pid=238) 
+    526.9 out | Loading safetensors checkpoint shards:  38% Completed | 78/206 [04:22<06:39,  3.12s/it]
+    526.9 out | (PleOffloadWorker pid=301) 
+    526.9 out | Loading safetensors checkpoint shards(PLE-offload):  61% Completed | 125/206 [04:11<03:03,  2.26s/it]
+    526.9 out | (PleOffloadWorker pid=301) 
+    526.9 out | Loading safetensors checkpoint shards(PLE-offload):  61% Completed | 126/206 [04:13<02:51,  2.15s/it]
+    526.9 out | (Worker pid=238) 
+    526.9 out | Loading safetensors checkpoint shards:  38% Completed | 79/206 [04:25<06:45,  3.19s/it]
+    526.9 out | (PleOffloadWorker pid=301) 
+    526.9 out | Loading safetensors checkpoint shards(PLE-offload):  62% Completed | 127/206 [04:14<02:42,  2.06s/it]
+    526.9 out | (PleOffloadWorker pid=301) 
+    526.9 out | Loading safetensors checkpoint shards(PLE-offload):  62% Completed | 128/206 [04:16<02:31,  1.95s/it]
+    586.7 out | VLLM_WAIT elapsed_s=420
+    586.7 out | (Worker pid=238) 
+    586.7 out | Loading safetensors checkpoint shards:  44% Completed | 91/206 [05:07<07:20,  3.83s/it]
+    586.7 out | (PleOffloadWorker pid=301) 
+    586.7 out | Loading safetensors checkpoint shards(PLE-offload):  72% Completed | 148/206 [04:58<02:33,  2.65s/it]
+    586.7 out | (PleOffloadWorker pid=301) 
+    586.7 out | Loading safetensors checkpoint shards(PLE-offload):  72% Completed | 149/206 [05:00<02:17,  2.41s/it]
+    586.7 out | (PleOffloadWorker pid=301) 
+    586.7 out | Loading safetensors checkpoint shards(PLE-offload):  73% Completed | 150/206 [05:02<02:06,  2.26s/it]
+    586.7 out | (Worker pid=238) 
+    586.7 out | Loading safetensors checkpoint shards:  45% Completed | 92/206 [05:14<08:55,  4.70s/it]
+    586.7 out | (PleOffloadWorker pid=301) 
+    586.7 out | Loading safetensors checkpoint shards(PLE-offload):  73% Completed | 151/206 [05:04<02:01,  2.22s/it]
+    586.7 out | (Worker pid=238) 
+    586.7 out | Loading safetensors checkpoint shards:  45% Completed | 93/206 [05:17<08:09,  4.33s/it]
+    586.7 out | (PleOffloadWorker pid=301) 
+    586.7 out | Loading safetensors checkpoint shards(PLE-offload):  74% Completed | 152/206 [05:06<02:00,  2.23s/it]
+    586.7 out | (PleOffloadWorker pid=301) 
+    586.7 out | Loading safetensors checkpoint shards(PLE-offload):  74% Completed | 153/206 [05:08<01:51,  2.11s/it]
+    586.7 out | (Worker pid=238) 
+    586.7 out | Loading safetensors checkpoint shards:  46% Completed | 94/206 [05:20<07:30,  4.03s/it]
+    586.7 out | (PleOffloadWorker pid=301) 
+    586.7 out | Loading safetensors checkpoint shards(PLE-offload):  75% Completed | 154/206 [05:10<01:47,  2.06s/it]
+    586.7 out | (PleOffloadWorker pid=301) 
+    586.7 out | Loading safetensors checkpoint shards(PLE-offload):  75% Completed | 155/206 [05:13<01:56,  2.29s/it]
+    586.7 out | (Worker pid=238) 
+    586.7 out | Loading safetensors checkpoint shards:  46% Completed | 95/206 [05:24<07:18,  3.95s/it]
+    586.7 out | (PleOffloadWorker pid=301) 
+    586.7 out | Loading safetensors checkpoint shards(PLE-offload):  76% Completed | 156/206 [05:15<01:48,  2.17s/it]
+    586.7 out | (Worker pid=238) 
+    586.7 out | Loading safetensors checkpoint shards:  47% Completed | 96/206 [05:27<06:48,  3.72s/it]
+    587.0 out | VLLM_WAIT elapsed_s=420
+    587.0 out | (Worker pid=238) 
+    587.0 out | Loading safetensors checkpoint shards:  44% Completed | 91/206 [05:07<07:20,  3.83s/it]
+    587.0 out | (PleOffloadWorker pid=301) 
+    587.0 out | Loading safetensors checkpoint shards(PLE-offload):  72% Completed | 148/206 [04:58<02:33,  2.65s/it]
+    587.0 out | (PleOffloadWorker pid=301) 
+    587.0 out | Loading safetensors checkpoint shards(PLE-offload):  72% Completed | 149/206 [05:00<02:17,  2.41s/it]
+    587.0 out | (PleOffloadWorker pid=301) 
+    587.0 out | Loading safetensors checkpoint shards(PLE-offload):  73% Completed | 150/206 [05:02<02:06,  2.26s/it]
+    587.0 out | (Worker pid=238) 
+    587.0 out | Loading safetensors checkpoint shards:  45% Completed | 92/206 [05:14<08:55,  4.70s/it]
+    587.0 out | (PleOffloadWorker pid=301) 
+    587.0 out | Loading safetensors checkpoint shards(PLE-offload):  73% Completed | 151/206 [05:04<02:01,  2.22s/it]
+    587.0 out | (Worker pid=238) 
+    587.0 out | Loading safetensors checkpoint shards:  45% Completed | 93/206 [05:17<08:09,  4.33s/it]
+    587.0 out | (PleOffloadWorker pid=301) 
+    587.0 out | Loading safetensors checkpoint shards(PLE-offload):  74% Completed | 152/206 [05:06<02:00,  2.23s/it]
+    587.0 out | (PleOffloadWorker pid=301) 
+    587.0 out | Loading safetensors checkpoint shards(PLE-offload):  74% Completed | 153/206 [05:08<01:51,  2.11s/it]
+    587.0 out | (Worker pid=238) 
+    587.0 out | Loading safetensors checkpoint shards:  46% Completed | 94/206 [05:20<07:30,  4.03s/it]
+    587.0 out | (PleOffloadWorker pid=301) 
+    587.0 out | Loading safetensors checkpoint shards(PLE-offload):  75% Completed | 154/206 [05:10<01:47,  2.06s/it]
+    587.0 out | (PleOffloadWorker pid=301) 
+    587.0 out | Loading safetensors checkpoint shards(PLE-offload):  75% Completed | 155/206 [05:13<01:56,  2.29s/it]
+    587.0 out | (Worker pid=238) 
+    587.0 out | Loading safetensors checkpoint shards:  46% Completed | 95/206 [05:24<07:18,  3.95s/it]
+    587.0 out | (PleOffloadWorker pid=301) 
+    587.0 out | Loading safetensors checkpoint shards(PLE-offload):  76% Completed | 156/206 [05:15<01:48,  2.17s/it]
+    587.0 out | (Worker pid=238) 
+    587.0 out | Loading safetensors checkpoint shards:  47% Completed | 96/206 [05:27<06:48,  3.72s/it]
+    646.8 out | VLLM_WAIT elapsed_s=480
+    646.8 out | (Worker pid=238) 
+    646.8 out | Loading safetensors checkpoint shards:  53% Completed | 109/206 [06:09<04:57,  3.07s/it]
+    646.8 out | (PleOffloadWorker pid=301) 
+    646.8 out | Loading safetensors checkpoint shards(PLE-offload):  86% Completed | 178/206 [05:59<00:51,  1.85s/it]
+    646.8 out | (Worker pid=238) 
+    646.8 out | Loading safetensors checkpoint shards:  53% Completed | 110/206 [06:14<05:52,  3.67s/it]
+    646.8 out | (PleOffloadWorker pid=301) 
+    646.8 out | Loading safetensors checkpoint shards(PLE-offload):  87% Completed | 179/206 [06:03<01:07,  2.51s/it]
+    646.8 out | (PleOffloadWorker pid=301) 
+    646.8 out | Loading safetensors checkpoint shards(PLE-offload):  87% Completed | 180/206 [06:05<01:00,  2.32s/it]
+    646.8 out | (Worker pid=238) 
+    646.8 out | Loading safetensors checkpoint shards:  54% Completed | 111/206 [06:17<05:35,  3.53s/it]
+    646.8 out | (PleOffloadWorker pid=301) 
+    646.8 out | Loading safetensors checkpoint shards(PLE-offload):  88% Completed | 181/206 [06:07<00:56,  2.25s/it]
+    646.8 out | (Worker pid=238) 
+    646.8 out | Loading safetensors checkpoint shards:  54% Completed | 112/206 [06:20<05:12,  3.32s/it]
+    646.8 out | (PleOffloadWorker pid=301) 
+    646.8 out | Loading safetensors checkpoint shards(PLE-offload):  88% Completed | 182/206 [06:09<00:50,  2.12s/it]
+    646.8 out | (PleOffloadWorker pid=301) 
+    646.8 out | Loading safetensors checkpoint shards(PLE-offload):  89% Completed | 183/206 [06:11<00:45,  1.99s/it]
+    646.8 out | (Worker pid=238) 
+    646.8 out | Loading safetensors checkpoint shards:  55% Completed | 113/206 [06:23<05:02,  3.25s/it]
+    646.8 out | (PleOffloadWorker pid=301) 
+    646.8 out | Loading safetensors checkpoint shards(PLE-offload):  89% Completed | 184/206 [06:13<00:42,  1.94s/it]
+    646.8 out | (PleOffloadWorker pid=301) 
+    646.8 out | Loading safetensors checkpoint shards(PLE-offload):  90% Completed | 185/206 [06:15<00:40,  1.94s/it]
+    646.8 out | (Worker pid=238) 
+    646.8 out | Loading safetensors checkpoint shards:  55% Completed | 114/206 [06:26<04:46,  3.11s/it]
+    646.8 out | (PleOffloadWorker pid=301) 
+    646.8 out | Loading safetensors checkpoint shards(PLE-offload):  90% Completed | 186/206 [06:17<00:38,  1.90s/it]
+    647.0 out | VLLM_WAIT elapsed_s=480
+    647.0 out | (Worker pid=238) 
+    647.0 out | Loading safetensors checkpoint shards:  53% Completed | 109/206 [06:09<04:57,  3.07s/it]
+    647.0 out | (PleOffloadWorker pid=301) 
+    647.0 out | Loading safetensors checkpoint shards(PLE-offload):  86% Completed | 178/206 [05:59<00:51,  1.85s/it]
+    647.0 out | (Worker pid=238) 
+    647.0 out | Loading safetensors checkpoint shards:  53% Completed | 110/206 [06:14<05:52,  3.67s/it]
+    647.0 out | (PleOffloadWorker pid=301) 
+    647.0 out | Loading safetensors checkpoint shards(PLE-offload):  87% Completed | 179/206 [06:03<01:07,  2.51s/it]
+    647.0 out | (PleOffloadWorker pid=301) 
+    647.0 out | Loading safetensors checkpoint shards(PLE-offload):  87% Completed | 180/206 [06:05<01:00,  2.32s/it]
+    647.0 out | (Worker pid=238) 
+    647.0 out | Loading safetensors checkpoint shards:  54% Completed | 111/206 [06:17<05:35,  3.53s/it]
+    647.0 out | (PleOffloadWorker pid=301) 
+    647.0 out | Loading safetensors checkpoint shards(PLE-offload):  88% Completed | 181/206 [06:07<00:56,  2.25s/it]
+    647.0 out | (Worker pid=238) 
+    647.0 out | Loading safetensors checkpoint shards:  54% Completed | 112/206 [06:20<05:12,  3.32s/it]
+    647.0 out | (PleOffloadWorker pid=301) 
+    647.0 out | Loading safetensors checkpoint shards(PLE-offload):  88% Completed | 182/206 [06:09<00:50,  2.12s/it]
+    647.0 out | (PleOffloadWorker pid=301) 
+    647.0 out | Loading safetensors checkpoint shards(PLE-offload):  89% Completed | 183/206 [06:11<00:45,  1.99s/it]
+    647.0 out | (Worker pid=238) 
+    647.0 out | Loading safetensors checkpoint shards:  55% Completed | 113/206 [06:23<05:02,  3.25s/it]
+    647.0 out | (PleOffloadWorker pid=301) 
+    647.0 out | Loading safetensors checkpoint shards(PLE-offload):  89% Completed | 184/206 [06:13<00:42,  1.94s/it]
+    647.0 out | (PleOffloadWorker pid=301) 
+    647.0 out | Loading safetensors checkpoint shards(PLE-offload):  90% Completed | 185/206 [06:15<00:40,  1.94s/it]
+    647.0 out | (Worker pid=238) 
+    647.0 out | Loading safetensors checkpoint shards:  55% Completed | 114/206 [06:26<04:46,  3.11s/it]
+    647.0 out | (PleOffloadWorker pid=301) 
+    647.0 out | Loading safetensors checkpoint shards(PLE-offload):  90% Completed | 186/206 [06:17<00:38,  1.90s/it]
+    706.8 out | VLLM_WAIT elapsed_s=540
+    706.8 out | (PleOffloadWorker pid=301) 
+    706.8 out | Loading safetensors checkpoint shards(PLE-offload):  95% Completed | 196/206 [06:32<00:09,  1.02it/s]
+    706.8 out | (Worker pid=238) 
+    706.8 out | Loading safetensors checkpoint shards:  58% Completed | 120/206 [06:44<04:16,  2.99s/it]
+    706.8 out | (Worker pid=238) 
+    706.8 out | Loading safetensors checkpoint shards:  59% Completed | 121/206 [06:49<05:04,  3.58s/it]
+    706.8 out | (Worker pid=238) 
+    706.8 out | Loading safetensors checkpoint shards:  59% Completed | 122/206 [06:52<04:44,  3.39s/it]
+    706.8 out | (Worker pid=238) 
+    706.8 out | Loading safetensors checkpoint shards:  60% Completed | 123/206 [06:55<04:26,  3.21s/it]
+    706.8 out | (Worker pid=238) 
+    706.8 out | Loading safetensors checkpoint shards:  60% Completed | 124/206 [06:58<04:14,  3.11s/it]
+    706.8 out | (Worker pid=238) 
+    706.8 out | Loading safetensors checkpoint shards:  61% Completed | 125/206 [07:03<05:02,  3.73s/it]
+    706.8 out | (Worker pid=238) 
+    706.8 out | Loading safetensors checkpoint shards:  61% Completed | 126/206 [07:06<04:32,  3.40s/it]
+    706.8 out | (Worker pid=238) 
+    706.8 out | Loading safetensors checkpoint shards:  62% Completed | 127/206 [07:08<04:12,  3.19s/it]
+    706.8 out | (Worker pid=238) 
+    706.8 out | Loading safetensors checkpoint shards:  62% Completed | 128/206 [07:11<03:55,  3.02s/it]
+    706.8 out | (Worker pid=238) 
+    706.8 out | Loading safetensors checkpoint shards:  63% Completed | 129/206 [07:14<03:48,  2.97s/it]
+    706.8 out | (Worker pid=238) 
+    706.8 out | Loading safetensors checkpoint shards:  63% Completed | 130/206 [07:16<03:40,  2.90s/it]
+    706.8 out | (Worker pid=238) 
+    706.8 out | Loading safetensors checkpoint shards:  64% Completed | 131/206 [07:22<04:37,  3.70s/it]
+    706.8 out | (PleOffloadWorker pid=301) 
+    706.8 out | Loading safetensors checkpoint shards(PLE-offload):  96% Completed | 197/206 [07:14<02:00, 13.36s/it]
+    706.8 out | (Worker pid=238) 
+    706.8 out | Loading safetensors checkpoint shards:  64% Completed | 132/206 [07:25<04:27,  3.61s/it]
+    707.0 out | VLLM_WAIT elapsed_s=540
+    707.0 out | (PleOffloadWorker pid=301) 
+    707.0 out | Loading safetensors checkpoint shards(PLE-offload):  95% Completed | 196/206 [06:32<00:09,  1.02it/s]
+    707.0 out | (Worker pid=238) 
+    707.0 out | Loading safetensors checkpoint shards:  58% Completed | 120/206 [06:44<04:16,  2.99s/it]
+    707.0 out | (Worker pid=238) 
+    707.0 out | Loading safetensors checkpoint shards:  59% Completed | 121/206 [06:49<05:04,  3.58s/it]
+    707.0 out | (Worker pid=238) 
+    707.0 out | Loading safetensors checkpoint shards:  59% Completed | 122/206 [06:52<04:44,  3.39s/it]
+    707.0 out | (Worker pid=238) 
+    707.0 out | Loading safetensors checkpoint shards:  60% Completed | 123/206 [06:55<04:26,  3.21s/it]
+    707.0 out | (Worker pid=238) 
+    707.0 out | Loading safetensors checkpoint shards:  60% Completed | 124/206 [06:58<04:14,  3.11s/it]
+    707.0 out | (Worker pid=238) 
+    707.0 out | Loading safetensors checkpoint shards:  61% Completed | 125/206 [07:03<05:02,  3.73s/it]
+    707.0 out | (Worker pid=238) 
+    707.0 out | Loading safetensors checkpoint shards:  61% Completed | 126/206 [07:06<04:32,  3.40s/it]
+    707.0 out | (Worker pid=238) 
+    707.0 out | Loading safetensors checkpoint shards:  62% Completed | 127/206 [07:08<04:12,  3.19s/it]
+    707.0 out | (Worker pid=238) 
+    707.0 out | Loading safetensors checkpoint shards:  62% Completed | 128/206 [07:11<03:55,  3.02s/it]
+    707.0 out | (Worker pid=238) 
+    707.0 out | Loading safetensors checkpoint shards:  63% Completed | 129/206 [07:14<03:48,  2.97s/it]
+    707.0 out | (Worker pid=238) 
+    707.0 out | Loading safetensors checkpoint shards:  63% Completed | 130/206 [07:16<03:40,  2.90s/it]
+    707.0 out | (Worker pid=238) 
+    707.0 out | Loading safetensors checkpoint shards:  64% Completed | 131/206 [07:22<04:37,  3.70s/it]
+    707.0 out | (PleOffloadWorker pid=301) 
+    707.0 out | Loading safetensors checkpoint shards(PLE-offload):  96% Completed | 197/206 [07:14<02:00, 13.36s/it]
+    707.0 out | (Worker pid=238) 
+    707.0 out | Loading safetensors checkpoint shards:  64% Completed | 132/206 [07:25<04:27,  3.61s/it]
+    766.8 out | VLLM_WAIT elapsed_s=600
+    766.8 out | (Worker pid=238) 
+    766.8 out | Loading safetensors checkpoint shards:  67% Completed | 137/206 [07:42<04:08,  3.60s/it]
+    766.8 out | (Worker pid=238) 
+    766.8 out | Loading safetensors checkpoint shards:  67% Completed | 138/206 [07:46<04:20,  3.83s/it]
+    766.8 out | (Worker pid=238) 
+    766.8 out | Loading safetensors checkpoint shards:  67% Completed | 139/206 [07:49<03:53,  3.49s/it]
+    766.8 out | (Worker pid=238) 
+    766.8 out | Loading safetensors checkpoint shards:  68% Completed | 140/206 [07:52<03:36,  3.28s/it]
+    766.8 out | (Worker pid=238) 
+    766.8 out | Loading safetensors checkpoint shards:  68% Completed | 141/206 [07:55<03:24,  3.15s/it]
+    766.8 out | (Worker pid=238) 
+    766.8 out | Loading safetensors checkpoint shards:  69% Completed | 142/206 [07:59<03:43,  3.50s/it]
+    766.8 out | (Worker pid=238) 
+    766.8 out | Loading safetensors checkpoint shards:  69% Completed | 143/206 [08:02<03:25,  3.26s/it]
+    766.8 out | (Worker pid=238) 
+    766.8 out | Loading safetensors checkpoint shards:  70% Completed | 144/206 [08:05<03:12,  3.11s/it]
+    766.8 out | (PleOffloadWorker pid=301) 
+    766.8 out | Loading safetensors checkpoint shards(PLE-offload):  96% Completed | 198/206 [07:56<02:54, 21.85s/it]
+    766.8 out | (Worker pid=238) 
+    766.8 out | Loading safetensors checkpoint shards:  70% Completed | 145/206 [08:08<03:11,  3.13s/it]
+    766.8 out | (Worker pid=238) 
+    766.8 out | Loading safetensors checkpoint shards:  71% Completed | 146/206 [08:10<02:59,  2.99s/it]
+    766.8 out | (Worker pid=238) 
+    766.8 out | Loading safetensors checkpoint shards:  71% Completed | 147/206 [08:13<02:52,  2.93s/it]
+    766.8 out | (Worker pid=238) 
+    766.8 out | Loading safetensors checkpoint shards:  72% Completed | 148/206 [08:16<02:49,  2.92s/it]
+    766.8 out | (Worker pid=238) 
+    766.8 out | Loading safetensors checkpoint shards:  72% Completed | 149/206 [08:19<02:54,  3.06s/it]
+    766.8 out | (Worker pid=238) 
+    766.8 out | Loading safetensors checkpoint shards:  73% Completed | 150/206 [08:23<02:58,  3.19s/it]
+    767.0 out | VLLM_WAIT elapsed_s=600
+    767.0 out | (Worker pid=238) 
+    767.0 out | Loading safetensors checkpoint shards:  67% Completed | 137/206 [07:42<04:08,  3.60s/it]
+    767.0 out | (Worker pid=238) 
+    767.0 out | Loading safetensors checkpoint shards:  67% Completed | 138/206 [07:46<04:20,  3.83s/it]
+    767.0 out | (Worker pid=238) 
+    767.0 out | Loading safetensors checkpoint shards:  67% Completed | 139/206 [07:49<03:53,  3.49s/it]
+    767.0 out | (Worker pid=238) 
+    767.0 out | Loading safetensors checkpoint shards:  68% Completed | 140/206 [07:52<03:36,  3.28s/it]
+    767.0 out | (Worker pid=238) 
+    767.0 out | Loading safetensors checkpoint shards:  68% Completed | 141/206 [07:55<03:24,  3.15s/it]
+    767.0 out | (Worker pid=238) 
+    767.0 out | Loading safetensors checkpoint shards:  69% Completed | 142/206 [07:59<03:43,  3.50s/it]
+    767.0 out | (Worker pid=238) 
+    767.0 out | Loading safetensors checkpoint shards:  69% Completed | 143/206 [08:02<03:25,  3.26s/it]
+    767.0 out | (Worker pid=238) 
+    767.0 out | Loading safetensors checkpoint shards:  70% Completed | 144/206 [08:05<03:12,  3.11s/it]
+    767.0 out | (PleOffloadWorker pid=301) 
+    767.0 out | Loading safetensors checkpoint shards(PLE-offload):  96% Completed | 198/206 [07:56<02:54, 21.85s/it]
+    767.0 out | (Worker pid=238) 
+    767.0 out | Loading safetensors checkpoint shards:  70% Completed | 145/206 [08:08<03:11,  3.13s/it]
+    767.0 out | (Worker pid=238) 
+    767.0 out | Loading safetensors checkpoint shards:  71% Completed | 146/206 [08:10<02:59,  2.99s/it]
+    767.0 out | (Worker pid=238) 
+    767.0 out | Loading safetensors checkpoint shards:  71% Completed | 147/206 [08:13<02:52,  2.93s/it]
+    767.0 out | (Worker pid=238) 
+    767.0 out | Loading safetensors checkpoint shards:  72% Completed | 148/206 [08:16<02:49,  2.92s/it]
+    767.0 out | (Worker pid=238) 
+    767.0 out | Loading safetensors checkpoint shards:  72% Completed | 149/206 [08:19<02:54,  3.06s/it]
+    767.0 out | (Worker pid=238) 
+    767.0 out | Loading safetensors checkpoint shards:  73% Completed | 150/206 [08:23<02:58,  3.19s/it]
+    826.8 out | VLLM_WAIT elapsed_s=660
+    826.8 out | (Worker pid=238) 
+    826.8 out | Loading safetensors checkpoint shards:  70% Completed | 144/206 [08:05<03:12,  3.11s/it]
+    826.8 out | (PleOffloadWorker pid=301) 
+    826.8 out | Loading safetensors checkpoint shards(PLE-offload):  96% Completed | 198/206 [07:56<02:54, 21.85s/it]
+    826.8 out | (Worker pid=238) 
+    826.8 out | Loading safetensors checkpoint shards:  70% Completed | 145/206 [08:08<03:11,  3.13s/it]
+    826.8 out | (Worker pid=238) 
+    826.8 out | Loading safetensors checkpoint shards:  71% Completed | 146/206 [08:10<02:59,  2.99s/it]
+    826.8 out | (Worker pid=238) 
+    826.8 out | Loading safetensors checkpoint shards:  71% Completed | 147/206 [08:13<02:52,  2.93s/it]
+    826.8 out | (Worker pid=238) 
+    826.8 out | Loading safetensors checkpoint shards:  72% Completed | 148/206 [08:16<02:49,  2.92s/it]
+    826.8 out | (Worker pid=238) 
+    826.8 out | Loading safetensors checkpoint shards:  72% Completed | 149/206 [08:19<02:54,  3.06s/it]
+    826.8 out | (Worker pid=238) 
+    826.8 out | Loading safetensors checkpoint shards:  73% Completed | 150/206 [08:23<02:58,  3.19s/it]
+    826.8 out | (Worker pid=238) 
+    826.8 out | Loading safetensors checkpoint shards:  73% Completed | 151/206 [08:32<04:30,  4.92s/it]
+    826.8 out | (Worker pid=238) 
+    826.8 out | Loading safetensors checkpoint shards:  74% Completed | 152/206 [08:40<05:23,  5.98s/it]
+    826.8 out | (Worker pid=238) 
+    826.8 out | Loading safetensors checkpoint shards:  74% Completed | 153/206 [08:51<06:25,  7.27s/it]
+    826.8 out | (Worker pid=238) 
+    826.8 out | Loading safetensors checkpoint shards:  75% Completed | 154/206 [09:00<06:50,  7.90s/it]
+    826.8 out | (Worker pid=238) 
+    826.8 out | Loading safetensors checkpoint shards:  75% Completed | 155/206 [09:12<07:40,  9.02s/it]
+    826.8 out | (Worker pid=238) 
+    826.8 out | Loading safetensors checkpoint shards:  76% Completed | 156/206 [09:21<07:42,  9.26s/it]
+    826.8 out | (PleOffloadWorker pid=301) 
+    826.8 out | Loading safetensors checkpoint shards(PLE-offload):  97% Completed | 199/206 [09:12<04:28, 38.35s/it]
+    827.0 out | VLLM_WAIT elapsed_s=660
+    827.0 out | (Worker pid=238) 
+    827.0 out | Loading safetensors checkpoint shards:  70% Completed | 144/206 [08:05<03:12,  3.11s/it]
+    827.0 out | (PleOffloadWorker pid=301) 
+    827.0 out | Loading safetensors checkpoint shards(PLE-offload):  96% Completed | 198/206 [07:56<02:54, 21.85s/it]
+    827.0 out | (Worker pid=238) 
+    827.0 out | Loading safetensors checkpoint shards:  70% Completed | 145/206 [08:08<03:11,  3.13s/it]
+    827.0 out | (Worker pid=238) 
+    827.0 out | Loading safetensors checkpoint shards:  71% Completed | 146/206 [08:10<02:59,  2.99s/it]
+    827.0 out | (Worker pid=238) 
+    827.0 out | Loading safetensors checkpoint shards:  71% Completed | 147/206 [08:13<02:52,  2.93s/it]
+    827.0 out | (Worker pid=238) 
+    827.0 out | Loading safetensors checkpoint shards:  72% Completed | 148/206 [08:16<02:49,  2.92s/it]
+    827.0 out | (Worker pid=238) 
+    827.0 out | Loading safetensors checkpoint shards:  72% Completed | 149/206 [08:19<02:54,  3.06s/it]
+    827.0 out | (Worker pid=238) 
+    827.0 out | Loading safetensors checkpoint shards:  73% Completed | 150/206 [08:23<02:58,  3.19s/it]
+    827.0 out | (Worker pid=238) 
+    827.0 out | Loading safetensors checkpoint shards:  73% Completed | 151/206 [08:32<04:30,  4.92s/it]
+    827.0 out | (Worker pid=238) 
+    827.0 out | Loading safetensors checkpoint shards:  74% Completed | 152/206 [08:40<05:23,  5.98s/it]
+    827.0 out | (Worker pid=238) 
+    827.0 out | Loading safetensors checkpoint shards:  74% Completed | 153/206 [08:51<06:25,  7.27s/it]
+    827.0 out | (Worker pid=238) 
+    827.0 out | Loading safetensors checkpoint shards:  75% Completed | 154/206 [09:00<06:50,  7.90s/it]
+    827.0 out | (Worker pid=238) 
+    827.0 out | Loading safetensors checkpoint shards:  75% Completed | 155/206 [09:12<07:40,  9.02s/it]
+    827.0 out | (Worker pid=238) 
+    827.0 out | Loading safetensors checkpoint shards:  76% Completed | 156/206 [09:21<07:42,  9.26s/it]
+    827.0 out | (PleOffloadWorker pid=301) 
+    827.0 out | Loading safetensors checkpoint shards(PLE-offload):  97% Completed | 199/206 [09:12<04:28, 38.35s/it]
+    886.8 out | VLLM_WAIT elapsed_s=720
+    886.8 out | (Worker pid=238) 
+    886.8 out | Loading safetensors checkpoint shards:  76% Completed | 156/206 [09:21<07:42,  9.26s/it]
+    886.8 out | (PleOffloadWorker pid=301) 
+    886.8 out | Loading safetensors checkpoint shards(PLE-offload):  97% Completed | 199/206 [09:12<04:28, 38.35s/it]
+    886.8 out | (Worker pid=238) 
+    886.8 out | Loading safetensors checkpoint shards:  76% Completed | 157/206 [09:35<08:37, 10.57s/it]
+    886.8 out | (Worker pid=238) 
+    886.8 out | Loading safetensors checkpoint shards:  77% Completed | 158/206 [09:43<07:43,  9.66s/it]
+    886.8 out | (Worker pid=238) 
+    886.8 out | Loading safetensors checkpoint shards:  77% Completed | 159/206 [09:47<06:19,  8.07s/it]
+    886.8 out | (Worker pid=238) 
+    886.8 out | Loading safetensors checkpoint shards:  78% Completed | 160/206 [09:51<05:20,  6.98s/it]
+    886.8 out | (Worker pid=238) 
+    886.8 out | Loading safetensors checkpoint shards:  78% Completed | 161/206 [09:56<04:38,  6.19s/it]
+    886.8 out | (Worker pid=238) 
+    886.8 out | Loading safetensors checkpoint shards:  79% Completed | 162/206 [10:01<04:19,  5.91s/it]
+    886.8 out | (Worker pid=238) 
+    886.8 out | Loading safetensors checkpoint shards:  79% Completed | 163/206 [10:05<03:50,  5.37s/it]
+    886.8 out | (Worker pid=238) 
+    886.8 out | Loading safetensors checkpoint shards:  80% Completed | 164/206 [10:09<03:31,  5.03s/it]
+    886.8 out | (Worker pid=238) 
+    886.8 out | Loading safetensors checkpoint shards:  80% Completed | 165/206 [10:15<03:28,  5.10s/it]
+    886.8 out | (Worker pid=238) 
+    886.8 out | Loading safetensors checkpoint shards:  81% Completed | 166/206 [10:19<03:17,  4.95s/it]
+    886.8 out | (Worker pid=238) 
+    886.8 out | Loading safetensors checkpoint shards:  81% Completed | 167/206 [10:23<03:01,  4.65s/it]
+    886.8 out | (PleOffloadWorker pid=301) 
+    886.8 out | Loading safetensors checkpoint shards(PLE-offload):  97% Completed | 200/206 [10:14<04:31, 45.29s/it]
+    886.8 out | (Worker pid=238) 
+    886.8 out | Loading safetensors checkpoint shards:  82% Completed | 168/206 [10:27<02:44,  4.34s/it]
+    887.0 out | VLLM_WAIT elapsed_s=720
+    887.0 out | (Worker pid=238) 
+    887.0 out | Loading safetensors checkpoint shards:  76% Completed | 156/206 [09:21<07:42,  9.26s/it]
+    887.0 out | (PleOffloadWorker pid=301) 
+    887.0 out | Loading safetensors checkpoint shards(PLE-offload):  97% Completed | 199/206 [09:12<04:28, 38.35s/it]
+    887.0 out | (Worker pid=238) 
+    887.0 out | Loading safetensors checkpoint shards:  76% Completed | 157/206 [09:35<08:37, 10.57s/it]
+    887.0 out | (Worker pid=238) 
+    887.0 out | Loading safetensors checkpoint shards:  77% Completed | 158/206 [09:43<07:43,  9.66s/it]
+    887.0 out | (Worker pid=238) 
+    887.0 out | Loading safetensors checkpoint shards:  77% Completed | 159/206 [09:47<06:19,  8.07s/it]
+    887.0 out | (Worker pid=238) 
+    887.0 out | Loading safetensors checkpoint shards:  78% Completed | 160/206 [09:51<05:20,  6.98s/it]
+    887.0 out | (Worker pid=238) 
+    887.0 out | Loading safetensors checkpoint shards:  78% Completed | 161/206 [09:56<04:38,  6.19s/it]
+    887.0 out | (Worker pid=238) 
+    887.0 out | Loading safetensors checkpoint shards:  79% Completed | 162/206 [10:01<04:19,  5.91s/it]
+    887.0 out | (Worker pid=238) 
+    887.0 out | Loading safetensors checkpoint shards:  79% Completed | 163/206 [10:05<03:50,  5.37s/it]
+    887.0 out | (Worker pid=238) 
+    887.0 out | Loading safetensors checkpoint shards:  80% Completed | 164/206 [10:09<03:31,  5.03s/it]
+    887.0 out | (Worker pid=238) 
+    887.0 out | Loading safetensors checkpoint shards:  80% Completed | 165/206 [10:15<03:28,  5.10s/it]
+    887.0 out | (Worker pid=238) 
+    887.0 out | Loading safetensors checkpoint shards:  81% Completed | 166/206 [10:19<03:17,  4.95s/it]
+    887.0 out | (Worker pid=238) 
+    887.0 out | Loading safetensors checkpoint shards:  81% Completed | 167/206 [10:23<03:01,  4.65s/it]
+    887.0 out | (PleOffloadWorker pid=301) 
+    887.0 out | Loading safetensors checkpoint shards(PLE-offload):  97% Completed | 200/206 [10:14<04:31, 45.29s/it]
+    887.0 out | (Worker pid=238) 
+    887.0 out | Loading safetensors checkpoint shards:  82% Completed | 168/206 [10:27<02:44,  4.34s/it]
+    946.8 out | VLLM_WAIT elapsed_s=780
+    946.8 out | (Worker pid=238) 
+    946.8 out | Loading safetensors checkpoint shards:  84% Completed | 174/206 [10:46<01:44,  3.28s/it]
+    946.8 out | (Worker pid=238) 
+    946.8 out | Loading safetensors checkpoint shards:  85% Completed | 175/206 [10:49<01:38,  3.16s/it]
+    946.8 out | (Worker pid=238) 
+    946.8 out | Loading safetensors checkpoint shards:  85% Completed | 176/206 [10:52<01:33,  3.11s/it]
+    946.8 out | (Worker pid=238) 
+    946.8 out | Loading safetensors checkpoint shards:  86% Completed | 177/206 [10:55<01:25,  2.94s/it]
+    946.8 out | (Worker pid=238) 
+    946.8 out | Loading safetensors checkpoint shards:  86% Completed | 178/206 [10:57<01:21,  2.91s/it]
+    946.8 out | (Worker pid=238) 
+    946.8 out | Loading safetensors checkpoint shards:  87% Completed | 179/206 [11:00<01:19,  2.93s/it]
+    946.8 out | (Worker pid=238) 
+    946.8 out | Loading safetensors checkpoint shards:  87% Completed | 180/206 [11:03<01:14,  2.86s/it]
+    946.8 out | (PleOffloadWorker pid=301) 
+    946.8 out | Loading safetensors checkpoint shards(PLE-offload):  98% Completed | 201/206 [10:54<03:37, 43.58s/it]
+    946.8 out | (Worker pid=238) 
+    946.8 out | Loading safetensors checkpoint shards:  88% Completed | 181/206 [11:06<01:11,  2.85s/it]
+    946.8 out | (Worker pid=238) 
+    946.8 out | Loading safetensors checkpoint shards:  88% Completed | 182/206 [11:09<01:09,  2.90s/it]
+    946.8 out | (Worker pid=238) 
+    946.8 out | Loading safetensors checkpoint shards:  89% Completed | 183/206 [11:12<01:05,  2.83s/it]
+    946.8 out | (Worker pid=238) 
+    946.8 out | Loading safetensors checkpoint shards:  89% Completed | 184/206 [11:16<01:14,  3.37s/it]
+    946.8 out | (Worker pid=238) 
+    946.8 out | Loading safetensors checkpoint shards:  90% Completed | 185/206 [11:19<01:09,  3.30s/it]
+    946.8 out | (Worker pid=238) 
+    946.8 out | Loading safetensors checkpoint shards:  90% Completed | 186/206 [11:22<01:04,  3.21s/it]
+    946.8 out | (Worker pid=238) 
+    946.8 out | Loading safetensors checkpoint shards:  91% Completed | 187/206 [11:25<00:59,  3.12s/it]
+    947.0 out | VLLM_WAIT elapsed_s=780
+    947.0 out | (Worker pid=238) 
+    947.0 out | Loading safetensors checkpoint shards:  84% Completed | 174/206 [10:46<01:44,  3.28s/it]
+    947.0 out | (Worker pid=238) 
+    947.0 out | Loading safetensors checkpoint shards:  85% Completed | 175/206 [10:49<01:38,  3.16s/it]
+    947.0 out | (Worker pid=238) 
+    947.0 out | Loading safetensors checkpoint shards:  85% Completed | 176/206 [10:52<01:33,  3.11s/it]
+    947.0 out | (Worker pid=238) 
+    947.0 out | Loading safetensors checkpoint shards:  86% Completed | 177/206 [10:55<01:25,  2.94s/it]
+    947.0 out | (Worker pid=238) 
+    947.0 out | Loading safetensors checkpoint shards:  86% Completed | 178/206 [10:57<01:21,  2.91s/it]
+    947.0 out | (Worker pid=238) 
+    947.0 out | Loading safetensors checkpoint shards:  87% Completed | 179/206 [11:00<01:19,  2.93s/it]
+    947.0 out | (Worker pid=238) 
+    947.0 out | Loading safetensors checkpoint shards:  87% Completed | 180/206 [11:03<01:14,  2.86s/it]
+    947.0 out | (PleOffloadWorker pid=301) 
+    947.0 out | Loading safetensors checkpoint shards(PLE-offload):  98% Completed | 201/206 [10:54<03:37, 43.58s/it]
+    947.0 out | (Worker pid=238) 
+    947.0 out | Loading safetensors checkpoint shards:  88% Completed | 181/206 [11:06<01:11,  2.85s/it]
+    947.0 out | (Worker pid=238) 
+    947.0 out | Loading safetensors checkpoint shards:  88% Completed | 182/206 [11:09<01:09,  2.90s/it]
+    947.0 out | (Worker pid=238) 
+    947.0 out | Loading safetensors checkpoint shards:  89% Completed | 183/206 [11:12<01:05,  2.83s/it]
+    947.0 out | (Worker pid=238) 
+    947.0 out | Loading safetensors checkpoint shards:  89% Completed | 184/206 [11:16<01:14,  3.37s/it]
+    947.0 out | (Worker pid=238) 
+    947.0 out | Loading safetensors checkpoint shards:  90% Completed | 185/206 [11:19<01:09,  3.30s/it]
+    947.0 out | (Worker pid=238) 
+    947.0 out | Loading safetensors checkpoint shards:  90% Completed | 186/206 [11:22<01:04,  3.21s/it]
+    947.0 out | (Worker pid=238) 
+    947.0 out | Loading safetensors checkpoint shards:  91% Completed | 187/206 [11:25<00:59,  3.12s/it]
+   1006.8 out | VLLM_WAIT elapsed_s=840
+   1006.8 out | (Worker pid=238) 
+   1006.8 out | Loading safetensors checkpoint shards:  88% Completed | 182/206 [11:09<01:09,  2.90s/it]
+   1006.8 out | (Worker pid=238) 
+   1006.8 out | Loading safetensors checkpoint shards:  89% Completed | 183/206 [11:12<01:05,  2.83s/it]
+   1006.8 out | (Worker pid=238) 
+   1006.8 out | Loading safetensors checkpoint shards:  89% Completed | 184/206 [11:16<01:14,  3.37s/it]
+   1006.8 out | (Worker pid=238) 
+   1006.8 out | Loading safetensors checkpoint shards:  90% Completed | 185/206 [11:19<01:09,  3.30s/it]
+   1006.8 out | (Worker pid=238) 
+   1006.8 out | Loading safetensors checkpoint shards:  90% Completed | 186/206 [11:22<01:04,  3.21s/it]
+   1006.8 out | (Worker pid=238) 
+   1006.8 out | Loading safetensors checkpoint shards:  91% Completed | 187/206 [11:25<00:59,  3.12s/it]
+   1006.8 out | (Worker pid=238) 
+   1006.8 out | Loading safetensors checkpoint shards:  91% Completed | 188/206 [11:31<01:10,  3.92s/it]
+   1006.8 out | (Worker pid=238) 
+   1006.8 out | Loading safetensors checkpoint shards:  92% Completed | 189/206 [11:35<01:06,  3.92s/it]
+   1006.8 out | (Worker pid=238) 
+   1006.8 out | Loading safetensors checkpoint shards:  92% Completed | 190/206 [11:38<00:57,  3.60s/it]
+   1006.8 out | (Worker pid=238) 
+   1006.8 out | Loading safetensors checkpoint shards:  93% Completed | 191/206 [11:41<00:50,  3.40s/it]
+   1006.8 out | (Worker pid=238) 
+   1006.8 out | Loading safetensors checkpoint shards:  93% Completed | 192/206 [11:44<00:45,  3.24s/it]
+   1006.8 out | (PleOffloadWorker pid=301) 
+   1006.8 out | Loading safetensors checkpoint shards(PLE-offload):  98% Completed | 202/206 [11:34<02:50, 42.59s/it]
+   1006.8 out | (Worker pid=238) 
+   1006.8 out | Loading safetensors checkpoint shards:  94% Completed | 193/206 [11:55<01:12,  5.58s/it]
+   1006.8 out | (Worker pid=238) 
+   1006.8 out | Loading safetensors checkpoint shards:  94% Completed | 194/206 [11:57<00:55,  4.63s/it]
+   1006.8 out | (PleOffloadWorker pid=301) 
+   1006.8 out | Loading safetensors checkpoint shards(PLE-offload):  99% Completed | 203/206 [12:14<02:05, 41.97s/it]
+   1007.0 out | VLLM_WAIT elapsed_s=840
+   1007.0 out | (Worker pid=238) 
+   1007.0 out | Loading safetensors checkpoint shards:  88% Completed | 182/206 [11:09<01:09,  2.90s/it]
+   1007.0 out | (Worker pid=238) 
+   1007.0 out | Loading safetensors checkpoint shards:  89% Completed | 183/206 [11:12<01:05,  2.83s/it]
+   1007.0 out | (Worker pid=238) 
+   1007.0 out | Loading safetensors checkpoint shards:  89% Completed | 184/206 [11:16<01:14,  3.37s/it]
+   1007.0 out | (Worker pid=238) 
+   1007.0 out | Loading safetensors checkpoint shards:  90% Completed | 185/206 [11:19<01:09,  3.30s/it]
+   1007.0 out | (Worker pid=238) 
+   1007.0 out | Loading safetensors checkpoint shards:  90% Completed | 186/206 [11:22<01:04,  3.21s/it]
+   1007.0 out | (Worker pid=238) 
+   1007.0 out | Loading safetensors checkpoint shards:  91% Completed | 187/206 [11:25<00:59,  3.12s/it]
+   1007.0 out | (Worker pid=238) 
+   1007.0 out | Loading safetensors checkpoint shards:  91% Completed | 188/206 [11:31<01:10,  3.92s/it]
+   1007.0 out | (Worker pid=238) 
+   1007.0 out | Loading safetensors checkpoint shards:  92% Completed | 189/206 [11:35<01:06,  3.92s/it]
+   1007.0 out | (Worker pid=238) 
+   1007.0 out | Loading safetensors checkpoint shards:  92% Completed | 190/206 [11:38<00:57,  3.60s/it]
+   1007.0 out | (Worker pid=238) 
+   1007.0 out | Loading safetensors checkpoint shards:  93% Completed | 191/206 [11:41<00:50,  3.40s/it]
+   1007.0 out | (Worker pid=238) 
+   1007.0 out | Loading safetensors checkpoint shards:  93% Completed | 192/206 [11:44<00:45,  3.24s/it]
+   1007.0 out | (PleOffloadWorker pid=301) 
+   1007.0 out | Loading safetensors checkpoint shards(PLE-offload):  98% Completed | 202/206 [11:34<02:50, 42.59s/it]
+   1007.0 out | (Worker pid=238) 
+   1007.0 out | Loading safetensors checkpoint shards:  94% Completed | 193/206 [11:55<01:12,  5.58s/it]
+   1007.0 out | (Worker pid=238) 
+   1007.0 out | Loading safetensors checkpoint shards:  94% Completed | 194/206 [11:57<00:55,  4.63s/it]
+   1007.0 out | (PleOffloadWorker pid=301) 
+   1007.0 out | Loading safetensors checkpoint shards(PLE-offload):  99% Completed | 203/206 [12:14<02:05, 41.97s/it]
+   1066.8 out | VLLM_WAIT elapsed_s=900
+   1066.8 out | (Worker pid=238) 
+   1066.8 out | Loading safetensors checkpoint shards:  39% Completed | 80/206 [00:01<00:01, 72.11it/s]
+   1066.8 out | (Worker pid=238) 
+   1066.8 out | Loading safetensors checkpoint shards:  43% Completed | 88/206 [00:01<00:01, 71.79it/s]
+   1066.8 out | (Worker pid=238) 
+   1066.8 out | Loading safetensors checkpoint shards:  47% Completed | 96/206 [00:01<00:01, 71.12it/s]
+   1066.8 out | (Worker pid=238) 
+   1066.8 out | Loading safetensors checkpoint shards:  50% Completed | 104/206 [00:01<00:01, 71.52it/s]
+   1066.8 out | (Worker pid=238) 
+   1066.8 out | Loading safetensors checkpoint shards:  54% Completed | 112/206 [00:01<00:01, 71.76it/s]
+   1066.8 out | (Worker pid=238) 
+   1066.8 out | Loading safetensors checkpoint shards:  58% Completed | 120/206 [00:01<00:01, 71.77it/s]
+   1066.8 out | (Worker pid=238) 
+   1066.8 out | Loading safetensors checkpoint shards:  62% Completed | 128/206 [00:01<00:01, 68.88it/s]
+   1066.8 out | (Worker pid=238) 
+   1066.8 out | Loading safetensors checkpoint shards:  66% Completed | 136/206 [00:01<00:01, 69.80it/s]
+   1066.8 out | (Worker pid=238) 
+   1066.8 out | Loading safetensors checkpoint shards:  70% Completed | 144/206 [00:02<00:00, 70.66it/s]
+   1066.8 out | (Worker pid=238) 
+   1066.8 out | Loading safetensors checkpoint shards:  74% Completed | 152/206 [00:02<00:00, 70.23it/s]
+   1066.8 out | (Worker pid=238) 
+   1066.8 out | Loading safetensors checkpoint shards:  78% Completed | 160/206 [00:02<00:00, 69.23it/s]
+   1066.8 out | (Worker pid=238) 
+   1066.8 out | Loading safetensors checkpoint shards:  82% Completed | 168/206 [00:02<00:00, 70.30it/s]
+   1066.8 out | (Worker pid=238) 
+   1066.8 out | Loading safetensors checkpoint shards:  85% Completed | 176/206 [00:02<00:00, 70.24it/s]
+   1066.8 out | (Worker pid=238) 
+   1066.8 out | Loading safetensors checkpoint shards:  89% Completed | 184/206 [00:02<00:00, 70.86it/s]
+   1066.8 out | (Worker pid=238) 
+   1066.8 out | Loading safetensors checkpoint shards:  93% Completed | 192/206 [00:02<00:00, 69.80it/s]
+   1067.0 out | VLLM_WAIT elapsed_s=900
+   1067.0 out | (Worker pid=238) 
+   1067.0 out | Loading safetensors checkpoint shards:  39% Completed | 80/206 [00:01<00:01, 72.11it/s]
+   1067.0 out | (Worker pid=238) 
+   1067.0 out | Loading safetensors checkpoint shards:  43% Completed | 88/206 [00:01<00:01, 71.79it/s]
+   1067.0 out | (Worker pid=238) 
+   1067.0 out | Loading safetensors checkpoint shards:  47% Completed | 96/206 [00:01<00:01, 71.12it/s]
+   1067.0 out | (Worker pid=238) 
+   1067.0 out | Loading safetensors checkpoint shards:  50% Completed | 104/206 [00:01<00:01, 71.52it/s]
+   1067.0 out | (Worker pid=238) 
+   1067.0 out | Loading safetensors checkpoint shards:  54% Completed | 112/206 [00:01<00:01, 71.76it/s]
+   1067.0 out | (Worker pid=238) 
+   1067.0 out | Loading safetensors checkpoint shards:  58% Completed | 120/206 [00:01<00:01, 71.77it/s]
+   1067.0 out | (Worker pid=238) 
+   1067.0 out | Loading safetensors checkpoint shards:  62% Completed | 128/206 [00:01<00:01, 68.88it/s]
+   1067.0 out | (Worker pid=238) 
+   1067.0 out | Loading safetensors checkpoint shards:  66% Completed | 136/206 [00:01<00:01, 69.80it/s]
+   1067.0 out | (Worker pid=238) 
+   1067.0 out | Loading safetensors checkpoint shards:  70% Completed | 144/206 [00:02<00:00, 70.66it/s]
+   1067.0 out | (Worker pid=238) 
+   1067.0 out | Loading safetensors checkpoint shards:  74% Completed | 152/206 [00:02<00:00, 70.23it/s]
+   1067.0 out | (Worker pid=238) 
+   1067.0 out | Loading safetensors checkpoint shards:  78% Completed | 160/206 [00:02<00:00, 69.23it/s]
+   1067.0 out | (Worker pid=238) 
+   1067.0 out | Loading safetensors checkpoint shards:  82% Completed | 168/206 [00:02<00:00, 70.30it/s]
+   1067.0 out | (Worker pid=238) 
+   1067.0 out | Loading safetensors checkpoint shards:  85% Completed | 176/206 [00:02<00:00, 70.24it/s]
+   1067.0 out | (Worker pid=238) 
+   1067.0 out | Loading safetensors checkpoint shards:  89% Completed | 184/206 [00:02<00:00, 70.86it/s]
+   1067.0 out | (Worker pid=238) 
+   1067.0 out | Loading safetensors checkpoint shards:  93% Completed | 192/206 [00:02<00:00, 69.80it/s]
+   1126.8 out | VLLM_WAIT elapsed_s=960
+   1126.8 out | (Worker pid=238) 
+   1126.8 out | Loading safetensors checkpoint shards: 100% Completed | 206/206 [00:47<00:00,  4.30it/s]
+   1126.8 out | (Worker pid=238) 
+   1126.8 out | (Worker pid=238) INFO 09-28 20:21:50 [default_loader.py:430] Loading weights took 48.03 seconds
+   1126.8 out | (Worker pid=238) INFO 09-28 20:21:51 [unquantized.py:399] Using MoEPrepareAndFinalizeNoDPEPModular
+   1126.8 out | (Worker pid=238) INFO 09-28 20:21:51 [unquantized.py:400] Using FlashInferExperts MoE backend
+   1126.8 out | (Worker pid=238) WARNING 09-28 20:21:51 [speculator.py:178] Draft model Qwen3_8FlashNextMTP does not support external multimodal embeddings. Embeddings from the target model will not be passed to the drafter; using text-only draft inputs instead.
+   1126.8 out | (Worker pid=238) INFO 09-28 20:21:52 [model_runner.py:407] Model loading took 81.8 GiB memory and 843.310589 seconds
+   1126.8 out | (Worker pid=238) INFO 09-28 20:21:52 [topk_topp_sampler.py:62] Using FlashInfer for top-p & top-k sampling.
+   1126.8 out | (Worker pid=238) INFO 09-28 20:21:52 [connector.py:231] PleOffload: registered 1 PleOffloadLayer(s) (dp_rank=0, tp_rank=0, ipc_addr=ipc:///tmp/qwen38-flash-next-vllm-tmp/24ed9a17-4f39-4ae6-951c-dd3deb5cb783): ['language_model.model.layers.1.ple.ple_embedding']
+   1126.8 out | (PleOffloadWorker pid=301) 
+   1126.8 out | Loading safetensors checkpoint shards(PLE-offload): 100% Completed | 206/206 [14:14<00:00, 40.09s/it]
+   1126.8 out | (PleOffloadWorker pid=301) 
+   1126.8 out | Loading safetensors checkpoint shards(PLE-offload): 100% Completed | 206/206 [14:14<00:00,  4.15s/it]
+   1126.8 out | (PleOffloadWorker pid=301) 
+   1126.8 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:448] PLE offload matched 132 checkpoint tensor(s), loaded 5 offload entries, and verified 2/2 materialized parameter(s) for layers: ['language_model.model.layers.1.ple.ple_embedding']
+   1126.8 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:471] PLE weight loading complete.
+   1126.8 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:289] Bound IPC address ipc:///tmp/qwen38-flash-next-vllm-tmp/24ed9a17-4f39-4ae6-951c-dd3deb5cb783; waiting for 1 GPU worker registration(s).
+   1126.8 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:479] Waiting for 1 GPU worker registration(s) ...
+   1126.8 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:489] GPU worker 0 registered (dp_rank=0, tp_rank=0, layers=['language_model.model.layers.1.ple.ple_embedding']).
+   1126.8 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:576] Registrations complete (dp_size=1, tp_size=1, layers=['language_model.model.layers.1.ple.ple_embedding']).
+   1126.8 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:590] Busy-loop started.
+   1126.8 out | (Worker pid=238) INFO 09-28 20:22:19 [worker.py:232] Worker ready - 1 PleOffloadLayer(s): ['language_model.model.layers.1.ple.ple_embedding']
+   1126.8 out | (Worker pid=238) INFO 09-28 20:22:19 [interface.py:915] Setting attention block size to 1600 tokens to ensure that attention page size is >= mamba page size.
+   1126.8 out | (Worker pid=238) INFO 09-28 20:22:19 [interface.py:939] Padding mamba page size by 0.25% to ensure that mamba page size and attention page size are exactly equal.
+   1126.8 out | (Worker pid=238) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1126.8 out | (Worker pid=238) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1126.8 out | (Worker pid=238) [transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+   1126.8 out | (Worker pid=238) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1126.8 out | (Worker pid=238) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1127.0 out | VLLM_WAIT elapsed_s=960
+   1127.0 out | (Worker pid=238) 
+   1127.0 out | Loading safetensors checkpoint shards: 100% Completed | 206/206 [00:47<00:00,  4.30it/s]
+   1127.0 out | (Worker pid=238) 
+   1127.0 out | (Worker pid=238) INFO 09-28 20:21:50 [default_loader.py:430] Loading weights took 48.03 seconds
+   1127.0 out | (Worker pid=238) INFO 09-28 20:21:51 [unquantized.py:399] Using MoEPrepareAndFinalizeNoDPEPModular
+   1127.0 out | (Worker pid=238) INFO 09-28 20:21:51 [unquantized.py:400] Using FlashInferExperts MoE backend
+   1127.0 out | (Worker pid=238) WARNING 09-28 20:21:51 [speculator.py:178] Draft model Qwen3_8FlashNextMTP does not support external multimodal embeddings. Embeddings from the target model will not be passed to the drafter; using text-only draft inputs instead.
+   1127.0 out | (Worker pid=238) INFO 09-28 20:21:52 [model_runner.py:407] Model loading took 81.8 GiB memory and 843.310589 seconds
+   1127.0 out | (Worker pid=238) INFO 09-28 20:21:52 [topk_topp_sampler.py:62] Using FlashInfer for top-p & top-k sampling.
+   1127.0 out | (Worker pid=238) INFO 09-28 20:21:52 [connector.py:231] PleOffload: registered 1 PleOffloadLayer(s) (dp_rank=0, tp_rank=0, ipc_addr=ipc:///tmp/qwen38-flash-next-vllm-tmp/24ed9a17-4f39-4ae6-951c-dd3deb5cb783): ['language_model.model.layers.1.ple.ple_embedding']
+   1127.0 out | (PleOffloadWorker pid=301) 
+   1127.0 out | Loading safetensors checkpoint shards(PLE-offload): 100% Completed | 206/206 [14:14<00:00, 40.09s/it]
+   1127.0 out | (PleOffloadWorker pid=301) 
+   1127.0 out | Loading safetensors checkpoint shards(PLE-offload): 100% Completed | 206/206 [14:14<00:00,  4.15s/it]
+   1127.0 out | (PleOffloadWorker pid=301) 
+   1127.0 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:448] PLE offload matched 132 checkpoint tensor(s), loaded 5 offload entries, and verified 2/2 materialized parameter(s) for layers: ['language_model.model.layers.1.ple.ple_embedding']
+   1127.0 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:471] PLE weight loading complete.
+   1127.0 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:289] Bound IPC address ipc:///tmp/qwen38-flash-next-vllm-tmp/24ed9a17-4f39-4ae6-951c-dd3deb5cb783; waiting for 1 GPU worker registration(s).
+   1127.0 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:479] Waiting for 1 GPU worker registration(s) ...
+   1127.0 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:489] GPU worker 0 registered (dp_rank=0, tp_rank=0, layers=['language_model.model.layers.1.ple.ple_embedding']).
+   1127.0 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:576] Registrations complete (dp_size=1, tp_size=1, layers=['language_model.model.layers.1.ple.ple_embedding']).
+   1127.0 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:590] Busy-loop started.
+   1127.0 out | (Worker pid=238) INFO 09-28 20:22:19 [worker.py:232] Worker ready - 1 PleOffloadLayer(s): ['language_model.model.layers.1.ple.ple_embedding']
+   1127.0 out | (Worker pid=238) INFO 09-28 20:22:19 [interface.py:915] Setting attention block size to 1600 tokens to ensure that attention page size is >= mamba page size.
+   1127.0 out | (Worker pid=238) INFO 09-28 20:22:19 [interface.py:939] Padding mamba page size by 0.25% to ensure that mamba page size and attention page size are exactly equal.
+   1127.0 out | (Worker pid=238) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1127.0 out | (Worker pid=238) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1127.0 out | (Worker pid=238) [transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+   1127.0 out | (Worker pid=238) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1127.0 out | (Worker pid=238) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1186.8 out | VLLM_WAIT elapsed_s=1020
+   1186.8 out | (PleOffloadWorker pid=301) 
+   1186.8 out | Loading safetensors checkpoint shards(PLE-offload): 100% Completed | 206/206 [14:14<00:00, 40.09s/it]
+   1186.8 out | (PleOffloadWorker pid=301) 
+   1186.8 out | Loading safetensors checkpoint shards(PLE-offload): 100% Completed | 206/206 [14:14<00:00,  4.15s/it]
+   1186.8 out | (PleOffloadWorker pid=301) 
+   1186.8 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:448] PLE offload matched 132 checkpoint tensor(s), loaded 5 offload entries, and verified 2/2 materialized parameter(s) for layers: ['language_model.model.layers.1.ple.ple_embedding']
+   1186.8 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:471] PLE weight loading complete.
+   1186.8 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:289] Bound IPC address ipc:///tmp/qwen38-flash-next-vllm-tmp/24ed9a17-4f39-4ae6-951c-dd3deb5cb783; waiting for 1 GPU worker registration(s).
+   1186.8 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:479] Waiting for 1 GPU worker registration(s) ...
+   1186.8 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:489] GPU worker 0 registered (dp_rank=0, tp_rank=0, layers=['language_model.model.layers.1.ple.ple_embedding']).
+   1186.8 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:576] Registrations complete (dp_size=1, tp_size=1, layers=['language_model.model.layers.1.ple.ple_embedding']).
+   1186.8 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:590] Busy-loop started.
+   1186.8 out | (Worker pid=238) INFO 09-28 20:22:19 [worker.py:232] Worker ready - 1 PleOffloadLayer(s): ['language_model.model.layers.1.ple.ple_embedding']
+   1186.8 out | (Worker pid=238) INFO 09-28 20:22:19 [interface.py:915] Setting attention block size to 1600 tokens to ensure that attention page size is >= mamba page size.
+   1186.8 out | (Worker pid=238) INFO 09-28 20:22:19 [interface.py:939] Padding mamba page size by 0.25% to ensure that mamba page size and attention page size are exactly equal.
+   1186.8 out | (Worker pid=238) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1186.8 out | (Worker pid=238) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1186.8 out | (Worker pid=238) [transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+   1186.8 out | (Worker pid=238) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1186.8 out | (Worker pid=238) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1186.8 out | (Worker pid=238) INFO 09-28 20:22:23 [encoder_runner.py:120] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
+   1186.8 out | (Worker pid=238) INFO 09-28 20:22:38 [backends.py:1094] Using cache directory: /tmp/qwen38-flash-next-vllm-cache/vllm/torch_compile_cache/eee0b6c579/rank_0_0/backbone for vLLM's torch.compile
+   1186.8 out | (Worker pid=238) INFO 09-28 20:22:38 [backends.py:1155] Dynamo bytecode transform time: 5.10 s
+   1186.8 out | (Worker pid=238) INFO 09-28 20:22:48 [backends.py:393] Compiling a graph for compile range (1, 8192) takes 8.39 s
+   1186.8 out | (Worker pid=238) INFO 09-28 20:22:50 [backends.py:920] collected artifacts: 50 entries, 18 artifacts, 7552062 bytes total
+   1186.8 out | (Worker pid=238) INFO 09-28 20:22:50 [decorators.py:708] saved AOT compiled function to /tmp/qwen38-flash-next-vllm-cache/vllm/torch_compile_cache/torch_aot_compile/d7bdc0a9a814e2d94f14207e772c1e37a64a688fad5a47335798630ce58ed339/rank_0_0/model
+   1186.8 out | (Worker pid=238) INFO 09-28 20:22:50 [monitor.py:53] torch.compile took 16.80 s in total
+   1186.8 out | (Worker pid=238) /tmp/qwen38-flash-next-vllm-runtime/usr/local/lib/python3.12/dist-packages/triton/language/core.py:2284: UserWarning: tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.
+   1186.8 out | (Worker pid=238)   warn("tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.")
+   1186.8 out | (EngineCore pid=220) INFO 09-28 20:23:20 [shm_broadcast.py:801] No available shared memory broadcast block found in 60 seconds. This typically happens when some processes are hanging or doing some time-consuming work (e.g. compilation, weight/kv cache quantization).
+   1187.0 out | VLLM_WAIT elapsed_s=1020
+   1187.0 out | (PleOffloadWorker pid=301) 
+   1187.0 out | Loading safetensors checkpoint shards(PLE-offload): 100% Completed | 206/206 [14:14<00:00, 40.09s/it]
+   1187.0 out | (PleOffloadWorker pid=301) 
+   1187.0 out | Loading safetensors checkpoint shards(PLE-offload): 100% Completed | 206/206 [14:14<00:00,  4.15s/it]
+   1187.0 out | (PleOffloadWorker pid=301) 
+   1187.0 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:448] PLE offload matched 132 checkpoint tensor(s), loaded 5 offload entries, and verified 2/2 materialized parameter(s) for layers: ['language_model.model.layers.1.ple.ple_embedding']
+   1187.0 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:471] PLE weight loading complete.
+   1187.0 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:289] Bound IPC address ipc:///tmp/qwen38-flash-next-vllm-tmp/24ed9a17-4f39-4ae6-951c-dd3deb5cb783; waiting for 1 GPU worker registration(s).
+   1187.0 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:479] Waiting for 1 GPU worker registration(s) ...
+   1187.0 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:489] GPU worker 0 registered (dp_rank=0, tp_rank=0, layers=['language_model.model.layers.1.ple.ple_embedding']).
+   1187.0 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:576] Registrations complete (dp_size=1, tp_size=1, layers=['language_model.model.layers.1.ple.ple_embedding']).
+   1187.0 out | (PleOffloadWorker pid=301) INFO 09-28 20:22:19 [worker.py:590] Busy-loop started.
+   1187.0 out | (Worker pid=238) INFO 09-28 20:22:19 [worker.py:232] Worker ready - 1 PleOffloadLayer(s): ['language_model.model.layers.1.ple.ple_embedding']
+   1187.0 out | (Worker pid=238) INFO 09-28 20:22:19 [interface.py:915] Setting attention block size to 1600 tokens to ensure that attention page size is >= mamba page size.
+   1187.0 out | (Worker pid=238) INFO 09-28 20:22:19 [interface.py:939] Padding mamba page size by 0.25% to ensure that mamba page size and attention page size are exactly equal.
+   1187.0 out | (Worker pid=238) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1187.0 out | (Worker pid=238) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1187.0 out | (Worker pid=238) [transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+   1187.0 out | (Worker pid=238) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1187.0 out | (Worker pid=238) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1187.0 out | (Worker pid=238) INFO 09-28 20:22:23 [encoder_runner.py:120] Encoder cache will be initialized with a budget of 16384 tokens, and profiled with 1 image items of the maximum feature size.
+   1187.0 out | (Worker pid=238) INFO 09-28 20:22:38 [backends.py:1094] Using cache directory: /tmp/qwen38-flash-next-vllm-cache/vllm/torch_compile_cache/eee0b6c579/rank_0_0/backbone for vLLM's torch.compile
+   1187.0 out | (Worker pid=238) INFO 09-28 20:22:38 [backends.py:1155] Dynamo bytecode transform time: 5.10 s
+   1187.0 out | (Worker pid=238) INFO 09-28 20:22:48 [backends.py:393] Compiling a graph for compile range (1, 8192) takes 8.39 s
+   1187.0 out | (Worker pid=238) INFO 09-28 20:22:50 [backends.py:920] collected artifacts: 50 entries, 18 artifacts, 7552062 bytes total
+   1187.0 out | (Worker pid=238) INFO 09-28 20:22:50 [decorators.py:708] saved AOT compiled function to /tmp/qwen38-flash-next-vllm-cache/vllm/torch_compile_cache/torch_aot_compile/d7bdc0a9a814e2d94f14207e772c1e37a64a688fad5a47335798630ce58ed339/rank_0_0/model
+   1187.0 out | (Worker pid=238) INFO 09-28 20:22:50 [monitor.py:53] torch.compile took 16.80 s in total
+   1187.0 out | (Worker pid=238) /tmp/qwen38-flash-next-vllm-runtime/usr/local/lib/python3.12/dist-packages/triton/language/core.py:2284: UserWarning: tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.
+   1187.0 out | (Worker pid=238)   warn("tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.")
+   1187.0 out | (EngineCore pid=220) INFO 09-28 20:23:20 [shm_broadcast.py:801] No available shared memory broadcast block found in 60 seconds. This typically happens when some processes are hanging or doing some time-consuming work (e.g. compilation, weight/kv cache quantization).
+   1246.8 out | VLLM_WAIT elapsed_s=1080
+   1246.8 out | Capturing prefill CUDA graphs (PIECEWISE):   0%|          | 0/7 [00:00<?, ?it/s]
+   1246.8 out | Capturing prefill CUDA graphs (PIECEWISE): 100%|██████████| 7/7 [00:00<00:00, 158.56it/s]
+   1246.8 out | (Worker pid=238) 
+   1246.8 out | Capturing prefill CUDA graphs (FULL):   0%|          | 0/5 [00:00<?, ?it/s]
+   1246.8 out | Capturing prefill CUDA graphs (FULL): 100%|██████████| 5/5 [00:00<00:00, 147.61it/s]
+   1246.8 out | (Worker pid=238) 
+   1246.8 out | Capturing decode CUDA graphs (FULL):   0%|          | 0/4 [00:00<?, ?it/s]
+   1246.8 out | Capturing decode CUDA graphs (FULL): 100%|██████████| 4/4 [00:00<00:00, 196.85it/s]
+   1246.8 out | (Worker pid=238) INFO 09-28 20:24:02 [model_runner.py:953] Graph capturing finished in 8 secs, took 0.36 GiB
+   1246.8 out | (Worker pid=238) INFO 09-28 20:24:07 [jit_monitor.py:85] Kernel JIT monitor activated; monitored JIT compilations during inference will use mode=warn.
+   1246.8 out | (EngineCore pid=220) INFO 09-28 20:24:08 [core.py:347] init engine (profile, create kv cache, warmup model) took 109.17 s (compilation: 19.66 s)
+   1246.8 out | (EngineCore pid=220) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1246.8 out | (EngineCore pid=220) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1246.8 out | (EngineCore pid=220) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1246.8 out | (EngineCore pid=220) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1246.8 out | (EngineCore pid=220) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1246.8 out | (EngineCore pid=220) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1246.8 out | (EngineCore pid=220) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1246.8 out | (EngineCore pid=220) [transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+   1246.8 out | (EngineCore pid=220) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1246.8 out | (EngineCore pid=220) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1246.8 out | (EngineCore pid=220) [ERROR] `min_frames` is part of Qwen3VLVideoProcessorInitKwargs, but not documented. Make sure to add it to the docstring of the function in /tmp/qwen38-flash-next-vllm-runtime/usr/local/lib/python3.12/dist-packages/transformers/models/qwen3_vl/video_processing_qwen3_vl.py.
+   1246.8 out | (EngineCore pid=220) [ERROR] `max_frames` is part of Qwen3VLVideoProcessorInitKwargs, but not documented. Make sure to add it to the docstring of the function in /tmp/qwen38-flash-next-vllm-runtime/usr/local/lib/python3.12/dist-packages/transformers/models/qwen3_vl/video_processing_qwen3_vl.py.
+   1246.8 out | (EngineCore pid=220) INFO 09-28 20:24:14 [kernel.py:308] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'])
+   1246.8 out | (EngineCore pid=220) INFO 09-28 20:24:14 [compilation.py:329] Enabled custom fusions: act_quant
+   1246.8 out | (APIServer pid=151) INFO 09-28 20:24:14 [api_server.py:653] Supported tasks: ['generate']
+   1246.8 out | (APIServer pid=151) INFO 09-28 20:24:14 [parser_manager.py:58] "auto" tool choice has been enabled.
+   1246.8 out | (APIServer pid=151) INFO 09-28 20:24:14 [hf.py:551] Detected the chat template content format to be 'openai'. You can set `--chat-template-content-format` to override this.
+   1246.8 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1246.8 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1247.0 out | VLLM_WAIT elapsed_s=1080
+   1247.0 out | Capturing prefill CUDA graphs (PIECEWISE):   0%|          | 0/7 [00:00<?, ?it/s]
+   1247.0 out | Capturing prefill CUDA graphs (PIECEWISE): 100%|██████████| 7/7 [00:00<00:00, 158.56it/s]
+   1247.0 out | (Worker pid=238) 
+   1247.0 out | Capturing prefill CUDA graphs (FULL):   0%|          | 0/5 [00:00<?, ?it/s]
+   1247.0 out | Capturing prefill CUDA graphs (FULL): 100%|██████████| 5/5 [00:00<00:00, 147.61it/s]
+   1247.0 out | (Worker pid=238) 
+   1247.0 out | Capturing decode CUDA graphs (FULL):   0%|          | 0/4 [00:00<?, ?it/s]
+   1247.0 out | Capturing decode CUDA graphs (FULL): 100%|██████████| 4/4 [00:00<00:00, 196.85it/s]
+   1247.0 out | (Worker pid=238) INFO 09-28 20:24:02 [model_runner.py:953] Graph capturing finished in 8 secs, took 0.36 GiB
+   1247.0 out | (Worker pid=238) INFO 09-28 20:24:07 [jit_monitor.py:85] Kernel JIT monitor activated; monitored JIT compilations during inference will use mode=warn.
+   1247.0 out | (EngineCore pid=220) INFO 09-28 20:24:08 [core.py:347] init engine (profile, create kv cache, warmup model) took 109.17 s (compilation: 19.66 s)
+   1247.0 out | (EngineCore pid=220) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1247.0 out | (EngineCore pid=220) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1247.0 out | (EngineCore pid=220) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1247.0 out | (EngineCore pid=220) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1247.0 out | (EngineCore pid=220) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1247.0 out | (EngineCore pid=220) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1247.0 out | (EngineCore pid=220) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1247.0 out | (EngineCore pid=220) [transformers] The `use_fast` parameter is deprecated and will be removed in a future version. Use `backend="torchvision"` instead of `use_fast=True`, or `backend="pil"` instead of `use_fast=False`.
+   1247.0 out | (EngineCore pid=220) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1247.0 out | (EngineCore pid=220) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1247.0 out | (EngineCore pid=220) [ERROR] `min_frames` is part of Qwen3VLVideoProcessorInitKwargs, but not documented. Make sure to add it to the docstring of the function in /tmp/qwen38-flash-next-vllm-runtime/usr/local/lib/python3.12/dist-packages/transformers/models/qwen3_vl/video_processing_qwen3_vl.py.
+   1247.0 out | (EngineCore pid=220) [ERROR] `max_frames` is part of Qwen3VLVideoProcessorInitKwargs, but not documented. Make sure to add it to the docstring of the function in /tmp/qwen38-flash-next-vllm-runtime/usr/local/lib/python3.12/dist-packages/transformers/models/qwen3_vl/video_processing_qwen3_vl.py.
+   1247.0 out | (EngineCore pid=220) INFO 09-28 20:24:14 [kernel.py:308] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'])
+   1247.0 out | (EngineCore pid=220) INFO 09-28 20:24:14 [compilation.py:329] Enabled custom fusions: act_quant
+   1247.0 out | (APIServer pid=151) INFO 09-28 20:24:14 [api_server.py:653] Supported tasks: ['generate']
+   1247.0 out | (APIServer pid=151) INFO 09-28 20:24:14 [parser_manager.py:58] "auto" tool choice has been enabled.
+   1247.0 out | (APIServer pid=151) INFO 09-28 20:24:14 [hf.py:551] Detected the chat template content format to be 'openai'. You can set `--chat-template-content-format` to override this.
+   1247.0 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1247.0 out | (APIServer pid=151) [transformers] Unrecognized keys in `rope_parameters` for 'rope_type'='default': {'mrope_section', 'mrope_interleaved'}
+   1256.9 out | VLLM_SETUP_COMPLETE {"mode": "fast", "pid": 151, "ready_seconds": 1090.1008654790003}
+   1256.9 out | VLLM_SETUP_COMPLETE {"mode": "fast", "pid": 151, "ready_seconds": 1090.1008654790003}
+   1258.8 out | PUBLIC25_SETTINGS budget_s=3600.0 concurrency=6 analyzer_timeout=900.0 action_cap=None request_logs=False
+   1258.8 out | arc3_batch: {'installed': True, 'addendum_chars': 5202, 'delta_chars': 1385, 'system_prompt_chars': 14066}
+   1258.8 out | ARC3_BATCH_PROMPT chars=14066 marker=PREDICT-THEN-COMMIT
+   1258.8 out | arc3_stall: {'installed': True, 'mode': 'warn', 'repeat_n': 10, 'window': 40, 'uniq_frac': 0.2, 'grind_mult': 3.0, 'grind_floor': 60, 'min_on_level': 45, 'arm_mult': 3.0, 'bans_armed': 0, 'actions_dropped': 0}
+   1258.8 out | arc3_stall prompt: {'installed': True}
+   1258.8 out | ARC3_STALL_READY chars=14522
+   1258.8 out | ARC3_POLICY mode=warn dead_signature=on reset_injector=absent ledger=absent profile=kv5-bf16-mtp3-c8-cg32 only_reset_levels=true
+   1258.8 out | arc3_score: {'installed': True, 'delta_chars': 1296, 'system_prompt_chars': 15818}
+   1258.8 out | ARC3_SCORE_READY chars=15818 time_field=True grid_hint=True counter=True
+   1258.8 out | ARC3_COMPACT_READY keep_reasoning=8 min_bytes=40000 instruction_lines=14 urlopen_wrapped=True
+   1259.0 out | DEPTH_PROBE_SELECTION games=6 passes=1 cap_s=3600
+   1259.0 out | ARC3_BUDGET_FIT waves=1 fit_s=30427 budget_s=3600->3600
+   1859.4 out | benchmark: duck-harness-kaggle
+   1859.4 out | solver:    duck-harness
+   1859.4 out | games:     6
+   1859.4 out | passes:    1
+   1859.4 out | runs:      6 (won: 0)
+   1859.4 out | started:   2026-09-28 20:24:34
+   1859.4 out | ended:     in progress
+   1859.4 out | mean score:    6.60
+   1859.4 out | median score:  5.56
+   1859.4 out | total actions: 191
+   1859.4 out | total tokens:  152098
+   1859.4 out | generated tokens/sec: 253.39 (job wallclock)
+   1859.4 out | total wallclock: 3321.5s
+   1859.4 out | 
+   1859.4 out | per-game (mean across passes):
+   1859.4 out |   ar25-0c556536: score=2.78, levels=1.0/8, actions=35, tokens=22547
+   1859.4 out |   ft09-0d8bbf25: score=14.29, levels=2.0/6, actions=24, tokens=27412
+   1859.4 out |   lp85-305b61c3: score=8.33, levels=2.0/8, actions=23, tokens=27391
+   1859.4 out |   re86-8af5384d: score=2.78, levels=1.0/8, actions=32, tokens=23725
+   1859.4 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=45, tokens=27356
+   1859.4 out |   vc33-5430563c: score=8.65, levels=2.0/7, actions=32, tokens=23667
+   1859.4 out | 
+   2459.5 out | benchmark: duck-harness-kaggle
+   2459.5 out | solver:    duck-harness
+   2459.5 out | games:     6
+   2459.5 out | passes:    1
+   2459.5 out | runs:      6 (won: 0)
+   2459.5 out | started:   2026-09-28 20:24:34
+   2459.5 out | ended:     in progress
+   2459.5 out | mean score:    11.30
+   2459.5 out | median score:  8.49
+   2459.5 out | total actions: 342
+   2459.5 out | total tokens:  301572
+   2459.5 out | generated tokens/sec: 251.25 (job wallclock)
+   2459.5 out | total wallclock: 6758.8s
+   2459.5 out | 
+   2459.5 out | per-game (mean across passes):
+   2459.5 out |   ar25-0c556536: score=8.33, levels=2.0/8, actions=66, tokens=37476
+   2459.5 out |   ft09-0d8bbf25: score=28.57, levels=3.0/6, actions=41, tokens=47337
+   2459.5 out |   lp85-305b61c3: score=16.67, levels=3.0/8, actions=61, tokens=54122
+   2459.5 out |   re86-8af5384d: score=2.78, levels=1.0/8, actions=45, tokens=56771
+   2459.5 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=71, tokens=49700
+   2459.5 out |   vc33-5430563c: score=8.65, levels=2.0/7, actions=58, tokens=56166
+   2459.5 out | 
+   2936.1 err | <python_tool>:10: SyntaxWarning: "is" with 'tuple' literal. Did you mean "=="?
+   2936.1 err | 
+   2936.1 err | <python_tool>:10: SyntaxWarning: "is" with 'tuple' literal. Did you mean "=="?
+   3059.5 out | benchmark: duck-harness-kaggle
+   3059.5 out | solver:    duck-harness
+   3059.5 out | games:     6
+   3059.5 out | passes:    1
+   3059.5 out | runs:      6 (won: 0)
+   3059.5 out | started:   2026-09-28 20:24:34
+   3059.5 out | ended:     in progress
+   3059.5 out | mean score:    16.72
+   3059.5 out | median score:  14.37
+   3059.5 out | total actions: 454
+   3059.5 out | total tokens:  399652
+   3059.5 out | generated tokens/sec: 221.99 (job wallclock)
+   3059.5 out | total wallclock: 9269.8s
+   3059.5 out | 
+   3059.5 out | per-game (mean across passes):
+   3059.5 out |   ar25-0c556536: score=8.33, levels=2.0/8, actions=106, tokens=57454
+   3059.5 out |   ft09-0d8bbf25: score=28.57, levels=3.0/6, actions=41, tokens=47337
+   3059.5 out |   lp85-305b61c3: score=37.46, levels=5.0/8, actions=88, tokens=79703
+   3059.5 out |   re86-8af5384d: score=2.78, levels=1.0/8, actions=48, tokens=73416
+   3059.5 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=87, tokens=67914
+   3059.5 out |   vc33-5430563c: score=20.41, levels=3.0/7, actions=84, tokens=73828
+   3059.5 out | 
+   3659.5 out | benchmark: duck-harness-kaggle
+   3659.5 out | solver:    duck-harness
+   3659.5 out | games:     6
+   3659.5 out | passes:    1
+   3659.5 out | runs:      6 (won: 0)
+   3659.5 out | started:   2026-09-28 20:24:34
+   3659.5 out | ended:     in progress
+   3659.5 out | mean score:    27.00
+   3659.5 out | median score:  23.66
+   3659.5 out | total actions: 656
+   3659.5 out | total tokens:  595035
+   3659.5 out | generated tokens/sec: 247.90 (job wallclock)
+   3659.5 out | total wallclock: 13892.9s
+   3659.5 out | 
+   3659.5 out | per-game (mean across passes):
+   3659.5 out |   ar25-0c556536: score=26.91, levels=4.0/8, actions=173, tokens=77378
+   3659.5 out |   ft09-0d8bbf25: score=47.62, levels=4.0/6, actions=52, tokens=107994
+   3659.5 out |   lp85-305b61c3: score=56.63, levels=6.0/8, actions=135, tokens=106219
+   3659.5 out |   re86-8af5384d: score=7.63, levels=2.0/8, actions=70, tokens=105347
+   3659.5 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=100, tokens=96887
+   3659.5 out |   vc33-5430563c: score=20.41, levels=3.0/7, actions=126, tokens=101210
+   3659.5 out | 
+   4259.6 out | benchmark: duck-harness-kaggle
+   4259.6 out | solver:    duck-harness
+   4259.6 out | games:     6
+   4259.6 out | passes:    1
+   4259.6 out | runs:      6 (won: 0)
+   4259.6 out | started:   2026-09-28 20:24:34
+   4259.6 out | ended:     in progress
+   4259.6 out | mean score:    28.50
+   4259.6 out | median score:  23.66
+   4259.6 out | total actions: 843
+   4259.6 out | total tokens:  704856
+   4259.6 out | generated tokens/sec: 234.92 (job wallclock)
+   4259.6 out | total wallclock: 16806.0s
+   4259.6 out | 
+   4259.6 out | per-game (mean across passes):
+   4259.6 out |   ar25-0c556536: score=26.91, levels=4.0/8, actions=200, tokens=89601
+   4259.6 out |   ft09-0d8bbf25: score=47.62, levels=4.0/6, actions=52, tokens=107994
+   4259.6 out |   lp85-305b61c3: score=56.63, levels=6.0/8, actions=156, tokens=126354
+   4259.6 out |   re86-8af5384d: score=16.67, levels=3.0/8, actions=143, tokens=131267
+   4259.6 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=116, tokens=119879
+   4259.6 out |   vc33-5430563c: score=20.41, levels=3.0/7, actions=176, tokens=129761
+   4259.6 out | 
+   4859.3 err | analyzer request failed at action 226: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=2.9698989849994177)
+   4859.3 err | 
+   4859.3 err | analyzer request failed at action 226: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=2.9698989849994177)
+   4859.5 out | [finished] lp85-305b61c3 state=gave_up level=7/8 score=60.16 actions=225 tokens=146163 per-level=10/17,13/38,17/31,35/16,13/41,42/60,61/26,34/159 note="tokens=146163"
+   4859.5 out | benchmark: duck-harness-kaggle
+   4859.5 out | solver:    duck-harness
+   4859.5 out | games:     6
+   4859.5 out | passes:    1
+   4859.5 out | runs:      6 (won: 0)
+   4859.5 out | started:   2026-09-28 20:24:34
+   4859.5 out | ended:     in progress
+   4859.5 out | mean score:    29.09
+   4859.5 out | median score:  23.66
+   4859.5 out | total actions: 1106
+   4859.5 out | total tokens:  813745
+   4859.5 out | generated tokens/sec: 226.01 (job wallclock)
+   4859.5 out | total wallclock: 20063.6s
+   4859.5 out | 
+   4859.5 out | per-game (mean across passes):
+   4859.5 out |   ar25-0c556536: score=26.91, levels=4.0/8, actions=228, tokens=106096
+   4859.5 out |   ft09-0d8bbf25: score=47.62, levels=4.0/6, actions=52, tokens=107994
+   4859.5 out |   lp85-305b61c3: score=60.16, levels=7.0/8, actions=225, tokens=146163
+   4859.5 out |   re86-8af5384d: score=16.67, levels=3.0/8, actions=240, tokens=153592
+   4859.5 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=134, tokens=143484
+   4859.5 out |   vc33-5430563c: score=20.41, levels=3.0/7, actions=227, tokens=156416
+   4859.5 out | 
+   4859.6 err | analyzer request failed at action 241: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=31.101187776999723)
+   4859.6 err | 
+   4859.6 err | analyzer request failed at action 241: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=31.101187776999723)
+   4859.6 err | analyzer request failed at action 229: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=35.819588758000464)
+   4859.6 err | 
+   4859.6 err | analyzer request failed at action 229: HTTPConnectionPool(host='127.0.0.1', port=1234): Read timed out. (read timeout=35.819588758000464)
+   4859.8 out | [finished] re86-8af5384d state=gave_up level=3/8 score=16.67 actions=240 tokens=153592 per-level=23/26,47/42,47/86,123/108,0/189,0/139,0/424,0/241 note="tokens=153592"
+   4859.8 out | [finished] ar25-0c556536 state=gave_up level=4/8 score=26.91 actions=228 tokens=106096 per-level=23/32,31/50,80/75,39/37,55/89,0/159,0/233,0/73 note="tokens=108371"
+   4869.7 out | [finished] vc33-5430563c state=gave_up level=3/7 score=20.41 actions=227 tokens=156416 per-level=20/7,12/18,42/44,153/61,0/131,0/34,0/152 note="tokens=157768"
+   4885.9 out | [finished] sb26-7fbdac44 state=gave_up level=1/8 score=2.78 actions=134 tokens=143484 per-level=17/18,117/28,0/18,0/19,0/31,0/23,0/58,0/18 note="tokens=147621"
+   4886.8 out | [finished] ft09-0d8bbf25 state=gave_up level=4/6 score=47.62 actions=52 tokens=107994 per-level=4/43,7/12,14/23,25/28,2/65,0/37 note="tokens=176878"
+   4886.8 out | benchmark: duck-harness-kaggle
+   4886.8 out | solver:    duck-harness
+   4886.8 out | games:     6
+   4886.8 out | passes:    1
+   4886.8 out | runs:      6 (won: 0)
+   4886.8 out | started:   2026-09-28 20:24:34
+   4886.8 out | ended:     2026-09-28 21:25:01
+   4886.8 out | duration:  1h 0m 27s
+   4886.8 out | mean score:    29.09
+   4886.8 out | median score:  23.66
+   4886.8 out | total actions: 1106
+   4886.8 out | total tokens:  813745
+   4886.8 out | generated tokens/sec: 224.32 (job wallclock)
+   4886.8 out | total wallclock: 21665.3s
+   4886.8 out | 
+   4886.8 out | per-game (mean across passes):
+   4886.8 out |   ar25-0c556536: score=26.91, levels=4.0/8, actions=228, tokens=106096
+   4886.8 out |   ft09-0d8bbf25: score=47.62, levels=4.0/6, actions=52, tokens=107994
+   4886.8 out |   lp85-305b61c3: score=60.16, levels=7.0/8, actions=225, tokens=146163
+   4886.8 out |   re86-8af5384d: score=16.67, levels=3.0/8, actions=240, tokens=153592
+   4886.8 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=134, tokens=143484
+   4886.8 out |   vc33-5430563c: score=20.41, levels=3.0/7, actions=227, tokens=156416
+   4886.8 out | 
+   4887.0 out | PUBLIC25_AUDIT runs=25 actions=1106 score_path=/kaggle/working/score.json
+   4887.0 out | taaf.kaggle: teardown command: "$PYTHON" "$TAAF_KAGGLE_BUNDLE_DIR/serving_teardown.py"
+   4890.2 out | VLLM_SERVER_TEARDOWN {"cpu_survivors": 0, "elapsed_seconds": 3.1561497779985075, "metrics_preserved": true, "port_closed": true, "required_artifacts_preserved": true, "result": "/kaggle/working/vllm-server-teardown.json", "shutdown_ok": false, "vllm_gpu_survivors": 1}
+   4890.2 err | Traceback (most recent call last):
+   4890.2 err |   File "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_teardown.py", line 1503, in <module>
+   4890.2 err |     main()
+   4890.2 err |   File "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_teardown.py", line 1494, in main
+   4890.2 err |     raise RuntimeError("vLLM teardown did not reach the bounded terminal gate")
+   4890.2 err | RuntimeError: vLLM teardown did not reach the bounded terminal gate
+   4890.3 out | VLLM_SERVER_TEARDOWN {"cpu_survivors": 0, "elapsed_seconds": 3.1561497779985075, "metrics_preserved": true, "port_closed": true, "required_artifacts_preserved": true, "result": "/kaggle/working/vllm-server-teardown.json", "shutdown_ok": false, "vllm_gpu_survivors": 1}
+   4890.3 err | Traceback (most recent call last):
+   4890.3 err |   File "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_teardown.py", line 1503, in <module>
+   4890.3 err |     main()
+   4890.3 err |   File "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_teardown.py", line 1494, in main
+   4890.3 err |     raise RuntimeError("vLLM teardown did not reach the bounded terminal gate")
+   4890.3 err | RuntimeError: vLLM teardown did not reach the bounded terminal gate
+   4890.3 err | 
+   4890.3 err | Traceback (most recent call last):
+   4890.3 err |   File "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_teardown.py", line 1503, in <module>
+   4890.3 err |     main()
+   4890.3 err |   File "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_teardown.py", line 1494, in main
+   4890.3 err |     raise RuntimeError("vLLM teardown did not reach the bounded terminal gate")
+   4890.3 err | RuntimeError: vLLM teardown did not reach the bounded terminal gate
+   4890.3 out | game  levels  score   cleared/human    eff    wall   gen_tok  state
+   4890.3 out | sb26  1/8     2.78      17/18          0.94   117    143484   gave_up
+   4890.3 out | vc33  3/7     20.41     74/69          1.07   153    156416   gave_up
+   4890.3 out | ft09  4/6     47.62     50/106         0.47   2      107994   gave_up
+   4890.3 out | lp85  7/8     60.16    191/229         0.83   34     146163   gave_up
+   4890.3 out | re86  3/8     16.67    117/154         0.76   123    153592   gave_up
+   4890.3 out | ar25  4/8     26.91    173/194         0.89   55     106096   gave_up
+   4890.3 out | 
+   4890.3 out | ARC3_EVAL {"actions": 1106, "actions_per_decision": 5.45, "ar25": 26.91, "ar25_levels": 4, "avg_prompt": 19269, "eff": 0.81, "gen_tokens": 893680, "history": 17.0, "kv_pool_tokens": "105,202", "kv_usage_pct": 82.3, "levels": 22, "oom_warnings": 2, "preemptions": 300, "requests": 434, "running": 3.27, "score": 29.09, "waiting": 2.47}
+   4890.3 out | ARC3_COMPACT {"bytes_after": 29788999, "bytes_before": 34568328, "errors": 0, "instruction_chars": 4361618, "instruction_lines_dropped": 22928, "last_error": null, "posts_changed": 409, "posts_seen": 437, "posts_skipped_small": 28, "reasoning_chars": 117939, "reasoning_dropped": 71}
+   4890.3 out | run            score       levels      eff         gen_tokens  avg_prompt  running     waiting     history     preemptions
+   4890.3 out | v3 (LB 3.59)   25.08       19          0.72        880744      21494       3.07        2.65        23.9        17         
+   4890.3 out | v4 (unsub.)    16.23       19          1.41        881771      21801       3.04        2.53        22.8        14         
+   4890.3 out | v4A (unsub.)   13.41       15          2.26        977801      15627       3.63        1.08        17.8        53         
+   4890.3 out | v5 (this run)  29.09       22          0.81        893680      19269       3.27        2.47        17.0        300        
+   4890.3 out | stall stats: {'levels_seen': 28, 'trips': 14, 'warnings_shown': 14, 'bans_armed': 10, 'actions_dropped': 2, 'calls_seen': 1124, 'calls_single_action': 1121, 'calls_fully_banned_passthrough': 104}
+   4890.3 out | ARC3_VERDICT HOLD mechanism={"prompt<=0.85*v3": false, "history>=0.9*v3": false, "preemptions<40": false, "oom==0": false} quality={"eff<=1.0": true, "levels>=17": true, "ar25>=v3": false}
+   4890.4 out | ARC3_COMPACT_CHECK ok=True keep=8 min_bytes=40000 {'posts_seen': 437, 'posts_changed': 409, 'posts_skipped_small': 28, 'reasoning_dropped': 71, 'reasoning_chars': 117939, 'instruction_lines_dropped': 22928, 'instruction_chars': 4361618, 'bytes_before': 34568328, 'bytes_after': 29788999, 'errors': 0, 'last_error': None}
+   4892.1 err | /usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+   4892.1 err |   cells[i][c] = re.sub('\\\\\|', '|', cell)
+   4892.2 err | /usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+   4892.2 err |   text = re.sub(r'_', '\_', text) # Escape underscores in display text
+   4892.5 err | [NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+   4892.6 err | [NbConvertApp] Writing 180140 bytes to __notebook__.ipynb
+   4893.8 err | [NbConvertApp] Converting notebook __notebook__.ipynb to html
+   4894.3 err | [NbConvertApp] Writing 616535 bytes to __results__.html

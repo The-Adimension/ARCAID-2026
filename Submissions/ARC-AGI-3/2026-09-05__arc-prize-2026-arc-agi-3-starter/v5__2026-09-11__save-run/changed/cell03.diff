@@ -1,0 +1,42 @@
+--- base cell 3
++++ new cell 3
+@@ -1,20 +1,7 @@
+ import os
+-
+ if os.getenv('KAGGLE_IS_COMPETITION_RERUN'):
+-    # Wait for the gateway sidecar to be ready.
+-    !curl --fail --retry 999 --retry-all-errors --retry-delay 5 \
+-          --retry-max-time 600 http://gateway:8001/api/games
+-
+-    # Copy the framework into a writable location.
+-    !cp -r /kaggle/input/competitions/arc-prize-2026-arc-agi-3/ARC-AGI-3-Agents \
+-           /kaggle/working/ARC-AGI-3-Agents
+-
+-    # Drop our agent in as a framework template.
+-    !cp /tmp/my_agent.py \
+-        /kaggle/working/ARC-AGI-3-Agents/agents/templates/my_agent.py
+-
+-    # Register MyAgent in the framework's agent registry. We rewrite
+-    # __init__.py because the upstream version eagerly imports
+-    # templates with deps we don't ship (langgraph, smolagents, etc.).
++    !curl --fail --retry 999 --retry-all-errors --retry-delay 5 --retry-max-time 600 http://gateway:8001/api/games
++    !cp -r /kaggle/input/competitions/arc-prize-2026-arc-agi-3/ARC-AGI-3-Agents /kaggle/working/ARC-AGI-3-Agents
++    !cp /tmp/my_agent.py /kaggle/working/ARC-AGI-3-Agents/agents/templates/my_agent.py
+     with open('/kaggle/working/ARC-AGI-3-Agents/agents/__init__.py', 'w') as f:
+         f.write("""from typing import Type
+@@ -32,6 +19,4 @@
+ }
+ """)
+-
+-    # Point the framework at the gateway sidecar.
+     with open('/kaggle/working/ARC-AGI-3-Agents/.env', 'w') as f:
+         f.write("""SCHEME=http
+@@ -44,7 +29,3 @@
+ RECORDINGS_DIR=/kaggle/working/server_recording
+ """)
+-
+-    # Run it. The gateway records every action and emits submission.parquet.
+-    !cd /kaggle/working/ARC-AGI-3-Agents && \
+-        MPLBACKEND=agg \
+-        python main.py --agent myagent
++    !cd /kaggle/working/ARC-AGI-3-Agents && MPLBACKEND=agg python main.py --agent myagent

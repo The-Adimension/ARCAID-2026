@@ -1,0 +1,77 @@
+{
+ "kernel": "habanwer/arc3-duck-fp4-prompts",
+ "title": "arc3-duck-fp4-prompts",
+ "version": 1,
+ "script_version_id": 351923783,
+ "url": "https://www.kaggle.com/code/habanwer/arc3-duck-fp4-prompts?scriptVersionId=351923783",
+ "track": "ARC-AGI-3",
+ "private_on_kaggle_at_collection": true,
+ "placement": {
+  "place": "submissions"
+ },
+ "inputs_now": {
+  "competition_sources": [
+   "arc-prize-2026-arc-agi-3"
+  ],
+  "dataset_sources": [
+   "keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1",
+   "keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1"
+  ],
+  "model_sources": [
+   ""
+  ],
+  "kernel_sources": []
+ },
+ "inputs_as_run": [
+  {
+   "sourceId": 133468,
+   "sourceType": "competition"
+  },
+  {
+   "sourceId": 19333078,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 19306148,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 977939,
+   "sourceType": "modelInstanceVersion"
+  }
+ ],
+ "accelerator": "nvidiaRtxPro6000",
+ "run": {
+  "start": "2026-09-22T17:14:59.645247+00:00",
+  "end": "2026-09-22T17:43:56.344362+00:00",
+  "duration_s": 1736.699115,
+  "exception": null
+ },
+ "submissions": [
+  {
+   "submission_ref": "56487807",
+   "submitted_utc": "2026-09-23T08:10:47.620000",
+   "status": "COMPLETE",
+   "public_score": "3.01",
+   "private_score": "",
+   "selected": "",
+   "after_deadline": ""
+  }
+ ],
+ "files": {
+  "__notebook__.ipynb": "373eba3fd173e2d019710a25dd6fc88233c3a689cb6e8f0ff9cbb25c84767841",
+  "__output__.json": "8b841a59e07d8774faae3858021d406c631df1889c0ba8fd3f5aca515db1ba28",
+  "outputs": "hashed from local copy 2026-09-23__arc3-duck-fp4-prompts__v1__score-3.01"
+ },
+ "collected_at": "2026-11-06T12:00:49Z",
+ "notebook_sha256_original": "373eba3fd173e2d019710a25dd6fc88233c3a689cb6e8f0ff9cbb25c84767841",
+ "log_sha256_original": "8b841a59e07d8774faae3858021d406c631df1889c0ba8fd3f5aca515db1ba28",
+ "inferred_parent": {
+  "notebook": "habanwer/arc3-duck-fp4-ledger@v1",
+  "distance_lines": 57,
+  "runner_up": "habanwer/arc3-duck-fp4-serving@v1",
+  "runner_up_distance": 152,
+  "method": "Tools/lineage/infer_parents.py"
+ },
+ "root_base": "keithtyser/duck-qwen3-8-flash-next-nvfp4-mtp@v13"
+}

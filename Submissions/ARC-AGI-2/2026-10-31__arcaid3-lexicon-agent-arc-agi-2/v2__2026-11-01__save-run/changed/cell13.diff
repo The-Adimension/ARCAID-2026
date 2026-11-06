@@ -1,0 +1,50 @@
+--- base cell 13
++++ new cell 13
+@@ -8,9 +8,43 @@
+ import lexicon2, repl                                       # import check: a broken module fails the save run
+ print("lexicon on:", repl.LEXICON_ON)
++SMOKE_MINUTES = 75                                         # 0: save run = preflight + fallback only
+ if not RERUN:
+-    # A version is only submittable once a run has produced submission.json. The save run
+-    # therefore writes the fallback and stops here (a minute of quota); the agent itself
+-    # runs only in the competition rerun, which does not bill quota.
+-    print("not a competition rerun: fallback submission only, agent skipped")
++    # A version is only submittable once a run has produced submission.json, and the save run
++    # is the only run whose log we can read. v1 scored 0.00 because the wheelhouse (cp312 wheels)
++    # could not install on Kaggle's Python 3.13 image -- the save run never tried. So the save run
++    # now proves the install works on THIS image, and fails loudly (no submittable version) if not.
++    import glob, sys as _sys
++    print("python", _sys.version.split()[0])
++    assert _sys.version_info[:2] == (3, 12), "the wheelhouse is cp312: pin the Python 3.12 docker image"
++    wh = Path(glob.glob("/kaggle/input/**/arc3-vllm-h100-wheelhouse-v3/**/requirements.lock", recursive=True)[0]).parent
++    t = time.time()
++    r = subprocess.run([sys.executable, "-m", "pip", "install", "--dry-run", "--no-index", "--find-links", str(wh),
++                        "--requirement", str(wh / "requirements.lock"), "--target", "/tmp/preflight",
++                        "--ignore-installed", "--only-binary", ":all:", "--disable-pip-version-check", "-q"],
++                       capture_output=True, text=True)
++    print(f"preflight: wheelhouse {'installs' if r.returncode == 0 else 'DOES NOT install'} on this image "
++          f"({time.time() - t:.0f}s)", r.stderr[-2000:] if r.returncode else "")
++    assert r.returncode == 0, "wheelhouse does not install on this image"
++    if SMOKE_MINUTES:
++        # GPU smoke test on 3 evaluation tasks: install, server ladder, agent, lexicon, direct pass.
++        # Writes only under /kaggle/working/smoke -- submission.json stays the fallback.
++        os.makedirs("/kaggle/working/smoke", exist_ok=True)
++        smoke = dict(cfg, challenges="arc-agi_evaluation_challenges.json",
++                     sub_path="/kaggle/working/smoke/submission.json",
++                     deadline_epoch=time.time() + SMOKE_MINUTES * 60, server_hold_max_s=SMOKE_MINUTES * 45,
++                     min_start_s=120, interactive_tasks=3)
++        try:
++            subprocess.run([sys.executable, "/kaggle/working/agent/submit_main.py", json.dumps(smoke)],
++                           timeout=SMOKE_MINUTES * 60 + 600)
++        except Exception as e:
++            print("smoke did not finish cleanly:", repr(e))
++        try:
++            ev = json.load(open(glob.glob("/kaggle/input/**/arc-agi_evaluation_solutions.json", recursive=True)[0]))
++            sm = json.load(open(smoke["sub_path"]))
++            hit = sum(sol in (row["attempt_1"], row["attempt_2"]) for t in sm for row, sol in zip(sm[t], ev[t]))
++            print(f"SMOKE: {len(sm)} eval tasks, {hit} test outputs correct", flush=True)
++        except Exception as e:
++            print("SMOKE: no result:", repr(e))
++    print("not a competition rerun: fallback submission only")
+ else:
+     try:

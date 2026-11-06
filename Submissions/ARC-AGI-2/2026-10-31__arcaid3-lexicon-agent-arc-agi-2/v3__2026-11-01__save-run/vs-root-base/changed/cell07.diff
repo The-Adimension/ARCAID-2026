@@ -1,0 +1,21 @@
+--- base cell 6
++++ new cell 7
+@@ -156,4 +156,18 @@
+ )
+ 
++# ARCAID3 grid lexicon (lexicon2.py): the ARC-AGI-3 lexicon view on static grids. Its source
++# is appended to HELPERS, so every python call has it; ARCAID3_LEXICON=0 turns it off.
++_LEX_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)), "lexicon2.py")
++LEXICON_ON = os.environ.get("ARCAID3_LEXICON", "1") != "0" and os.path.exists(_LEX_PATH)
++if LEXICON_ON:
++    HELPERS += "\n" + open(_LEX_PATH, encoding="utf-8").read()
++    PREAMBLE_DOC += (
++        " Also preloaded, the lexicon (names are shared by every grid of the task, so the same "
++        "picture has the same name everywhere): `print(rules())` (facts that hold on every train "
++        "pair), `print(changes(i))` (train[i] input -> output as objects that moved / became / "
++        "appeared / disappeared, plus cell colour transitions, or how a resized output relates "
++        "to its input), `print(lexicon(g))` (a grid as named objects with a legend), and "
++        "`lex_objects(g)` (the same objects as dicts: sym, at, bbox, size, colors, cells, patch).")
++
+ 
+ RETAIN_DOC = (

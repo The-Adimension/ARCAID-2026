@@ -1,0 +1,127 @@
+      4.4 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+      4.4 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+      4.4 err | 0.00s - to python to disable frozen modules.
+      4.4 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+      4.7 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+      4.7 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+      4.7 err | 0.00s - to python to disable frozen modules.
+      4.7 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+      5.4 out | PUBLIC25_VLLM_PROFILE name=kv5-bf16-mtp3-c16-cg32-ctx16k env={"TAAF_VLLM_ENABLE_PREFIX_CACHING": "0", "TAAF_VLLM_KV_CACHE_DTYPE": "auto", "TAAF_VLLM_KV_CACHE_MEMORY_BYTES": "5368709120", "TAAF_VLLM_MAX_CUDAGRAPH_CAPTURE_SIZE": "32", "TAAF_VLLM_MAX_NUM_BATCHED_TOKENS": "8192", "TAAF_VLLM_MAX_NUM_SEQS": "16", "TAAF_VLLM_MTP_TOKENS": "3", "TAAF_VLLM_OMP_THREADS": "1"}
+      5.4 out | taaf.kaggle: TRUE_SUBMISSION=False
+      7.5 out | taaf.kaggle: source bundle = /kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1
+      7.5 out | taaf.kaggle: input paths = {"keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1": "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1", "keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1": "/kaggle/input/datasets/keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1"}
+      7.5 out | taaf.kaggle: wrote /usr/local/lib/python3.13/dist-packages/taaf_kaggle_sources.pth (5 source roots)
+      7.5 out | taaf.kaggle: setup command: "$PYTHON" "$TAAF_KAGGLE_BUNDLE_DIR/serving_setup.py"
+      7.7 out | VLLM_SETUP_MODE fast TAAF_KAGGLE_FAST_START=1
+      7.7 out | VLLM_SETUP_MODE fast TAAF_KAGGLE_FAST_START=1
+      7.7 out | PINNED_VLLM_RUNTIME_PATH /kaggle/input/datasets/keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1
+      7.7 out | PINNED_MODEL_PATH /kaggle/input/models/keithtyser/qwen3-8-flash-next-nvfp4/pytorch/radixark-modelopt-fp4/1
+      7.7 out | RUNTIME_LAYER_FAST_CHECK index=8 bytes=1374796713 manifest_sha256=f4f325a97c3e4739640b0e472a818bb299e7ce8e585bdbfe5586e9d3b5a2c475
+      7.7 out | PINNED_VLLM_RUNTIME_PATH /kaggle/input/datasets/keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1
+      7.7 out | PINNED_MODEL_PATH /kaggle/input/models/keithtyser/qwen3-8-flash-next-nvfp4/pytorch/radixark-modelopt-fp4/1
+      7.7 out | RUNTIME_LAYER_FAST_CHECK index=8 bytes=1374796713 manifest_sha256=f4f325a97c3e4739640b0e472a818bb299e7ce8e585bdbfe5586e9d3b5a2c475
+     30.5 out | RUNTIME_LAYER_FAST_CHECK index=17 bytes=4634843373 manifest_sha256=a5881cf32fc46f24318a6fc7015ccae863706075d4434d186b8b1b4e5bafb36e
+     30.7 out | RUNTIME_LAYER_FAST_CHECK index=17 bytes=4634843373 manifest_sha256=a5881cf32fc46f24318a6fc7015ccae863706075d4434d186b8b1b4e5bafb36e
+    134.6 out | RUNTIME_LAYER_FAST_CHECK index=18 bytes=1511319261 manifest_sha256=692ea0d28a87e9cea6db254c830f650f29804522045c9201f8ea63f30471b33b
+    134.8 out | RUNTIME_LAYER_FAST_CHECK index=18 bytes=1511319261 manifest_sha256=692ea0d28a87e9cea6db254c830f650f29804522045c9201f8ea63f30471b33b
+    155.3 out | RUNTIME_LAYER_FAST_CHECK index=21 bytes=61571140 manifest_sha256=651e9c6638c77d15bf671d9264badcba80ea551f84109de486427b87d2ddbf75
+    155.5 out | RUNTIME_LAYER_FAST_CHECK index=21 bytes=61571140 manifest_sha256=651e9c6638c77d15bf671d9264badcba80ea551f84109de486427b87d2ddbf75
+    156.4 out | RUNTIME_LAYER_FAST_CHECK index=24 bytes=309686893 manifest_sha256=10dce885652a53a2e644a75d256b90830663330988b8599c3c0e56cd6c8a4675
+    156.6 out | RUNTIME_LAYER_FAST_CHECK index=24 bytes=309686893 manifest_sha256=10dce885652a53a2e644a75d256b90830663330988b8599c3c0e56cd6c8a4675
+    161.3 out | RUNTIME_LAYER_FAST_CHECK index=27 bytes=14479724 manifest_sha256=49a63ac9d116f92e5a8b006ae5665b940fcbc3d22d53aa7c01a3753ef341c53e
+    161.5 out | RUNTIME_LAYER_FAST_CHECK index=27 bytes=14479724 manifest_sha256=49a63ac9d116f92e5a8b006ae5665b940fcbc3d22d53aa7c01a3753ef341c53e
+    161.8 out | VLLM_SETUP_FAILED {"cleanup": {"identity_exists": false, "stopped": true}, "error": "The pinned vLLM runtime requires CPython 3.12, found cpython 3.13.", "error_type": "RuntimeError", "failed_epoch": 1791059776.0684702, "server_log_tail": "", "traceback": "Traceback (most recent call last):\n  File \"/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py\", line 3094, in <module>\n    main()\n    ~~~~^^\n  File \"/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py\", line 2980, in main\n    env, environment_check = runtime_environment(\n                             ~~~~~~~~~~~~~~~~~~~^\n        deep_preload_validation=not fast_start,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        tuning=tuning,\n        ^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py\", line 1431, in runtime_environment\n    raise RuntimeError(\n    ...<2 lines>...\n    )\nRuntimeError: The pinned vLLM runtime requires CPython 3.12, found cpython 3.13.\n"}
+    161.8 err | Traceback (most recent call last):
+    161.8 err |   File "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py", line 3094, in <module>
+    161.8 err |     main()
+    161.8 err |     ~~~~^^
+    161.8 err |   File "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py", line 2980, in main
+    161.8 err |     env, environment_check = runtime_environment(
+    161.8 err |                              ~~~~~~~~~~~~~~~~~~~^
+    161.8 err |         deep_preload_validation=not fast_start,
+    161.8 err |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    161.8 err |         tuning=tuning,
+    161.8 err |         ^^^^^^^^^^^^^^
+    161.8 err |     )
+    161.8 err |     ^
+    161.8 err |   File "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py", line 1431, in runtime_environment
+    161.8 err |     raise RuntimeError(
+    161.8 err |     ...<2 lines>...
+    161.8 err |     )
+    161.8 err | RuntimeError: The pinned vLLM runtime requires CPython 3.12, found cpython 3.13.
+    161.8 out | VLLM_SETUP_FAILED {"cleanup": {"identity_exists": false, "stopped": true}, "error": "The pinned vLLM runtime requires CPython 3.12, found cpython 3.13.", "error_type": "RuntimeError", "failed_epoch": 1791059776.0684702, "server_log_tail": "", "traceback": "Traceback (most recent call last):\n  File \"/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py\", line 3094, in <module>\n    main()\n    ~~~~^^\n  File \"/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py\", line 2980, in main\n    env, environment_check = runtime_environment(\n                             ~~~~~~~~~~~~~~~~~~~^\n        deep_preload_validation=not fast_start,\n        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n        tuning=tuning,\n        ^^^^^^^^^^^^^^\n    )\n    ^\n  File \"/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py\", line 1431, in runtime_environment\n    raise RuntimeError(\n    ...<2 lines>...\n    )\nRuntimeError: The pinned vLLM runtime requires CPython 3.12, found cpython 3.13.\n"}
+    161.8 err | Traceback (most recent call last):
+    161.8 err |   File "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py", line 3094, in <module>
+    161.8 err |     main()
+    161.8 err |     ~~~~^^
+    161.8 err |   File "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py", line 2980, in main
+    161.8 err |     env, environment_check = runtime_environment(
+    161.8 err |                              ~~~~~~~~~~~~~~~~~~~^
+    161.8 err |         deep_preload_validation=not fast_start,
+    161.8 err |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    161.8 err |         tuning=tuning,
+    161.8 err |         ^^^^^^^^^^^^^^
+    161.8 err |     )
+    161.8 err |     ^
+    161.8 err |   File "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py", line 1431, in runtime_environment
+    161.8 err |     raise RuntimeError(
+    161.8 err |     ...<2 lines>...
+    161.8 err |     )
+    161.8 err | RuntimeError: The pinned vLLM runtime requires CPython 3.12, found cpython 3.13.
+    161.8 err | 
+    161.8 err | Traceback (most recent call last):
+    161.8 err |   File "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py", line 3094, in <module>
+    161.8 err |     main()
+    161.8 err |     ~~~~^^
+    161.8 err |   File "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py", line 2980, in main
+    161.8 err |     env, environment_check = runtime_environment(
+    161.8 err |                              ~~~~~~~~~~~~~~~~~~~^
+    161.8 err |         deep_preload_validation=not fast_start,
+    161.8 err |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    161.8 err |         tuning=tuning,
+    161.8 err |         ^^^^^^^^^^^^^^
+    161.8 err |     )
+    161.8 err |     ^
+    161.8 err |   File "/kaggle/input/datasets/keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1/serving_setup.py", line 1431, in runtime_environment
+    161.8 err |     raise RuntimeError(
+    161.8 err |     ...<2 lines>...
+    161.8 err |     )
+    161.8 err | RuntimeError: The pinned vLLM runtime requires CPython 3.12, found cpython 3.13.
+    162.1 err | Traceback (most recent call last):
+    162.1 err |   File "<string>", line 1, in <module>
+    162.1 err |     import sys;import papermill as pm;pm.execute_notebook("__notebook__.ipynb","__notebook__.ipynb",progress_bar=False,log_output=True,stdout_file=sys.stdout,stderr_file=sys.stderr,allow_errors=False,timeout=43200)
+    162.1 err |                                       ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    162.1 err |   File "/usr/local/lib/python3.13/dist-packages/papermill/execute.py", line 131, in execute_notebook
+    162.1 err |     raise_for_execution_errors(nb, output_path)
+    162.1 err |     ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+    162.1 err |   File "/usr/local/lib/python3.13/dist-packages/papermill/execute.py", line 251, in raise_for_execution_errors
+    162.1 err |     raise error
+    162.1 err | papermill.exceptions.PapermillExecutionError: 
+    162.1 err | ---------------------------------------------------------------------------
+    162.1 err | Exception encountered at "In [4]":
+    162.1 err | ---------------------------------------------------------------------------
+    162.1 err | CalledProcessError                        Traceback (most recent call last)
+    162.1 err | /tmp/ipykernel_65/2137133893.py in <cell line: 0>()
+    162.1 err |      36 for command in json.loads((BUNDLE_DIR / "setup_commands.json").read_text()):
+    162.1 err |      37     print(f"taaf.kaggle: setup command: {command}", flush=True)
+    162.1 err | ---> 38     subprocess.run(command, shell=True, check=True, cwd=WORKING_DIR, env=env)
+    162.1 err |      39     # Re-read in case the command persisted new env keys.
+    162.1 err |      40     env = _command_env()
+    162.1 err | 
+    162.1 err | /usr/lib/python3.13/subprocess.py in run(input, capture_output, timeout, check, *popenargs, **kwargs)
+    162.1 err |     575         retcode = process.poll()
+    162.1 err |     576         if check and retcode:
+    162.1 err | --> 577             raise CalledProcessError(retcode, process.args,
+    162.1 err |     578                                      output=stdout, stderr=stderr)
+    162.1 err |     579     return CompletedProcess(process.args, retcode, stdout, stderr)
+    162.1 err | 
+    162.1 err | CalledProcessError: Command '"$PYTHON" "$TAAF_KAGGLE_BUNDLE_DIR/serving_setup.py"' returned non-zero exit status 1.
+    162.1 err | 
+    163.2 err | /usr/local/lib/python3.13/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+    163.2 err |   cells[i][c] = re.sub('\\\\\|', '|', cell)
+    163.3 err | /usr/local/lib/python3.13/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+    163.3 err |   text = re.sub(r'_', '\_', text) # Escape underscores in display text
+    163.7 err | [NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+    163.8 err | [NbConvertApp] Writing 263286 bytes to __notebook__.ipynb
+    165.6 err | [NbConvertApp] Converting notebook __notebook__.ipynb to html
+    166.1 err | [NbConvertApp] Writing 1082243 bytes to __results__.html

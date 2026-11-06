@@ -1,0 +1,44 @@
+{
+ "kernel": "habanwer/arcaid3-mount-diag",
+ "title": "arcaid3-mount-diag",
+ "version": 1,
+ "script_version_id": 358306306,
+ "url": "https://www.kaggle.com/code/habanwer/arcaid3-mount-diag?scriptVersionId=358306306",
+ "track": "ARC-AGI-3",
+ "private_on_kaggle_at_collection": false,
+ "placement": {
+  "place": "tools",
+  "group": "diagnostics",
+  "note": "Input-mount read-speed diagnostic"
+ },
+ "inputs_now": {
+  "competition_sources": [
+   "arc-prize-2026-arc-agi-3"
+  ],
+  "dataset_sources": [
+   "dfranzen/pennyroyal-v253",
+   "dfranzen/taaf-kaggle-source-bundle-copy"
+  ],
+  "model_sources": [
+   "dfranzen/albucino-qwen3-8-flash-next-drafter/Transformers/default/1",
+   "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/Transformers/default/1"
+  ],
+  "kernel_sources": []
+ },
+ "inputs_as_run": null,
+ "accelerator": null,
+ "run": {
+  "start": "2026-10-14T10:41:04.773604+00:00",
+  "end": "2026-10-14T10:41:08.389391+00:00",
+  "duration_s": 3.615787,
+  "exception": null
+ },
+ "submissions": [],
+ "files": {
+  "__notebook__.ipynb": "56ba7bfd7e0d7cf6c2f870e4a66a1501623f433e6d8e01a1cad0a3fce57b3730",
+  "__output__.json": "65ee3c97e6784548b8b3948397b0d56ad4c39173f5c0ece495197dffd721e121"
+ },
+ "collected_at": "2026-11-06T11:46:02Z",
+ "notebook_sha256_original": "56ba7bfd7e0d7cf6c2f870e4a66a1501623f433e6d8e01a1cad0a3fce57b3730",
+ "log_sha256_original": "65ee3c97e6784548b8b3948397b0d56ad4c39173f5c0ece495197dffd721e121"
+}

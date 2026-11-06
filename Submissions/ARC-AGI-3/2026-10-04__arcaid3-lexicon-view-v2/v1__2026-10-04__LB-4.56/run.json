@@ -1,0 +1,77 @@
+{
+ "kernel": "habanwer/arcaid3-lexicon-view-v2",
+ "title": "arcaid3-lexicon-view-v2",
+ "version": 1,
+ "script_version_id": 355230214,
+ "url": "https://www.kaggle.com/code/habanwer/arcaid3-lexicon-view-v2?scriptVersionId=355230214",
+ "track": "ARC-AGI-3",
+ "private_on_kaggle_at_collection": false,
+ "placement": {
+  "place": "submissions",
+  "note": "Lexicon v2 (prompt edits); also the after arm of 2026-10-04__lexicon-view-read-or-not"
+ },
+ "inputs_now": {
+  "competition_sources": [
+   "arc-prize-2026-arc-agi-3"
+  ],
+  "dataset_sources": [
+   "keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1",
+   "keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1"
+  ],
+  "model_sources": [
+   ""
+  ],
+  "kernel_sources": []
+ },
+ "inputs_as_run": [
+  {
+   "sourceId": 133468,
+   "sourceType": "competition"
+  },
+  {
+   "sourceId": 19306148,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 19333078,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 977939,
+   "sourceType": "modelInstanceVersion"
+  }
+ ],
+ "accelerator": "nvidiaRtxPro6000",
+ "run": {
+  "start": "2026-10-04T19:36:05.862725+00:00",
+  "end": "2026-10-04T21:58:02.952598+00:00",
+  "duration_s": 8517.089873,
+  "exception": null
+ },
+ "submissions": [
+  {
+   "submission_ref": "56845541",
+   "submitted_utc": "2026-10-05T07:05:01.203000",
+   "status": "COMPLETE",
+   "public_score": "4.56",
+   "private_score": "",
+   "selected": "",
+   "after_deadline": ""
+  }
+ ],
+ "files": {
+  "__notebook__.ipynb": "161bfab5e8e651a6198b8b2df68cf7c3579854bbc34d7ff8464c8c43eb1dccfb",
+  "__output__.json": "a692c4164c7cb4964959105499c7f949f6314ffc8c93d98754702952ec329243"
+ },
+ "collected_at": "2026-11-06T11:56:51Z",
+ "notebook_sha256_original": "161bfab5e8e651a6198b8b2df68cf7c3579854bbc34d7ff8464c8c43eb1dccfb",
+ "log_sha256_original": "a692c4164c7cb4964959105499c7f949f6314ffc8c93d98754702952ec329243",
+ "inferred_parent": {
+  "notebook": "habanwer/arcaid3-lexicon-view@v1",
+  "distance_lines": 92,
+  "runner_up": "habanwer/arcaid3-lexicon-view-py312@v1",
+  "runner_up_distance": 92,
+  "method": "Tools/lineage/infer_parents.py"
+ },
+ "root_base": "scottlegrand/taaf-flashnext-sheetu12b-0922@v1"
+}

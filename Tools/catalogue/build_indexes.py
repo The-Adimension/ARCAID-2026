@@ -69,8 +69,8 @@ for nid, r in nodes.items():
     if par in nodes:
         children[par].append(nid)
     else:
-        children[par or "(no earlier notebook found)"].append(nid)
-        roots.add(par or "(no earlier notebook found)")
+        children[par or "Our own code (no earlier notebook shares 30% of its lines)"].append(nid)
+        roots.add(par or "Our own code (no earlier notebook shares 30% of its lines)")
 
 
 def start(nid):

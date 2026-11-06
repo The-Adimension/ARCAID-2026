@@ -1,0 +1,11 @@
+--- base cell 0
++++ new cell 0
+@@ -18,5 +18,7 @@
+ **Save run.** Franzen's own v1 demo settings: 10 public games, 25 minutes each, 10 streams, 1 pass. That matches the saved outputs of his v1 run, so the two compare directly (levels, tokens, cache reuse, view usage). Like every single run, it cannot settle a score difference.
+ 
+-**Kill switch:** `ARCAID3_LEXICON=0`. **Log lines:** `ARCAID3_LEXICON_READY`, `ARCAID3_LEXICON_STATS` every 200 tool calls, `ARCAID3_LEXICON_FINAL` at the end.
++**Version 2: per-level scale lock.** The lexicon used to detect the grid size afresh on every frame, so a sparse frame could flip to a coarser grid and rename every object. Now every frame of a level is read at one block size, agreed across that level's frames in `history`; a block size that fails on any frame of the level stays rejected. On 4,662 replayed steps of 45 recorded plays (official engine), it halves scale flips (0.26% → 0.13%) and changes only vc33, which improves on every measure; no game gets worse. It is per level because the camera scale changes between levels in 4 of the 25 public games.
++
++**Kill switches:** `ARCAID3_LEXICON=0` (whole view), `ARCAID3_SCALE_LOCK=0` (lock only). **Log lines:** `ARCAID3_LEXICON_READY`, `ARCAID3_LEXICON_STATS` every 200 tool calls, `ARCAID3_LEXICON_FINAL` at the end.
+ 
+ Credits: Daniel Franzen (Milestone 2 solution, Apache-2.0 per his notebook), Tufa Labs (Duck), and the model, serving and checkpoint authors he credits below. Third-party code and weights keep their licences.

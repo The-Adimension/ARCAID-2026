@@ -1,0 +1,8 @@
+--- base cell 0
++++ new cell 0
+@@ -1,3 +1,5 @@
+ # ARCAID3 lexicon view on Daniel Franzen's Milestone 2 solution
++
++**This is the D' variant (not yet scored).** Same notebook as `arcaid3-lexicon-view-dfranzen-m2`, plus two cells before *Run the benchmark*: an animation-schema fix and shiiin9's D' slot priority (see the note above those cells). It exists to be compared with the plain notebook; one submission each cannot settle the difference.
+ 
+ **What this is.** [Daniel Franzen's Milestone 2 notebook](https://www.kaggle.com/code/dfranzen/arc-agi-3-milestone-2-solution), version 1 (public LB 27.89), built on [Tufa Labs' Duck harness](https://www.kaggle.com/code/jeroencottaar/tufa-labs-duck-harness-june-30-milestone-winner). Every original cell is kept, unchanged and in order: model, SGLang serving, 128K context, scheduler, harness patch and competition settings are his.

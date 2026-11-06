@@ -1,0 +1,36 @@
+--- base cell 8
++++ new cell 9
+@@ -10,4 +10,11 @@
+ Q38_P1_PUBLIC_GAME_IDS = [
+     "ls20-9607627b",
++    "g50t-5849a774",
++    "tu93-0768757b",
++    "dc22-fdcac232",
++    "cd82-fb555c5d",
++    "vc33-5430563c",
++    "tn36-ef4dde99",
++    "sp80-589a99af",
+ ]
+ 
+@@ -30,6 +37,8 @@
+         )
+ 
++    # A/B: the list twice; the solver numbers repeats of a game as pass 0, 1.
+     bm.games = [
+         taaf.game_api.GameAPI(env_name=game_id, arcade_spec=arcade_spec)
++        for _ in range(2)
+         for game_id in Q38_P1_PUBLIC_GAME_IDS
+     ]
+@@ -40,9 +49,9 @@
+     # intended evaluation configuration is visible and stable.
+     if hasattr(bm.solver, "concurrency"):
+-        bm.solver.concurrency = 28
++        bm.solver.concurrency = 16
+     if hasattr(bm.solver, "max_runtime_s_per_game"):
+-        bm.solver.max_runtime_s_per_game = 1800.0
++        bm.solver.max_runtime_s_per_game = 2700.0
+ 
+-    bm.label = f"{bm.label}-smoke-1g"
++    bm.label = f"{bm.label}-arc3-ab-8g"
+     print(f"Public evaluation override: {len(bm.games)} games × {bm.n_passes} pass = {len(bm.games) * bm.n_passes} runs")
+     print("Public evaluation concurrency:", getattr(bm.solver, "concurrency", None))

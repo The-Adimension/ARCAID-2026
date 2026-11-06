@@ -1,0 +1,149 @@
+--- base cell 2
++++ new cell 2
+@@ -24,5 +24,4 @@
+ import logging
+ import random
+-import time
+ from collections import Counter, defaultdict, deque
+ from dataclasses import dataclass, field
+@@ -117,5 +116,8 @@
+     "max_candidates": GROUND.MAX_MODEL_CANDIDATES,
+     "research_max_gap": 32,   # 1 == research every action (pre-backoff behaviour)
+-    "research_ms": 30,        # per-round candidate budget
++    # Search budget as a count, not a clock: at 30 ms of perf_counter how much of
++    # the (already ranked) search ran depended on machine load, so a game and its
++    # twin committed different models and twin_blind failed at random (038d667).
++    "research_cands": GROUND.MAX_MODEL_CANDIDATES,
+     "noise_min": 3,           # observations before a row can be called HUD
+     "noise_frac": 0.6,        # fraction of observations it must be dirty in
+@@ -167,4 +169,13 @@
+     # fit wobble by a pixel, and every walk built on it broke.
+     "blob_anchor": True,
++    # Principle P13: the pixels of a rare colour want to be in one place. A slot
++    # outlined in a colour that exactly one piece carries is the goal written in
++    # the only language a game has (lp85 r003: 2 levels in 10 and 11 actions
++    # against a human's 17 and 38, where the policy needs 102 for one). A colour
++    # counts as rare at or under this many pixels; 0 turns the channel off. Only
++    # colours whose pixel count is unchanged count: as first measured (d60cfb5) a
++    # countdown bar, a rare colour shortening every action, held r11l on one click.
++    "attract_cap": 64,
++    "attract_budget": 30,     # actions per level the attract channel may take
+     # Retrodiction gate (Retrodict 99.9%, Tycho, Twin): a world model may only
+     # plan live actions if it replays the recorded transitions at this ratio.
+@@ -372,4 +383,36 @@
+         g[ny][nx] = color
+     return g
++
++
++def color_spread(grid: list[list[int]], cap: int) -> Optional[dict]:
++    """How scattered the rare colours are: sum of their bounding-box perimeters.
++
++    P13. A colour covering only a few pixels and sitting in more than one place
++    is nearly always a piece and the marks of the slot it belongs in. Putting the
++    piece in the slot is exactly what shrinks that colour's bounding box, so the
++    sum is an objective the agent can hold without knowing the game. None when no
++    colour qualifies, so a caller can tell "no signal" from "already together".
++    """
++    if not cap:
++        return None
++    box: dict[int, list[int]] = {}
++    for y, row in enumerate(grid):
++        for x, c in enumerate(row):
++            c = int(c)
++            b = box.get(c)
++            if b is None:
++                box[c] = [x, y, x, y, 1]
++                continue
++            if x < b[0]:
++                b[0] = x
++            if y < b[1]:
++                b[1] = y
++            if x > b[2]:
++                b[2] = x
++            if y > b[3]:
++                b[3] = y
++            b[4] += 1
++    return {c: ((b[2] - b[0]) + (b[3] - b[1]), b[4])
++            for c, b in box.items() if 2 <= b[4] <= cap}
+ 
+ 
+@@ -1412,6 +1455,7 @@
+                 0,
+             )
+-            if best is not None and best_rank is not None and best_rank < here:
+-                return _reconstruct(parent, best)
++            # P19 (probe-nofallback-full): no stale-square fallback. Once every
++            # reachable square is stood on, walking is exhausted; return no path so
++            # the click and twin phases get the turn (dc22 looped 9 squares ~1000x).
+         return None
+ 
+@@ -2165,4 +2209,7 @@
+         self._level_keys: list[str] = []
+         self._replayed: set = set()
++        self._spread: Optional[int] = None
++        self._attract_key: Optional[str] = None
++        self._attract_used: int = 0
+ 
+     @property
+@@ -2242,4 +2289,25 @@
+         self._prev_levels = levels
+ 
++        # P13: did the last action pull a rare colour together? Then it is the
++        # control this puzzle is asking for, and the thing to do is press it
++        # again until it stops helping.
++        # Clicks only: where there is an avatar the navigator owns the arrows, and
++        # an arrow that happens to shrink a colour is not a control. The bar is the
++        # best this level has ever been, not the previous frame, so a control that
++        # merely cycles a colour past its slot cannot hold the agent forever.
++        spread = color_spread(grid, TUNE["attract_cap"])
++        if spread is not None and self._spread is not None and self._prev_key:
++            # Only colours whose pixel count did not change: a piece that moved
++            # keeps its pixels, a countdown bar that shortened loses them.
++            gain = sum(self._spread[c][0] - v[0] for c, v in spread.items()
++                       if c in self._spread and self._spread[c][1] == v[1])
++            if parse_key(self._prev_key)[0] != 6:
++                pass
++            elif gain > 0:
++                self._attract_key = self._prev_key
++            elif self._prev_key == self._attract_key:
++                self._attract_key = None
++        self._spread = spread
++
+         self.tracker.note_frame(grid)
+         cur_t = self._hash(grid)
+@@ -2256,4 +2324,7 @@
+             self._nav_expect = None
+             self._pred_t = None
++            self._spread = None
++            self._attract_key = None
++            self._attract_used = 0
+             self.tracker.new_level()
+             self._level_start = cur_t
+@@ -2318,4 +2389,12 @@
+         if nav is not None:
+             return self._commit_action(grid, nav[0], latest_frame, nav[1])
++
++        # PHASE 4d — ATTRACT: repeat whatever last pulled a rare colour together.
++        # Budgeted like the explorer: on a game with no such control the signal is
++        # noise, and noise must not be allowed to own the whole action budget.
++        if (self._attract_key and self._attract_used < TUNE["attract_budget"]
++                and self._key_legal(self._attract_key, ids)):
++            self._attract_used += 1
++            return self._commit_action(grid, self._attract_key, latest_frame, "phase4d-attract")
+ 
+         # PHASE 4c — BFS IN THE TWIN (games with no steerable avatar)
+@@ -2420,5 +2499,4 @@
+         # Hash the truth once per round, not once per candidate per transition.
+         trans = [(t[0], t[1], t[2], self._hash(t[2])) for t in raw]
+-        deadline = time.perf_counter() + TUNE["research_ms"] / 1000.0
+         committed = False
+         if self.model is not None:
+@@ -2432,7 +2510,5 @@
+         )
+         self.mem.t += 1
+-        for cand in cands:
+-            if time.perf_counter() > deadline:
+-                break
++        for cand in cands[: TUNE["research_cands"]]:
+             if cand.key() == self.model.key() and self.best is not None:
+                 continue

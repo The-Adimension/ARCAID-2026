@@ -1,0 +1,16 @@
+--- base cell 0
++++ new cell 0
+@@ -1,7 +1,9 @@
+-## Our copy: Duck harness on the NVFP4 serving stack
++## Duck on the NVFP4 stack + prompt-only action batching (measurement run)
+ 
+-Forked from [wuliao0/duck-qwen3-8-anim-base](https://www.kaggle.com/code/wuliao0/duck-qwen3-8-anim-base), itself based on [Tufa Labs' Duck harness](https://www.kaggle.com/code/jeroencottaar/tufa-labs-duck-harness-june-30-milestone-winner) (Milestone-1 winner). Full credit to Jeroen Cottaar, Tufa Labs, and to ktyser/wuliao_0 for the NVFP4 serving work.
++Identical to `arc3-duck-fp4-serving` (submitted as v1) except for **one change: the system prompt**. `consult/arc3_batch.py` rewrites two lines of `PYTHON_ADDENDUM` that pull against batching -- "Optimize for the shortest reliable sequence" and "After **every** action, verify..." -- and adds a predict-then-commit protocol: plan a sequence, predict a board signature per step, execute behind a gate that breaks on the first mismatch.
+ 
+-The Duck prompts, tool-use loop, game policy and scorer are unchanged, and so is the serving profile (`kv5-bf16-mtp3-c8-cg32`: NVFP4 weights, BF16 compute, chunked prefill, 3-token NEXTN MTP, 8 vLLM sequences, CUDA graphs, prefix caching off).
++No harness code, no serving knob, no new mechanism. Duck's sandbox already permits `action(...)` inside loops with state refreshed between calls (`prompts.py:105`), so the whole protocol lives in the model's own code.
+ 
+-**Our only change:** a save run caps each game at 900 s instead of 7920 s, so the first end-to-end test of this stack costs ~40 min of GPU instead of ~2.5 h. The competition rerun path is untouched and keeps the full 7920 s budget. The 25-game audit and the frozen scorer still run, so the save run ends with a public-25 `score.json` we can compare against our FP8 baseline.
++**Baseline to beat** (fp4run1, same games, same 900 s cap, same profile): 2.33 actions per charged model decision, 57% singletons, 802 tokens per executed action. Target >= 4.0 and <= 600. The last cell prints `ARC3_BATCH_RESULT` with both.
++
++This notebook is for measurement and is not intended for submission.

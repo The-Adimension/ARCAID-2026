@@ -1,0 +1,18 @@
+--- base cell 16
++++ new cell 17
+@@ -8,5 +8,5 @@
+ bm.game_weights = None
+ 
+-demo_excluded_games = [] if TRUE_SUBMISSION else ['bp35', 'cd82', 'cn04', 'dc22', 'g50t', 'ka59', 'lf52', 'ls20', 'm0r0', 's5i5', 'sk48', 'sp80', 'su15', 'tn36', 'wa30']
++demo_excluded_games = []  # ARCAID3 level trials: all 25 public games
+ 
+ if TRUE_SUBMISSION:  # overrides for contest run
+@@ -18,6 +18,6 @@
+ else:
+     if USE_PRIORITY_SCHEDULING:
+-        bm.solver.concurrency = (25 - len(demo_excluded_games)) * bm.n_passes
+-        bm.solver.max_runtime_s_per_game = 25*60 #532*60 * bm.solver.concurrency // 110
++        bm.solver.concurrency = 92  # ARCAID3 level trials: 183 entries in two waves
++        bm.solver.max_runtime_s_per_game = 60*60  # ARCAID3 level trials: per (game, level) entry
+     if float(getattr(target, 'max_runtime_s', 0.0) or 0.0) != 32400.0:
+         raise RuntimeError(

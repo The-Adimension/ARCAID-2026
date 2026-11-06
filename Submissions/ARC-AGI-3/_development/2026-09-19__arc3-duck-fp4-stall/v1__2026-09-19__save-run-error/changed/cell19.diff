@@ -1,0 +1,112 @@
+--- base cell 19
++++ new cell 19
+@@ -1,68 +1,58 @@
+-# Depth report: where does the agent stall, and was it starved or stuck?
++# Did the warning change behaviour? Compare against depthrun1 (same games, same cap, no stall).
+ import json as _json
+ from collections import Counter as _Counter
+ 
++DEPTH_BASELINE = {'sb26': 1, 'vc33': 3, 'ft09': 4, 'lp85': 5, 're86': 3, 'ar25': 3}
++
++try:
++    import arc3_stall as _st
++    _stats = dict(_st.STATS)
++except Exception as _e:
++    _stats = {'error': repr(_e)}
++
+ _p = WORKING_DIR / 'benchmark.json'
+ if not _p.exists():
+-    print('ARC3_DEPTH_RESULT no benchmark.json', flush=True)
++    print('ARC3_STALL_RESULT no benchmark.json', flush=True)
+ else:
+     _b = _json.loads(_p.read_text(encoding='utf-8'))
++    def _key(a):
++        d = a.get('data') or {}
++        return '%s:%s,%s' % (a['id'], d.get('x'), d.get('y')) if d else a['id']
+     _rows = []
+-    _acts = _dec = _tok = 0
+-    _sizes = []
+     for _r in _b['game_runs']:
+-        _apl = _r.get('actions_per_level') or []
+-        _hum = _r.get('base_actions_per_level') or []
+-        _done = _r.get('levels_completed', 0)
+-        # the level it stopped on (0-indexed = _done), and what it spent there
+-        _spent = _apl[_done] if _done < len(_apl) else 0
+-        _base = _hum[_done] if _done < len(_hum) else 0
++        _g = _r['game_id'][:4]
++        _apl = _r['actions_per_level']
++        _done = _r['levels_completed']
++        _cut = sum(_apl[:_done])
++        _hist = [h['action'] for h in _r['history']]
++        _wall = _hist[_cut:]
++        _c = _Counter(_key(a) for a in _wall)
+         _rows.append({
+-            'game': _r['game_id'][:4],
+-            'levels_cleared': _done,
+-            'actions_per_level': _apl[:max(_done + 1, 1)],
+-            'human_per_level': _hum[:max(_done + 1, 1)],
+-            'stuck_on_level': _done + 1,
+-            'actions_spent_there': _spent,
+-            'human_baseline_there': _base,
+-            'spend_ratio_vs_human': round(_spent / _base, 2) if _base else None,
++            'game': _g,
++            'levels': _done,
++            'depthrun1_levels': DEPTH_BASELINE.get(_g),
++            'delta': _done - DEPTH_BASELINE.get(_g, 0),
++            'wall_actions': len(_wall),
++            'wall_uniq_frac': round(len(_c) / len(_wall), 3) if _wall else None,
++            'wall_top_repeat': _c.most_common(1)[0][1] if _c else 0,
+             'total_actions': sum(_apl),
+             'state': _r.get('state'),
+-            'wallclock_s': round(_r.get('final_wallclock_seconds', 0)),
+         })
+-        _cur = 0
+-        for _h in _r.get('history', []):
+-            _t = _h.get('generated_tokens', 0) or 0
+-            _tok += _t
+-            if _t > 0:
+-                if _cur:
+-                    _sizes.append(_cur)
+-                _cur = 1
+-                _dec += 1
+-            else:
+-                _cur += 1
+-            _acts += 1
+-        if _cur:
+-            _sizes.append(_cur)
+-    _c = _Counter(_sizes)
+-    _starved = [r['game'] for r in _rows if (r['spend_ratio_vs_human'] or 0) < 0.8]
+-    _stuck = [r['game'] for r in _rows if (r['spend_ratio_vs_human'] or 0) >= 1.5]
+-    print('ARC3_DEPTH_RESULT ' + _json.dumps({
++    print('ARC3_STALL_RESULT ' + _json.dumps({
++        'stall_stats': _stats,
+         'per_game': _rows,
+-        'levels_total': sum(r['levels_cleared'] for r in _rows),
+-        'actions': _acts,
+-        'decisions': _dec,
+-        'actions_per_decision': round(_acts / max(_dec, 1), 3),
+-        'singleton_share': round(_c[1] / max(len(_sizes), 1), 3),
+-        'tokens_per_action': round(_tok / max(_acts, 1), 1),
+-        'batch_sizes': dict(sorted(_c.items())),
+-        'VERDICT_starved_games': _starved,
+-        'VERDICT_stuck_games': _stuck,
++        'levels_total': sum(r['levels'] for r in _rows),
++        'levels_total_depthrun1': sum(DEPTH_BASELINE.values()),
+     }, sort_keys=True), flush=True)
+     print(flush=True)
+-    print('%-6s %-7s %-9s %-9s %-8s %s' % ('game', 'cleared', 'stuck_on', 'spent', 'human', 'ratio'), flush=True)
++    print('%-6s %-8s %-11s %-7s %-13s %-13s %s' % (
++        'game', 'levels', 'depthrun1', 'delta', 'wall_actions', 'wall_uniq', 'top_repeat'), flush=True)
+     for _r in _rows:
+-        print('%-6s %-7d %-9d %-9d %-8d %s' % (
+-            _r['game'], _r['levels_cleared'], _r['stuck_on_level'],
+-            _r['actions_spent_there'], _r['human_baseline_there'],
+-            _r['spend_ratio_vs_human']), flush=True)
++        print('%-6s %-8d %-11s %-7d %-13d %-13s %s' % (
++            _r['game'], _r['levels'], _r['depthrun1_levels'], _r['delta'],
++            _r['wall_actions'], _r['wall_uniq_frac'], _r['wall_top_repeat']), flush=True)
++    print(flush=True)
++    print('stall stats:', _stats, flush=True)
++    print('READ: wall_uniq_frac UP and top_repeat DOWN vs depthrun1 (0.16/0.10/0.41/0.12/0.02/0.07)', flush=True)
++    print('      means the agent broke the loop when told. Unchanged means it CANNOT escape', flush=True)
++    print('      and the next version must RESET the level, not just warn.', flush=True)

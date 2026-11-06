@@ -1,0 +1,82 @@
+{
+ "kernel": "habanwer/arc3-duck-qwen38-baseline",
+ "title": "arc3-duck-qwen38-baseline",
+ "version": 1,
+ "script_version_id": 350352988,
+ "url": "https://www.kaggle.com/code/habanwer/arc3-duck-qwen38-baseline?scriptVersionId=350352988",
+ "track": "ARC-AGI-3",
+ "private_on_kaggle_at_collection": true,
+ "placement": {
+  "place": "submissions",
+  "note": "Copy of foysalemonshanto/lb-9-arc3-duck-v12-with-qwen-3-8-27b"
+ },
+ "inputs_now": {
+  "competition_sources": [
+   "arc-prize-2026-arc-agi-3"
+  ],
+  "dataset_sources": [
+   "",
+   "jakobbrggen/taaf-kaggle-source-anim-20260807-anim"
+  ],
+  "model_sources": [
+   "foysalemonshanto/qwen3-8-27b-fp8-repacked-v1/PyTorch/hf-fp8/1"
+  ],
+  "kernel_sources": []
+ },
+ "inputs_as_run": [
+  {
+   "sourceId": 133468,
+   "sourceType": "competition"
+  },
+  {
+   "sourceId": 16033726,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 16306657,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 18706912,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 966079,
+   "sourceType": "modelInstanceVersion"
+  }
+ ],
+ "accelerator": "nvidiaRtxPro6000",
+ "run": {
+  "start": "2026-09-16T15:51:05.320258+00:00",
+  "end": "2026-09-16T16:28:57.376964+00:00",
+  "duration_s": 2272.056706,
+  "exception": null
+ },
+ "submissions": [
+  {
+   "submission_ref": "56283316",
+   "submitted_utc": "2026-09-16T16:34:21.160000",
+   "status": "COMPLETE",
+   "public_score": "1.37",
+   "private_score": "",
+   "selected": "",
+   "after_deadline": ""
+  }
+ ],
+ "files": {
+  "__notebook__.ipynb": "f9ff2cf0a07bbc0e2c446f99878eaf010e6c810d427a08f7b01f317997577279",
+  "__output__.json": "e1b90c74c82120ab3cadcb11b6e7fb237d80e9c16bc6c1ae5fe414bbd657ff2e",
+  "outputs": "hashed from local copy 2026-09-16__arc3-duck-qwen38-baseline__v1__score-1.37"
+ },
+ "collected_at": "2026-11-06T11:57:13Z",
+ "notebook_sha256_original": "f9ff2cf0a07bbc0e2c446f99878eaf010e6c810d427a08f7b01f317997577279",
+ "log_sha256_original": "e1b90c74c82120ab3cadcb11b6e7fb237d80e9c16bc6c1ae5fe414bbd657ff2e",
+ "inferred_parent": {
+  "notebook": "foysalemonshanto/lb-9-arc3-duck-v12-with-qwen-3-8-27b@v6",
+  "distance_lines": 32,
+  "runner_up": "foysalemonshanto/lb-9-arc3-duck-v12-with-qwen-3-8-27b@v5",
+  "runner_up_distance": 57,
+  "method": "Tools/lineage/infer_parents.py"
+ },
+ "root_base": "foysalemonshanto/lb-9-arc3-duck-v12-with-qwen-3-8-27b@v6"
+}

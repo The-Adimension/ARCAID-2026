@@ -1,0 +1,96 @@
+--- base cell 14
++++ new cell 17
+@@ -105,10 +105,22 @@
+             f'Offline public game set changed; missing={missing}, extra={extra}.'
+         )
+-    bm.games = [offline_by_id[game_id] for game_id in PUBLIC_GAME_IDS]
+-    if len(bm.games) != 25:
+-        raise RuntimeError(f'Expected 25 public games, got {len(bm.games)}.')
+-    print(f'PUBLIC25_SELECTION games={len(bm.games)} passes=1', flush=True)
+-
+-bm.n_passes = 1
++    # arc3 depth probe: the 25-game integrity check above still runs, so upstream drift in the
++    # offline set is still caught; we then play a 6-game subset long enough to reach level 2.
++    DEPTH_PROBE_IDS = [
++        "sb26-7fbdac44",
++        "vc33-5430563c",
++        "ft09-0d8bbf25",
++        "lp85-305b61c3",
++        "re86-8af5384d",
++        "ar25-0c556536"
++    ]
++    bm.games = [offline_by_id[game_id] for game_id in DEPTH_PROBE_IDS]
++    if len(bm.games) != len(DEPTH_PROBE_IDS):
++        raise RuntimeError(f'Expected {len(DEPTH_PROBE_IDS)} probe games, got {len(bm.games)}.')
++    print(f'DEPTH_PROBE_SELECTION games={len(bm.games)} passes=1 cap_s=3600', flush=True)
++
++# arc3: two passes over the same games -- n_passes, never a repeated games list
++# (duplicate game_ids raise in taaf/benchmark.py).
++bm.n_passes = 1 if TRUE_SUBMISSION else 1
+ bm.game_weights = None
+ 
+@@ -137,4 +149,20 @@
+ )
+ 
++# arc3: fit the per-game budget so the last wave of games ends before soft_end. 110 games at
++# concurrency 28 is 4 waves; at 7920 s per game the last wave overran the time left by ~600 s.
++import math as _math
++_arc3_waves = _math.ceil(
++    len(bm.games) * int(getattr(bm, 'n_passes', 1) or 1) / max(1, int(bm.solver.concurrency))
++)
++_arc3_fit_s = ((soft_end - datetime.now()).total_seconds() - 120.0) / max(1, _arc3_waves)
++_arc3_budget_before = float(bm.solver.max_runtime_s_per_game)
++if _arc3_fit_s < _arc3_budget_before:
++    bm.solver.max_runtime_s_per_game = float(max(1800.0, _math.floor(_arc3_fit_s)))
++print(
++    f'ARC3_BUDGET_FIT waves={_arc3_waves} fit_s={_arc3_fit_s:.0f} '
++    f'budget_s={_arc3_budget_before:.0f}->{bm.solver.max_runtime_s_per_game:.0f}',
++    flush=True,
++)
++
+ # Play the benchmark; watchdog stop and teardown run even if it raises.
+ try:
+@@ -155,7 +183,17 @@
+         public_runs = list(bm.game_runs)
+         public_run_ids = [run.game_id for run in public_runs]
+-        if len(public_runs) != 25 or public_run_ids != list(PUBLIC_GAME_IDS):
++        # arc3: audit against the set we actually selected, and by MULTISET, not by order.
++        # Upstream asserts exactly 25 ids in PUBLIC_GAME_IDS order, so a subset run dies here
++        # (depthrun1) and so does a multi-pass run, where game_runs holds len(games)*n_passes
++        # entries (resetrun2). Both played every game first and then lost the scorer call and
++        # the COMPLETE status -- and an ERRORed version cannot be submitted.
++        from collections import Counter as _ArcCounter
++        _expected_ids = list(globals().get('DEPTH_PROBE_IDS') or PUBLIC_GAME_IDS)
++        _passes = int(getattr(bm, 'n_passes', 1) or 1)
++        _want = _ArcCounter({_gid: _passes for _gid in _expected_ids})
++        if _ArcCounter(public_run_ids) != _want:
+             raise RuntimeError(
+-                f'Public run coverage changed: count={len(public_runs)} ids={public_run_ids}.'
++                f'Public run coverage changed: count={len(public_runs)} ids={public_run_ids} '
++                f'expected={_expected_ids} x{_passes} passes.'
+             )
+         unfinished = [
+@@ -194,10 +232,15 @@
+         for command in json.loads((BUNDLE_DIR / "teardown_commands.json").read_text()):
+             print(f"taaf.kaggle: teardown command: {command}", flush=True)
+-            subprocess.run(
+-                command,
+-                shell=True,
+-                check=False,
+-                cwd=WORKING_DIR,
+-                env=_command_env(),
+-                timeout=30.0,
+-            )
++            # arc3: check=False already ignores a non-zero exit; a hang past the timeout raises
++            # TimeoutExpired, which must not fail the notebook after every game has been played.
++            try:
++                subprocess.run(
++                    command,
++                    shell=True,
++                    check=False,
++                    cwd=WORKING_DIR,
++                    env=_command_env(),
++                    timeout=30.0,
++                )
++            except Exception as _teardown_exc:
++                print(f'taaf.kaggle: teardown command did not finish cleanly: {_teardown_exc!r}', flush=True)

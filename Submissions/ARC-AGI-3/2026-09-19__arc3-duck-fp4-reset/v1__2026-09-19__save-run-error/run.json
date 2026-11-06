@@ -1,0 +1,50 @@
+{
+ "kernel": "habanwer/arc3-duck-fp4-reset",
+ "title": "arc3-duck-fp4-reset",
+ "version": 1,
+ "script_version_id": 351112476,
+ "url": "https://www.kaggle.com/code/habanwer/arc3-duck-fp4-reset?scriptVersionId=351112476",
+ "track": "ARC-AGI-3",
+ "private_on_kaggle_at_collection": true,
+ "placement": {
+  "place": "submissions"
+ },
+ "inputs_now": {
+  "competition_sources": [
+   "arc-prize-2026-arc-agi-3"
+  ],
+  "dataset_sources": [
+   "keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1",
+   "keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1"
+  ],
+  "model_sources": [
+   ""
+  ],
+  "kernel_sources": []
+ },
+ "inputs_as_run": null,
+ "accelerator": null,
+ "run": {
+  "start": "2026-09-19T16:50:10.521730+00:00",
+  "end": "2026-09-19T17:00:14.197767+00:00",
+  "duration_s": 603.676037,
+  "exception": true
+ },
+ "submissions": [],
+ "files": {
+  "__notebook__.ipynb": "dbbd09d277470ae6f845866a9263021f1ecb52e358c30339617bff92bb1953b2",
+  "__output__.json": "ac8312817e3594ca544a6560ad3b822a0702e2d6675f21e604922c26e2c85b90",
+  "outputs": "hashed from local copy 2026-09-19__arc3-duck-fp4-reset__v1__unsubmitted__error-import"
+ },
+ "collected_at": "2026-11-06T11:57:04Z",
+ "notebook_sha256_original": "dbbd09d277470ae6f845866a9263021f1ecb52e358c30339617bff92bb1953b2",
+ "log_sha256_original": "ac8312817e3594ca544a6560ad3b822a0702e2d6675f21e604922c26e2c85b90",
+ "inferred_parent": {
+  "notebook": "habanwer/arc3-duck-fp4-stall@v2",
+  "distance_lines": 79,
+  "runner_up": "habanwer/arc3-duck-fp4-stall@v1",
+  "runner_up_distance": 81,
+  "method": "Tools/lineage/infer_parents.py"
+ },
+ "root_base": "keithtyser/duck-qwen3-8-flash-next-nvfp4-mtp@v13"
+}

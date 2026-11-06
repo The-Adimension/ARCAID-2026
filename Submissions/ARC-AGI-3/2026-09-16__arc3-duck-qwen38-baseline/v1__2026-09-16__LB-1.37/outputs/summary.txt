@@ -1,0 +1,17 @@
+benchmark: anim-20260807-anim-smoke-1g
+solver:    duck-harness
+games:     1
+passes:    1
+runs:      1 (won: 0)
+started:   2026-09-16 15:58:28
+ended:     2026-09-16 16:28:53
+duration:  30m 25s
+mean score:    1.69
+median score:  1.69
+total actions: 52
+total tokens:  45795
+generated tokens/sec: 25.09 (job wallclock)
+total wallclock: 1825.1s
+
+per-game (mean across passes):
+  ls20-9607627b: score=1.69, levels=1.0/7, actions=52, tokens=45795

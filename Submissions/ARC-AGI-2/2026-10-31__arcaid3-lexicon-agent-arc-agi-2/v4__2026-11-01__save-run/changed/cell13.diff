@@ -1,0 +1,11 @@
+--- base cell 13
++++ new cell 13
+@@ -17,4 +17,8 @@
+     print("python", _sys.version.split()[0])
+     assert _sys.version_info[:2] == (3, 12), "the wheelhouse is cp312: pin the Python 3.12 docker image"
++    gpus = subprocess.run(["nvidia-smi", "--query-gpu=index,name,memory.total", "--format=csv,noheader"],
++                          capture_output=True, text=True).stdout.strip().splitlines()
++    print("gpus:", gpus)
++    assert len(gpus) == 4, "expected 4 GPUs (L4x4): wrong image or accelerator"
+     wh = Path(glob.glob("/kaggle/input/**/arc3-vllm-h100-wheelhouse-v3/**/requirements.lock", recursive=True)[0]).parent
+     t = time.time()

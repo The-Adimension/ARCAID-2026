@@ -1,0 +1,16 @@
+--- base cell 0
++++ new cell 0
+@@ -1,9 +1,7 @@
+-## Duck on the NVFP4 stack + prompt-only action batching (measurement run)
++## Duck + NVFP4 + prompt-only batching, with a level-2 depth probe as the save run
+ 
+-Identical to `arc3-duck-fp4-serving` (submitted as v1) except for **one change: the system prompt**. `consult/arc3_batch.py` rewrites two lines of `PYTHON_ADDENDUM` that pull against batching -- "Optimize for the shortest reliable sequence" and "After **every** action, verify..." -- and adds a predict-then-commit protocol: plan a sequence, predict a board signature per step, execute behind a gate that breaks on the first mismatch.
++Submission 56342262 (FP4, no batching) scored **2.49**. Clearing level 1 on every game is worth only ~3.0, so breadth is nearly spent and the open question is what happens at **level 2**. A 25-game x 900 s save run cannot answer it -- 11-13 actions per game never gets there.
+ 
+-No harness code, no serving knob, no new mechanism. Duck's sandbox already permits `action(...)` inside loops with state refreshed between calls (`prompts.py:105`), so the whole protocol lives in the model's own code.
++**Save run:** 6 games that reliably clear level 1, at 3600 s each (~240 actions per game), so the agent actually reaches level 2 and we can see whether it is **starved** (spent well under the human baseline on the level it failed) or **stuck** (spent well over). Those call for opposite next moves.
+ 
+-**Baseline to beat** (fp4run1, same games, same 900 s cap, same profile): 2.33 actions per charged model decision, 57% singletons, 802 tokens per executed action. Target >= 4.0 and <= 600. The last cell prints `ARC3_BATCH_RESULT` with both.
+-
+-This notebook is for measurement and is not intended for submission.
++**Competition path: unchanged** -- live gateway games, 7920 s per game, concurrency 28. This version is submittable as-is, carrying the prompt-only batching change measured in batchrun1 (actions per decision 2.33 -> 3.14, singletons 57% -> 35%, tokens per action 802 -> 619, tokens per decision flat).

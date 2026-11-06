@@ -1,0 +1,9 @@
+--- base cell 6
++++ new cell 6
+@@ -58,5 +58,5 @@
+ SERVER_BASE_URL = f'http://{SERVED_MODEL_HOST}:{SERVED_MODEL_PORT}/v1'
+ USE_PRIORITY_SCHEDULING = True
+-STUCK_RESTART_TOKENS = 100000  # ARCAID3: 0 = Franzen v1 behaviour
++STUCK_RESTART_TOKENS = 0  # ARCAID3: 0 = Franzen v1 behaviour
+ 
+ setup_env = {

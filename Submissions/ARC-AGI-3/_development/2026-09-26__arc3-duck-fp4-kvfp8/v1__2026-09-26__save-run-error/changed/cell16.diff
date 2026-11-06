@@ -1,0 +1,21 @@
+--- base cell 16
++++ new cell 16
+@@ -107,16 +107,9 @@
+     # arc3 depth probe: the 25-game integrity check above still runs, so upstream drift in the
+     # offline set is still caught; we then play a 6-game subset long enough to reach level 2.
+-    DEPTH_PROBE_IDS = [
+-        "sb26-7fbdac44",
+-        "vc33-5430563c",
+-        "ft09-0d8bbf25",
+-        "lp85-305b61c3",
+-        "re86-8af5384d",
+-        "ar25-0c556536"
+-    ]
++    DEPTH_PROBE_IDS = list(PUBLIC_GAME_IDS)  # v5 contention probe: all 25
+     bm.games = [offline_by_id[game_id] for game_id in DEPTH_PROBE_IDS]
+     if len(bm.games) != len(DEPTH_PROBE_IDS):
+         raise RuntimeError(f'Expected {len(DEPTH_PROBE_IDS)} probe games, got {len(bm.games)}.')
+-    print(f'DEPTH_PROBE_SELECTION games={len(bm.games)} passes=1 cap_s=3600', flush=True)
++    print(f'DEPTH_PROBE_SELECTION games={len(bm.games)} passes=1 cap_s=1800 concurrency=28', flush=True)
+ 
+ # arc3: two passes over the same games -- n_passes, never a repeated games list

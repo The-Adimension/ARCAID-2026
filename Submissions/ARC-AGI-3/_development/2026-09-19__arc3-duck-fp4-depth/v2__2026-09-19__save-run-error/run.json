@@ -1,0 +1,50 @@
+{
+ "kernel": "habanwer/arc3-duck-fp4-depth",
+ "title": "arc3-duck-fp4-depth",
+ "version": 2,
+ "script_version_id": 351029162,
+ "url": "https://www.kaggle.com/code/habanwer/arc3-duck-fp4-depth?scriptVersionId=351029162",
+ "track": "ARC-AGI-3",
+ "private_on_kaggle_at_collection": true,
+ "placement": {
+  "place": "development"
+ },
+ "inputs_now": {
+  "competition_sources": [
+   "arc-prize-2026-arc-agi-3"
+  ],
+  "dataset_sources": [
+   "keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1",
+   "keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1"
+  ],
+  "model_sources": [
+   ""
+  ],
+  "kernel_sources": []
+ },
+ "inputs_as_run": null,
+ "accelerator": null,
+ "run": {
+  "start": "2026-09-19T10:28:52.544574+00:00",
+  "end": "2026-09-19T11:38:08.387394+00:00",
+  "duration_s": 4155.84282,
+  "exception": true
+ },
+ "submissions": [],
+ "files": {
+  "__notebook__.ipynb": "afbda9752851168c4fc3bfcb687c4b68cf9f167fb3bedd5c37b9b4bbf19cd898",
+  "__output__.json": "7032b3848f63dc19c53898417abe3fde0b23e96138b20cdc1da0b5eb0ece9200",
+  "outputs": "hashed from local copy 2026-09-19__arc3-duck-fp4-depth__v2__unsubmitted__error-coverage-check"
+ },
+ "collected_at": "2026-11-06T12:14:21Z",
+ "notebook_sha256_original": "afbda9752851168c4fc3bfcb687c4b68cf9f167fb3bedd5c37b9b4bbf19cd898",
+ "log_sha256_original": "7032b3848f63dc19c53898417abe3fde0b23e96138b20cdc1da0b5eb0ece9200",
+ "inferred_parent": {
+  "notebook": "habanwer/arc3-duck-fp4-batch@v1",
+  "distance_lines": 68,
+  "runner_up": "habanwer/arc3-duck-fp4-serving@v1",
+  "runner_up_distance": 105,
+  "method": "Tools/lineage/infer_parents.py"
+ },
+ "root_base": "keithtyser/duck-qwen3-8-flash-next-nvfp4-mtp@v13"
+}

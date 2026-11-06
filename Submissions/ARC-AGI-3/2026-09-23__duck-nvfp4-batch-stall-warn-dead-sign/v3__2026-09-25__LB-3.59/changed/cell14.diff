@@ -1,0 +1,122 @@
+--- base cell 14
++++ new cell 14
+@@ -89,2 +89,119 @@
+     flush=True,
+ )
++
++
++# arc3_score (2026-09-25): scoring, time and click-target lines. Prompt-only, with the same
++# binding trap as arc3_batch: patch both PYTHON_ADDENDUM bindings, then assert on the prompt
++# _build_system_prompt actually returns. Evidence: disc/743060 went 1.12 -> 1.43 on the hidden
++# set with a scoring-formula line plus a time_remaining_seconds pacing line. Formula per
++# docs.arcprize.org/methodology (level weight = level index; RESET counts as an action).
++import re as _re
++
++_inference_root = Path(_ta.__file__).resolve().parents[1]
++_inference_src = "\n".join(
++    _p.read_text(encoding="utf-8", errors="replace") for _p in sorted(_inference_root.rglob("*.py"))
++)
++# Point at the live clock only if this bundle's harness reports it; otherwise state the budget.
++ARC3_HAS_TIME_FIELD = "time_remaining_seconds" in _inference_src
++# Add the click hint only if the harness itself uses these names.
++ARC3_HAS_GRID_NAMES = (
++    "current_frame" in _inference_src
++    and _re.search(r"""['"]row['"]""", _inference_src) is not None
++    and _re.search(r"""['"]col['"]""", _inference_src) is not None
++)
++
++ARC3_SCORE_MARKER = "SCORING (how this run is graded)"
++ARC3_SCORE_LINE = (
++    "- " + ARC3_SCORE_MARKER + ": each level you CLEAR scores (h / a)^2, where h is the number "
++    "of actions a first-time human needed on that level and a is the number you used. Every action "
++    "counts, including RESET. Level k carries weight k: in a 7-level game level 7 is worth 7/28 of "
++    "the game and level 1 only 1/28. A level you do not clear scores 0. Clearing a level at twice "
++    "the human's actions still keeps 1/4 of its value; not clearing it keeps nothing. So never "
++    "explore less to save actions: save actions by never repeating an action or plan that already "
++    "failed.\n"
++)
++if ARC3_HAS_TIME_FIELD:
++    _arc3_clock = "Action results report `time_remaining_seconds`; pace yourself with it."
++else:
++    _arc3_clock = "You have about %d minutes of wall-clock time for this whole game." % int(
++        float(bm.solver.max_runtime_s_per_game) // 60
++    )
++ARC3_TIME_LINE = (
++    "- TIME: the game ends when your wall-clock budget runs out, not when actions run out, and "
++    "every turn of reasoning spends that budget. " + _arc3_clock + " Time sunk into a level you "
++    "cannot crack is time taken from the deeper levels, which are worth more.\n"
++)
++ARC3_GRID_LINE = (
++    "- CLICK TARGETS: clicks address grid cells (row, col) of the 64x64 grid in `current_frame`: "
++    "row counts down from the top (y), col counts right from the left (x), both 0-63. Take targets "
++    "from the grid, never by estimating positions in the image: "
++    "cells = [(r, c) for r, line in enumerate(current_frame) for c, v in enumerate(line) if v == colour] "
++    "lists every cell of one colour; click a cell that is on the object you mean.\n"
++)
++
++
++def _arc3_score_install() -> dict:
++    from inference.agent import prompts as P
++    from inference.agent import tool_agent as TA
++
++    if ARC3_SCORE_MARKER in TA.PYTHON_ADDENDUM:
++        return {"installed": "already"}
++    anchor = arc3_batch.NEW_SHORTEST
++    n = TA.PYTHON_ADDENDUM.count(anchor)
++    if n != 1:
++        raise RuntimeError(f"arc3_score: expected the arc3_batch shortest line exactly once, found {n}")
++    block = ARC3_SCORE_LINE + ARC3_TIME_LINE + (ARC3_GRID_LINE if ARC3_HAS_GRID_NAMES else "")
++    new = TA.PYTHON_ADDENDUM.replace(anchor, block + anchor)
++    TA.PYTHON_ADDENDUM = new
++    P.PYTHON_ADDENDUM = new
++    built = TA._build_system_prompt(tool_output_tokens=1024)
++    for need in (ARC3_SCORE_MARKER, "- TIME: the game ends", arc3_batch.MARKER, "stuck_warning"):
++        if need not in built:
++            raise RuntimeError(f"arc3_score: {need!r} missing from _build_system_prompt")
++    if ARC3_HAS_GRID_NAMES and "CLICK TARGETS" not in built:
++        raise RuntimeError("arc3_score: click-target line missing from _build_system_prompt")
++    return {"installed": True, "delta_chars": len(block), "system_prompt_chars": len(built)}
++
++
++print("arc3_score:", _arc3_score_install(), flush=True)
++
++# arc3_stall counter, observe-only: the 09-23 probe armed 40 bans and dropped 0 actions. The
++# predict-then-commit loop sends one action per action([a]) call, and a fully banned call is
++# passed through unchanged, so a banned singleton is never dropped. Count both, change nothing.
++arc3_stall.STATS.setdefault("calls_seen", 0)
++arc3_stall.STATS.setdefault("calls_single_action", 0)
++arc3_stall.STATS.setdefault("calls_fully_banned_passthrough", 0)
++if not getattr(_ta.ToolAgent._normalize_python_actions, "_arc3_counter", False):
++    _arc3_inner_normalize = _ta.ToolAgent._normalize_python_actions
++
++    def _arc3_counted_normalize(self, value):
++        out = _arc3_inner_normalize(self, value)
++        try:
++            acts = out if isinstance(out, list) else []
++            arc3_stall.STATS["calls_seen"] += 1
++            if len(acts) == 1:
++                arc3_stall.STATS["calls_single_action"] += 1
++            t = getattr(self, "_arc3_tracker", None)
++            if t is not None and acts and t.banned and all(
++                (not arc3_stall._never_ban(arc3_stall._sig(a))) and arc3_stall._sig(a) in t.banned
++                for a in acts
++            ):
++                arc3_stall.STATS["calls_fully_banned_passthrough"] += 1
++        except Exception:
++            pass   # a counter must never break a run
++        return out
++
++    _arc3_counted_normalize._arc3_stall = True
++    _arc3_counted_normalize._arc3_counter = True
++    _ta.ToolAgent._normalize_python_actions = _arc3_counted_normalize
++
++_built3 = _ta._build_system_prompt(tool_output_tokens=1024)
++for _banned in _BANNED_PROMPT:
++    assert _banned not in _built3, _banned
++assert arc3_batch.MARKER in _built3 and "stuck_warning" in _built3 and ARC3_SCORE_MARKER in _built3
++print(
++    "ARC3_SCORE_READY chars=%d time_field=%s grid_hint=%s counter=%s"
++    % (len(_built3), ARC3_HAS_TIME_FIELD, ARC3_HAS_GRID_NAMES,
++       getattr(_ta.ToolAgent._normalize_python_actions, "_arc3_counter", False)),
++    flush=True,
++)

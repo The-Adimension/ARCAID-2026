@@ -1,0 +1,10 @@
+--- base cell 7
++++ new cell 7
+@@ -1,4 +1,6 @@
+ def _soft_end_time(max_runtime_s: float, *, run_as_submission: bool) -> datetime | None:
+-    if run_as_submission or max_runtime_s <= 0:
++    # arc3: upstream returns None in submission mode, so nothing ever cancels the
++    # benchmark and a hard kernel kill would skip teardown entirely.
++    if max_runtime_s <= 0:
+         return None
+     budget = max(1.0, max_runtime_s)

@@ -1,0 +1,73 @@
+{
+ "kernel": "habanwer/arcaid3-rep-v2-r2",
+ "title": "arcaid3-rep-v2-r2",
+ "version": 1,
+ "script_version_id": 356715324,
+ "url": "https://www.kaggle.com/code/habanwer/arcaid3-rep-v2-r2?scriptVersionId=356715324",
+ "track": "ARC-AGI-3",
+ "private_on_kaggle_at_collection": false,
+ "placement": {
+  "place": "ablations",
+  "group": "2026-10-09__A1-replicates-v2-vs-v4",
+  "arm": "v2"
+ },
+ "inputs_now": {
+  "competition_sources": [
+   "arc-prize-2026-arc-agi-3"
+  ],
+  "dataset_sources": [
+   "dfranzen/pennyroyal-v253",
+   "dfranzen/taaf-kaggle-source-bundle-copy"
+  ],
+  "model_sources": [
+   "dfranzen/albucino-qwen3-8-flash-next-drafter/Transformers/default/1",
+   "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/Transformers/default/1"
+  ],
+  "kernel_sources": []
+ },
+ "inputs_as_run": [
+  {
+   "sourceId": 133468,
+   "sourceType": "competition"
+  },
+  {
+   "sourceId": 20092813,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 20134793,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 1007009,
+   "sourceType": "modelInstanceVersion"
+  },
+  {
+   "sourceId": 1007514,
+   "sourceType": "modelInstanceVersion"
+  }
+ ],
+ "accelerator": "nvidiaRtxPro6000",
+ "run": {
+  "start": "2026-10-09T09:46:33.460054+00:00",
+  "end": "2026-10-09T10:21:31.659956+00:00",
+  "duration_s": 2098.199902,
+  "exception": null
+ },
+ "submissions": [],
+ "files": {
+  "__notebook__.ipynb": "f4e9f9f6e90cf64fd06ecfea895bebe1a70fff8f5de5ec83d786aeaa2d09117e",
+  "__output__.json": "1b87184f82a71801c9b5dfc5af31763310469589c7dc22e5b71c4a7c2e9fcd3d"
+ },
+ "collected_at": "2026-11-06T12:11:59Z",
+ "notebook_sha256_original": "f4e9f9f6e90cf64fd06ecfea895bebe1a70fff8f5de5ec83d786aeaa2d09117e",
+ "log_sha256_original": "1b87184f82a71801c9b5dfc5af31763310469589c7dc22e5b71c4a7c2e9fcd3d",
+ "inferred_parent": {
+  "notebook": "habanwer/arcaid3-lexicon-view-dfranzen-m2@v2",
+  "distance_lines": 0,
+  "runner_up": "habanwer/arcaid3-rep-v2-r1@v1",
+  "runner_up_distance": 0,
+  "method": "Tools/lineage/infer_parents.py"
+ },
+ "root_base": "dfranzen/arc-agi-3-milestone-2-solution@v1"
+}

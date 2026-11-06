@@ -1,0 +1,100 @@
+{
+ "kernel": "habanwer/arcaid3-lexicon-dprime-dfranzen-m2",
+ "title": "arcaid3-lexicon-dprime-dfranzen-m2",
+ "version": 1,
+ "script_version_id": 360147562,
+ "url": "https://www.kaggle.com/code/habanwer/arcaid3-lexicon-dprime-dfranzen-m2?scriptVersionId=360147562",
+ "track": "ARC-AGI-3",
+ "private_on_kaggle_at_collection": false,
+ "placement": {
+  "place": "submissions",
+  "note": "Lexicon v6 + D' + empty-animation fix"
+ },
+ "inputs_now": {
+  "competition_sources": [
+   "arc-prize-2026-arc-agi-3"
+  ],
+  "dataset_sources": [
+   "dfranzen/pennyroyal-v253",
+   "dfranzen/taaf-kaggle-source-bundle-copy"
+  ],
+  "model_sources": [
+   "dfranzen/albucino-qwen3-8-flash-next-drafter/Transformers/default/1",
+   "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/Transformers/default/1"
+  ],
+  "kernel_sources": []
+ },
+ "inputs_as_run": [
+  {
+   "sourceId": 133468,
+   "sourceType": "competition"
+  },
+  {
+   "sourceId": 20134793,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 20092813,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 1007009,
+   "sourceType": "modelInstanceVersion"
+  },
+  {
+   "sourceId": 1007514,
+   "sourceType": "modelInstanceVersion"
+  }
+ ],
+ "accelerator": "nvidiaRtxPro6000",
+ "run": {
+  "start": "2026-10-19T17:51:48.544577+00:00",
+  "end": "2026-10-19T18:28:23.485773+00:00",
+  "duration_s": 2194.941196,
+  "exception": null
+ },
+ "submissions": [
+  {
+   "submission_ref": "57405782",
+   "submitted_utc": "2026-10-19T18:33:03.010000",
+   "status": "COMPLETE",
+   "public_score": "21.18",
+   "private_score": "",
+   "selected": "",
+   "after_deadline": ""
+  },
+  {
+   "submission_ref": "57483523",
+   "submitted_utc": "2026-10-21T13:19:52.267000",
+   "status": "COMPLETE",
+   "public_score": "0.00",
+   "private_score": "",
+   "selected": "",
+   "after_deadline": ""
+  },
+  {
+   "submission_ref": "57510463",
+   "submitted_utc": "2026-10-22T04:59:16.670000",
+   "status": "COMPLETE",
+   "public_score": "0.00",
+   "private_score": "",
+   "selected": "",
+   "after_deadline": ""
+  }
+ ],
+ "files": {
+  "__notebook__.ipynb": "f9010d2440743cd70d3dbe641736048f89133a21ffe43cee12b8f2cfe84e1508",
+  "__output__.json": "83c8320bbe641383f90ee4a0bdf500bca200bc12257b6292fc571cf9e03d97aa"
+ },
+ "collected_at": "2026-11-06T11:46:59Z",
+ "notebook_sha256_original": "f9010d2440743cd70d3dbe641736048f89133a21ffe43cee12b8f2cfe84e1508",
+ "log_sha256_original": "83c8320bbe641383f90ee4a0bdf500bca200bc12257b6292fc571cf9e03d97aa",
+ "inferred_parent": {
+  "notebook": "habanwer/arcaid3-lexicon-view-dfranzen-m2@v5",
+  "distance_lines": 57,
+  "runner_up": "habanwer/arcaid3-lexicon-view-dfranzen-m2@v6",
+  "runner_up_distance": 57,
+  "method": "Tools/lineage/infer_parents.py"
+ },
+ "root_base": "dfranzen/arc-agi-3-milestone-2-solution@v1"
+}

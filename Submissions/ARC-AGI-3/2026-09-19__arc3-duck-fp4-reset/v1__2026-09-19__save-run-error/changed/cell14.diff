@@ -1,0 +1,8 @@
+--- base cell 14
++++ new cell 14
+@@ -27,4 +27,5 @@
+ import arc3_stall
+ arc3_stall = importlib.reload(arc3_stall)
++assert arc3_stall.MODE == 'reset', 'arc3_stall must run in reset mode here'
+ print('arc3_stall:', arc3_stall.install(), flush=True)
+ print('arc3_stall prompt:', arc3_stall.install_prompt(), flush=True)

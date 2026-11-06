@@ -1,0 +1,9 @@
+--- base cell 0
++++ new cell 0
+@@ -8,5 +8,5 @@
+ | What the AI sees | a picture of the board | a larger picture (12x), plus the in-between frames when something animates; old board pictures dropped to save memory | same as the base |
+ | Working notes | notes are wiped when it loses a life; sloppy labels are ignored | notes survive losing a life; looser labels accepted | same as the base |
+-| **Change A** | none | none | **also keeps the notes the AI writes while thinking silently, not only what it says out loud** (capped at 400 characters each) |
++| **Change A** | none | none | **keeps the notes the AI writes while thinking silently, not only those out loud** (capped at 400 characters each) |
+ 
+ **Note on the base's header below:** "About this fork" says "32K context ... eight vLLM sequences", but the base's own code (cell *1. Environment and submission mode*) sets **16** sequences and a **16K** context. The table above follows the code.

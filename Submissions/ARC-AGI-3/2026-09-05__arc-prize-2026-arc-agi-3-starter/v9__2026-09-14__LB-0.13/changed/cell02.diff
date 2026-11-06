@@ -1,0 +1,46 @@
+--- base cell 2
++++ new cell 2
+@@ -178,4 +178,5 @@
+     "attract_cap": 64,
+     "attract_budget": 30,     # actions per level the attract channel may take
++    "stall_reset": 80,       # actions without a level before RESETting the level
+     # Retrodiction gate (Retrodict 99.9%, Tycho, Twin): a world model may only
+     # plan live actions if it replays the recorded transitions at this ratio.
+@@ -2212,4 +2213,5 @@
+         self._attract_key: Optional[str] = None
+         self._attract_used: int = 0
++        self._stall: int = 0
+ 
+     @property
+@@ -2327,4 +2329,5 @@
+             self._attract_key = None
+             self._attract_used = 0
++            self._stall = 0
+             self.tracker.new_level()
+             self._level_start = cur_t
+@@ -2332,4 +2335,19 @@
+             self._research_gap = 1
+             self._research_due = 0
++
++        # A level with no progress for this long is probably in a state the
++        # agent cannot undo: RESET the level and keep everything learned.
++        if TUNE["stall_reset"] and self._stall >= TUNE["stall_reset"]:
++            self._stall = 0
++            self.pending_plan.clear()
++            self.nav_plan.clear()
++            self.replay_plan.clear()
++            self._nav_expect = None
++            self._pred_t = None
++            self._prev_g = None
++            self._level_start = None
++            self._level_keys = []
++            self._prev_key = "0"
++            return self._emit("0", latest_frame, "stall-reset")
+ 
+         # PHASE 3 before PHASE 2 return so the ratchet can raise n_ok (no deadlock).
+@@ -2616,4 +2634,5 @@
+         self._prev_anchor = self.tracker.anchor
+         self._level_keys.append(key)
++        self._stall += 1
+         return self._emit(key, frame, why)
+ 

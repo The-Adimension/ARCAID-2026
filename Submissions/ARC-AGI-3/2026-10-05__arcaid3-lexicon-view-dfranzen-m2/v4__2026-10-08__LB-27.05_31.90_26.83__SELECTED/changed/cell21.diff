@@ -1,0 +1,417 @@
+--- base cell 21
++++ new cell 21
+@@ -39,4 +39,10 @@
+ # right/wrong counts) and lists the last step's changes that no rule explains. No game-specific code.
+ # Checked by its own sandbox self-test; ARCAID3_RULES=0 turns it off.
++#
++# Version 4 (2026-10-08): (1) a cue for `.rules` in the user message when it can answer: after actions
++# that changed nothing inside the board, or when a level reaches 6/15/30/60/120 actions (never before the
++# third action of a level). (2) Perception: a piece that merged objects seen apart on the previous frame is
++# cut back into them (object permanence), and the scale lock rejects a coarse grid that a smaller one reads
++# cleanly. Both graded against the engine on 45 recorded plays (eval_perception_v4_off.out): no game worse.
+ # ---------------------------------------------------------------------------
+ import os as _a3_os
+@@ -175,6 +181,28 @@
+     '\n'
+     '\n'
++    'def _mixed_blocks(grid, k, oy, ox, margin=4, limit=2):\n'
++    '    """How many k-blocks away from the screen edge hold more than one colour (counted up to `limit`).\n'
++    '\n'
++    '    Blocks within `margin` pixels of the edge are skipped, because interface bars are drawn\n'
++    '    there at screen resolution.\n'
++    '    """\n'
++    '    h, w = len(grid), len(grid[0]) if grid else 0\n'
++    '    n = 0\n'
++    '    for by in range(oy, h - k + 1, k):\n'
++    '        if by < margin or by + k > h - margin:\n'
++    '            continue\n'
++    '        for bx in range(ox, w - k + 1, k):\n'
++    '            if bx < margin or bx + k > w - margin:\n'
++    '                continue\n'
++    '            v = grid[by][bx]\n'
++    '            if any(grid[y][x] != v for y in range(by, by + k) for x in range(bx, bx + k)):\n'
++    '                n += 1\n'
++    '                if n >= limit:\n'
++    '                    return n\n'
++    '    return n\n'
++    '\n'
++    '\n'
+     'def scale_lock(grids, scales=(8, 7, 6, 5, 4, 3, 2), min_runs=0.85, min_uniform=0.75, tolerance=0.0,\n'
+-    '               max_frames=256):\n'
++    '               max_frames=256, finer_check=True):\n'
+     '    """One block size for a whole level, agreed across its frames.\n'
+     '\n'
+@@ -186,4 +214,11 @@
+     '    largest candidate that passes both tests on every frame given, as (k, oy, ox);\n'
+     '    `tolerance` is the share of frames allowed to fail (0 = strict).\n'
++    '\n'
++    '    A coarse candidate is also rejected (`finer_check`) when some frame has two or more mixed\n'
++    "    blocks away from the screen edge at k while a smaller candidate reads that frame's interior\n"
++    "    with none: sprites are drawn at the camera's scale, so such detail means k is too coarse\n"
++    '    (typically an object that moved off the coarse grid). The divisors of every candidate (2 or\n'
++    '    more) join the candidates. Raw pixels (k = 1) are never used for the comparison, so a\n'
++    '    one-pixel interface overlay, mixed at every size, cannot force a level down to pixels.\n'
+     '\n'
+     '    All frames are used, not a sample, so the lock is monotone: once a frame has\n'
+@@ -206,5 +241,11 @@
+     '            cands[(k, oy, ox)] = cands.get((k, oy, ox), 0) + 1\n'
+     '    allowed = int(tolerance * len(grids))\n'
+-    '    for k, oy, ox in sorted(cands, key=lambda c: (-c[0], -cands[c], c[1], c[2])):\n'
++    '    if finer_check:\n'
++    '        for k, oy, ox in list(cands):\n'
++    '            for d in range(2, k):\n'
++    '                if k % d == 0:\n'
++    '                    cands.setdefault((d, oy % d, ox % d), 0)\n'
++    '    order = sorted(cands, key=lambda c: (-c[0], -cands[c], c[1], c[2]))\n'
++    '    for i, (k, oy, ox) in enumerate(order):\n'
+     '        failed = 0\n'
+     '        for g, r in zip(grids, runs):\n'
+@@ -213,6 +254,13 @@
+     '                if failed > allowed:\n'
+     '                    break\n'
+-    '        if failed <= allowed:\n'
+-    '            return (k, oy, ox)\n'
++    '        if failed > allowed:\n'
++    '            continue\n'
++    '        smaller = [c for c in order[i + 1:] if c[0] < k]\n'
++    '        if finer_check and smaller and any(\n'
++    '                _mixed_blocks(g, k, oy, ox) >= 2\n'
++    '                and any(_mixed_blocks(g, *c, limit=1) == 0 and _fits(g, *c, r, min_runs, min_uniform) for c in smaller)\n'
++    '                for g, r in zip(grids, runs)):\n'
++    '            continue                                    # too coarse: a smaller grid reads this level cleanly\n'
++    '        return (k, oy, ox)\n'
+     '    return (1, 0, 0)\n'
+     '\n'
+@@ -469,9 +517,91 @@
+     '# --------------------------------------------------------------------------- encode / diff\n'
+     '\n'
+-    'def encode(grid, lexicon=None, connectivity=8, layered=True, seen_at=None, lock=None):\n'
++    'def _piece(cells, members, like):\n'
++    '    members = sorted(members)\n'
++    '    rs, cs = [p[0] for p in members], [p[1] for p in members]\n'
++    '    return {"cells": members, "bbox": (min(rs), min(cs), max(rs), max(cs)),\n'
++    '            "colours": sorted({cells[r][c] for r, c in members}), "depth": like.get("depth", 0),\n'
++    '            "parent": like.get("parent")}\n'
++    '\n'
++    '\n'
++    'def _components(members):\n'
++    '    """Connected pieces (8-neighbour) of a set of cells."""\n'
++    '    members, out = set(members), []\n'
++    '    while members:\n'
++    '        stack = [members.pop()]\n'
++    '        comp = set(stack)\n'
++    '        while stack:\n'
++    '            r, c = stack.pop()\n'
++    '            for dr, dc in _N8:\n'
++    '                q = (r + dr, c + dc)\n'
++    '                if q in members:\n'
++    '                    members.discard(q)\n'
++    '                    comp.add(q)\n'
++    '                    stack.append(q)\n'
++    '        out.append(comp)\n'
++    '    return out\n'
++    '\n'
++    '\n'
++    'def carve(cells, pieces, prev, lexicon, radius=6):\n'
++    '    """Object permanence: cut a piece back into objects that were apart on the previous frame.\n'
++    '\n'
++    '    Two objects that touch become one piece (pieces may hold several colours). A piece is cut\n'
++    '    only when it is new (its picture was not seen before), holds two or more colours, and splits\n'
++    '    exactly into pictures present on the previous frame: each found whole (same cells, same\n'
++    '    colours) within `radius` cells of where it was, the remainder also a picture from that frame.\n'
++    '    Otherwise the piece is kept as it is.\n'
++    '    """\n'
++    '    if not prev:\n'
++    '        return pieces\n'
++    '    before = [p for p in prev["placed"] if not p["container"]]\n'
++    '    prev_syms = {p["sym"] for p in before}\n'
++    '    pics = []\n'
++    '    for p in before:\n'
++    '        patch = lexicon.entries[p["sym"]]["patch"]\n'
++    '        pcs = [(i, j, v) for i, row in enumerate(patch) for j, v in enumerate(row) if v >= 0]\n'
++    '        pics.append((len(pcs), p["sym"], p["at"], pcs))\n'
++    '    pics.sort(key=lambda t: (-t[0], t[1], t[2]))\n'
++    '    offsets = sorted(((dr, dc) for dr in range(-radius, radius + 1) for dc in range(-radius, radius + 1)),\n'
++    '                     key=lambda d: (abs(d[0]) + abs(d[1]), d))\n'
++    '    out = []\n'
++    '    for obj in pieces:\n'
++    '        members = set(obj["cells"])\n'
++    '        if (obj.get("container") or len(obj["colours"]) < 2 or len(members) < 2\n'
++    '                or _patch(cells, obj) in lexicon.by_key):\n'
++    '            out.append(obj)\n'
++    '            continue\n'
++    '        r0, c0, r1, c1 = obj["bbox"]\n'
++    '        left, cut = set(members), []\n'
++    '        for n, sym, (pr, pc), pcs in pics:\n'
++    '            if n >= len(left) or pr > r1 + radius or pc > c1 + radius or pr + radius < r0 - n or pc + radius < c0 - n:\n'
++    '                continue\n'
++    '            for dr, dc in offsets:\n'
++    '                r, c = pr + dr, pc + dc\n'
++    '                spot = [(r + i, c + j) for i, j, _ in pcs]\n'
++    '                if all(q in left and cells[q[0]][q[1]] == v for q, (_, _, v) in zip(spot, pcs)):\n'
++    '                    cut.append(set(spot))\n'
++    '                    left -= set(spot)\n'
++    '                    break\n'
++    '        if not cut:\n'
++    '            out.append(obj)\n'
++    '            continue\n'
++    '        rest = _components(left)\n'
++    '        ok = all(lexicon.by_key.get(_patch(cells, {"cells": sorted(comp), "bbox": (\n'
++    '            min(q[0] for q in comp), min(q[1] for q in comp), max(q[0] for q in comp), max(q[1] for q in comp))}))\n'
++    '            in prev_syms for comp in rest)\n'
++    '        if not ok:\n'
++    '            out.append(obj)\n'
++    '            continue\n'
++    '        out += [_piece(cells, comp, obj) for comp in cut + rest]\n'
++    '    return out\n'
++    '\n'
++    '\n'
++    'def encode(grid, lexicon=None, connectivity=8, layered=True, seen_at=None, lock=None, prev=None):\n'
+     '    """Encode one screen. Returns a dict that `to_text` renders as the code listing.\n'
+     '\n'
+     "    `lock` = (k, oy, ox) from `scale_lock` reads the screen at the level's agreed\n"
+-    "    block size instead of this frame's own detection.\n"
++    "    block size instead of this frame's own detection. `prev` = the previous frame's\n"
++    '    encoding (same level, same Lexicon): pieces that merged objects seen apart there\n'
++    '    are cut back into them (`carve`).\n'
+     '    """\n'
+     '    lexicon = lexicon if lexicon is not None else Lexicon()\n'
+@@ -481,4 +611,6 @@
+     '    pieces = (layered_objects(cells, bg, connectivity=connectivity) if layered\n'
+     '              else objects(cells, bg, connectivity=connectivity, multicolour=True))\n'
++    '    if prev is not None and (prev["scale"], prev["offset"]) == (nat["scale"], nat["offset"]):\n'
++    '        pieces = carve(cells, pieces, prev, lexicon)\n'
+     '    placed = []\n'
+     '    for obj in pieces:\n'
+@@ -547,9 +679,16 @@
+     '\n'
+     '\n'
+-    'def diff(before, after):\n'
++    'def diff(before, after, place_first=False):\n'
+     '    """Object-level change between two encodings that share one Lexicon.\n'
+     '\n'
+-    '    Instances of the same symbol are paired greedily by distance. Returns a dict\n'
+-    '    with moved / appeared / disappeared lists and a one-line-per-change text.\n'
++    '    Unchanged objects are matched first; then (`place_first`) an object that keeps its place\n'
++    '    and shape but changes colour is read as recoloured; then instances of the same symbol are\n'
++    '    paired greedily by distance as moves. The place rule is off by default: graded against the\n'
++    '    engine on 45 recorded plays it read real moves as recolours (tiles moving along a ring, an\n'
++    '    avatar crossing a tiled floor) far more often than it fixed a recolour read as moves\n'
++    '    (kaggle/lexicon-dfranzen/eval_perception_v4_*.out). place_first="shared" applies the place rule only\n'
++    '    between pictures that have several copies on screen: a unique object that leaves a place\n'
++    '    is still read as moving (an avatar crossing a tiled floor). Returns a dict with moved /\n'
++    '    became / appeared / disappeared lists and a one-line-per-change text.\n'
+     '    """\n'
+     '    def by_sym(code):\n'
+@@ -560,11 +699,37 @@
+     '\n'
+     '    a, b = by_sym(before), by_sym(after)\n'
++    '    for sym in set(a) | set(b):                       # unchanged objects first\n'
++    '        for p in [p for p in a.get(sym, []) if p in b.get(sym, [])]:\n'
++    '            a[sym].remove(p)\n'
++    '            b[sym].remove(p)\n'
++    '    # identity by place: an object whose place and shape stay while its colours change is the same\n'
++    '    # object recoloured, not one object leaving and a look-alike arriving (checked before moves)\n'
++    '    lex = before.get("lexicon")\n'
++    '    became = []\n'
++    '    if lex is not None and place_first:\n'
++    '        def mask(sym):\n'
++    '            return tuple(tuple(v >= 0 for v in row) for row in lex.entries[sym]["patch"])\n'
++    '        copies0, copies1 = {}, {}\n'
++    '        for q in before["placed"]:\n'
++    '            copies0[q["sym"]] = copies0.get(q["sym"], 0) + 1\n'
++    '        for q in after["placed"]:\n'
++    '            copies1[q["sym"]] = copies1.get(q["sym"], 0) + 1\n'
++    '        at_after = {}\n'
++    '        for sym, spots in b.items():\n'
++    '            for p in spots:\n'
++    '                at_after.setdefault(p, []).append(sym)\n'
++    '        for s0 in sorted(a, key=lambda s: (len(s), s)):\n'
++    '            for p in list(a[s0]):\n'
++    '                for s1 in at_after.get(p, []):\n'
++    '                    if place_first == "shared" and (copies0.get(s0, 0) < 2 or copies1.get(s1, 0) < 2):\n'
++    '                        continue\n'
++    '                    if s1 != s0 and p in b.get(s1, []) and mask(s1) == mask(s0):\n'
++    '                        became.append((s0, s1, p))\n'
++    '                        a[s0].remove(p)\n'
++    '                        b[s1].remove(p)\n'
++    '                        break\n'
+     '    moved, appeared, disappeared = [], [], []\n'
+     '    for sym in sorted(set(a) | set(b), key=lambda s: (len(s), s)):\n'
+     '        left, right = list(a.get(sym, [])), list(b.get(sym, []))\n'
+-    '        common = [p for p in left if p in right]\n'
+-    '        for p in common:\n'
+-    '            left.remove(p)\n'
+-    '            right.remove(p)\n'
+     '        pairs = sorted(((abs(l[0] - r[0]) + abs(l[1] - r[1]), l, r) for l in left for r in right))\n'
+     '        used_l, used_r = set(), set()\n'
+@@ -578,5 +743,4 @@
+     '        appeared += [(sym, r) for r in right if r not in used_r]\n'
+     '    # one symbol replaced by another at the same place: a recolour or a state change, not two events\n'
+-    '    became = []\n'
+     '    for s0, at in list(disappeared):\n'
+     '        for s1, at1 in appeared:\n'
+@@ -1279,5 +1443,6 @@
+     "    g       the rule grammar's namespace (State, observe, Learner, predict, matches)\n"
+     '    seq     [(action text, frame)] for one level, oldest first; frame i is the result of action i\n'
+-    '    encode  frame -> lexicon encoding (shared Lexicon, per-level scale lock)\n'
++    '    encode  (frame, previous encoding or None) -> lexicon encoding (shared Lexicon, per-level scale\n'
++    '            lock; the previous encoding lets the lexicon cut merged objects apart)\n'
+     '    """\n'
+     '    t0 = time.time()\n'
+@@ -1287,5 +1452,6 @@
+     '    def state(i):\n'
+     '        if i not in states:\n'
+-    '            states[i] = g["State"](encode(seq[i][1]))\n'
++    '            prev = states.get(i - 1)\n'
++    '            states[i] = g["State"](encode(seq[i][1], prev.code if prev is not None else None))\n'
+     '        return states[i]\n'
+     '\n'
+@@ -1404,7 +1570,20 @@
+ 
+ 
+-def _arcaid3_encode(view, lex=None):
++def _arcaid3_encode(view, lex=None, prev=None):
+     return _ARCAID3["encode"](_arcaid3_grid(view), lex if lex is not None else _arcaid3_lexicon(),
+-                              lock=_arcaid3_lock(view))
++                              lock=_arcaid3_lock(view), prev=prev)
++
++
++def _arcaid3_with_prev(view, lex):
++    """`view` encoded with its predecessor on the same level (from `history`), so that objects
++    that merged on touching are cut apart again."""
++    rt = _arcaid3_runtime()
++    before = None
++    for entry in ((rt.get("history") or []) if rt else []):
++        fr = getattr(entry, "frame", None)
++        if fr is not None and getattr(fr, "level", None) == getattr(view, "level", None) \
++                and getattr(fr, "step", 0) < getattr(view, "step", 0):
++            before = fr
++    return _arcaid3_encode(view, lex, prev=_arcaid3_encode(before, lex) if before is not None else None)
+ 
+ _ARCAID3_RULES_ON = __A3RULESON__
+@@ -1445,5 +1624,5 @@
+             break
+     lex = _arcaid3_lexicon()
+-    return _A3R["_view"]["report"](_A3R, seq, lambda fr: _arcaid3_encode(fr, lex), level=level, chars=COLOR_CHARS)
++    return _A3R["_view"]["report"](_A3R, seq, lambda fr, prev=None: _arcaid3_encode(fr, lex, prev=prev), level=level, chars=COLOR_CHARS)
+ 
+ '''
+@@ -1455,10 +1634,10 @@
+         if "error" in _ARCAID3:
+             return "lexicon unavailable: " + _ARCAID3["error"]
+-        return _ARCAID3["to_text"](_arcaid3_encode(self), max_kinds=24, max_list=8)   # fits the 1,024-token tool cap
++        return _ARCAID3["to_text"](_arcaid3_with_prev(self, _arcaid3_lexicon()), max_kinds=24, max_list=8)   # fits the 1,024-token tool cap
+ 
+     @property
+     def objects(self):
+         """One dict per object: symbol, row/col (cells), size, and a screen row/col to click."""
+-        enc = _arcaid3_encode(self)
++        enc = _arcaid3_with_prev(self, _arcaid3_lexicon())
+         out = []
+         for p in sorted(enc["placed"], key=lambda q: q["at"]):    # reading order
+@@ -1488,5 +1667,5 @@
+         lex = _arcaid3_lexicon()
+         before = _arcaid3_encode(other, lex)
+-        return _ARCAID3["diff"](before, _arcaid3_encode(self, lex))["text"]
++        return _ARCAID3["diff"](before, _arcaid3_encode(self, lex, prev=before))["text"]
+ 
+ '''
+@@ -1531,5 +1710,5 @@
+ _A3_ANCHOR_METHODS = "    @property\n    def segmentation(self):"
+ ARCAID3_STATS = {"tool_calls": 0, "calls_using_view": 0, "code": 0, "objects": 0, "native": 0,
+-                 "changes_since": 0, "rules": 0, "cue_turns": 0, "errors": 0}
++                 "changes_since": 0, "rules": 0, "cue_turns": 0, "rules_cues": 0, "errors": 0}
+ 
+ 
+@@ -1560,4 +1739,43 @@
+ 
+ 
++ARCAID3_RULES_CUE_STILL = ("Your last actions changed nothing inside the board. Before trying more, print "
++                           "`current_frame.rules`: what your actions have done on this level so far, with "
++                           "right/wrong counts, and the changes that no rule explains.")
++ARCAID3_RULES_CUE_STEPS = ("You have taken {n} actions on this level. Print `current_frame.rules` to see which "
++                           "effects of your actions repeat, and the changes no rule explains, before planning "
++                           "the next ones.")
++_A3_RULES_CUE_AT = (6, 15, 30, 60, 120)
++_A3_RULES_CUED = {}
++
++
++def arcaid3_rules_cue(agent, kwargs):
++    """A cue for `current_frame.rules` when it has something to say: after actions that changed nothing
++    inside the board, or when a level reaches 6, 15, 30, 60 or 120 actions. Never before a level's third
++    action: the rules need steps to learn from."""
++    frame = kwargs.get("current_frame")
++    level = getattr(frame, "level", None)
++    if level is None:
++        return None
++    hist = kwargs.get("history_entries") or []
++    summary = kwargs.get("previous_step_summary") or {}
++    n = sum(1 for e in hist if str(getattr(e, "action", "") or "").strip()
++            and getattr(getattr(e, "frame", None), "level", None) == level)
++    memo = _A3_RULES_CUED.setdefault(id(agent), {"seen": set(), "last": (0, 0)})
++    if (level, n) < memo["last"]:                     # a new game or a reset level: start over
++        memo["seen"] = set()
++    memo["last"] = (level, n)
++    if n < 3:
++        return None
++    still = (summary.get("executed_count") and not summary.get("gameplay_changed")) or summary.get("stale")
++    if still and ("still", level, n // 5) not in memo["seen"]:
++        memo["seen"].add(("still", level, n // 5))
++        return ARCAID3_RULES_CUE_STILL
++    due = [at for at in _A3_RULES_CUE_AT if n >= at and ("steps", level, at) not in memo["seen"]]
++    if due:
++        memo["seen"].update(("steps", level, at) for at in due)
++        return ARCAID3_RULES_CUE_STEPS.format(n=n)
++    return None
++
++
+ def arcaid3_wrap_user_prompt(agent_cls):
+     """Add ARCAID3_CUE to the user message on a game's first turn and after a level change."""
+@@ -1574,4 +1792,11 @@
+         except Exception:
+             ARCAID3_STATS["errors"] += 1
++        try:                                          # v4: point to `.rules` when it can answer
++            extra = arcaid3_rules_cue(self, kwargs) if ARCAID3_RULES else None
++            if extra and isinstance(text, str):
++                text = text + "\n" + extra
++                ARCAID3_STATS["rules_cues"] += 1
++        except Exception:
++            ARCAID3_STATS["errors"] += 1
+         return text
+ 
+@@ -1579,4 +1804,17 @@
+     agent_cls._build_user_prompt = _build_user_prompt
+     return True
++
++
++def _a3_packed(src):
++    """A Python expression that rebuilds `src` (zlib + base85). The harness starts the sandbox with the
++    whole program as one command-line argument (`python -c`), which Linux caps at 128 KiB, so the embedded
++    sources travel packed."""
++    import base64
++    import zlib
++    data = base64.b85encode(zlib.compress(src.encode("utf-8"), 9)).decode("ascii")
++    return '__import__("zlib").decompress(__import__("base64").b85decode(' + repr(data) + ')).decode("utf-8")'
++
++
++_A3_MAX_PROGRAM = 120000                              # bytes; Linux allows 131072 for one argument
+ 
+ 
+@@ -1595,10 +1833,13 @@
+             raise RuntimeError(f"anchor found {found} times, expected 1: {anchor.splitlines()[-1]!r}")
+     template = (_A3_SB_GLOBALS.replace("__LOCK__", repr(bool(lock))).replace("__A3RULESON__", repr(bool(rules)))
+-                .replace("__A3RULESSRC__", repr(ARCAID3_RULES_SOURCE))
+-                .replace("__A3VIEWSRC__", repr(ARCAID3_RULES_VIEW_SOURCE)))
++                .replace("__A3RULESSRC__", _a3_packed(ARCAID3_RULES_SOURCE))
++                .replace("__A3VIEWSRC__", _a3_packed(ARCAID3_RULES_VIEW_SOURCE)))
+     text = text.replace(_A3_ANCHOR_GLOBALS,
+-                        template.replace("__SRC__", repr(ARCAID3_LEXICON_SOURCE)) + "\n" + _A3_ANCHOR_GLOBALS)
++                        template.replace("__SRC__", _a3_packed(ARCAID3_LEXICON_SOURCE)) + "\n" + _A3_ANCHOR_GLOBALS)
+     text = text.replace(_A3_ANCHOR_METHODS, _A3_SB_METHODS + _A3_ANCHOR_METHODS)
+     compile(text, "<sandbox>", "exec")                 # never ship an unparsable child program
++    if len(text.encode("utf-8")) > _A3_MAX_PROGRAM:    # nor one too long to start
++        raise RuntimeError(f"sandbox program is {len(text.encode('utf-8'))} bytes; the harness passes it "
++                           f"as one command-line argument (Linux limit 131072)")
+     return text
+ 

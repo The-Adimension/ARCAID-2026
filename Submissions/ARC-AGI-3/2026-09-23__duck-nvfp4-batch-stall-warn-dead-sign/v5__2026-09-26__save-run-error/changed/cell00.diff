@@ -1,0 +1,21 @@
+--- base cell 0
++++ new cell 0
+@@ -1,2 +1,18 @@
++## v4A = v3 + harness context window 32768 -> 24576 (one change)
++
++Base: v3, LB 3.59 (2026-09-25, version 3 of habanwer/duck-nvfp4-batch-stall-warn-dead-sign). Everything in v3 is kept: arc3_batch, arc3_stall (warn), arc3_score prompt lines, budget re-fit, teardown guard, serving profile `kv5-bf16-mtp3-c8-cg32`.
++
++**The one change.** `LOCAL_ANALYZER_CONTEXT_WINDOW` 32768 -> 24576, set right after solver setup and before the benchmark is unpickled (the first import of the harness). The harness budget is window - 1024 (v3 prompt logs: `context_budget_tokens: 31744`), so it becomes 23552. The vLLM server is untouched (`--max-model-len 32768`).
++
++**Why.** Throughput is bound by the 5 GiB KV pool (105,202 tokens). In the v3 save run, prompts averaged 21.5K tokens, only 3.07 requests ran at a time and 2.65 waited. Shorter prompts fit more requests in the same pool, so each game gets more generated tokens inside its time budget.
++
++**Risk.** Less history per turn can make the model repeat failed actions. v4 showed how much efficiency matters: same 19 levels as v3, but 1.41x human actions instead of 0.72x, and 16.23 instead of 25.08.
++
++**Save run = same 6-game probe as v3/v4** (sb26, vc33, ft09, lp85, re86, ar25; 1 pass; 3600 s; concurrency 6), so the result is like-for-like. The last cells print `ARC3_EVAL` (frozen-scorer score, efficiency, vLLM running/waiting, generated tokens, against v3 and v4) and `ARC3_CTX_CHECK`. If the new window did not reach the harness, the save run raises at the end and this version should not be submitted.
++
++**Competition rerun** is v3's: live gateway, 110 games, concurrency 28, per-game budget re-fit, plus the context change.
++
++**Inputs to attach:** competition data; datasets `keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1` and `keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1`; model `keithtyser/qwen3-8-flash-next-nvfp4` (radixark-modelopt-fp4, v1). Accelerator RTX Pro 6000, internet off.
++
+ ## Duck + NVFP4 + batch + stall warn + dead-signature ban
+ 

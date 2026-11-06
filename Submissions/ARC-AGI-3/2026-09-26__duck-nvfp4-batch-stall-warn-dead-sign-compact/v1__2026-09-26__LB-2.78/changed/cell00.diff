@@ -1,0 +1,30 @@
+--- base cell 0
++++ new cell 0
+@@ -1,15 +1,15 @@
+-## v4A = v3 + harness context window 32768 -> 24576 (one change)
++## v5 = v3 + arc3_compact (one change: smaller requests, same history)
+ 
+-Base: v3, LB 3.59 (2026-09-25, version 3 of habanwer/duck-nvfp4-batch-stall-warn-dead-sign). Everything in v3 is kept: arc3_batch, arc3_stall (warn), arc3_score prompt lines, budget re-fit, teardown guard, serving profile `kv5-bf16-mtp3-c8-cg32`.
++Base: v3, LB 3.59 (2026-09-25, version 3 of habanwer/duck-nvfp4-batch-stall-warn-dead-sign). Everything in v3 is kept: arc3_batch, arc3_stall (warn), arc3_score prompt lines, budget re-fit, teardown guard, serving profile `kv5-bf16-mtp3-c8-cg32`, context window 32768.
+ 
+-**The one change.** `LOCAL_ANALYZER_CONTEXT_WINDOW` 32768 -> 24576, set right after solver setup and before the benchmark is unpickled (the first import of the harness). The harness budget is window - 1024 (v3 prompt logs: `context_budget_tokens: 31744`), so it becomes 23552. The vLLM server is untouched (`--max-model-len 32768`).
++**The one change.** `arc3_compact` rewrites each chat request to the local vLLM server just before it is sent (urllib3, in this process, where `bm.run` plays every game):
++1. The reasoning of assistant messages older than the current turn and the newest 2 assistant messages is dropped. Their content, tool calls and tool results stay.
++2. The 14 fixed instruction lines are dropped from every USER message except the newest. Executed actions, state lines, the carried world model and the grid image stay.
+ 
+-**Why.** Throughput is bound by the 5 GiB KV pool (105,202 tokens). In the v3 save run, prompts averaged 21.5K tokens, only 3.07 requests ran at a time and 2.65 waited. Shorter prompts fit more requests in the same pool, so each game gets more generated tokens inside its time budget.
++**Why.** Throughput is bound by the 5 GiB KV pool (105,202 tokens). This model's chat template keeps every earlier turn's reasoning (`preserve_thinking` defaults to true), and every USER turn repeats the same instructions. Rendering v3's six prompt snapshots with the model's own template and tokenizer gives 21.4K tokens on average (vLLM measured 21.5K). With arc3_compact they render to 13.2K (0.62x), with the same messages. v4A reached a similar size (15.6K) only by trimming history (23.9 -> 17.8 messages), and its score fell from 25.08 to 13.41 because the model repeated moves. v5 keeps the history depth unchanged.
+ 
+-**Risk.** Less history per turn can make the model repeat failed actions. v4 showed how much efficiency matters: same 19 levels as v3, but 1.41x human actions instead of 0.72x, and 16.23 instead of 25.08.
++**Save run = same 6-game probe as v3/v4/v4A** (sb26, vc33, ft09, lp85, re86, ar25; 1 pass; 3600 s; concurrency 6). The last cells print `ARC3_EVAL`, `ARC3_COMPACT` and `ARC3_VERDICT` against v3/v4/v4A. If the rewrite never fired, the save run raises at the end: do not submit that version.
+ 
+-**Save run = same 6-game probe as v3/v4** (sb26, vc33, ft09, lp85, re86, ar25; 1 pass; 3600 s; concurrency 6), so the result is like-for-like. The last cells print `ARC3_EVAL` (frozen-scorer score, efficiency, vLLM running/waiting, generated tokens, against v3 and v4) and `ARC3_CTX_CHECK`. If the new window did not reach the harness, the save run raises at the end and this version should not be submitted.
+-
+-**Competition rerun** is v3's: live gateway, 110 games, concurrency 28, per-game budget re-fit, plus the context change.
++**Competition rerun** is v3's: live gateway, 110 games, concurrency 28, per-game budget re-fit, plus the compaction.
+ 
+ **Inputs to attach:** competition data; datasets `keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1` and `keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1`; model `keithtyser/qwen3-8-flash-next-nvfp4` (radixark-modelopt-fp4, v1). Accelerator RTX Pro 6000, internet off.
+@@ -39,2 +39,3 @@
+ - Teardown: a teardown command that hangs past its 30 s timeout no longer raises.
+ - Serving profile unchanged (`kv5-bf16-mtp3-c8-cg32`).
++- 

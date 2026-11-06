@@ -1,0 +1,86 @@
+--- base cell 21
++++ new cell 21
+@@ -45,4 +45,7 @@
+ # cut back into them (object permanence), and the scale lock rejects a coarse grid that a smaller one reads
+ # cleanly. Both graded against the engine on 45 recorded plays (eval_perception_v4_off.out): no game worse.
++#
++# Version 5 (2026-10-09): picture names carry 4 hex digits (3 gave two pictures one name on 34 of 161 levels
++# of recorded public play), and `.rules` skips older steps, not the newest, when it runs out of time.
+ # ---------------------------------------------------------------------------
+ import os as _a3_os
+@@ -452,9 +455,11 @@
+     '\n'
+     'def _stable_name(patch, color_chars):\n'
+-    '    """Content-derived name: dominant colour letter + 3 hex digits of the picture\'s hash.\n'
++    '    """Content-derived name: dominant colour letter + 4 hex digits of the picture\'s hash.\n'
+     '\n'
+     '    Python hashes tuples of ints the same way in every process (only str/bytes\n'
+     '    hashing is randomised), so a fresh sandbox process names a picture the same\n'
+-    '    way every time without any saved state.\n'
++    '    way every time without any saved state. 4 digits, not 3: a level can hold 200\n'
++    '    pictures, 70 of one colour, and on 45 recorded public plays 3 digits gave two\n'
++    '    pictures one name on 34 of 161 levels (4 digits: none).\n'
+     '    """\n'
+     '    counts = {}\n'
+@@ -464,5 +469,5 @@
+     '                counts[v] = counts.get(v, 0) + 1\n'
+     '    dom = max(sorted(counts), key=lambda c: counts[c]) if counts else 0\n'
+-    '    return f"{color_chars[dom]}{hash(patch) & 0xFFF:03x}"\n'
++    '    return f"{color_chars[dom]}{hash(patch) & 0xFFFF:04x}"\n'
+     '\n'
+     '\n'
+@@ -488,8 +493,8 @@
+     '            if self.naming == "stable":\n'
+     '                sym = base = _stable_name(patch, self.color_chars)\n'
+-    '                n = 1\n'
++    '                n = 0\n'
+     '                while sym in self.entries:        # rare: two pictures share a fingerprint\n'
+-    '                    n += 1\n'
+-    '                    sym = f"{base}_{n}"\n'
++    '                    n += 1                        # the suffix comes from the picture itself, not from\n'
++    '                    sym = f"{base}_{hash((n, patch)) & 0xFFFFFF:06x}"   # which picture was seen first\n'
+     '            else:\n'
+     '                sym = _symbol_name(len(self.entries))\n'
+@@ -1456,15 +1461,17 @@
+     '        return states[i]\n'
+     '\n'
+-    '    steps = []\n'
+-    '    for i in range(1, len(seq)):\n'
++    '    steps, skipped, last = [], 0, len(seq) - 1\n'
++    '    i = 1\n'
++    '    while i <= last:\n'
++    '        if i < last and time.time() - t0 > budget:\n'
++    '            # out of time: skip the older steps still unread and read the newest one, so that\n'
++    '            # LAST STEP is always the action just taken\n'
++    '            skipped, i = last - i, last\n'
+     '        name, click = parse_action(seq[i][0])\n'
+-    '        if not name or name == "RESET":\n'
+-    '            continue\n'
+-    '        a, b = state(i - 1), state(i)\n'
+-    '        if (a.code["scale"], a.code["offset"]) != (b.code["scale"], b.code["offset"]):\n'
+-    '            continue\n'
+-    '        steps.append((a, name, click, g["observe"](a, b), seq[i][0]))\n'
+-    '        if time.time() - t0 > budget:\n'
+-    '            break\n'
++    '        if name and name != "RESET":\n'
++    '            a, b = state(i - 1), state(i)\n'
++    '            if (a.code["scale"], a.code["offset"]) == (b.code["scale"], b.code["offset"]):\n'
++    '                steps.append((a, name, click, g["observe"](a, b), seq[i][0]))\n'
++    '        i += 1\n'
+     '    where = f"level {level}" if level is not None else "this level"\n'
+     '    if not steps:\n'
+@@ -1483,5 +1490,6 @@
+     '    rules = learner.rules()\n'
+     '    lines = [f"RULES for {where}, learned from its last {len(steps)} steps "\n'
+-    '             "(when <action> [if/unless <relation>] then <change>; counts: right / wrong on this level):"]\n'
++    '             + (f"({skipped} older ones skipped for time) " if skipped else "")\n'
++    '             + "(when <action> [if/unless <relation>] then <change>; counts: right / wrong on this level):"]\n'
+     '    lines += ["  " + r.line() for r in rules[:max_rules]]\n'
+     '    if len(rules) > max_rules:\n'
+@@ -1908,5 +1916,5 @@
+                                   action_handler=lambda actions: {})
+     out = str(res.get("stdout", ""))
+-    ok = "each cell 2x2 px (locked for this level)" in out and "R761" in out and not res.get("error")
++    ok = "each cell 2x2 px (locked for this level)" in out and "Rb761" in out and not res.get("error")  # the red marker
+     return ok, out, res.get("error")
+ 

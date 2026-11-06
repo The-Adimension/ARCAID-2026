@@ -1,0 +1,50 @@
+{
+ "kernel": "habanwer/arcaid3-lexicon-agent-arc-agi-2",
+ "title": "arcaid3-lexicon-agent-arc-agi-2",
+ "version": 2,
+ "script_version_id": 364536271,
+ "url": "https://www.kaggle.com/code/habanwer/arcaid3-lexicon-agent-arc-agi-2?scriptVersionId=364536271",
+ "track": "ARC-AGI-2",
+ "private_on_kaggle_at_collection": true,
+ "placement": {
+  "place": "submissions",
+  "note": "madarshbb agent + lexicon tools"
+ },
+ "inputs_now": {
+  "competition_sources": [
+   "arc-prize-2026-arc-agi-2"
+  ],
+  "dataset_sources": [
+   "mirzamilanfarabi/arc3-vllm-h100-wheelhouse-v3",
+   "keithtyser/taaf-duck-qwen38-serving-v1"
+  ],
+  "model_sources": [
+   "foysalemonshanto/qwen3-8-27b-fp8-repacked-v1/PyTorch/hf-fp8/1"
+  ],
+  "kernel_sources": []
+ },
+ "inputs_as_run": null,
+ "accelerator": null,
+ "run": {
+  "start": "2026-11-01T12:10:45.199693+00:00",
+  "end": "2026-11-01T12:18:35.497526+00:00",
+  "duration_s": 470.297833,
+  "exception": null
+ },
+ "submissions": [],
+ "files": {
+  "__notebook__.ipynb": "fc74b801e9fc4764aa4f62f731454b12a66d6b6de2aa2ba099e3b50fee3bda0c",
+  "__output__.json": "6af4f5757113e2f5aefb9811ebbf214471d0abb98fd2f0267cf35b90f74977df"
+ },
+ "collected_at": "2026-11-06T11:39:45Z",
+ "notebook_sha256_original": "fc74b801e9fc4764aa4f62f731454b12a66d6b6de2aa2ba099e3b50fee3bda0c",
+ "log_sha256_original": "6af4f5757113e2f5aefb9811ebbf214471d0abb98fd2f0267cf35b90f74977df",
+ "inferred_parent": {
+  "notebook": "habanwer/arcaid3-lexicon-agent-arc-agi-2@v1",
+  "distance_lines": 42,
+  "runner_up": "madarshbb/arc-qwen-3-8-27b-agent@v1",
+  "runner_up_distance": 621,
+  "method": "Tools/lineage/infer_parents.py"
+ },
+ "root_base": "madarshbb/arc-qwen-3-8-27b-agent@v1"
+}

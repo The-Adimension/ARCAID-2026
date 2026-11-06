@@ -1,0 +1,13 @@
+--- base cell 0
++++ new cell 0
+@@ -15,2 +15,10 @@
+ 
+ The diagnostic cell still shows the 2026-09-20 probe print (`ARC3_RESET_RESULT`, mode reset, 0 RESET issued). That print is the record of that run.
++
++### 2026-09-25 changes (score + budget fit)
++
++- Prompt: adds the RHAE scoring rule (level score `(h/a)^2`, level weight = level index, uncleared = 0, RESET counts), a time line (points at `time_remaining_seconds` if the harness reports it, otherwise states the per-game budget), and a grid click-target line (only if the harness uses `current_frame` and `row`/`col`). Marker: `SCORING (how this run is graded)`.
++- Budget: competition per-game budget 7920 s to 7750 s, then re-fitted before `bm.run` so all 4 waves (110 games at concurrency 28) finish before the soft end. Concurrency stays 28.
++- Stall: ban behaviour unchanged. Adds observe-only counters `calls_single_action` and `calls_fully_banned_passthrough` to explain `actions_dropped` 0.
++- Teardown: a teardown command that hangs past its 30 s timeout no longer raises.
++- Serving profile unchanged (`kv5-bf16-mtp3-c8-cg32`).

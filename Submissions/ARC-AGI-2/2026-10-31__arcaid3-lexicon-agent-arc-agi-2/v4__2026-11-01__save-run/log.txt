@@ -1,0 +1,69 @@
+      7.1 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+      7.1 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+      7.1 err | 0.00s - to python to disable frozen modules.
+      7.1 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+      7.7 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+      7.7 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+      7.7 err | 0.00s - to python to disable frozen modules.
+      7.7 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+      9.2 out | fallback submission written for 240 tasks; rerun = None
+      9.3 out | Writing /kaggle/working/agent/grids.py
+      9.3 out | Writing /kaggle/working/agent/sandbox.py
+      9.3 out | Writing /kaggle/working/agent/backend.py
+      9.3 out | Writing /kaggle/working/agent/agent.py
+      9.3 out | Writing /kaggle/working/agent/lexicon2.py
+      9.4 out | Writing /kaggle/working/agent/repl.py
+      9.4 out | Writing /kaggle/working/agent/client.py
+      9.4 out | Writing /kaggle/working/agent/repl_agent.py
+      9.4 out | Writing /kaggle/working/agent/run_direct.py
+      9.4 out | Writing /kaggle/working/agent/run_submit.py
+      9.5 out | Writing /kaggle/working/agent/submit_main.py
+      9.5 out | lexicon on: True
+      9.5 out | python 3.12.13
+      9.6 out | gpus: ['0, NVIDIA L4, 23034 MiB', '1, NVIDIA L4, 23034 MiB', '2, NVIDIA L4, 23034 MiB', '3, NVIDIA L4, 23034 MiB']
+     54.2 out | preflight: wheelhouse installs on this image (44s) 
+    110.9 out | precache: 944 chunks of /kaggle/input/models/foysalemonshanto/qwen3-8-27b-fp8-repacked-v1/pytorch/hf-fp8/1 read in 57s
+    111.1 out | precache: 944 chunks of /kaggle/input/models/foysalemonshanto/qwen3-8-27b-fp8-repacked-v1/pytorch/hf-fp8/1 read in 57s
+    177.7 out | wheelhouse installed in 124s
+    177.9 out | wheelhouse installed in 124s
+    197.2 out | overlay installed: ['huggingface_hub-1.5.0-py3-none-any.whl', 'transformers-5.8.0-py3-none-any.whl']
+    197.2 out | /usr/bin/python3 -m vllm.entrypoints.openai.api_server --model /kaggle/input/models/foysalemonshanto/qwen3-8-27b-fp8-repacked-v1/pytorch/hf-fp8/1 --served-model-name qwen --host 127.0.0.1 --port 1234 --tensor-parallel-size 4 --enable-auto-tool-choice --tool-call-parser qwen3_coder --reasoning-parser qwen3 --generation-config vllm --enable-prefix-caching --max-model-len 81920 --gpu-memory-utilization 0.90 --max-num-seqs 16 --reasoning-config {"reasoning_start_str": "<think>", "reasoning_end_str": "</think>"} --kv-cache-dtype fp8 --language-model-only --speculative-config {"method": "qwen3_5_mtp", "num_speculative_tokens": 2}
+    197.4 out | overlay installed: ['huggingface_hub-1.5.0-py3-none-any.whl', 'transformers-5.8.0-py3-none-any.whl']
+    197.4 out | /usr/bin/python3 -m vllm.entrypoints.openai.api_server --model /kaggle/input/models/foysalemonshanto/qwen3-8-27b-fp8-repacked-v1/pytorch/hf-fp8/1 --served-model-name qwen --host 127.0.0.1 --port 1234 --tensor-parallel-size 4 --enable-auto-tool-choice --tool-call-parser qwen3_coder --reasoning-parser qwen3 --generation-config vllm --enable-prefix-caching --max-model-len 81920 --gpu-memory-utilization 0.90 --max-num-seqs 16 --reasoning-config {"reasoning_start_str": "<think>", "reasoning_end_str": "</think>"} --kv-cache-dtype fp8 --language-model-only --speculative-config {"method": "qwen3_5_mtp", "num_speculative_tokens": 2}
+    657.2 out | server ready after 460s
+    657.2 out | server up with option set 0: ['--reasoning-config', '{"reasoning_start_str": "<think>", "reasoning_end_str": "</think>"}', '--kv-cache-dtype', 'fp8', '--language-model-only', '--speculative-config', '{"method": "qwen3_5_mtp", "num_speculative_tokens": 2}']
+    657.4 out | rerun=False tasks=3 available 1.08 h, est supply 0.5M tokens -> per-attempt cap 60000
+    657.4 out | hybrid: REPL share 0.75 -> per-attempt cap 60000
+    657.5 out | server ready after 460s
+    657.5 out | server up with option set 0: ['--reasoning-config', '{"reasoning_start_str": "<think>", "reasoning_end_str": "</think>"}', '--kv-cache-dtype', 'fp8', '--language-model-only', '--speculative-config', '{"method": "qwen3_5_mtp", "num_speculative_tokens": 2}']
+    657.5 out | rerun=False tasks=3 available 1.08 h, est supply 0.5M tokens -> per-attempt cap 60000
+    657.5 out | hybrid: REPL share 0.75 -> per-attempt cap 60000
+    657.6 out | [     0s] 136b0064#0 failed   turns  1 py  0 sub 0 tok      0 | done 1/3 tasks verified 0
+    657.6 out | [     0s] 135a2760#0 failed   turns  1 py  0 sub 0 tok      0 | done 2/3 tasks verified 0
+    657.6 out | [     0s] 0934a4d8#0 failed   turns  1 py  0 sub 0 tok      0 | done 3/3 tasks verified 0
+    657.6 out | done: 0/3 tasks verified, 0 tokens, restarts 0, 0s
+    657.6 out | direct pass on 3 unverified tasks, 1.08 h left
+    657.8 out | [     0s] 136b0064#0 failed   turns  1 py  0 sub 0 tok      0 | done 1/3 tasks verified 0
+    657.8 out | [     0s] 135a2760#0 failed   turns  1 py  0 sub 0 tok      0 | done 2/3 tasks verified 0
+    657.8 out | [     0s] 0934a4d8#0 failed   turns  1 py  0 sub 0 tok      0 | done 3/3 tasks verified 0
+    657.8 out | done: 0/3 tasks verified, 0 tokens, restarts 0, 0s
+    657.8 out | direct pass on 3 unverified tasks, 1.08 h left
+   1535.0 out | [   878s] direct 136b0064 answered | {'answered': 1}
+   1535.2 out | [   878s] direct 136b0064 answered | {'answered': 1}
+   1669.1 out | [  1012s] direct 135a2760 rescued | {'answered': 1, 'rescued': 1}
+   1669.3 out | [  1012s] direct 135a2760 rescued | {'answered': 1, 'rescued': 1}
+   1797.6 out | [  1140s] direct 0934a4d8 rescued | {'answered': 1, 'rescued': 2}
+   1797.6 out | direct pass done: {'answered': 1, 'rescued': 2}, 1140s
+   1797.8 out | [  1140s] direct 0934a4d8 rescued | {'answered': 1, 'rescued': 2}
+   1797.8 out | direct pass done: {'answered': 1, 'rescued': 2}, 1140s
+   1804.4 out | SMOKE: 3 eval tasks, 1 test outputs correct
+   1804.4 out | not a competition rerun: fallback submission only
+   1804.5 out | submission.json valid: 240 tasks, 0 test outputs answered by the agent
+   1806.9 err | /usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+   1806.9 err |   cells[i][c] = re.sub('\\\\\|', '|', cell)
+   1807.1 err | /usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+   1807.1 err |   text = re.sub(r'_', '\_', text) # Escape underscores in display text
+   1807.7 err | [NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+   1808.0 err | [NbConvertApp] Writing 173162 bytes to __notebook__.ipynb
+   1810.5 err | [NbConvertApp] Converting notebook __notebook__.ipynb to html
+   1811.7 err | [NbConvertApp] Writing 892891 bytes to __results__.html

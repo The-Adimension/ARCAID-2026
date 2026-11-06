@@ -1,0 +1,16 @@
+--- base cell 14
++++ new cell 14
+@@ -70,5 +70,5 @@
+ _EXPECTED_PROFILE = {
+     "TAAF_VLLM_ENABLE_PREFIX_CACHING": "0",
+-    "TAAF_VLLM_KV_CACHE_DTYPE": "auto",
++    "TAAF_VLLM_KV_CACHE_DTYPE": "fp8",
+     "TAAF_VLLM_KV_CACHE_MEMORY_BYTES": "5368709120",
+     "TAAF_VLLM_MAX_CUDAGRAPH_CAPTURE_SIZE": "32",
+@@ -78,5 +78,5 @@
+     "TAAF_VLLM_OMP_THREADS": "1",
+ }
+-assert PUBLIC25_VLLM_PROFILE_NAME == 'kv5-bf16-mtp3-c8-cg32'
++assert PUBLIC25_VLLM_PROFILE_NAME == 'kv5-fp8-mtp3-c8-cg32'
+ assert PUBLIC25_VLLM_PROFILE_ENV == _EXPECTED_PROFILE
+ for _k, _v in _EXPECTED_PROFILE.items():

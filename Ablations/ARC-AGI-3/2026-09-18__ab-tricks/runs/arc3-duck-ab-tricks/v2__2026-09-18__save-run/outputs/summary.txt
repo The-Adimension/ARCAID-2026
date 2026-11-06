@@ -1,0 +1,22 @@
+benchmark: anim-20260807-anim-arc3-ab-6g
+solver:    duck-harness
+games:     6
+passes:    6
+runs:      36 (won: 0)
+started:   2026-09-18 11:15:40
+ended:     2026-09-18 12:16:19
+duration:  1h 0m 38s
+mean score:    1.27
+median score:  0.00
+total actions: 596
+total tokens:  600039
+generated tokens/sec: 164.90 (job wallclock)
+total wallclock: 97331.0s
+
+per-game (mean across passes):
+  cn04-2fe56bfb: score=0.79, levels=0.2/6, actions=12, tokens=11799
+  ft09-0d8bbf25: score=1.59, levels=0.3/6, actions=4, tokens=15741
+  m0r0-492f87ba: score=0.00, levels=0.0/6, actions=9, tokens=20068
+  re86-8af5384d: score=1.82, levels=0.7/8, actions=29, tokens=16304
+  s5i5-18d95033: score=0.74, levels=0.3/8, actions=15, tokens=21361
+  sb26-7fbdac44: score=2.65, levels=1.0/8, actions=28, tokens=14731

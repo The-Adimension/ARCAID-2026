@@ -1,0 +1,77 @@
+{
+ "kernel": "habanwer/arcaid3-lexicon-view",
+ "title": "arcaid3-lexicon-view",
+ "version": 1,
+ "script_version_id": 354998049,
+ "url": "https://www.kaggle.com/code/habanwer/arcaid3-lexicon-view?scriptVersionId=354998049",
+ "track": "ARC-AGI-3",
+ "private_on_kaggle_at_collection": true,
+ "placement": {
+  "place": "submissions",
+  "note": "Lexicon v1 on the sheetu base"
+ },
+ "inputs_now": {
+  "competition_sources": [
+   "arc-prize-2026-arc-agi-3"
+  ],
+  "dataset_sources": [
+   "keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1",
+   "keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1"
+  ],
+  "model_sources": [
+   ""
+  ],
+  "kernel_sources": []
+ },
+ "inputs_as_run": [
+  {
+   "sourceId": 133468,
+   "sourceType": "competition"
+  },
+  {
+   "sourceId": 19306148,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 19333078,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 977939,
+   "sourceType": "modelInstanceVersion"
+  }
+ ],
+ "accelerator": "nvidiaRtxPro6000",
+ "run": {
+  "start": "2026-10-03T20:33:38.092242+00:00",
+  "end": "2026-10-03T20:36:16.303379+00:00",
+  "duration_s": 158.211137,
+  "exception": true
+ },
+ "submissions": [
+  {
+   "submission_ref": "56806237",
+   "submitted_utc": "2026-10-03T20:33:33.197000",
+   "status": "ERROR",
+   "public_score": "",
+   "private_score": "",
+   "selected": "",
+   "after_deadline": ""
+  }
+ ],
+ "files": {
+  "__notebook__.ipynb": "21da9ca3e02b7bf704bae570a5ecfe6752cc75148143e712cd7273f5ccb1c3a5",
+  "__output__.json": "7d8f1ae53dbbb4650ec31ad15e6f66a7f430e01791836b14f60a15fa14432b66"
+ },
+ "collected_at": "2026-11-06T12:14:00Z",
+ "notebook_sha256_original": "21da9ca3e02b7bf704bae570a5ecfe6752cc75148143e712cd7273f5ccb1c3a5",
+ "log_sha256_original": "7d8f1ae53dbbb4650ec31ad15e6f66a7f430e01791836b14f60a15fa14432b66",
+ "inferred_parent": {
+  "notebook": "scottlegrand/taaf-flashnext-sheetu12b-0922@v1",
+  "distance_lines": 681,
+  "runner_up": "habanwer/taaf-flashnext-sheetu12b-0922@v1",
+  "runner_up_distance": 681,
+  "method": "Tools/lineage/infer_parents.py"
+ },
+ "root_base": "scottlegrand/taaf-flashnext-sheetu12b-0922@v1"
+}

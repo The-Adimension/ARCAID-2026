@@ -1,0 +1,343 @@
+      3.8 err | /usr/local/lib/python3.12/dist-packages/nbformat/__init__.py:96: MissingIDFieldWarning: Cell is missing an id field, this will become a hard error in future nbformat versions. You may want to use `normalize()` on your notebooks before validations (available since nbformat 5.1.4). Previous versions of nbformat are fixing this issue transparently, and will stop doing so in the future.
+      3.8 err |   validate(nb)
+      4.3 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+      4.3 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+      4.3 err | 0.00s - to python to disable frozen modules.
+      4.3 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+      4.6 err | 0.00s - Debugger warning: It seems that frozen modules are being used, which may
+      4.6 err | 0.00s - make the debugger miss breakpoints. Please pass -Xfrozen_modules=off
+      4.6 err | 0.00s - to python to disable frozen modules.
+      4.6 err | 0.00s - Note: Debugging will proceed. Set PYDEVD_DISABLE_FILE_VALIDATION=1 to disable this validation.
+      5.4 out | Writing /kaggle/harness-changes.patch
+      6.4 err | Checking patch ARC3-Inference/inference/agent/action_names.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/noop_repeat_guard.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/priority_pace_reference.json...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/priority_scheduler.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/prompts.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/python_tool_sandbox.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/runtime_state.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/tool_agent.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/vision_context.py...
+      6.4 err | Checking patch ARC3-Inference/inference/framework/run.py...
+      6.4 err | Hunk #1 succeeded at 467 (offset 48 lines).
+      6.4 err | Hunk #2 succeeded at 1271 (offset 48 lines).
+      6.4 err | Checking patch ARC3-Inference/inference/framework/solver.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/animation.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/frame_diff.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/openai_compat.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/retained_functions.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/segmentation.py...
+      6.4 err | Applied patch ARC3-Inference/inference/agent/action_names.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/noop_repeat_guard.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/priority_pace_reference.json cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/priority_scheduler.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/prompts.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/python_tool_sandbox.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/runtime_state.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/tool_agent.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/vision_context.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/framework/run.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/framework/solver.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/animation.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/frame_diff.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/openai_compat.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/retained_functions.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/segmentation.py cleanly.
+      6.4 out | harness patch applied successfully
+      6.4 out | taaf.kaggle: TRUE_SUBMISSION=False
+      6.4 err | Checking patch ARC3-Inference/inference/agent/action_names.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/noop_repeat_guard.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/priority_pace_reference.json...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/priority_scheduler.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/prompts.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/python_tool_sandbox.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/runtime_state.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/tool_agent.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/vision_context.py...
+      6.4 err | Checking patch ARC3-Inference/inference/framework/run.py...
+      6.4 err | Hunk #1 succeeded at 467 (offset 48 lines).
+      6.4 err | Hunk #2 succeeded at 1271 (offset 48 lines).
+      6.4 err | Checking patch ARC3-Inference/inference/framework/solver.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/animation.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/frame_diff.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/openai_compat.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/retained_functions.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/segmentation.py...
+      6.4 err | Applied patch ARC3-Inference/inference/agent/action_names.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/noop_repeat_guard.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/priority_pace_reference.json cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/priority_scheduler.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/prompts.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/python_tool_sandbox.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/runtime_state.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/tool_agent.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/vision_context.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/framework/run.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/framework/solver.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/animation.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/frame_diff.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/openai_compat.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/retained_functions.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/segmentation.py cleanly.
+      6.4 err | 
+      6.4 err | Checking patch ARC3-Inference/inference/agent/action_names.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/noop_repeat_guard.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/priority_pace_reference.json...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/priority_scheduler.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/prompts.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/python_tool_sandbox.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/runtime_state.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/tool_agent.py...
+      6.4 err | Checking patch ARC3-Inference/inference/agent/vision_context.py...
+      6.4 err | Checking patch ARC3-Inference/inference/framework/run.py...
+      6.4 err | Hunk #1 succeeded at 467 (offset 48 lines).
+      6.4 err | Hunk #2 succeeded at 1271 (offset 48 lines).
+      6.4 err | Checking patch ARC3-Inference/inference/framework/solver.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/animation.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/frame_diff.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/openai_compat.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/retained_functions.py...
+      6.4 err | Checking patch ARC3-Inference/inference/utils/segmentation.py...
+      6.4 err | Applied patch ARC3-Inference/inference/agent/action_names.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/noop_repeat_guard.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/priority_pace_reference.json cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/priority_scheduler.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/prompts.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/python_tool_sandbox.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/runtime_state.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/tool_agent.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/agent/vision_context.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/framework/run.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/framework/solver.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/animation.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/frame_diff.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/openai_compat.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/retained_functions.py cleanly.
+      6.4 err | Applied patch ARC3-Inference/inference/utils/segmentation.py cleanly.
+      6.5 out | Precaching: Started...
+     17.2 out | Precaching: loaded 211 files (6.70 GB) in 10.73 seconds.
+     17.2 out | 
+     19.4 out | taaf.kaggle: wrote /usr/local/lib/python3.12/dist-packages/taaf_kaggle_sources.pth (3 source roots)
+     19.6 out | === installing Pennyroyal (offline) ===
+     19.7 out | $ /tmp/sgl-intel/bin/uv venv --python /usr/bin/python3 /tmp/sgl-intel/venv
+     19.9 out | $ /tmp/sgl-intel/bin/uv pip install --python /tmp/sgl-intel/venv/bin/python --no-index --find-links /kaggle/input/datasets/dfranzen/pennyroyal-v253/wheels -r /kaggle/input/datasets/dfranzen/pennyroyal-v253/requirements.lock
+     26.0 out | $ /tmp/sgl-intel/bin/uv pip install --python /tmp/sgl-intel/venv/bin/python --no-index --find-links /kaggle/input/datasets/dfranzen/pennyroyal-v253/wheels --reinstall --no-deps /kaggle/input/datasets/dfranzen/pennyroyal-v253/wheels/sglang-0.5.19+gd00d88efc8d6-cp312-cp312-linux_x86_64.whl
+     26.2 out | $ /tmp/sgl-intel/venv/lib/python3.12/site-packages/nvidia/cu13/bin/nvcc --version
+     26.2 out | nvcc: NVIDIA (R) Cuda compiler driver
+     26.2 out | Copyright (c) 2005-2025 NVIDIA Corporation
+     26.2 out | Built on Wed_Aug_20_01:58:59_PM_PDT_2025
+     26.2 out | Cuda compilation tools, release 13.0, V13.0.88
+     26.2 out | Build cuda_13.0.r13.0/compiler.36424714_0
+     26.2 out | Host compiler: g++-11
+     26.2 out | $ /tmp/sgl-intel/venv/bin/python -c 'import pathlib, sglang, torch
+     26.2 out | print("sglang", sglang.__version__, "| torch", torch.__version__)
+     26.2 out | assert torch.cuda.is_available(), "CUDA unavailable"
+     26.2 out | print("GPU:", torch.cuda.get_device_name(0), "capability:", torch.cuda.get_device_capability(0))
+     26.2 out | '
+     65.1 out | sglang 0.5.19+gd00d88efc8d6 | torch 2.13.0+cu130
+     65.1 out | GPU: NVIDIA RTX PRO 6000 Blackwell Server Edition capability: (12, 0)
+     65.6 out | Target: /kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1 | shards: 38 | PLE dtype: checkpoint default (typically BF16)
+     65.6 out | Draft source: /kaggle/input/models/dfranzen/albucino-qwen3-8-flash-next-drafter/transformers/default/1
+     65.6 out | SGLang draft view: /tmp/sgl-intel/draft-view-746747f37bf36968 (2 linked weight shards)
+     65.8 out | 
+     65.8 out | /tmp/sgl-intel/venv/bin/sglang serve --model-path /kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1 --load-format safetensors --model-loader-extra-config '{"enable_multithread_load":false}' --served-model-name flashnext --host 127.0.0.1 --port 8001 --tensor-parallel-size 1 --dtype bfloat16 --quantization auto-round --kv-cache-dtype fp8_e4m3 --mem-fraction-static 0.96 --context-length 139264 --page-size 64 --max-running-requests 10 --chunked-prefill-size 8192 --max-prefill-tokens 16384 --cuda-graph-max-bs-decode 10 --cuda-graph-bs-decode 1 2 4 7 8 9 10 --mamba-ssm-dtype bfloat16 --max-mamba-cache-size 60 --mamba-radix-cache-strategy extra_buffer --mamba-track-interval 64 --mamba-backend flashinfer --linear-attn-decode-backend flashinfer --linear-attn-prefill-backend flashinfer --moe-runner-backend auto --ple-offload-embedding --trust-remote-code --mm-feature-transport cpu --image-processor-backend pil --reasoning-parser qwen3 --tool-call-parser qwen3_coder --default-chat-template-kwargs '{"preserve_thinking":true}' --watchdog-timeout 1800 --schedule-policy lpm --warmups structured_output --enable-cache-report --enable-metrics --enable-request-time-stats-logging --weight-loader-prefetch-checkpoints --weight-loader-drop-cache-after-load --chat-template /kaggle/input/models/dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/transformers/default/1/chat_template.jinja --gdn-mtp-cache-mode none --speculative-algorithm NEXTN --speculative-num-steps 3 --speculative-eagle-topk 1 --speculative-num-draft-tokens 4 --speculative-draft-model-path /tmp/sgl-intel/draft-view-746747f37bf36968 --speculative-draft-model-quantization compressed-tensors --speculative-moe-runner-backend auto --speculative-draft-kv-cache-dtype fp8_e4m3 --speculative-accept-threshold-single 1.0 --speculative-accept-threshold-acc 1.0 --speculative-token-map /kaggle/input/datasets/dfranzen/pennyroyal-v253/hot_tokens_64k.pt
+     65.8 out | 
+     65.8 out | pid 494 -> /kaggle/working/serve.log
+     65.8 out |   0s ...
+     95.8 out |   30s ...
+    125.8 out | Precaching: Started...
+    125.8 out |   60s ...
+    155.8 out |   90s ...
+    185.8 out |   120s ...
+    215.8 out |   150s ...
+    245.8 out |   180s ...
+    275.8 out |   210s ...
+    305.8 out |   240s ...
+    335.8 out |   270s ...
+    365.8 out |   300s ...
+    395.8 out |   330s ...
+    425.8 out |   360s ...
+    455.8 out |   390s ...
+    485.8 out |   420s ...
+    515.8 out |   450s ...
+    545.8 out |   480s ...
+    575.8 out |   510s ...
+    605.8 out |   540s ...
+    635.8 out |   570s ...
+    665.8 out |   600s ...
+    695.9 out |   630s ...
+    725.8 out | 
+    725.8 out | DEADLINE at 720s from notebook start; releasing the benchmark with the server still loading
+    727.8 out | benchmark.solver: HarnessSolver(label='duck-harness', runtime_environment=None, job_dir=None, soft_end_time=None, minimal_diagnostics=False, model='local', analyzer_timeout=900.0, max_actions_per_game=None, max_runtime_s_per_game=1500, max_generated_tokens_per_game=None, concurrency=10, save_request_logs=True, start_local_server=False, local_server_config='', local_server_api_key_file='', local_server_repo_dir='/Users/jeroencottaar/code/ARC3-Inference', local_server_port=None, local_server_tensor_parallel_size=None, local_server_count=1, cancel_drain_timeout_s=120.0)
+    727.9 out | [sys] RAM 103.3/176.9 | swap none | proc 0.4 GB, 64 threads, 68 fds | GPU0 69.9/95.6 | disk / 7123.5/8156.9, /kaggle/working 0.0/19.5[sys] RAM 103.3/176.9 | swap none | proc 0.4 GB, 64 threads, 68 fds | GPU0 69.9/95.6 | disk / 7123.5/8156.9, /kaggle/working 0.0/19.5
+    727.9 out | 
+    728.0 out | ARC3_PF_READY installed nudge_at=3 cap_at=5 cap_tokens=4096 self_test=ok
+    728.0 out | ARC3_PF_CONTEST_CONFIG n/a (not TRUE_SUBMISSION)
+    731.1 out | ARC3_SG_READY installed keepalive=420s hold_max=7200s url=http://127.0.0.1:8001/health self_test=ok
+    731.1 out |   ARC3_SG waiting for http://127.0.0.1:8001/health: t=725s, held=0, keepalive_resets=0
+    731.3 out | Starting benchmark...
+    732.5 err | priority gate active: 10 concurrent streams
+    732.5 err | 
+    732.5 err | priority gate active: 10 concurrent streams
+    732.5 err | tu93-0768757b: keep-alive RESET while the model server loads
+    732.5 err | 
+    732.5 err | tu93-0768757b: keep-alive RESET while the model server loads
+    848.0 out | [sys] RAM 103.3/176.9 | swap none | proc 0.4 GB, 75 threads, 70 fds | GPU0 69.9/95.6 | disk / 7123.5/8156.9, /kaggle/working 0.0/19.5
+    968.0 out | [sys] RAM 103.3/176.9 | swap none | proc 0.4 GB, 75 threads, 70 fds | GPU0 69.9/95.6 | disk / 7123.5/8156.9, /kaggle/working 0.0/19.5
+   1027.3 out | Precaching: loaded 62 files (185.40 GB) in 901.31 seconds.
+   1027.3 out | 
+   1031.1 out |   ARC3_SG waiting for http://127.0.0.1:8001/health: t=1025s, held=10, keepalive_resets=1
+   1088.0 out | [sys] RAM 105.8/176.9 | swap none | proc 0.3 GB, 71 threads, 66 fds | GPU0 89.8/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.0/19.5
+   1152.6 err | lp85-305b61c3: keep-alive RESET while the model server loads
+   1152.6 err | 
+   1152.6 err | lp85-305b61c3: keep-alive RESET while the model server loads
+   1207.2 out | ARC3_SG_RELEASE by=health t=1201.7s keepalive_resets=2
+   1208.0 out | [sys] RAM 106.3/176.9 | swap none | proc 0.3 GB, 70 threads, 76 fds | GPU0 92.2/95.6 | disk / 7123.5/8156.9, /kaggle/working 0.0/19.5
+   1328.0 out | [sys] RAM 107.1/176.9 | swap none | proc 0.4 GB, 70 threads, 76 fds | GPU0 93.4/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.0/19.5
+   1334.0 out | benchmark: regenerated diagnostics in /kaggle/working in 1.22s
+   1334.0 out | benchmark: duck-harness-kaggle
+   1334.0 out | solver:    duck-harness
+   1334.0 out | games:     10
+   1334.0 out | passes:    1
+   1334.0 out | runs:      10 (won: 0)
+   1334.0 out | started:   2026-10-25 22:17:30
+   1334.0 out | ended:     in progress
+   1334.0 out | mean score:    0.28
+   1334.0 out | median score:  0.00
+   1334.0 out | total actions: 94
+   1334.0 out | total tokens:  59009
+   1334.0 out | generated tokens/sec: 98.04 (job wallclock)
+   1334.0 out | total wallclock: 5711.2s
+   1334.0 out | 
+   1334.0 out | per-game (mean across passes):
+   1334.0 out |   ar25-0c556536: score=0.00, levels=0.0/8, actions=16, tokens=7310
+   1334.0 out |   ft09-0d8bbf25: score=0.00, levels=0.0/6, actions=3, tokens=4814
+   1334.0 out |   lp85-305b61c3: score=0.00, levels=0.0/8, actions=3, tokens=8373
+   1334.0 out |   r11l-495a7899: score=0.00, levels=0.0/6, actions=3, tokens=4960
+   1334.0 out |   re86-8af5384d: score=0.00, levels=0.0/8, actions=9, tokens=6035
+   1334.0 out |   sb26-7fbdac44: score=2.78, levels=1.0/8, actions=24, tokens=4143
+   1334.0 out |   sc25-635fd71a: score=0.00, levels=0.0/6, actions=8, tokens=7333
+   1334.0 out |   tr87-cd924810: score=0.00, levels=0.0/6, actions=14, tokens=6979
+   1334.0 out |   tu93-0768757b: score=0.00, levels=0.0/9, actions=3, tokens=5487
+   1334.0 out |   vc33-5430563c: score=0.00, levels=0.0/7, actions=11, tokens=3575
+   1334.0 out | 
+   1448.0 out | [sys] RAM 107.7/176.9 | swap none | proc 0.4 GB, 70 threads, 77 fds | GPU0 93.4/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5
+   1505.7 out | ARC3_PF_STATS {'openers': 100, 'nudged': 1, 'capped_requests': 0, 'max_streak': 4, 'errors': 0}
+   1568.1 out | [sys] RAM 108.5/176.9 | swap none | proc 0.5 GB, 71 threads, 80 fds | GPU0 93.4/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5
+   1688.1 out | [sys] RAM 109.4/176.9 | swap none | proc 0.5 GB, 70 threads, 78 fds | GPU0 93.4/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5
+   1808.1 out | [sys] RAM 110.1/176.9 | swap none | proc 0.6 GB, 70 threads, 78 fds | GPU0 93.4/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.1/19.5
+   1899.3 out | [finished] sb26-7fbdac44 state=won level=8/8 score=100.00 actions=133 tokens=43836 per-level=9/18,24/28,15/18,15/19,17/31,19/23,17/58,17/18 note="tokens=43836"
+   1899.6 out | ARC3_PF_STATS {'openers': 200, 'nudged': 5, 'capped_requests': 2, 'max_streak': 5, 'errors': 0}
+   1928.1 out | [sys] RAM 113.0/176.9 | swap none | proc 0.6 GB, 71 threads, 79 fds | GPU0 93.4/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.2/19.5
+   1935.4 out | benchmark: regenerated diagnostics in /kaggle/working in 1.33s
+   1935.4 out | benchmark: duck-harness-kaggle
+   1935.4 out | solver:    duck-harness
+   1935.4 out | games:     10
+   1935.4 out | passes:    1
+   1935.4 out | runs:      10 (won: 1)
+   1935.4 out | started:   2026-10-25 22:17:30
+   1935.4 out | ended:     in progress
+   1935.4 out | mean score:    20.47
+   1935.4 out | median score:  8.33
+   1935.4 out | total actions: 608
+   1935.4 out | total tokens:  437681
+   1935.4 out | generated tokens/sec: 363.76 (job wallclock)
+   1935.4 out | total wallclock: 11365.0s
+   1935.4 out | 
+   1935.4 out | per-game (mean across passes):
+   1935.4 out |   ar25-0c556536: score=16.67, levels=3.0/8, actions=82, tokens=40253
+   1935.4 out |   ft09-0d8bbf25: score=47.62, levels=4.0/6, actions=53, tokens=48465
+   1935.4 out |   lp85-305b61c3: score=8.33, levels=2.0/8, actions=32, tokens=40562
+   1935.4 out |   r11l-495a7899: score=4.76, levels=1.0/6, actions=10, tokens=36365
+   1935.4 out |   re86-8af5384d: score=8.33, levels=2.0/8, actions=77, tokens=45523
+   1935.4 out |   sb26-7fbdac44: score=100.00, levels=8.0/8, actions=133, tokens=43836
+   1935.4 out |   sc25-635fd71a: score=0.00, levels=0.0/6, actions=76, tokens=43202
+   1935.4 out |   tr87-cd924810: score=4.76, levels=1.0/6, actions=64, tokens=45034
+   1935.4 out |   tu93-0768757b: score=5.37, levels=2.0/9, actions=43, tokens=47334
+   1935.4 out |   vc33-5430563c: score=8.82, levels=2.0/7, actions=38, tokens=47107
+   1935.4 out | 
+   1988.2 err | tail fade phase after 20.9 minutes: 4.1 minutes remaining; fading tail B to zero over the final 5.0 minutes, retaining hazard C
+   1988.2 err | 
+   1988.2 err | tail fade phase after 20.9 minutes: 4.1 minutes remaining; fading tail B to zero over the final 5.0 minutes, retaining hazard C
+   2048.3 out | [sys] RAM 112.8/176.9 | swap none | proc 0.7 GB, 26 threads, 78 fds | GPU0 93.4/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.2/19.5
+   2168.3 out | [sys] RAM 113.0/176.9 | swap none | proc 0.7 GB, 25 threads, 78 fds | GPU0 93.9/95.6 | disk / 7123.6/8156.9, /kaggle/working 0.2/19.5
+   2232.6 err | analyzer request timed out at action 74; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=5.182848466999985)
+   2232.6 err | 
+   2232.6 err | analyzer request timed out at action 74; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=5.182848466999985)
+   2232.6 err | analyzer request timed out at action 116; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=143.45850959900008)
+   2232.6 err | 
+   2232.6 err | analyzer request timed out at action 116; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=143.45850959900008)
+   2232.6 err | analyzer request timed out at action 66; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=0.1)
+   2232.6 err | 
+   2232.6 err | analyzer request timed out at action 66; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=0.1)
+   2232.6 err | analyzer request timed out at action 107; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=27.128928995000024)
+   2232.6 err | 
+   2232.6 err | analyzer request timed out at action 107; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=27.128928995000024)
+   2232.6 err | analyzer request timed out at action 76; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=0.36178362900022876)
+   2232.6 err | 
+   2232.6 err | analyzer request timed out at action 76; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=0.36178362900022876)
+   2232.8 err | analyzer request timed out at action 115; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=0.6196560250002676)
+   2232.8 err | 
+   2232.8 err | analyzer request timed out at action 115; yielding with 0 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=0.6196560250002676)
+   2232.8 out | [finished] tr87-cd924810 state=gave_up level=1/6 score=4.76 actions=73 tokens=61843 per-level=28/54,45/58,0/40,0/45,0/71,0/146 note="tokens=67112"
+   2232.8 out | [finished] re86-8af5384d state=gave_up level=3/8 score=16.67 actions=115 tokens=57653 per-level=23/26,38/42,51/86,3/108,0/189,0/139,0/424,0/241 note="tokens=57653"
+   2232.8 out | [finished] vc33-5430563c state=gave_up level=3/7 score=21.14 actions=65 tokens=68163 per-level=17/7,11/18,26/44,11/61,0/131,0/34,0/152 note="tokens=68163"
+   2232.8 out | [finished] ar25-0c556536 state=gave_up level=4/8 score=27.78 actions=106 tokens=66141 per-level=24/32,15/50,43/75,22/37,2/89,0/159,0/233,0/73 note="tokens=66141"
+   2232.8 out | [finished] ft09-0d8bbf25 state=gave_up level=5/6 score=71.43 actions=75 tokens=69601 per-level=11/43,7/12,14/23,21/28,21/65,1/37 note="tokens=69601"
+   2233.0 out | [finished] sc25-635fd71a state=gave_up level=0/6 score=0.00 actions=114 tokens=61511 per-level=114/36,0/6,0/32,0/83,0/143,0/50 note="tokens=61511"
+   2238.1 err | analyzer request timed out at action 73; yielding with 1 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=45.93115121100004)
+   2238.1 err | 
+   2238.1 err | analyzer request timed out at action 73; yielding with 1 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=45.93115121100004)
+   2238.3 out | [finished] lp85-305b61c3 state=gave_up level=4/8 score=25.86 actions=72 tokens=65420 per-level=17/17,11/38,24/31,20/16,0/41,0/60,0/26,0/159 note="tokens=65731"
+   2240.5 err | analyzer request timed out at action 32; yielding with 1 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=41.295289680999986)
+   2240.5 err | 
+   2240.5 err | analyzer request timed out at action 32; yielding with 1 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=41.295289680999986)
+   2240.7 out | [finished] r11l-495a7899 state=gave_up level=3/6 score=28.57 actions=31 tokens=64684 per-level=6/22,14/33,11/51,0/26,0/52,0/49 note="tokens=65109"
+   2257.1 err | analyzer request timed out at action 74; yielding with 3 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=29.733346746000052)
+   2257.1 err | 
+   2257.1 err | analyzer request timed out at action 74; yielding with 3 tool call(s) preserved: HTTPConnectionPool(host='127.0.0.1', port=8001): Read timed out. (read timeout=29.733346746000052)
+   2257.3 out | [finished] tu93-0768757b state=gave_up level=3/9 score=13.04 actions=73 tokens=64513 per-level=19/19,19/16,24/34,11/42,0/123,0/80,0/14,0/23,0/111 note="tokens=68708"
+   2259.3 out | benchmark: regenerated diagnostics in /kaggle/working in 1.94s
+   2259.3 out | benchmark: duck-harness-kaggle
+   2259.3 out | solver:    duck-harness
+   2259.3 out | games:     10
+   2259.3 out | passes:    1
+   2259.3 out | runs:      10 (won: 1)
+   2259.3 out | started:   2026-10-25 22:17:30
+   2259.3 out | ended:     2026-10-25 22:42:55
+   2259.3 out | duration:  25m 25s
+   2259.3 out | mean score:    30.92
+   2259.3 out | median score:  23.50
+   2259.3 out | total actions: 857
+   2259.3 out | total tokens:  623365
+   2259.3 out | generated tokens/sec: 408.72 (job wallclock)
+   2259.3 out | total wallclock: 14707.3s
+   2259.3 out | 
+   2259.3 out | per-game (mean across passes):
+   2259.3 out |   ar25-0c556536: score=27.78, levels=4.0/8, actions=106, tokens=66141
+   2259.3 out |   ft09-0d8bbf25: score=71.43, levels=5.0/6, actions=75, tokens=69601
+   2259.3 out |   lp85-305b61c3: score=25.86, levels=4.0/8, actions=72, tokens=65420
+   2259.3 out |   r11l-495a7899: score=28.57, levels=3.0/6, actions=31, tokens=64684
+   2259.3 out |   re86-8af5384d: score=16.67, levels=3.0/8, actions=115, tokens=57653
+   2259.3 out |   sb26-7fbdac44: score=100.00, levels=8.0/8, actions=133, tokens=43836
+   2259.3 out |   sc25-635fd71a: score=0.00, levels=0.0/6, actions=114, tokens=61511
+   2259.3 out |   tr87-cd924810: score=4.76, levels=1.0/6, actions=73, tokens=61843
+   2259.3 out |   tu93-0768757b: score=13.04, levels=3.0/9, actions=73, tokens=64513
+   2259.3 out |   vc33-5430563c: score=21.14, levels=3.0/7, actions=65, tokens=68163
+   2259.3 out | 
+   2259.3 out | diagnostics: /kaggle/working/diagnostics.html
+   2260.0 err | /usr/local/lib/python3.12/dist-packages/IPython/core/display.py:724: UserWarning: Consider using IPython.display.IFrame instead
+   2260.0 err |   warnings.warn("Consider using IPython.display.IFrame instead")
+   2260.0 err | 
+   2260.0 err | /usr/local/lib/python3.12/dist-packages/IPython/core/display.py:724: UserWarning: Consider using IPython.display.IFrame instead
+   2260.0 err |   warnings.warn("Consider using IPython.display.IFrame instead")
+   2260.1 out | ARC3_PF_FINAL {'openers': 267, 'nudged': 9, 'capped_requests': 8, 'max_streak': 6, 'errors': 0}
+   2260.1 out | ARC3_SG_FINAL {'held_games': 10, 'keepalive_resets': 2, 'released_by': 'health', 'ready_after_s': 1201.7, 'max_hold_s': 474.6, 'errors': 0}
+   2262.1 err | /usr/local/lib/python3.12/dist-packages/mistune.py:435: SyntaxWarning: invalid escape sequence '\|'
+   2262.1 err |   cells[i][c] = re.sub('\\\\\|', '|', cell)
+   2262.2 err | /usr/local/lib/python3.12/dist-packages/nbconvert/filters/filter_links.py:36: SyntaxWarning: invalid escape sequence '\_'
+   2262.2 err |   text = re.sub(r'_', '\_', text) # Escape underscores in display text
+   2263.0 err | [NbConvertApp] Converting notebook __notebook__.ipynb to notebook
+   2263.2 err | [NbConvertApp] Writing 1868943 bytes to __notebook__.ipynb
+   2264.3 err | [NbConvertApp] Converting notebook __notebook__.ipynb to html
+   2265.3 err | [NbConvertApp] Writing 3527420 bytes to __results__.html

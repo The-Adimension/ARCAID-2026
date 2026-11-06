@@ -1,0 +1,67 @@
+{
+ "kernel": "habanwer/duck-nvfp4-batch-stall-warn-dead-sign",
+ "title": "Duck+NVFP4+ batch+stall warn+dead-sign",
+ "version": 5,
+ "script_version_id": 352947599,
+ "url": "https://www.kaggle.com/code/habanwer/duck-nvfp4-batch-stall-warn-dead-sign?scriptVersionId=352947599",
+ "track": "ARC-AGI-3",
+ "private_on_kaggle_at_collection": true,
+ "placement": {
+  "place": "submissions"
+ },
+ "inputs_now": {
+  "competition_sources": [
+   "arc-prize-2026-arc-agi-3"
+  ],
+  "dataset_sources": [
+   "keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1",
+   "keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1"
+  ],
+  "model_sources": [
+   ""
+  ],
+  "kernel_sources": []
+ },
+ "inputs_as_run": [
+  {
+   "sourceId": 133468,
+   "sourceType": "competition"
+  },
+  {
+   "sourceId": 19306148,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 19333078,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 977939,
+   "sourceType": "modelInstanceVersion"
+  }
+ ],
+ "accelerator": "nvidiaRtxPro6000",
+ "run": {
+  "start": "2026-09-26T09:57:05.474292+00:00",
+  "end": "2026-09-26T09:57:12.385128+00:00",
+  "duration_s": 6.910836,
+  "exception": true
+ },
+ "submissions": [],
+ "files": {
+  "__notebook__.ipynb": "211e8c2bfb1818badd08fbe1bb661c8fcd9e2982ae5208eceb136818303579d0",
+  "__output__.json": "0b7962c01de40ffb6420d315711eed51a598ef9f482254fd3710a66dfec168eb",
+  "outputs": "hashed from local copy 2026-09-26__duck-nvfp4-batch-stall-warn-dead-sign__v5__unsubmitted__error-vllm-setup"
+ },
+ "collected_at": "2026-11-06T12:14:16Z",
+ "notebook_sha256_original": "211e8c2bfb1818badd08fbe1bb661c8fcd9e2982ae5208eceb136818303579d0",
+ "log_sha256_original": "0b7962c01de40ffb6420d315711eed51a598ef9f482254fd3710a66dfec168eb",
+ "inferred_parent": {
+  "notebook": "habanwer/duck-nvfp4-batch-stall-warn-dead-sign@v3",
+  "distance_lines": 223,
+  "runner_up": "habanwer/arc3-duck-fp4-kvfp8@v1",
+  "runner_up_distance": 285,
+  "method": "Tools/lineage/infer_parents.py"
+ },
+ "root_base": "keithtyser/duck-qwen3-8-flash-next-nvfp4-mtp@v13"
+}

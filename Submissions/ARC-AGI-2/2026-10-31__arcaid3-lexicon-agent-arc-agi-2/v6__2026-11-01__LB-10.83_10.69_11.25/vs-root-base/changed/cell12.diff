@@ -1,0 +1,81 @@
+--- base cell 11
++++ new cell 12
+@@ -22,4 +22,38 @@
+ SITE = WORK / "vllm-site-packages"
+ LOG = WORK / "vllm-server.log"
++
++
++def precache(path, threads=4, chunk=32 << 20):
++    """Read the model files once so the server's load hits the page cache (ARCAID3 / dfranzen
++    ARC-AGI-3 notebooks: since Oct 20 reads from /kaggle/input are slow and a load took 35-65
++    min). Runs in a background thread while the wheelhouse installs; never raises."""
++    import threading
++    from concurrent.futures import ThreadPoolExecutor
++
++    def run():
++        t, jobs = time.time(), []
++        for root, _, files in os.walk(path):
++            for f in files:
++                fp = os.path.join(root, f)
++                try:
++                    size = os.path.getsize(fp)
++                except OSError:
++                    continue
++                jobs += [(fp, off) for off in range(0, max(size, 1), chunk)]
++
++        def read(job):
++            try:
++                with open(job[0], "rb") as fh:
++                    fh.seek(job[1])
++                    fh.read(chunk)
++            except Exception:
++                pass
++        with ThreadPoolExecutor(max_workers=threads) as ex:
++            list(ex.map(read, jobs))
++        print(f"precache: {len(jobs)} chunks of {path} read in {time.time() - t:.0f}s", flush=True)
++
++    th = threading.Thread(target=run, daemon=True)
++    th.start()
++    return th
+ 
+ 
+@@ -53,5 +87,5 @@
+ 
+ 
+-def start_server(cfg, extra):
++def start_server(cfg, extra, wait_s=1500):
+     model = one(cfg["model_glob"]).parent
+     env = dict(os.environ, PYTHONPATH=str(SITE), USE_TF="0", TRANSFORMERS_NO_TF="1",
+@@ -69,5 +103,7 @@
+     proc = subprocess.Popen(cmd, env=env, stdout=open(LOG, "w"), stderr=subprocess.STDOUT,
+                             start_new_session=True)
+-    while time.time() - t < 1500:
++    # Startup guard (ARCAID3 ARC-AGI-3 SG cell): a slow load is waited out, not mistaken for a
++    # failed option set. Only a dead process or "EngineCore failed" moves on early.
++    while time.time() - t < wait_s:
+         text = LOG.read_text(errors="replace") if LOG.exists() else ""
+         if proc.poll() is not None or "EngineCore failed" in text:
+@@ -119,10 +155,22 @@
+     proc = None
+     try:
++        t0 = time.time()
++        try:
++            precache(str(one(cfg["model_glob"]).parent), threads=cfg.get("precache_threads", 4))
++        except Exception as e:
++            print("precache skipped:", repr(e), flush=True)
+         install(cfg)
+         # A ladder of server option sets, most ambitious first; the last is plain serving.
+         # Untested-on-L4 options (MTP, --reasoning-config) must never cost the whole run.
+         ladder = server_ladder(cfg)
++        hold_max = cfg.get("server_hold_max_s", 7200)      # SG_HOLD_MAX_S: give up after 2 h
+         for i, extra in enumerate(ladder):
+-            proc = start_server(cfg, extra)
++            left = hold_max - (time.time() - t0)
++            if left < 300:
++                print(f"startup guard: {hold_max}s spent starting the server -> fallback stands", flush=True)
++                break
++            # the first load pays for the cold reads; later option sets reuse the page cache
++            wait = cfg.get("first_server_wait_s", 3600) if i == 0 else cfg.get("server_wait_s", 1500)
++            proc = start_server(cfg, extra, wait_s=min(wait, left))
+             if proc is not None:
+                 print(f"server up with option set {i}: {extra}", flush=True)

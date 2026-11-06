@@ -1,0 +1,60 @@
+{
+ "kernel": "habanwer/arc3-duck-fp4-batch",
+ "title": "arc3-duck-fp4-batch",
+ "version": 1,
+ "script_version_id": 350930058,
+ "url": "https://www.kaggle.com/code/habanwer/arc3-duck-fp4-batch?scriptVersionId=350930058",
+ "track": "ARC-AGI-3",
+ "private_on_kaggle_at_collection": true,
+ "placement": {
+  "place": "submissions"
+ },
+ "inputs_now": {
+  "competition_sources": [
+   "arc-prize-2026-arc-agi-3"
+  ],
+  "dataset_sources": [
+   "keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1",
+   "keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1"
+  ],
+  "model_sources": [
+   ""
+  ],
+  "kernel_sources": []
+ },
+ "inputs_as_run": null,
+ "accelerator": null,
+ "run": {
+  "start": "2026-09-18T22:49:49.600132+00:00",
+  "end": "2026-09-18T23:14:19.716130+00:00",
+  "duration_s": 1470.115998,
+  "exception": null
+ },
+ "submissions": [
+  {
+   "submission_ref": "56358774",
+   "submitted_utc": "2026-09-19T12:28:49.840000",
+   "status": "COMPLETE",
+   "public_score": "3.04",
+   "private_score": "",
+   "selected": "",
+   "after_deadline": ""
+  }
+ ],
+ "files": {
+  "__notebook__.ipynb": "ead60c64ef0e4ef3c18ae2f6a302230de5d9ce2ebe50f3b4d0dcb402b6def256",
+  "__output__.json": "cf01025cbc903ecb99c33f4fae96823050faacc1b2c0c6e9d6380f851300a2e3",
+  "outputs": "hashed from local copy 2026-09-19__arc3-duck-fp4-batch__v1__score-3.04"
+ },
+ "collected_at": "2026-11-06T11:57:12Z",
+ "notebook_sha256_original": "ead60c64ef0e4ef3c18ae2f6a302230de5d9ce2ebe50f3b4d0dcb402b6def256",
+ "log_sha256_original": "cf01025cbc903ecb99c33f4fae96823050faacc1b2c0c6e9d6380f851300a2e3",
+ "inferred_parent": {
+  "notebook": "habanwer/arc3-duck-fp4-serving@v1",
+  "distance_lines": 59,
+  "runner_up": "keithtyser/duck-qwen3-8-flash-next-nvfp4-mtp@v13",
+  "runner_up_distance": 63,
+  "method": "Tools/lineage/infer_parents.py"
+ },
+ "root_base": "keithtyser/duck-qwen3-8-flash-next-nvfp4-mtp@v13"
+}

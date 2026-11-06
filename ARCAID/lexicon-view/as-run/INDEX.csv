@@ -1,0 +1,9 @@
+file,sha256,lines,ran_in
+arcaid3-lb-lex-r1__v1__cell21.py,d22a34d50ec5ef8081c0d6dec55b5038cd681a9e2d850a076fa7eb7c211e1804,2026,arcaid3-lb-lex-r1@v1:cell21 arcaid3-lb-lex-r2@v1:cell21 arcaid3-lb-off-r1@v1:cell22 arcaid3-lb-off-r2@v1:cell22 arcaid3-lt-lex-r1@v1:cell21 arcaid3-lt-lex-r2@v1:cell21 arcaid3-lt-lex-r3@v1:cell21 arcaid3-lt-off-r1@v1:cell22 arcaid3-lt-off-r2@v1:cell22 arcaid3-lt-off-r3@v1:cell22
+arcaid3-lexicon-dprime-dfranzen-m2__v1__cell21.py,124f203f408c5c0aeaa0b6d50830748e277a2ba97584894b0206c989a3fbf354,2103,arcaid3-lexicon-dprime-dfranzen-m2-sg@v1:cell21 arcaid3-lexicon-dprime-dfranzen-m2@v1:cell21 arcaid3-lexicon-view-dfranzen-m2@v5:cell21 arcaid3-lexicon-view-dfranzen-m2@v6:cell21
+arcaid3-lexicon-view__v1__cell17.py,9a48a4b8591dd494f296b52d71b444dfccb9424e64860055a41f63efa7ebe95d,712,arcaid3-lexicon-view-py312@v1:cell17 arcaid3-lexicon-view@v1:cell17
+arcaid3-lexicon-view-dfranzen-m2__v1__cell21.py,f82694c904ac892722176941597a3f6211151ebb9d179eb8a571cc129e5c5f2e,811,arcaid3-lexicon-view-dfranzen-m2@v1:cell21
+arcaid3-lexicon-view-dfranzen-m2__v2__cell21.py,e87b1431a6d04c8223a6a071fc0be53856788586b90e94f82f07d82152b1cc4f,965,arcaid3-lexicon-view-dfranzen-m2@v2:cell21 arcaid3-rep-v2-r1@v1:cell21 arcaid3-rep-v2-r2@v1:cell21
+arcaid3-lexicon-view-dfranzen-m2__v3__cell21.py,3f904165fab983ce3a9cc16b1282ee148e7ca3313f8183952a985cabed44ce10,1777,arcaid3-lexicon-view-dfranzen-m2@v3:cell21
+arcaid3-lexicon-view-dfranzen-m2__v4__cell21.py,2aa4a54cccd92783c1cf82d910663747f7f9e2cb3606dd4016a116516d442eb9,2018,arcaid3-lexicon-view-dfranzen-m2@v4:cell21 arcaid3-rep-v4-r1@v1:cell21 arcaid3-rep-v4-r2@v1:cell21
+arcaid3-lexicon-view-v2__v1__cell17.py,9294a9c2abd63f512c882c3ead2fc0d0dbe254a25f2b396bd2064be547d232e9,805,arcaid3-lexicon-view-v2@v1:cell17

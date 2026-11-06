@@ -1,0 +1,35 @@
+--- base cell 5
++++ new cell 5
+@@ -1,2 +1,21 @@
++ARC3_SERVING_PATCHES = [
++    [
++        "VLLM_MAX_MODEL_LEN = 65536",
++        "VLLM_MAX_MODEL_LEN = 32768"
++    ],
++    [
++        "ANALYZER_CONTEXT_WINDOW = 32768",
++        "ANALYZER_CONTEXT_WINDOW = 24576"
++    ],
++    [
++        "'LOCAL_ANALYZER_MAX_OUTPUT': '0'",
++        "'LOCAL_ANALYZER_MAX_OUTPUT': '3072'"
++    ],
++    [
++        "'LOCAL_ANALYZER_TOOL_STEPS': '0'",
++        "'LOCAL_ANALYZER_TOOL_STEPS': '12'"
++    ]
++]
++
+ import re
+ 
+@@ -80,4 +99,10 @@
+             )
+ 
++        # arc3 item 2: bound the runaway turn and stop paying for a served context
++        # window the agent never asks for (both shipped as unlimited / 2x oversized).
++        for _old, _new in ARC3_SERVING_PATCHES:
++            if _old in command:
++                command = command.replace(_old, _new)
++                print('arc3 serving patch:', _old, '->', _new, flush=True)
+         patched.append(command)
+ 

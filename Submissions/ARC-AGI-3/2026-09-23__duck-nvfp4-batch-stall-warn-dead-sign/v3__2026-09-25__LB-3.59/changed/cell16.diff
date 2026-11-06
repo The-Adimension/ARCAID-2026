@@ -1,0 +1,47 @@
+--- base cell 16
++++ new cell 16
+@@ -149,4 +149,20 @@
+ )
+ 
++# arc3: fit the per-game budget so the last wave of games ends before soft_end. 110 games at
++# concurrency 28 is 4 waves; at 7920 s per game the last wave overran the time left by ~600 s.
++import math as _math
++_arc3_waves = _math.ceil(
++    len(bm.games) * int(getattr(bm, 'n_passes', 1) or 1) / max(1, int(bm.solver.concurrency))
++)
++_arc3_fit_s = ((soft_end - datetime.now()).total_seconds() - 120.0) / max(1, _arc3_waves)
++_arc3_budget_before = float(bm.solver.max_runtime_s_per_game)
++if _arc3_fit_s < _arc3_budget_before:
++    bm.solver.max_runtime_s_per_game = float(max(1800.0, _math.floor(_arc3_fit_s)))
++print(
++    f'ARC3_BUDGET_FIT waves={_arc3_waves} fit_s={_arc3_fit_s:.0f} '
++    f'budget_s={_arc3_budget_before:.0f}->{bm.solver.max_runtime_s_per_game:.0f}',
++    flush=True,
++)
++
+ # Play the benchmark; watchdog stop and teardown run even if it raises.
+ try:
+@@ -216,10 +232,15 @@
+         for command in json.loads((BUNDLE_DIR / "teardown_commands.json").read_text()):
+             print(f"taaf.kaggle: teardown command: {command}", flush=True)
+-            subprocess.run(
+-                command,
+-                shell=True,
+-                check=False,
+-                cwd=WORKING_DIR,
+-                env=_command_env(),
+-                timeout=30.0,
+-            )
++            # arc3: check=False already ignores a non-zero exit; a hang past the timeout raises
++            # TimeoutExpired, which must not fail the notebook after every game has been played.
++            try:
++                subprocess.run(
++                    command,
++                    shell=True,
++                    check=False,
++                    cwd=WORKING_DIR,
++                    env=_command_env(),
++                    timeout=30.0,
++                )
++            except Exception as _teardown_exc:
++                print(f'taaf.kaggle: teardown command did not finish cleanly: {_teardown_exc!r}', flush=True)

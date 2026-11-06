@@ -86,16 +86,10 @@ if compdata:
     out += ["## Competition data paths", ""] + [f"- `{r}`" for r in compdata] + [""]
 
 # Kaggle notebook visibility
-priv = defaultdict(set)
-for p in root.glob("**/run.json"):
-    r = json.loads(p.read_text())
-    if r.get("files") is not None:
-        pass
-    priv[r["kernel"]]
 meta_priv = {}
 for p in root.glob("**/run.json"):
     r = json.loads(p.read_text())
-    meta_priv[r["kernel"]] = r.get("private_now")
+    meta_priv[r["kernel"]] = r.get("private_on_kaggle_at_collection")
 out += ["## Kaggle notebooks still private", "",
         "The author's instruction is that every notebook used for the competitions is made public with its logs and outputs. "
         "Visibility is as recorded when the runs were collected.", ""]

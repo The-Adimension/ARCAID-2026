@@ -1,0 +1,82 @@
+{
+ "kernel": "habanwer/arcaid3-probe-first-dfranzen-m2",
+ "title": "arcaid3-probe-first-dfranzen-m2",
+ "version": 2,
+ "script_version_id": 361509356,
+ "url": "https://www.kaggle.com/code/habanwer/arcaid3-probe-first-dfranzen-m2?scriptVersionId=361509356",
+ "track": "ARC-AGI-3",
+ "private_on_kaggle_at_collection": true,
+ "placement": {
+  "place": "submissions",
+  "note": "Franzen M2 v1 + probe-first"
+ },
+ "inputs_now": {
+  "competition_sources": [
+   "arc-prize-2026-arc-agi-3"
+  ],
+  "dataset_sources": [
+   "dfranzen/pennyroyal-v253",
+   "dfranzen/taaf-kaggle-source-bundle-copy"
+  ],
+  "model_sources": [
+   "dfranzen/albucino-qwen3-8-flash-next-drafter/Transformers/default/1",
+   "dfranzen/intel-qwen3.8-flash-next-w4a16-autoround/Transformers/default/1"
+  ],
+  "kernel_sources": []
+ },
+ "inputs_as_run": [
+  {
+   "sourceId": 133468,
+   "sourceType": "competition"
+  },
+  {
+   "sourceId": 20092813,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 20134793,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 1007009,
+   "sourceType": "modelInstanceVersion"
+  },
+  {
+   "sourceId": 1007514,
+   "sourceType": "modelInstanceVersion"
+  }
+ ],
+ "accelerator": "nvidiaRtxPro6000",
+ "run": {
+  "start": "2026-10-23T15:43:20.935876+00:00",
+  "end": "2026-10-23T16:20:55.937829+00:00",
+  "duration_s": 2255.001953,
+  "exception": null
+ },
+ "submissions": [
+  {
+   "submission_ref": "57619917",
+   "submitted_utc": "2026-10-25T06:34:11.160000",
+   "status": "COMPLETE",
+   "public_score": "0.00",
+   "private_score": "",
+   "selected": "",
+   "after_deadline": ""
+  }
+ ],
+ "files": {
+  "__notebook__.ipynb": "c5eb66e84fa2f892851377ca0634b586c8096756275b4c87fc4a05c8f4d3805d",
+  "__output__.json": "0752bbd4681cd79db3641f4154442a6028abff339ee53087127de91235ab09bf"
+ },
+ "collected_at": "2026-11-06T11:46:23Z",
+ "notebook_sha256_original": "c5eb66e84fa2f892851377ca0634b586c8096756275b4c87fc4a05c8f4d3805d",
+ "log_sha256_original": "0752bbd4681cd79db3641f4154442a6028abff339ee53087127de91235ab09bf",
+ "inferred_parent": {
+  "notebook": "habanwer/arcaid3-probe-first-dfranzen-m2@v1",
+  "distance_lines": 113,
+  "runner_up": "dfranzen/arc-agi-3-milestone-2-solution@v1",
+  "runner_up_distance": 230,
+  "method": "Tools/lineage/infer_parents.py"
+ },
+ "root_base": "dfranzen/arc-agi-3-milestone-2-solution@v1"
+}

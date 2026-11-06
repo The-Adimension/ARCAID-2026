@@ -1,0 +1,77 @@
+{
+ "kernel": "habanwer/duck-nvfp4-batch-stall-warn-dead-sign-compact",
+ "title": "duck-nvfp4-batch-stall-warn-dead-sign-compact",
+ "version": 1,
+ "script_version_id": 353002088,
+ "url": "https://www.kaggle.com/code/habanwer/duck-nvfp4-batch-stall-warn-dead-sign-compact?scriptVersionId=353002088",
+ "track": "ARC-AGI-3",
+ "private_on_kaggle_at_collection": true,
+ "placement": {
+  "place": "submissions"
+ },
+ "inputs_now": {
+  "competition_sources": [
+   "arc-prize-2026-arc-agi-3"
+  ],
+  "dataset_sources": [
+   "keithtyser/duck-qwen38-nvfp4-mtp-vllm-smoke-v1",
+   "keithtyser/qwen38-flash-next-vllm-nvfp4-runtime-v1"
+  ],
+  "model_sources": [
+   ""
+  ],
+  "kernel_sources": []
+ },
+ "inputs_as_run": [
+  {
+   "sourceId": 133468,
+   "sourceType": "competition"
+  },
+  {
+   "sourceId": 19306148,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 19333078,
+   "sourceType": "datasetVersion"
+  },
+  {
+   "sourceId": 977939,
+   "sourceType": "modelInstanceVersion"
+  }
+ ],
+ "accelerator": "nvidiaRtxPro6000",
+ "run": {
+  "start": "2026-09-26T13:38:05.710103+00:00",
+  "end": "2026-09-26T14:59:55.342235+00:00",
+  "duration_s": 4909.632132,
+  "exception": null
+ },
+ "submissions": [
+  {
+   "submission_ref": "56583069",
+   "submitted_utc": "2026-09-26T15:36:50.720000",
+   "status": "COMPLETE",
+   "public_score": "2.78",
+   "private_score": "",
+   "selected": "",
+   "after_deadline": ""
+  }
+ ],
+ "files": {
+  "__notebook__.ipynb": "fe20206e853560a129bed6beb44324b95d866f867f4ca7edc5f1065404dafcf4",
+  "__output__.json": "495ef7abceb049a80bf324ae8ee80493ba97182eac2b1ad9a2ff007f2adc9571",
+  "outputs": "hashed from local copy 2026-09-26__duck-nvfp4-batch-stall-warn-dead-sign-compact__v1__score-2.78"
+ },
+ "collected_at": "2026-11-06T12:00:46Z",
+ "notebook_sha256_original": "fe20206e853560a129bed6beb44324b95d866f867f4ca7edc5f1065404dafcf4",
+ "log_sha256_original": "495ef7abceb049a80bf324ae8ee80493ba97182eac2b1ad9a2ff007f2adc9571",
+ "inferred_parent": {
+  "notebook": "habanwer/duck-nvfp4-batch-stall-warn-dead-sign@v5",
+  "distance_lines": 142,
+  "runner_up": "habanwer/notebook7c0bf2022d@v1",
+  "runner_up_distance": 142,
+  "method": "Tools/lineage/infer_parents.py"
+ },
+ "root_base": "keithtyser/duck-qwen3-8-flash-next-nvfp4-mtp@v13"
+}

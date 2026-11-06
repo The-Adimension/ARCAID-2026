@@ -1,0 +1,27 @@
+--- base cell 20
++++ new cell 20
+@@ -59,4 +59,8 @@
+             "actions_per_decision": round(sum(r["actions"] for r in _rows) / max(1, sum(r["decisions"] for r in _rows)), 2),
+         })
++        for r in _rows:
++            if r["game"] == "ar25":
++                _eval["ar25"] = r["score"]
++                _eval["ar25_levels"] = r["levels"]
+         print("%-5s %-7s %-7s %-16s %-6s %-6s %-8s %s" % ("game", "levels", "score", "cleared/human", "eff", "wall", "gen_tok", "state"), flush=True)
+         for r in _rows:
+@@ -122,11 +126,13 @@
+         _v3 = ARC3_BASELINES["v3 (LB 3.59)"]
+         _mech = {
+-            "prompt<=0.8*v3": (_eval.get("avg_prompt") or 1e9) <= 0.8 * _v3["avg_prompt"],
++            "prompt<=0.85*v3": (_eval.get("avg_prompt") or 1e9) <= 0.85 * _v3["avg_prompt"],
+             "history>=0.9*v3": (_eval.get("history") or 0) >= 0.9 * _v3["history"],
+-            "gen_tokens>=v3": (_eval.get("gen_tokens") or 0) >= _v3["gen_tokens"],
++            "preemptions<40": (_eval.get("preemptions") or 0) < 40,
++            "oom==0": (_eval.get("oom_warnings") or 0) == 0,
+         }
+         _qual = {
+             "eff<=1.0": (_eval.get("eff") or 9e9) <= 1.0,
+             "levels>=17": (_eval.get("levels") or 0) >= 17,
++            "ar25>=v3": (_eval.get("ar25") or 0) >= 27.78,
+         }
+         _verdict = "HOLD" if not all(_mech.values()) else ("SUBMIT" if all(_qual.values()) else "REVIEW")
