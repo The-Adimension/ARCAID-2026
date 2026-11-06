@@ -4,7 +4,7 @@
 
 Shehab Anwer · [The Adimension](https://www.theadimension.com) · Built on the [DEITY Principles Framework](https://doi.org/10.1093/ehjimp/qyaf038)
 
-> **Status: preparation repository.** This is `habanwer/ARCAID-2026-Prep`. It is being checked for licence and privacy issues before it is released publicly as `The-Adimension/ARCAID-2026`. Until then, some links to Kaggle notebooks point to notebooks that are still private.
+> **Status: preparation repository.** This is `habanwer/ARCAID-2026-Prep`. It is being checked for licence and privacy issues before it is released publicly as `The-Adimension/ARCAID-2026`. All 51 competition notebooks are public on Kaggle (checked live on 2026-11-06, `Documentation/KAGGLE-VISIBILITY.csv`). The two run-output datasets are still private.
 
 ---
 
