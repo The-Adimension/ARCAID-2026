@@ -36,7 +36,7 @@ This work is independent. It is not affiliated with, or endorsed by:
 ## 4. What we do not claim
 
 - **The lexicon view does not raise scores.** In three controlled designs it made no detectable difference to levels cleared.
-- **Probe-first is not established.** Its paired trials passed the main test (+15.5% levels, p = 0.022). One of its own pre-registered gates failed, so its own rule said not to submit it, and it was submitted anyway. **[Author to state the reason.]**
+- **Probe-first is not established.** Its paired trials passed the main test (+15.5% levels, p = 0.022). One of its own pre-registered gates failed, so its own rule said not to submit it, and it was submitted anyway. The author's stated reason for selecting it for final scoring, with lexicon view v4: they are the two highest public scores, and they represent two different attempts (author's statement, 2026-11-06).
 - **No effect on ARC-AGI-2.** The ARC-AGI-2 entry is a transfer demonstration with no ablation, so we claim no effect of the lexicon there.
 - **No general claim.** Nothing here demonstrates artificial general intelligence or fluid intelligence. "Datafication" names what we built and tested, not a proven route to either.
 - **Public games only.** Results on the 25 public games do not transfer to the hidden games by default. We report them only as save-run evidence.
