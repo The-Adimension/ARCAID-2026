@@ -115,12 +115,5 @@ The author's instruction is that every notebook used for the competitions is mad
 
 Our notebooks contain the cells of these notebooks unchanged. Open each page and record its licence in `Documentation/REFERENCES.md` before release.
 
-- *ARC-AGI-3 Milestone 2 Solution.* https://www.kaggle.com/code/dfranzen/arc-agi-3-milestone-2-solution
-- *Tufa Labs duck harness [June 30 milestone winner].* https://www.kaggle.com/code/jeroencottaar/tufa-labs-duck-harness-june-30-milestone-winner
-- *taaf-flashnext-sheetu12b-0922.* https://www.kaggle.com/code/scottlegrand/taaf-flashnext-sheetu12b-0922
-- *Duck Qwen3.8 Flash Next NVFP4 MTP.* https://www.kaggle.com/code/keithtyser/duck-qwen3-8-flash-next-nvfp4-mtp
-- *LB-9 arc3 duck v12 with Qwen 3.8 27B.* https://www.kaggle.com/code/foysalemonshanto/lb-9-arc3-duck-v12-with-qwen-3-8-27b
-- *ARC Qwen 3.8 27B agent.* https://www.kaggle.com/code/madarshbb/arc-qwen-3-8-27b-agent
-- *大阪公立大学 Affectify ARC支部🐙｜31.54 in a Single Sub.* https://www.kaggle.com/code/shiiin9/affectify-arc-31-54-in-a-single-sub
-- *Try merging it—you might get lucky and win gold⭐⭐⭐.* https://www.kaggle.com/code/heliosli/try-merging-it-you-might-get-lucky-and-win-gold
+- none: every third-party notebook's licence is recorded in `Documentation/REFERENCES.md`, with the evidence in `Documentation/references/kaggle-notebook-licences-*.csv`
 

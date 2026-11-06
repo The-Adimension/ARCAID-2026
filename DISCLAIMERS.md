@@ -44,7 +44,8 @@ This work is independent. It is not affiliated with, or endorsed by:
 ## 5. Licences and third-party material
 
 - **Our code.** Code written by the author is released under MIT-0 ([`LICENSE`](LICENSE)), as the competition's open-source rule requires.
-- **Others' notebook cells.** Our notebooks contain, unchanged, the cells of the public notebooks they fork. Those cells remain their authors' work under their authors' licences. `Documentation/REFERENCES.md` lists each source and the licence its page shows, or states that none was found.
+- **Others' notebook cells.** Our notebooks contain, unchanged, the cells of the public notebooks they fork. Those cells remain their authors' work. Every one of those notebooks displays the Apache 2.0 licence on its Kaggle page (rendered 2026-11-06; `Documentation/references/kaggle-notebook-licences-2026-11-06.csv`). A copy of the licence is in `Documentation/licenses/Apache-2.0.txt`.
+- **Our notebooks on Kaggle.** Kaggle displays the Apache 2.0 licence on every public notebook, ours included. The code we wrote in them is also offered under MIT-0, as in this repository.
 - **No model weights.** No model weights are redistributed here. The models are referenced by their Kaggle model pages and keep their own licences.
 - **No competition data.** Competition data (game files and hidden-set material) is not redistributed. Run outputs that contain game state are listed by name and sha256 only.
 

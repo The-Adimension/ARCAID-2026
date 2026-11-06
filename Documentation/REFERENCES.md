@@ -4,7 +4,8 @@ This page cites every external work this repository uses or builds on. Short cre
 
 **How the entries were checked:**
 - Versions, titles, inputs and licence fields were read from the Kaggle API on 2026-11-06, unless stated otherwise.
-- Kaggle's API does not expose a notebook's licence. Public Kaggle notebooks display "released under the Apache 2.0 open source license" on their page by default, but each notebook below is marked **to verify on page** until someone has opened the page and checked. `Documentation/RELEASE-CHECKS.md` tracks this.
+- Kaggle's API does not expose a notebook's licence. Each notebook page below was rendered in a browser on 2026-11-06 (`Tools/release/render_licence_lines.js`), and the licence line it displays is recorded in [`references/kaggle-notebook-licences-2026-11-06.csv`](references/kaggle-notebook-licences-2026-11-06.csv), together with any licence statement in the notebook's own text.
+- Apache 2.0 asks that a copy of the licence accompany redistributed code. It is in [`licenses/Apache-2.0.txt`](licenses/Apache-2.0.txt).
 - "Version used" is the version our code was built from, where that can be shown. Otherwise it says what is known.
 
 **Tags:**
@@ -36,16 +37,29 @@ This page cites every external work this repository uses or builds on. Short cre
 
 | # | Notebook | Author | Version used | Licence | Use |
 |---|---|---|---|---|---|
-| N1 | *ARC-AGI-3 Milestone 2 Solution.* https://www.kaggle.com/code/dfranzen/arc-agi-3-milestone-2-solution | Daniel Franzen (`dfranzen`) | **Version 1**, scriptVersionId 354090904. Our notebooks keep its 23 cells byte-identical (checked by `Tools/lineage/notebook_diff.py`). Current: v3. | To verify on page | [R1] Base of every ARC-AGI-3 submission from 2026-10-05, including both selected ones |
-| N2 | *Tufa Labs duck harness [June 30 milestone winner].* https://www.kaggle.com/code/jeroencottaar/tufa-labs-duck-harness-june-30-milestone-winner | Jeroen Cottaar, Tufa Labs | Reached us through N1 (dataset D2), N3 and N4. The exact upstream version is not recorded. Current: v6. | To verify on page | [R1] The Duck harness underneath every Duck-based submission |
-| N3 | *taaf-flashnext-sheetu12b-0922.* https://www.kaggle.com/code/scottlegrand/taaf-flashnext-sheetu12b-0922 | Scott Le Grand | Version 1 (the only version) | To verify on page | [R1] Copied unchanged for our 4.17 submission; base of 3.90 and of the first lexicon-view notebooks |
-| N4 | *Duck Qwen3.8 Flash Next NVFP4 MTP.* https://www.kaggle.com/code/keithtyser/duck-qwen3-8-flash-next-nvfp4-mtp | keithtyser | **Version 13** by code distance (4 lines from our `arc3-duck-fp4-serving` v1; v14 equally close). Current: v14. | To verify on page | [R1] Base of our September FP4/NVFP4 line |
-| N5 | *LB-9 arc3 duck v12 with Qwen 3.8 27B.* https://www.kaggle.com/code/foysalemonshanto/lb-9-arc3-duck-v12-with-qwen-3-8-27b | FOYSAL (`foysalemonshanto`) | Copied 2026-09-16. **Version 6** by code distance (32 lines; v5 is 57). Current: v6. | To verify on page | [R1] Copied for `arc3-duck-qwen38-baseline` (1.37) |
-| N6 | *ARC Qwen 3.8 27B agent.* https://www.kaggle.com/code/madarshbb/arc-qwen-3-8-27b-agent | madarshbb | Forked around 2026-10-31. **Version 1** by code distance (`Tools/lineage/infer_parents.py`; v2 is equally close). Current: v2. | To verify on page | [R1] Base of our ARC-AGI-2 entry |
-| N7 | *dfranzen fork + D-prime.* https://www.kaggle.com/code/amatlas/dfranzen-fork-d-prime | amatlas (Zhilei Qiu) | v2 (inferred) | Page text: "dfranzen base = Apache-2.0 … verify the notebook page license" | [R1] D′ cell copied into our D′ variants |
-| N8 | *大阪公立大学 Affectify ARC支部🐙｜31.54 in a Single Sub.* https://www.kaggle.com/code/shiiin9/affectify-arc-31-54-in-a-single-sub | shiiin9 | v1 or v2 | To verify on page | [R3] Origin of the D′ formula (via N7) |
-| N9 | *Try merging it—you might get lucky and win gold⭐⭐⭐.* https://www.kaggle.com/code/heliosli/try-merging-it-you-might-get-lucky-and-win-gold | heliosli | v5 (inferred). Current: v12. | To verify on page | [R3] Idea for the empty-animation fix in our D′ variant |
+| N1 | *ARC-AGI-3 Milestone 2 Solution.* https://www.kaggle.com/code/dfranzen/arc-agi-3-milestone-2-solution | Daniel Franzen (`dfranzen`) | **Version 1**, scriptVersionId 354090904. Our notebooks keep its 23 cells byte-identical (checked by `Tools/lineage/notebook_diff.py`). Current: v3. | Apache 2.0 (notebook page) | [R1] Base of every ARC-AGI-3 submission from 2026-10-05, including both selected ones |
+| N2 | *Tufa Labs duck harness [June 30 milestone winner].* https://www.kaggle.com/code/jeroencottaar/tufa-labs-duck-harness-june-30-milestone-winner | Jeroen Cottaar, Tufa Labs | Reached us through N1 (dataset D2), N3 and N4. The exact upstream version is not recorded. Current: v6. | Apache 2.0 (notebook page) | [R1] The Duck harness underneath every Duck-based submission |
+| N3 | *taaf-flashnext-sheetu12b-0922.* https://www.kaggle.com/code/scottlegrand/taaf-flashnext-sheetu12b-0922 | Scott Le Grand | Version 1 (the only version) | Apache 2.0 (notebook page) | [R1] Copied unchanged for our 4.17 submission; base of 3.90 and of the first lexicon-view notebooks |
+| N4 | *Duck Qwen3.8 Flash Next NVFP4 MTP.* https://www.kaggle.com/code/keithtyser/duck-qwen3-8-flash-next-nvfp4-mtp | keithtyser | **Version 13** by code distance (4 lines from our `arc3-duck-fp4-serving` v1; v14 equally close). Current: v14. | Apache 2.0 (notebook page) | [R1] Base of our September FP4/NVFP4 line |
+| N5 | *LB-9 arc3 duck v12 with Qwen 3.8 27B.* https://www.kaggle.com/code/foysalemonshanto/lb-9-arc3-duck-v12-with-qwen-3-8-27b | FOYSAL (`foysalemonshanto`) | Copied 2026-09-16. **Version 6** by code distance (32 lines; v5 is 57). Current: v6. Itself a fork of N11. | Apache 2.0 (notebook page) | [R1] Copied for `arc3-duck-qwen38-baseline` (1.37) |
+| N6 | *ARC Qwen 3.8 27B agent.* https://www.kaggle.com/code/madarshbb/arc-qwen-3-8-27b-agent | madarshbb | Forked around 2026-10-31. **Version 1** by code distance (`Tools/lineage/infer_parents.py`; v2 is equally close). Current: v2. | Apache 2.0 (notebook page) | [R1] Base of our ARC-AGI-2 entry |
+| N7 | *dfranzen fork + D-prime.* https://www.kaggle.com/code/amatlas/dfranzen-fork-d-prime | amatlas (Zhilei Qiu) | v2 (inferred) | Apache 2.0 (notebook page); its text: "dfranzen base = Apache-2.0" | [R1] D′ cell copied into our D′ variants |
+| N8 | *大阪公立大学 Affectify ARC支部🐙｜31.54 in a Single Sub.* https://www.kaggle.com/code/shiiin9/affectify-arc-31-54-in-a-single-sub | shiiin9 | v1 or v2 | Apache 2.0 (notebook page) | [R3] Origin of the D′ formula (via N7) |
+| N9 | *Try merging it—you might get lucky and win gold⭐⭐⭐.* https://www.kaggle.com/code/heliosli/try-merging-it-you-might-get-lucky-and-win-gold | heliosli | v5 (inferred). Current: v12. | Apache 2.0 (notebook page) | [R3] Idea for the empty-animation fix in our D′ variant |
+| N11 | *arc3-duck-v12* (`arc3-duck-v12-1d7d88`). https://www.kaggle.com/code/caoyupeng/arc3-duck-v12-1d7d88 | caoyupeng | Upstream of N5 (Kaggle fork record); not used directly | Apache 2.0 (notebook page) | [R1] Through N5 |
 | N10 | 154 public ARC-AGI-3 notebooks of other teams, collected 2026-10-01 for analysis: [`references/external-notebooks-consulted.csv`](references/external-notebooks-consulted.csv) | Various | The version current at collection, listed per notebook | Not exposed by the API | [R4] Analysed for our record; none copied into a submission |
+
+## 3a. Components credited by Daniel Franzen's notebook (N1)
+
+N1's header credits the following, and every fork of N1 carries them through datasets D1 and D2 and models M1 and M2. Its header also says: "Third-party code and model weights remain subject to their respective licenses."
+
+| Component | Author | Link |
+|---|---|---|
+| Qwen3.8-Flash-Next W4A16 AutoRound quantisation (the base of M1) | Intel | https://huggingface.co/Intel/Qwen3.8-Flash-Next-W4A16-AutoRound |
+| MTP draft checkpoint for speculative decoding (the base of M2) | Albucino | https://huggingface.co/albucino/Qwen3.8-Flash-Next-W4A16-FP8PLE |
+| Pennyroyal, an SGLang fork, v2.5.3 at commit `d00d88e` (D1) | John Pezzulli | https://github.com/jpezzulli/sglang-rtxpro6000 |
+| SGLang patches | Mamy Ratsimbazafy | https://github.com/mratsim/sglang-qwen38fn-sm120-turbo |
+| SGLang patches | Gabriel Olympie | https://github.com/gabrielolympie/sglang-flashnext-sm120 |
 
 ## 4. Datasets by others (Kaggle)
 

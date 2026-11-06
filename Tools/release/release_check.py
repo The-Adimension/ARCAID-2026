@@ -112,5 +112,7 @@ ref = (root / "Documentation" / "REFERENCES.md").read_text() if (root / "Documen
 tbv = [l.split("|")[2].strip() for l in ref.splitlines() if l.startswith("| N") and "To verify on page" in l]
 out += ["## Third-party notebooks whose licence is not yet verified", "",
         "Our notebooks contain the cells of these notebooks unchanged. Open each page and record its licence in "
-        "`Documentation/REFERENCES.md` before release.", ""] + [f"- {t}" for t in tbv] + [""]
+        "`Documentation/REFERENCES.md` before release.", ""] + ([f"- {t}" for t in tbv] or [
+        "- none: every third-party notebook's licence is recorded in `Documentation/REFERENCES.md`, with the evidence in "
+        "`Documentation/references/kaggle-notebook-licences-*.csv`"]) + [""]
 print("\n".join(out))
