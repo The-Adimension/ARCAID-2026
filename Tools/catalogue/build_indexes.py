@@ -41,7 +41,7 @@ for track in ("ARC-AGI-3", "ARC-AGI-2"):
     for i, s in enumerate(rows, 1):
         r = by_sid.get(s["script_version_id"] or "")
         nb = f"`{(s['kernel'] or '').split('/')[-1]}` v{r['version']}" if r else f"`{(s['kernel'] or '').split('/')[-1]}`"
-        flag = (" (after deadline)" if s["after_deadline"] == "yes" else "")
+        flag = (" (late, not counted)" if s["after_deadline"] == "yes" else "")
         out.append(f"| {i} | {s['submitted_utc'][:16].replace('T', ' ')}{flag} | {nb} | {s['public_score'] or '—'} | "
                    f"{s['status'].lower()} | {'**yes**' if s['selected'] == 'yes' else ''} | "
                    f"{('[folder](' + link(r, frm) + ')') if r else 'not collected'} |")
@@ -80,7 +80,8 @@ def start(nid):
 def walk(nid, depth, lines):
     r = nodes.get(nid)
     if r:
-        subs = ", ".join(s["public_score"] or s["status"].lower() for s in r.get("submissions", []))
+        subs = ", ".join((s["public_score"] or s["status"].lower()) + (" (late)" if s.get("after_deadline") == "yes" else "")
+                         for s in r.get("submissions", []))
         d = (r.get("inferred_parent") or {}).get("distance_lines")
         lines.append(f"{'  ' * depth}- [`{nid.split('/')[-1]}`](../{r['_dir']}/)"
                      f"{' · ' + str(d) + ' lines from parent' if d is not None else ''}"

@@ -13,7 +13,7 @@ Shehab Anwer · [The Adimension](https://www.theadimension.com) · Built on the 
 | Track | Our submissions | Selected for final scoring | Best public score | Public rank | Private score |
 |---|---|---|---|---|---|
 | [ARC-AGI-3](https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-3) | 43 (41 scored, 2 Kaggle errors) | **Lexicon view v4** (31.90) and **Probe-first + startup guard v1** (30.57) | 31.90 | 438 of 4,927 | Due 2026-12-04 |
-| [ARC-AGI-2](https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-2) | 4 (one after the deadline) | To be confirmed | 10.83 | 2,438 of 3,543 | Due 2026-12-04 |
+| [ARC-AGI-2](https://www.kaggle.com/competitions/arc-prize-2026-arc-agi-2) | 2 counted: 0.00 (scoring failed) and 10.83. Two more were late and not counted; they are kept for their logs and outputs. | 10.83 (the only scored entry) | 10.83 | 2,438 of 3,543 | Due 2026-12-04 |
 | [Paper Track](https://www.kaggle.com/competitions/arc-prize-2026-paper-track) | To be written from this catalogue into [`2026-Paper-Track/`](2026-Paper-Track/) | n/a | n/a | n/a | Judged on a six-part rubric |
 
 Public scores and ranks are from Kaggle's public leaderboards, downloaded 2026-11-06 10:03 UTC. A public score is one run on half of the hidden games, and one run of identical code can move by several points (see [`DISCLAIMERS.md`](DISCLAIMERS.md)).

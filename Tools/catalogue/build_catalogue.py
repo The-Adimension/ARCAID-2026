@@ -100,7 +100,8 @@ def main():
             start = (pm.get("start_time") or "")[:10]
             my_subs = subs.get((slug, str(sid)), [])
             if my_subs:
-                scores = [s["public_score"] or s["status"].lower() for s in my_subs]
+                scores = [("late-" if s["after_deadline"] == "yes" else "") + (s["public_score"] or s["status"].lower())
+                          for s in my_subs]
                 label = "LB-" + "_".join(scores)
                 if any(s["selected"] == "yes" for s in my_subs):
                     label += "__SELECTED"
@@ -177,7 +178,7 @@ def main():
             (vdir / "run.json").write_text(json.dumps(run, indent=1, ensure_ascii=False) + "\n")
             dur = pm.get("duration")
             table.append(f"| [v{v}]({vdir.name}/) | {start or '—'} | {round(dur/60) if dur else '—'} | "
-                         f"{', '.join((s['public_score'] or s['status'].lower()) + (' (selected)' if s['selected'] == 'yes' else '') for s in my_subs) or '—'} | "
+                         f"{', '.join((s['public_score'] or s['status'].lower()) + (' (selected)' if s['selected'] == 'yes' else '') + (' (late, not counted)' if s['after_deadline'] == 'yes' else '') for s in my_subs) or '—'} | "
                          f"{(run.get('inferred_parent') or {}).get('notebook', '—')} | "
                          f"[Kaggle]({meta['url']}) |")
             index[(track, p["place"], p.get("group", ""))].append((slug, v, vdir, my_subs, label))

@@ -7,6 +7,6 @@ Each row links to the folder of the notebook version that was submitted. Noteboo
 | # | Submitted (UTC) | Notebook, version | Public score | Status | Selected | Folder |
 |---|---|---|---|---|---|---|
 | 1 | 2026-10-31 12:04 | `arcaid3-lexicon-agent-arc-agi-2` v1 | 0.00 | complete |  | [folder](2026-10-31__arcaid3-lexicon-agent-arc-agi-2/v1__2026-10-31__LB-0.00/) |
-| 2 | 2026-11-01 16:13 | `arcaid3-lexicon-agent-arc-agi-2` v6 | 10.83 | complete |  | [folder](2026-10-31__arcaid3-lexicon-agent-arc-agi-2/v6__2026-11-01__LB-10.83_10.69_11.25/) |
-| 3 | 2026-11-02 23:37 | `arcaid3-lexicon-agent-arc-agi-2` v6 | 10.69 | complete |  | [folder](2026-10-31__arcaid3-lexicon-agent-arc-agi-2/v6__2026-11-01__LB-10.83_10.69_11.25/) |
-| 4 | 2026-11-04 20:48 (after deadline) | `arcaid3-lexicon-agent-arc-agi-2` v6 | 11.25 | complete |  | [folder](2026-10-31__arcaid3-lexicon-agent-arc-agi-2/v6__2026-11-01__LB-10.83_10.69_11.25/) |
+| 2 | 2026-11-01 16:13 | `arcaid3-lexicon-agent-arc-agi-2` v6 | 10.83 | complete |  | [folder](2026-10-31__arcaid3-lexicon-agent-arc-agi-2/v6__2026-11-01__LB-10.83_late-10.69_late-11.25/) |
+| 3 | 2026-11-02 23:37 (late, not counted) | `arcaid3-lexicon-agent-arc-agi-2` v6 | 10.69 | complete |  | [folder](2026-10-31__arcaid3-lexicon-agent-arc-agi-2/v6__2026-11-01__LB-10.83_late-10.69_late-11.25/) |
+| 4 | 2026-11-04 20:48 (late, not counted) | `arcaid3-lexicon-agent-arc-agi-2` v6 | 11.25 | complete |  | [folder](2026-10-31__arcaid3-lexicon-agent-arc-agi-2/v6__2026-11-01__LB-10.83_late-10.69_late-11.25/) |

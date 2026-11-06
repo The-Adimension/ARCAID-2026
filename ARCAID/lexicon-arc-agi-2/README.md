@@ -19,11 +19,13 @@ The cell-by-cell diff of the submitted version 6 against the base is in `Submiss
 
 ## Scores
 
-| Kaggle version | Submitted (UTC) | Public score |
-|---|---|---|
-| v1 | 2026-10-31 12:04 | 0.00 |
-| v6 | 2026-11-01 16:13 | 10.83 |
-| v6 | 2026-11-02 23:37 | 10.69 |
-| v6 | 2026-11-04 20:48 (after the 2026-11-02 deadline) | 11.25 |
+| Kaggle version | Submitted (UTC) | Public score | Counted on the leaderboard |
+|---|---|---|---|
+| v1 | 2026-10-31 12:04 | 0.00 | Yes. Scoring failed: the notebook header records that the cp312 wheels could not install on Kaggle's Python 3.13 image. |
+| v6 | 2026-11-01 16:13 | **10.83** | Yes: the entry's leaderboard score |
+| v6 | 2026-11-02 23:37 | 10.69 | No: late (the leaderboard counts 2 submissions, the last at 2026-11-01 16:13) |
+| v6 | 2026-11-04 20:48 | 11.25 | No: after the 2026-11-02 deadline |
+
+The two late runs are kept for their logs and outputs only. The evidence is in `Submissions/ARC-AGI-2/late.csv` and `leaderboard-own-row-2026-11-06.csv`.
 
 **No ablation.** No run of the base, or of this notebook with `ARCAID3_LEXICON=0`, was scored. The scores therefore cannot be attributed to the lexicon.

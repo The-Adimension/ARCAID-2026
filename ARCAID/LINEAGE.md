@@ -101,7 +101,7 @@ How each of our notebook versions descends from earlier notebooks, ours and othe
   - [`arcaid3-lexicon-agent-arc-agi-2@v2`](../Submissions/ARC-AGI-2/2026-10-31__arcaid3-lexicon-agent-arc-agi-2/v2__2026-11-01__save-run/) · 42 lines from parent · submissions
     - [`arcaid3-lexicon-agent-arc-agi-2@v4`](../Submissions/ARC-AGI-2/2026-10-31__arcaid3-lexicon-agent-arc-agi-2/v4__2026-11-01__save-run/) · 4 lines from parent · submissions
       - [`arcaid3-lexicon-agent-arc-agi-2@v5`](../Submissions/ARC-AGI-2/2026-10-31__arcaid3-lexicon-agent-arc-agi-2/v5__2026-11-01__save-run/) · 12 lines from parent · submissions
-        - [`arcaid3-lexicon-agent-arc-agi-2@v6`](../Submissions/ARC-AGI-2/2026-10-31__arcaid3-lexicon-agent-arc-agi-2/v6__2026-11-01__LB-10.83_10.69_11.25/) · 102 lines from parent · LB 10.83, 10.69, 11.25 · submissions
+        - [`arcaid3-lexicon-agent-arc-agi-2@v6`](../Submissions/ARC-AGI-2/2026-10-31__arcaid3-lexicon-agent-arc-agi-2/v6__2026-11-01__LB-10.83_late-10.69_late-11.25/) · 102 lines from parent · LB 10.83, 10.69 (late), 11.25 (late) · submissions
     - [`arcaid3-lexicon-agent-arc-agi-2@v3`](../Submissions/ARC-AGI-2/2026-10-31__arcaid3-lexicon-agent-arc-agi-2/v3__2026-11-01__save-run/) · 0 lines from parent · submissions
 
 ## scottlegrand/taaf-flashnext-sheetu12b-0922@v1
