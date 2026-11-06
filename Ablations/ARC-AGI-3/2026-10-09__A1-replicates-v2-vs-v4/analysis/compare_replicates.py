@@ -21,7 +21,9 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 REP = ROOT / "experiments/2026-10-09__replicates-v2-vs-v4"
-RAW = pathlib.Path("/tmp/claude-0/-home-user-ARCAID3/d7148e6e-6d38-56cc-b433-66830528a10d/scratchpad/replicates_raw")
+# Originally a session scratch folder; made configurable when copied into ARCAID-2026 (2026-11-06).
+import os
+RAW = pathlib.Path(os.environ.get("REPLICATES_RAW", "replicates_raw"))
 ARMS = {
     "v2": [ROOT / "experiments/2026-10-07__arcaid3-lexicon-view-dfranzen-m2__v2__unsubmitted__offline10-42.61"]
           + [REP / f"arcaid3-rep-v2-r{r}" for r in (1, 2)],
