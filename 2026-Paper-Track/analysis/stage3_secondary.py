@@ -72,8 +72,14 @@ a2 = {"per_round_on_minus_off": per_round, "primary_mean_over_rounds": st.mean(p
 
 # S3 leaderboard draws of the Franzen-based notebooks
 S = pd.read_csv(repo / "Submissions/ARC-AGI-3/submissions.csv")
-S = S[S.kernel.fillna("").str.contains("arcaid3") & (S.status == "COMPLETE")]
-S = S[pd.to_numeric(S.public_score, errors="coerce") > 1]          # exclude the 0.00 infrastructure failures and the 7.16 misconfigured trial build
+root = {}
+for rj in (repo / "Submissions/ARC-AGI-3").glob("**/run.json"):
+    r = json.loads(rj.read_text()); root[str(r["script_version_id"])] = r.get("root_base") or ""
+for rj in (repo / "Ablations/ARC-AGI-3").glob("**/run.json"):
+    r = json.loads(rj.read_text()); root[str(r["script_version_id"])] = r.get("root_base") or ""
+S = S[S.script_version_id.astype("Int64").astype(str).map(lambda v: root.get(v, "")).str.startswith("dfranzen/") & (S.status == "COMPLETE")]
+S = S[pd.to_numeric(S.public_score, errors="coerce") > 1]          # exclude the 0.00 infrastructure failures
+S = S[~S.kernel.str.endswith("arcaid3-lt-lex-r3")]                  # exclude the level-trial build submitted with trial settings (7.16)
 ref_mean, ref_sd = 25.77, 3.93                                      # third party: Son Pham, Kaggle discussion 745062
 draws = [{"kernel": k.split("/")[-1], "script_version_id": int(v), "score": float(s), "selected": bool(sel == "yes"),
           "z_vs_copies": (float(s) - ref_mean) / ref_sd}

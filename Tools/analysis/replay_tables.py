@@ -10,7 +10,8 @@ Needs Python 3.12 with the competition-pinned packages: pip install arc-agi==0.9
 
 Whole-game runs start at level 0. A run that plays a game more than once lists it once per pass; `pass` numbers them
 in order (0, 1, ...), as the harness's `_p<N>` file names do. Level trials (game ids "<game>@L<k>") are positioned exactly as the trial
-cell did it: set_level(k), then RESET, with ONLY_RESET_LEVELS=true (the harness's own setting).
+cell did it: set_level(k), then RESET, with ONLY_RESET_LEVELS=true (the harness's own setting). The engine's levels_completed
+counter does not count the k skipped levels, so a trial's level index is k plus the levels cleared since its start.
 
 Writes to OUT_DIR:
   replay.csv       one row per game-run: what the harness recorded and what the engine reproduces, with a
@@ -72,14 +73,14 @@ for bpath in sorted(repo.glob("**/outputs/benchmark.json")):
         apl, deaths, noop, tok = [0] * n, [0] * n, [0] * n, [0] * n
         prev = last(f)
         for i, h in enumerate(r["history"]):
-            cur = min(f.levels_completed, n - 1)
+            cur = min(k + f.levels_completed - start, n - 1)   # the engine's counter does not include set_level(k)
             a = h["action"]; data = a.get("data") or None
             f = env.step(GameAction[a["id"]], data=data)
             now = last(f)
             changed = not (prev is not None and now is not None and prev.shape == now.shape and np.array_equal(prev, now))
             any_changed = any(not (prev is not None and np.asarray(fr).shape == prev.shape and np.array_equal(prev, np.asarray(fr)))
                               for fr in (f.frame or []))
-            lvl_done = f.levels_completed > cur
+            lvl_done = k + f.levels_completed - start > cur
             over = f.state == GameState.GAME_OVER
             apl[cur] += 1; deaths[cur] += over; noop[cur] += (not changed); tok[cur] += h.get("generated_tokens") or 0
             act_w.writerow([run_id, gid, pss, i + 1, cur, a["id"], (data or {}).get("x", ""), (data or {}).get("y", ""),

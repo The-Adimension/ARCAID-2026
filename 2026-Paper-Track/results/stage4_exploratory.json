@@ -1,0 +1,406 @@
+{
+ "M1": {
+  "turns": 12005,
+  "turns_with_read": 2868,
+  "outcomes": {
+   "acts": {
+    "rate_read": 0.9633891213389121,
+    "rate_no_read": 0.941665754624056,
+    "strata": 1192,
+    "stratified_difference": 0.009415671880795758,
+    "ci": [
+     0.00042782703114435184,
+     0.018611300651640305
+    ]
+   },
+   "share_changed": {
+    "rate_read": 0.8983251343282169,
+    "rate_no_read": 0.9285670590041607,
+    "strata": 1177,
+    "stratified_difference": -0.041450405361124563,
+    "ci": [
+     -0.05959012387479676,
+     -0.022430517160791915
+    ]
+   },
+   "lvl_done": {
+    "rate_read": 0.03765690376569038,
+    "rate_no_read": 0.0944511327569224,
+    "strata": 1192,
+    "stratified_difference": -0.1075092426797439,
+    "ci": [
+     -0.14383273311408085,
+     -0.06900776254601118
+    ]
+   },
+   "lvl_within_10": {
+    "rate_read": 0.11262203626220363,
+    "rate_no_read": 0.12914523366531686,
+    "strata": 1192,
+    "stratified_difference": -0.08105882931940767,
+    "ci": [
+     -0.12932590739505467,
+     -0.044341666892550584
+    ]
+   },
+   "over": {
+    "rate_read": 0.01603905160390516,
+    "rate_no_read": 0.02002845572945168,
+    "strata": 1192,
+    "stratified_difference": -0.0020277520087048067,
+    "ci": [
+     -0.01291651853224038,
+     0.014284876365812153
+    ]
+   }
+  },
+  "off_arm_reference": {
+   "acts": 0.964032509078333,
+   "share_changed": 0.9166078749461427,
+   "lvl_done": 0.05965761715372644,
+   "lvl_within_10": 0.09648971122254885,
+   "over": 0.01660038042538475
+  }
+ },
+ "M2": {
+  "A3 lexicon on (r3)": {
+   "trials": 183,
+   "cleared": 58,
+   "responses": 7425,
+   "completion_tokens": 13792384,
+   "reasoning_tokens": 12490447,
+   "completion_tokens_per_cleared_level": 237799.72413793104,
+   "median_tokens_per_trial": 76014.0,
+   "no_action_response_share": 0.5286195286195287,
+   "no_action_token_share": 0.5526653695256745,
+   "median_tokens_before_first_action": 2233.0,
+   "turns_without_action_share": 0.048445813497619714,
+   "truncated_responses": 51
+  },
+  "A3 lexicon off (r3)": {
+   "trials": 183,
+   "cleared": 67,
+   "responses": 6995,
+   "completion_tokens": 13920777,
+   "reasoning_tokens": 12465128,
+   "completion_tokens_per_cleared_level": 207772.79104477612,
+   "median_tokens_per_trial": 75705.0,
+   "no_action_response_share": 0.4969263759828449,
+   "no_action_token_share": 0.5310537623007682,
+   "median_tokens_before_first_action": 2565.0,
+   "turns_without_action_share": 0.04848147116188353,
+   "truncated_responses": 63
+  },
+  "probe-first on (r1)": {
+   "trials": 183,
+   "cleared": 69,
+   "responses": 6833,
+   "completion_tokens": 13634184,
+   "reasoning_tokens": 12215029,
+   "completion_tokens_per_cleared_level": 197596.86956521738,
+   "median_tokens_per_trial": 76191.0,
+   "no_action_response_share": 0.49553636762768916,
+   "no_action_token_share": 0.5121725656628956,
+   "median_tokens_before_first_action": 2303.0,
+   "turns_without_action_share": 0.0489115069267741,
+   "truncated_responses": 110
+  },
+  "probe-first off (r1)": {
+   "trials": 183,
+   "cleared": 58,
+   "responses": 6740,
+   "completion_tokens": 13408948,
+   "reasoning_tokens": 12062674,
+   "completion_tokens_per_cleared_level": 231188.75862068965,
+   "median_tokens_per_trial": 76639.0,
+   "no_action_response_share": 0.5005934718100891,
+   "no_action_token_share": 0.5292864138185934,
+   "median_tokens_before_first_action": 2199.0,
+   "turns_without_action_share": 0.051118210862619806,
+   "truncated_responses": 58
+  },
+  "probe-first on (r2)": {
+   "trials": 183,
+   "cleared": 65,
+   "responses": 6691,
+   "completion_tokens": 13594221,
+   "reasoning_tokens": 12246429,
+   "completion_tokens_per_cleared_level": 209141.86153846153,
+   "median_tokens_per_trial": 77140.0,
+   "no_action_response_share": 0.49618891047675984,
+   "no_action_token_share": 0.5119719622036452,
+   "median_tokens_before_first_action": 2386.0,
+   "turns_without_action_share": 0.05063657407407408,
+   "truncated_responses": 116
+  },
+  "probe-first off (r2)": {
+   "trials": 183,
+   "cleared": 58,
+   "responses": 6679,
+   "completion_tokens": 13370043,
+   "reasoning_tokens": 12039775,
+   "completion_tokens_per_cleared_level": 230517.9827586207,
+   "median_tokens_per_trial": 75739.0,
+   "no_action_response_share": 0.49767929330738137,
+   "no_action_token_share": 0.5144519729667287,
+   "median_tokens_before_first_action": 2275.0,
+   "turns_without_action_share": 0.050507982583454285,
+   "truncated_responses": 51
+  }
+ },
+ "M3": {
+  "Duck/TAAF whole games (Sept)": {
+   "not cleared": {
+    "levels": 266,
+    "median_actions": 28.0,
+    "median_revisit_share": 0.05778894472361809,
+    "median_unchanged_share": 0.03076923076923077,
+    "game_overs_per_100_actions": 0.6568974229408793,
+    "median_tokens_per_action": 707.0743243243244
+   },
+   "cleared": {
+    "levels": 433,
+    "median_actions": 20.0,
+    "median_revisit_share": 0.0,
+    "median_unchanged_share": 0.0,
+    "game_overs_per_100_actions": 0.17459955970545812,
+    "median_tokens_per_action": 606.1147540983607
+   }
+  },
+  "Franzen-based whole games (Oct)": {
+   "not cleared": {
+    "levels": 315,
+    "median_actions": 40.0,
+    "median_revisit_share": 0.013036093418259023,
+    "median_unchanged_share": 0.0,
+    "game_overs_per_100_actions": 0.7152884551106358,
+    "median_tokens_per_action": 1113.7388059701493
+   },
+   "cleared": {
+    "levels": 1492,
+    "median_actions": 24.0,
+    "median_revisit_share": 0.0,
+    "median_unchanged_share": 0.0,
+    "game_overs_per_100_actions": 0.30218833025736713,
+    "median_tokens_per_action": 618.9757085020242
+   }
+  },
+  "level trials (Oct)": {
+   "not cleared": {
+    "levels": 1359,
+    "median_actions": 48.0,
+    "median_revisit_share": 0.06,
+    "median_unchanged_share": 0.06382978723404253,
+    "game_overs_per_100_actions": 0.5719355204046963,
+    "median_tokens_per_action": 1366.8474576271187
+   },
+   "cleared": {
+    "levels": 471,
+    "median_actions": 31.0,
+    "median_revisit_share": 0.006802721088435374,
+    "median_unchanged_share": 0.016129032258064502,
+    "game_overs_per_100_actions": 0.28708133971291866,
+    "median_tokens_per_action": 869.0322580645161
+   }
+  }
+ },
+ "M4": {
+  "Duck/TAAF whole games (Sept)": {
+   "cleared_levels": 433,
+   "median_actions_over_human": 0.7059,
+   "iqr": [
+    0.5465,
+    1.0
+   ],
+   "share_at_or_below_human": 0.7621247113163973,
+   "ci_median": [
+    0.6087,
+    0.8462
+   ]
+  },
+  "Franzen-based whole games (Oct)": {
+   "cleared_levels": 1492,
+   "median_actions_over_human": 0.65745,
+   "iqr": [
+    0.48275,
+    0.90515
+   ],
+   "share_at_or_below_human": 0.8304289544235925,
+   "ci_median": [
+    0.5833,
+    0.7857
+   ]
+  },
+  "level trials (Oct)": {
+   "cleared_levels": 471,
+   "median_actions_over_human": 0.8571,
+   "iqr": [
+    0.5625,
+    1.30625
+   ],
+   "share_at_or_below_human": 0.6199575371549894,
+   "ci_median": [
+    0.71363375,
+    0.9881
+   ]
+  },
+  "A3 lexicon on (r3)": {
+   "cleared_levels": 58,
+   "median_actions_over_human": 0.8573500000000001,
+   "iqr": [
+    0.592075,
+    1.3453249999999999
+   ],
+   "share_at_or_below_human": 0.6206896551724138
+  },
+  "A3 lexicon off (r3)": {
+   "cleared_levels": 67,
+   "median_actions_over_human": 0.8571,
+   "iqr": [
+    0.5803,
+    1.1972
+   ],
+   "share_at_or_below_human": 0.6417910447761194
+  },
+  "probe-first on (r1)": {
+   "cleared_levels": 69,
+   "median_actions_over_human": 0.8077,
+   "iqr": [
+    0.5625,
+    1.2143
+   ],
+   "share_at_or_below_human": 0.6521739130434783
+  },
+  "probe-first off (r1)": {
+   "cleared_levels": 58,
+   "median_actions_over_human": 0.8161,
+   "iqr": [
+    0.5761499999999999,
+    1.893075
+   ],
+   "share_at_or_below_human": 0.6206896551724138
+  },
+  "probe-first on (r2)": {
+   "cleared_levels": 65,
+   "median_actions_over_human": 0.9518,
+   "iqr": [
+    0.5455,
+    1.4865
+   ],
+   "share_at_or_below_human": 0.5076923076923077
+  },
+  "probe-first off (r2)": {
+   "cleared_levels": 58,
+   "median_actions_over_human": 1.13965,
+   "iqr": [
+    0.6954,
+    1.499525
+   ],
+   "share_at_or_below_human": 0.46551724137931033
+  }
+ },
+ "M5": {
+  "Duck/TAAF whole games (Sept)": {
+   "turns": 6559,
+   "actions": 34942,
+   "turns_without_action_share": 0.03582863241347766,
+   "median_reasoning_chars_per_turn": 3064.0,
+   "unchanged_board_share": 0.09882090321103543,
+   "revisit_share": 0.12955755251559728,
+   "game_overs_per_100_actions": 0.4750729780779578,
+   "mean_generated_tokens_per_action": 520.7388529563276
+  },
+  "Franzen-based whole games (Oct)": {
+   "turns": 13384,
+   "actions": 64266,
+   "turns_without_action_share": 0.02301255230125523,
+   "median_reasoning_chars_per_turn": 5341.5,
+   "unchanged_board_share": 0.029066691563190528,
+   "revisit_share": 0.03843400865154203,
+   "game_overs_per_100_actions": 0.3983443811657797,
+   "mean_generated_tokens_per_action": 765.8515700370335
+  },
+  "level trials (Oct)": {
+   "turns": 26273,
+   "actions": 92466,
+   "turns_without_action_share": 0.06200281657975869,
+   "median_reasoning_chars_per_turn": 6625.0,
+   "unchanged_board_share": 0.08128393139099777,
+   "revisit_share": 0.079467047347133,
+   "game_overs_per_100_actions": 0.4596284039538857,
+   "mean_generated_tokens_per_action": 1029.677102935133
+  }
+ },
+ "M6": {
+  "versions": [
+   {
+    "version": 1,
+    "start": "2026-10-31T11:30:59.482398+00:00",
+    "minutes": 0.1,
+    "exception": null,
+    "folder": "v1__2026-10-31__LB-0.00"
+   },
+   {
+    "version": 2,
+    "start": "2026-11-01T12:10:45.199693+00:00",
+    "minutes": 7.8,
+    "exception": null,
+    "folder": "v2__2026-11-01__save-run"
+   },
+   {
+    "version": 3,
+    "start": "2026-11-01T12:29:30.812120+00:00",
+    "minutes": 6.7,
+    "exception": null,
+    "folder": "v3__2026-11-01__save-run"
+   },
+   {
+    "version": 4,
+    "start": "2026-11-01T12:24:40.381150+00:00",
+    "minutes": 30.0,
+    "exception": null,
+    "folder": "v4__2026-11-01__save-run"
+   },
+   {
+    "version": 5,
+    "start": "2026-11-01T12:58:41.429458+00:00",
+    "minutes": 46.8,
+    "exception": null,
+    "folder": "v5__2026-11-01__save-run"
+   },
+   {
+    "version": 6,
+    "start": "2026-11-01T13:53:05.167587+00:00",
+    "minutes": 39.3,
+    "exception": null,
+    "folder": "v6__2026-11-01__LB-10.83_late-10.69_late-11.25"
+   }
+  ],
+  "submissions": [
+   {
+    "submitted_utc": "2026-10-31T12:04:49.810000",
+    "public_score": 0.0,
+    "status": "COMPLETE",
+    "after_deadline": ""
+   },
+   {
+    "submitted_utc": "2026-11-01T16:13:04",
+    "public_score": 10.83,
+    "status": "COMPLETE",
+    "after_deadline": ""
+   },
+   {
+    "submitted_utc": "2026-11-02T23:37:39.877000",
+    "public_score": 10.69,
+    "status": "COMPLETE",
+    "after_deadline": "yes"
+   },
+   {
+    "submitted_utc": "2026-11-04T20:48:57.227000",
+    "public_score": 11.25,
+    "status": "COMPLETE",
+    "after_deadline": "yes"
+   }
+  ]
+ }
+}

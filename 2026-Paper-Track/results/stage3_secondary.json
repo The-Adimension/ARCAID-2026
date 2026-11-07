@@ -1,0 +1,291 @@
+{
+ "S1_noise": {
+  "A1 lexicon v2 (10 games x 25 min)": {
+   "runs": [
+    {
+     "run": "arcaid3-lexicon-view-dfranzen-m2@v2",
+     "games": 10,
+     "mean": 42.61318,
+     "levels": 43,
+     "bootstrap_ci": [
+      24.87381,
+      63.34761999999999
+     ]
+    },
+    {
+     "run": "arcaid3-rep-v2-r1@v1",
+     "games": 10,
+     "mean": 47.46032,
+     "levels": 45,
+     "bootstrap_ci": [
+      29.92064,
+      67.38294399999995
+     ]
+    },
+    {
+     "run": "arcaid3-rep-v2-r2@v1",
+     "games": 10,
+     "mean": 54.37313,
+     "levels": 51,
+     "bootstrap_ci": [
+      36.78810349999999,
+      72.81288399999998
+     ]
+    }
+   ],
+   "mean_of_means": 48.148876666666666,
+   "sd_between_runs": 5.9101344073577,
+   "range": [
+    42.61318,
+    54.37313
+   ]
+  },
+  "A1 lexicon v4, the selected code (10 games x 25 min)": {
+   "runs": [
+    {
+     "run": "arcaid3-lexicon-view-dfranzen-m2@v4",
+     "games": 10,
+     "mean": 55.35714,
+     "levels": 50,
+     "bootstrap_ci": [
+      37.142849999999996,
+      75.59523
+     ]
+    },
+    {
+     "run": "arcaid3-rep-v4-r1@v1",
+     "games": 10,
+     "mean": 43.7033,
+     "levels": 44,
+     "bootstrap_ci": [
+      28.333290000000005,
+      61.15078999999999
+     ]
+    },
+    {
+     "run": "arcaid3-rep-v4-r2@v1",
+     "games": 10,
+     "mean": 44.38363,
+     "levels": 45,
+     "bootstrap_ci": [
+      31.118140000000004,
+      59.37401
+     ]
+    }
+   ],
+   "mean_of_means": 47.81469,
+   "sd_between_runs": 6.540804708069186,
+   "range": [
+    43.7033,
+    55.35714
+   ]
+  },
+  "A2 lexicon v5 on (25 games x 121 min)": {
+   "runs": [
+    {
+     "run": "arcaid3-lb-lex-r1@v1",
+     "games": 25,
+     "mean": 51.196832,
+     "levels": 112,
+     "bootstrap_ci": [
+      35.73548840000001,
+      66.4528018
+     ]
+    },
+    {
+     "run": "arcaid3-lb-lex-r2@v1",
+     "games": 25,
+     "mean": 40.08206,
+     "levels": 95,
+     "bootstrap_ci": [
+      24.1571786,
+      56.72012349999999
+     ]
+    }
+   ],
+   "mean_of_means": 45.639446,
+   "sd_between_runs": 7.859330652542367,
+   "range": [
+    40.08206,
+    51.196832
+   ]
+  },
+  "A2 lexicon off (25 games x 121 min)": {
+   "runs": [
+    {
+     "run": "arcaid3-lb-off-r1@v1",
+     "games": 25,
+     "mean": 43.773768,
+     "levels": 101,
+     "bootstrap_ci": [
+      29.9199014,
+      58.29621229999999
+     ]
+    },
+    {
+     "run": "arcaid3-lb-off-r2@v1",
+     "games": 25,
+     "mean": 47.568548,
+     "levels": 107,
+     "bootstrap_ci": [
+      32.481000300000005,
+      63.04231319999999
+     ]
+    }
+   ],
+   "mean_of_means": 45.671158,
+   "sd_between_runs": 2.6833146711110887,
+   "range": [
+    43.773768,
+    47.568548
+   ]
+  }
+ },
+ "S2_A1": {
+  "v4_minus_v2_points": -0.3341866666666675,
+  "p_one_sided": 0.55,
+  "levels_v4_minus_v2": 0.0,
+  "p_levels": 0.6,
+  "recorded": {
+   "v4_minus_v2_points": -0.33,
+   "p": 0.55,
+   "levels": 0.0,
+   "p_levels": 0.6
+  }
+ },
+ "S2_A2": {
+  "per_round_on_minus_off": [
+   7.423064000000004,
+   -7.486488000000001
+  ],
+  "primary_mean_over_rounds": -0.03171199999999885,
+  "sign_flip_p_two_sided": 0.99475,
+  "recorded": {
+   "per_round": [
+    7.42,
+    -7.49
+   ],
+   "primary": -0.03,
+   "p": 0.995
+  },
+  "rule_outcome": "no measurable effect"
+ },
+ "S3_leaderboard": {
+  "reference_copies": {
+   "mean": 25.77,
+   "sd": 3.93,
+   "source": "Son Pham, Kaggle discussion 745062 (third party)"
+  },
+  "draws": [
+   {
+    "kernel": "arcaid3-lexicon-view-dfranzen-m2",
+    "script_version_id": 355438281,
+    "score": 24.95,
+    "selected": false,
+    "z_vs_copies": -0.2086513994910942
+   },
+   {
+    "kernel": "arcaid3-lexicon-view-dfranzen-m2",
+    "script_version_id": 356505353,
+    "score": 27.05,
+    "selected": false,
+    "z_vs_copies": 0.3256997455470741
+   },
+   {
+    "kernel": "arcaid3-restart-dfranzen-m2",
+    "script_version_id": 357524957,
+    "score": 25.76,
+    "selected": false,
+    "z_vs_copies": -0.0025445292620860076
+   },
+   {
+    "kernel": "arcaid3-lexicon-view-dfranzen-m2",
+    "script_version_id": 356505353,
+    "score": 31.9,
+    "selected": true,
+    "z_vs_copies": 1.5597964376590328
+   },
+   {
+    "kernel": "arcaid3-lexicon-view-dfranzen-m2",
+    "script_version_id": 356505353,
+    "score": 26.83,
+    "selected": false,
+    "z_vs_copies": 0.2697201017811702
+   },
+   {
+    "kernel": "arcaid3-pair-flag0-r1b",
+    "script_version_id": 358307088,
+    "score": 26.22,
+    "selected": false,
+    "z_vs_copies": 0.11450381679389295
+   },
+   {
+    "kernel": "arcaid3-pair-restart-r1",
+    "script_version_id": 358224893,
+    "score": 24.42,
+    "selected": false,
+    "z_vs_copies": -0.34351145038167885
+   },
+   {
+    "kernel": "arcaid3-lexicon-view-dfranzen-m2",
+    "script_version_id": 359517226,
+    "score": 27.79,
+    "selected": false,
+    "z_vs_copies": 0.5139949109414756
+   },
+   {
+    "kernel": "arcaid3-lexicon-dprime-dfranzen-m2",
+    "script_version_id": 360147562,
+    "score": 21.18,
+    "selected": false,
+    "z_vs_copies": -1.1679389312977098
+   },
+   {
+    "kernel": "arcaid3-lexicon-view-dfranzen-m2",
+    "script_version_id": 359517226,
+    "score": 24.35,
+    "selected": false,
+    "z_vs_copies": -0.3613231552162845
+   },
+   {
+    "kernel": "arcaid3-probe-first-dfranzen-m2-sg",
+    "script_version_id": 362275314,
+    "score": 23.41,
+    "selected": false,
+    "z_vs_copies": -0.6005089058524171
+   },
+   {
+    "kernel": "arcaid3-lexicon-dprime-dfranzen-m2-sg",
+    "script_version_id": 362275304,
+    "score": 25.26,
+    "selected": false,
+    "z_vs_copies": -0.1297709923664117
+   },
+   {
+    "kernel": "arcaid3-lexicon-dprime-dfranzen-m2-sg",
+    "script_version_id": 362275304,
+    "score": 27.47,
+    "selected": false,
+    "z_vs_copies": 0.4325699745547072
+   },
+   {
+    "kernel": "arcaid3-lexicon-dprime-dfranzen-m2-sg",
+    "script_version_id": 362275304,
+    "score": 22.23,
+    "selected": false,
+    "z_vs_copies": -0.9007633587786257
+   },
+   {
+    "kernel": "arcaid3-probe-first-dfranzen-m2-sg",
+    "script_version_id": 362275314,
+    "score": 30.57,
+    "selected": true,
+    "z_vs_copies": 1.2213740458015268
+   }
+  ],
+  "our_mean": 25.959333333333333,
+  "our_sd": 2.853004598330545,
+  "n": 15,
+  "excluded": "0.00 scores (slow model loads, 21-25 October; Kaggle discussion 751598) and 7.16 (a level-trial build submitted with trial settings)"
+ }
+}

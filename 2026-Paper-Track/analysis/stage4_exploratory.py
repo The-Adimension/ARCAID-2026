@@ -45,28 +45,27 @@ A["revisit"] = A.duplicated(subset=K + ["level", "board_hash"]).astype(int)
 A["game"] = A.game_run.str.split("@").str[0]
 
 # ---- turns with their actions
-EA = E.merge(A, left_on=K + ["action_num"], right_on=K + ["action_index"], how="left")
+EA = E[K + ["action_num", "analysis_step"]].merge(A, left_on=K + ["action_num"], right_on=K + ["action_index"], how="left")  # outcomes from the replay only
 per_turn = EA.groupby(K + ["analysis_step"]).agg(n_actions=("action_index", "size"), changed=("board_changed", "sum"),
                                                   lvl_done=("level_completed", "max"), over=("game_over", "max"),
                                                   first_level=("level", "first")).reset_index()
 TT = T.merge(per_turn, on=K + ["analysis_step"], how="left").fillna({"n_actions": 0, "changed": 0, "lvl_done": 0, "over": 0})
-lvl_lookup = A.set_index(K + ["action_index"])["level"]
-def turn_level(r):
-    if r.first_level == r.first_level:
-        return r.first_level
-    key = (r.run_id, r.game_run, r["pass"], r.first_action_num)
-    if key in lvl_lookup.index:
-        return lvl_lookup.loc[key]
-    sub = A[(A.run_id == r.run_id) & (A.game_run == r.game_run) & (A["pass"] == r["pass"])]
-    return sub.level.iloc[-1] if len(sub) else 0
-TT["level"] = [turn_level(r) for _, r in TT.iterrows()]
+nxt = A[K + ["action_index", "level"]].rename(columns={"action_index": "first_action_num", "level": "next_level"})
+TT = TT.merge(nxt, on=K + ["first_action_num"], how="left")
+last_lvl = A.groupby(K)["level"].last().rename("last_level").reset_index()
+TT = TT.merge(last_lvl, on=K, how="left")
+TT["level"] = TT.first_level.fillna(TT.next_level).fillna(TT.last_level).fillna(0).astype(int)   # level the turn played on
 TT["game"] = TT.game_run.str.split("@").str[0]
 TT["generation"] = TT.run_id.map(generation)
-# completion within the next 10 actions from the turn's start
-lc = A.set_index(K + ["action_index"])["level_completed"]
-idx = {k: g.set_index("action_index")["level_completed"] for k, g in A.groupby(K)}
-TT["lvl_within_10"] = [int(idx.get((r.run_id, r.game_run, r["pass"]), pd.Series(dtype=int)).loc[r.first_action_num:r.first_action_num + 9].max() > 0)
-                       if (r.run_id, r.game_run, r["pass"]) in idx else 0 for _, r in TT.iterrows()]
+# completion within the next 10 actions from the turn's start (prefix sums per game-run)
+w10 = pd.Series(0, index=TT.index)
+for key, g in A.groupby(K):
+    cs = np.concatenate([[0], np.cumsum(g.sort_values("action_index").level_completed.values)])
+    n = len(cs) - 1
+    sel = (TT.run_id == key[0]) & (TT.game_run == key[1]) & (TT["pass"] == key[2])
+    st_ = TT.loc[sel, "first_action_num"].clip(lower=1, upper=max(n, 1)).astype(int).values
+    w10[sel] = ((cs[np.minimum(st_ + 9, n)] - cs[st_ - 1]) > 0).astype(int) if n else 0
+TT["lvl_within_10"] = w10.values
 
 res = {}
 
@@ -76,19 +75,31 @@ LEX["read"] = ((LEX.reads_code + LEX.reads_rules) > 0).astype(int)
 LEX["acts"] = (LEX.n_actions > 0).astype(int)
 LEX["share_changed"] = np.where(LEX.n_actions > 0, LEX.changed / LEX.n_actions.clip(lower=1), np.nan)
 outcomes = ["acts", "share_changed", "lvl_done", "lvl_within_10", "over"]
-def stratified_diff(df, col):
-    s = df.dropna(subset=[col]).groupby(K + ["level"])
-    num = den = 0.0
-    for _, g in s:
-        r, nr = g[g.read == 1][col], g[g.read == 0][col]
-        if len(r) and len(nr):
-            w = len(r) * len(nr) / (len(r) + len(nr)); num += w * (r.mean() - nr.mean()); den += w
-    return num / den if den else float("nan")
+def strata_table(df, col):
+    d = df.dropna(subset=[col])
+    g = d.groupby(K + ["level", "read"])[col].agg(["size", "sum"]).unstack("read", fill_value=0)
+    g.columns = [f"{a}_{b}" for a, b in g.columns]
+    g = g[(g.get("size_1", 0) > 0) & (g.get("size_0", 0) > 0)].reset_index()
+    g["game"] = g.game_run.str.split("@").str[0]
+    g["w"] = g.size_1 * g.size_0 / (g.size_1 + g.size_0)
+    g["d"] = g.sum_1 / g.size_1 - g.sum_0 / g.size_0
+    return g
+def stratified_diff_from(g, mult=None):
+    w = g.w.values * (1 if mult is None else mult)
+    return float((w * g.d.values).sum() / w.sum()) if w.sum() else float("nan")
+def boot_strata(g, n=2000):
+    games = g.game.unique(); gi = pd.Categorical(g.game, categories=games).codes
+    vals = []
+    for _ in range(n):
+        counts = np.bincount(rng.integers(0, len(games), len(games)), minlength=len(games))
+        vals.append(stratified_diff_from(g, counts[gi]))
+    vals = [v for v in vals if v == v]
+    return (float(np.percentile(vals, 2.5)), float(np.percentile(vals, 97.5)))
 m1 = {"turns": int(len(LEX)), "turns_with_read": int(LEX.read.sum()), "outcomes": {}}
 for col in outcomes:
-    d = stratified_diff(LEX, col)
+    g = strata_table(LEX, col)
     m1["outcomes"][col] = {"rate_read": float(LEX[LEX.read == 1][col].mean()), "rate_no_read": float(LEX[LEX.read == 0][col].mean()),
-                           "stratified_difference": d, "ci": boot(LEX, lambda x: stratified_diff(x, col))}
+                           "strata": int(len(g)), "stratified_difference": stratified_diff_from(g), "ci": boot_strata(g)}
 OFF = TT[TT.run_id.isin(["arcaid3-lt-off-r3@v1", "arcaid3-lb-off-r1@v1", "arcaid3-lb-off-r2@v1"])].copy()
 OFF["acts"] = (OFF.n_actions > 0).astype(int)
 OFF["share_changed"] = np.where(OFF.n_actions > 0, OFF.changed / OFF.n_actions.clip(lower=1), np.nan)
@@ -141,13 +152,17 @@ for gen, g in LL.groupby("generation"):
 res["M3"] = m3
 
 # ---- M4 efficiency on cleared levels
+def boot_median(g, n=2000):
+    games = g.game.unique(); vals_by = [g[g.game == x].actions_over_human.astype(float).values for x in games]
+    meds = [np.median(np.concatenate([vals_by[i] for i in rng.integers(0, len(games), len(games))])) for _ in range(n)]
+    return (float(np.percentile(meds, 2.5)), float(np.percentile(meds, 97.5)))
 m4 = {}
 cl = LL[LL.cleared == 1].copy()
 for gen, g in cl.groupby("generation"):
     r = g.actions_over_human.astype(float)
     m4[gen] = {"cleared_levels": int(len(g)), "median_actions_over_human": float(r.median()),
                "iqr": [float(r.quantile(0.25)), float(r.quantile(0.75))], "share_at_or_below_human": float((r <= 1).mean()),
-               "ci_median": boot(g, lambda x: x.actions_over_human.astype(float).median())}
+               "ci_median": boot_median(g)}
 for name, run in arms.items():
     g = cl[cl.run_id == run]; r = g.actions_over_human.astype(float)
     m4[name] = {"cleared_levels": int(len(g)), "median_actions_over_human": float(r.median()),
