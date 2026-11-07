@@ -276,12 +276,22 @@ p5 = {}
 W = R[R.trial == 0].copy()
 W["base_group"] = np.where(W.run_id.map(root).str.startswith("dfranzen/"), "Franzen-based", "Duck/TAAF-based")
 LW = {key: g.sort_values("level") for key, g in L[L.trial == 0].groupby(K)}
-an_rows = []; rhae_dev = []; order_bad = 0
+# A game's levels and their human baselines: every level of each public game was a level-trial start. (levels.csv.gz lists only
+# the levels a whole-game run reached.) See ANALYSIS-PLAN.md section 7, deviation of 2026-11-07.
+TRALL = L[L.trial == 1].assign(gid=lambda d: d.game_run.str.split("@").str[0])
+cnt = TRALL.groupby(["run_id", "gid"])["level"].agg(["count", "max"])
+res["checks"]["trial_starts_cover_every_level"] = bool((cnt["count"] == cnt["max"] + 1).all() and (cnt["count"].unstack("run_id").nunique(axis=1) == 1).all())
+BASE = {g: d.sort_values("level").human_actions.values.astype(float) for g, d in TRALL.drop_duplicates(["gid", "level"]).groupby("gid")}
+res["checks"]["public_games_and_levels"] = [len(BASE), int(sum(len(b) for b in BASE.values()))]
+an_rows = []; rhae_dev = []; order_bad = 0; base_bad = 0
 for _, r in W.iterrows():
-    lv = LW[(r.run_id, r.game_run, r["pass"])]
-    n = len(lv); base = lv.human_actions.values.astype(float); apl = lv.our_actions.values.astype(float); w = n * (n + 1) / 2
+    lv = LW[(r.run_id, r.game_run, r["pass"])].set_index("level")
+    base = BASE[r.game_run]; n = len(base); w = n * (n + 1) / 2
+    base_bad += int((lv.human_actions.values != base[lv.index.values]).any())
+    apl = lv.our_actions.reindex(range(n)).fillna(0).values.astype(float)
+    clr = lv.cleared.reindex(range(n)).fillna(0).values.astype(int)
     done = int(r.replay_levels_completed)
-    order_bad += int(not (lv.cleared.values[:done].all() and not lv.cleared.values[done:].any()))
+    order_bad += int(not (clr[:done].all() and not clr[done:].any()))
     cap = sum(range(1, done + 1)) / w * 100
     s = sum((i + 1) * min((base[i] / apl[i]) ** 2, 1.15) for i in range(done) if apl[i] > 0) / w * 100
     rhae_dev.append(abs(min(s, cap) - r.replay_score))
@@ -293,11 +303,12 @@ for _, r in W.iterrows():
     s5 = min(s5 / w * 100, sum(range(1, done5 + 1)) / w * 100)
     nxt = (done + 1) / w * 100 if done < n else 0.0
     an_rows.append({"group": r.base_group, "score": r.replay_score, "ceiling": cap, "lost_uncleared": 100 - cap, "lost_inefficiency": cap - r.replay_score,
-                    "levels_over_5x": int(((lv.cleared == 1) & (lv.our_actions > 5 * lv.human_actions)).sum()), "score_5x_rule": s5,
+                    "levels_over_5x": int(((clr == 1) & (apl > 5 * base)).sum()), "score_5x_rule": s5,
                     "next_level_ceiling_raise": nxt, "next_level_max_gain": min(1.15 * nxt, (cap - r.replay_score) + nxt) if done < n else 0.0})
 AN = pd.DataFrame(an_rows)
 res["checks"]["rhae_formula_reproduces_engine_scores_max_abs_diff"] = float(max(rhae_dev))
 res["checks"]["whole_game_levels_cleared_in_order"] = order_bad == 0
+res["checks"]["whole_game_baselines_match_trial_starts"] = base_bad == 0
 p5["score_anatomy"] = {}
 for gname, g in AN.groupby("group"):
     p5["score_anatomy"][gname] = {"runs": sorted(W[W.base_group == gname].run_id.unique().tolist()), "game_runs": int(len(g)),
@@ -473,7 +484,9 @@ md += ["", "## Checks", "",
        f"{setup['notebooks']['three controls']['cells'][0]} cells (each carries its own add-on cell, switched off); listed below.",
        f"- **The power model reproduces the real A/A disagreement:** {'yes' if ck['power_model_matches_aa'] else 'NO'} (P2).",
        f"- **The scoring formula reproduces the engine scores** of all whole-game runs: largest difference {ck['rhae_formula_reproduces_engine_scores_max_abs_diff']:.2g} points; "
-       f"levels cleared in order: {'yes' if ck['whole_game_levels_cleared_in_order'] else 'NO'}.",
+       f"levels cleared in order: {'yes' if ck['whole_game_levels_cleared_in_order'] else 'NO'}. Each game's level count and human baselines come from the "
+       f"level-trial starts ({ck['public_games_and_levels'][0]} games, {ck['public_games_and_levels'][1]} levels; consistent across trial runs: "
+       f"{'yes' if ck['trial_starts_cover_every_level'] else 'NO'}; whole-game rows agree: {'yes' if ck['whole_game_baselines_match_trial_starts'] else 'NO'}).",
        f"- **P6 starts from Stage 4 M1:** {'yes' if ck['p6_reproduces_stage4_m1'] else 'NO'} (same turns, same estimates).",
        f"- **Trial clears match the replayed actions** (a clear has a clearing action, a failure has none): {'yes' if ck['trial_clears_match_replayed_actions'] else 'NO'}.", "",
        "| Cell | Type | " + " | ".join(CTRL) + " |", "|---|---|" + "---|" * len(CTRL)]

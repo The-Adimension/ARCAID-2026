@@ -114,6 +114,7 @@ Any change to this plan after its commit is listed here, with its date and reaso
 | 2026-11-07 | `stage4_exploratory.py`: whole-game runs are grouped by the root base recorded in each run's `run.json`, not by run name. The September group is relabelled "Duck/TAAF-based whole games (Sept to 4 Oct)". | Bug: two runs of 4 October on Scott Le Grand's sheetu base (`arcaid3-lexicon-view-py312@v1`, `arcaid3-lexicon-view-v2@v1`; 50 game-runs) were grouped with the Franzen-based runs because their names start with `arcaid3`. Affects M3–M5 only; M1, M2, M6 and Stages 2–3 are unaffected. Found while writing Stage 5; Stage 4 re-run. |
 | 2026-11-07 | The analysis scripts are in `2026-Paper-Track/analysis/`, not in `Tools/analysis/` as §5 says. | Placement only. Each script was committed before its results, as §5 requires. |
 | 2026-11-07 | §8 added: post hoc analyses (Stage 5). | Questions raised by the Stage 2–4 results; labelled post hoc. See §8. |
+| 2026-11-07 | `stage5_posthoc.py` P5: a game's level count and per-level human baselines come from the level-trial starts (every level of each public game), not from the levels a whole-game run reached. | Bug in the committed script: `levels.csv.gz` lists only the levels a whole-game run reached, so the first run understated each game's level count. The script's own check caught it: recomputed scores missed the engine scores by up to 49 points. The trial starts match the official game metadata for all 25 games and 183 levels. Corrected before the result was used. |
 
 ## 8. Post hoc analyses (Stage 5)
 
