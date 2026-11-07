@@ -38,7 +38,7 @@ This catalogue records what was built, run and measured. Conclusions will be dra
 
 | You want to… | Go to |
 |---|---|
-| Read the paper | [`2026-Paper-Track/`](2026-Paper-Track/) (empty until the paper is written from this catalogue) |
+| Read the paper | [`2026-Paper-Track/`](2026-Paper-Track/): the analysis plan and the verified data tables so far; the paper is to be written from them |
 | See what each of the two selected submissions is, and how it differs from its base | [`Documentation/SELECTED-SUBMISSIONS.md`](Documentation/SELECTED-SUBMISSIONS.md) |
 | See every submission, with its notebook and log | [`Submissions/ARC-AGI-3/`](Submissions/ARC-AGI-3/), [`Submissions/ARC-AGI-2/`](Submissions/ARC-AGI-2/) |
 | See the controlled tests behind each claim | [`Ablations/ARC-AGI-3/`](Ablations/ARC-AGI-3/) |
@@ -63,7 +63,7 @@ ARCAID-2026/
 │   ├── ARC-AGI-3/          one folder per controlled test: decision rule, notebooks, logs, analysis, result
 │   └── ARC-AGI-2/
 ├── ARCAID/                 our code that went into the submissions, one folder per component
-├── 2026-Paper-Track/       the writeup, paper, figures and tables (to be written from this catalogue)
+├── 2026-Paper-Track/       analysis plan, verified data tables; the paper to be written from them
 └── Tools/                  collectors, diff and lineage tools, analysis and release checks
 ```
 
