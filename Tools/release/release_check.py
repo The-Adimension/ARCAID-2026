@@ -46,7 +46,7 @@ for p in sorted(root.rglob("*")):
         large.append((rel, size))
     if p.suffix in {".pkl", ".pickle", ".zip", ".gz", ".parquet", ".npz", ".pt", ".safetensors", ".bin"}:
         binary.append((rel, size))
-    if re.search(r"environment_files|/games?/[a-z]{2}\d{2}[^/]*\.py$|games\.pkl|intermediate_states\.pkl", rel):
+    if re.search(r"environment_files|/games?/[a-z0-9]{4}[^/]*\.py$|games\.pkl|intermediate_states\.pkl", rel):
         compdata.append(rel)
     if p.suffix not in TEXT_EXT or size > 20 * 1024 * 1024:
         continue
