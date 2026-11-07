@@ -396,8 +396,8 @@ per_turn = EA.groupby(K + ["analysis_step"]).agg(n_actions=("action_index", "siz
 TT = T6.merge(per_turn, on=K + ["analysis_step"], how="left").fillna({"n_actions": 0, "changed": 0, "lvl_done": 0, "over": 0})
 nxt_ = A6[K + ["action_index", "level"]].rename(columns={"action_index": "first_action_num", "level": "next_level"})
 TT = TT.merge(nxt_, on=K + ["first_action_num"], how="left")
-TT = TT.merge(A6.groupby(K)["level"].last().rename("last_level").reset_index(), on=K, how="left")
-TT["level"] = TT.first_level.fillna(TT.next_level).fillna(TT.last_level).fillna(0).astype(int)
+TT = TT.merge(A6.groupby(K).agg(last_level=("level", "last"), last_completed=("level_completed", "last")).reset_index(), on=K, how="left")
+TT["level"] = TT.first_level.fillna(TT.next_level).fillna(TT.last_level + TT.last_completed).fillna(0).astype(int)
 TT["game"] = TT.game_run.str.split("@").str[0]
 w10 = np.zeros(len(TT), dtype=int); pos = np.zeros(len(TT), dtype=int); unch5 = np.zeros(len(TT), dtype=int); rev10 = np.zeros(len(TT), dtype=int)
 tidx = {key: idx for key, idx in TT.groupby(K).indices.items()}
@@ -406,8 +406,10 @@ for key, g in A6.groupby(K):
         continue
     ii = tidx[key]; n = len(g)
     cs = np.concatenate([[0], np.cumsum(g.level_completed.values)])
-    s = TT.first_action_num.values[ii].clip(1, max(n, 1)).astype(int)
-    w10[ii] = ((cs[np.minimum(s + 9, n)] - cs[s - 1]) > 0).astype(int) if n else 0
+    s_raw = TT.first_action_num.values[ii].astype(int); s = s_raw.clip(1, max(n, 1))
+    v = ((cs[np.minimum(s + 9, n)] - cs[s - 1]) > 0).astype(int)
+    v[s_raw > n] = 0                          # a turn after the last action has no action in its window
+    w10[ii] = v
     ai = g.action_index.values; al = g.level.values; un = 1 - g.board_changed.values; rv = g.revisit.values
     bylvl = {lv_: (ai[al == lv_], un[al == lv_], rv[al == lv_]) for lv_ in np.unique(al)}
     for j, st0, L0 in zip(ii, TT.first_action_num.values[ii].astype(int), TT.level.values[ii]):
@@ -448,7 +450,8 @@ def boot(g, n=2000):
 
 
 p6 = {"turns": int(len(TT)), "turns_with_read": int(TT.read.sum()), "turns_with_cue": int(TT.cue.sum()),
-      "read_rate": {"by_position": {k: [int(v["size"]), float(v["mean"])] for k, v in TT.groupby("posbin").read.agg(["size", "mean"]).iterrows()},
+      "read_rate": {"by_position": {k: [int(v["size"]), float(v["mean"])] for k, v in
+                                    TT.groupby("posbin").read.agg(["size", "mean"]).reindex(["level start", "1-5", "6-15", "16-40", ">40"]).iterrows()},
                     "by_cue": {str(k): [int(v["size"]), float(v["mean"])] for k, v in TT.groupby("cue").read.agg(["size", "mean"]).iterrows()},
                     "by_stuck": {str(k): [int(v["size"]), float(v["mean"])] for k, v in TT.groupby("stuck").read.agg(["size", "mean"]).iterrows()}},
       "outcomes": {}}

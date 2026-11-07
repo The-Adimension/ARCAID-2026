@@ -55,9 +55,11 @@ per_turn = EA.groupby(K + ["analysis_step"]).agg(n_actions=("action_index", "siz
 TT = T.merge(per_turn, on=K + ["analysis_step"], how="left").fillna({"n_actions": 0, "changed": 0, "lvl_done": 0, "over": 0})
 nxt = A[K + ["action_index", "level"]].rename(columns={"action_index": "first_action_num", "level": "next_level"})
 TT = TT.merge(nxt, on=K + ["first_action_num"], how="left")
-last_lvl = A.groupby(K)["level"].last().rename("last_level").reset_index()
+last_lvl = A.groupby(K).agg(last_level=("level", "last"), last_completed=("level_completed", "last")).reset_index()
 TT = TT.merge(last_lvl, on=K, how="left")
-TT["level"] = TT.first_level.fillna(TT.next_level).fillna(TT.last_level).fillna(0).astype(int)   # level the turn played on
+# level the turn played on; a turn after the game-run's last action is on the level the game is on after that action
+# (ANALYSIS-PLAN.md section 7, deviation of 2026-11-07)
+TT["level"] = TT.first_level.fillna(TT.next_level).fillna(TT.last_level + TT.last_completed).fillna(0).astype(int)
 TT["game"] = TT.game_run.str.split("@").str[0]
 TT["generation"] = TT.run_id.map(generation)
 # completion within the next 10 actions from the turn's start (prefix sums per game-run)
@@ -66,8 +68,11 @@ for key, g in A.groupby(K):
     cs = np.concatenate([[0], np.cumsum(g.sort_values("action_index").level_completed.values)])
     n = len(cs) - 1
     sel = (TT.run_id == key[0]) & (TT.game_run == key[1]) & (TT["pass"] == key[2])
-    st_ = TT.loc[sel, "first_action_num"].clip(lower=1, upper=max(n, 1)).astype(int).values
-    w10[sel] = ((cs[np.minimum(st_ + 9, n)] - cs[st_ - 1]) > 0).astype(int) if n else 0
+    s_raw = TT.loc[sel, "first_action_num"].astype(int).values
+    st_ = s_raw.clip(1, max(n, 1))
+    v = ((cs[np.minimum(st_ + 9, n)] - cs[st_ - 1]) > 0).astype(int)
+    v[s_raw > n] = 0                          # a turn after the last action has no action in its window
+    w10[sel] = v
 TT["lvl_within_10"] = w10.values
 
 res = {}

@@ -115,6 +115,7 @@ Any change to this plan after its commit is listed here, with its date and reaso
 | 2026-11-07 | The analysis scripts are in `2026-Paper-Track/analysis/`, not in `Tools/analysis/` as §5 says. | Placement only. Each script was committed before its results, as §5 requires. |
 | 2026-11-07 | §8 added: post hoc analyses (Stage 5). | Questions raised by the Stage 2–4 results; labelled post hoc. See §8. |
 | 2026-11-07 | `stage5_posthoc.py` P5: a game's level count and per-level human baselines come from the level-trial starts (every level of each public game), not from the levels a whole-game run reached. | Bug in the committed script: `levels.csv.gz` lists only the levels a whole-game run reached, so the first run understated each game's level count. The script's own check caught it: recomputed scores missed the engine scores by up to 49 points. The trial starts match the official game metadata for all 25 games and 183 levels. Corrected before the result was used. |
+| 2026-11-07 | Stage 4 M1 and Stage 5 P6: a turn that starts after its game-run's last action has no level completion within 10 actions, and is placed on the level the game is on after that action. | Bug: the 10-action window was clipped to the last action, so such turns inherited that action's level completion. In the lexicon-on runs, 47 of 465 such turns were credited with a completion they did not make, 38 of them turns with a read. Found while checking Stage 5 against its scratch version. Stages 4 and 5 re-run. |
 
 ## 8. Post hoc analyses (Stage 5)
 
