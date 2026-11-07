@@ -19,14 +19,17 @@ C = pd.read_csv(data / "calls.csv.gz")
 L = pd.read_csv(data / "levels.csv.gz")
 K = ["run_id", "game_run", "pass"]
 rng = np.random.default_rng(0)
+# Root base of every run, as recorded in its run.json (folders as listed in replay.csv). See ANALYSIS-PLAN.md section 7, deviation of 2026-11-07.
+_folders = pd.read_csv(data / "replay.csv").drop_duplicates("run_id").set_index("run_id").folder
+ROOT = {rid: (json.loads((repo / f / "run.json").read_text()).get("root_base") or "") for rid, f in _folders.items()}
 
 
 def generation(run_id, trial=None):
     if run_id.startswith("arcaid3-lt-"):
         return "level trials (Oct)"
-    if run_id.startswith("arcaid3"):
+    if ROOT[run_id].startswith("dfranzen/"):
         return "Franzen-based whole games (Oct)"
-    return "Duck/TAAF whole games (Sept)"
+    return "Duck/TAAF-based whole games (Sept to 4 Oct)"
 
 
 def boot(df, stat, by="game", n=2000):
