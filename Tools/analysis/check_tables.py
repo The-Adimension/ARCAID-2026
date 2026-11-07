@@ -31,12 +31,10 @@ out += ["## 1. Engine replay against the harness record", "",
 
 acts = {}
 for r in rd("actions.csv.gz"):
-    acts[(r["run_id"], r["game_run"], int(r["action_index"]))] = r
+    acts[(r["run_id"], r["game_run"], r["pass"], int(r["action_index"]))] = r
 ev = {}
 for r in rd("events.csv.gz"):
-    if r["pass"] != "0":
-        continue
-    ev[(r["run_id"], r["game_run"], int(r["action_num"]))] = r
+    ev[(r["run_id"], r["game_run"], r["pass"], int(r["action_num"]))] = r
 runs_with_events = {k[0] for k in ev}
 a_keys = {k for k in acts if k[0] in runs_with_events}
 both = a_keys & set(ev)
@@ -44,6 +42,7 @@ agree = Counter()
 for k in both:
     a, e = acts[k], ev[k]
     agree["board_changed"] += a["board_changed"] == e["board_changed"]
+    agree["any_frame_changed"] += a["any_frame_changed"] == e["board_changed"]
     agree["game_over"] += a["game_over"] == e["game_over"]
     if a["level_completed"] == e["level_completed"]:
         agree["level_completed"] += 1
@@ -53,14 +52,29 @@ out += ["## 2. Logged actions against replayed actions", "",
         f"Runs with event logs: {len(runs_with_events)}. Replayed actions in those runs: {len(a_keys):,}; logged actions: "
         f"{sum(1 for k in ev if k[0] in runs_with_events):,}; present in both: {len(both):,}.", "",
         "| Field | Agree | Of |", "|---|---|---|"]
-for f in ("board_changed", "game_over", "level_completed"):
-    out.append(f"| {f} | {agree[f]:,} | {len(both):,} |")
+for f, label in (("board_changed", "board_changed (log) vs last frame changed (replay)"),
+                 ("any_frame_changed", "board_changed (log) vs any returned frame changed (replay)"),
+                 ("game_over", "game_over"), ("level_completed", "level_completed")):
+    out.append(f"| {label} | {agree[f]:,} | {len(both):,} |")
 out += [f"| level completion replayed but logged as `done` (final-level win) | {agree['final_win_logged_as_done']:,} | |", ""]
+by_game = defaultdict(Counter)
+for k in both:
+    a, e = acts[k], ev[k]
+    g = k[1].split("@")[0]
+    by_game[g]["n"] += 1; by_game[g]["log_changed"] += e["board_changed"] == "1"
+    by_game[g]["disagree"] += a["board_changed"] != e["board_changed"]
+bad = {g: c for g, c in by_game.items() if c["disagree"]}
+if bad:
+    out += ["Where the board-change flags disagree, by game:", "", "| Game | Disagreements | Logged actions | Share the log flags as changed |", "|---|---|---|---|"]
+    for g, c in sorted(bad.items(), key=lambda x: -x[1]["disagree"]):
+        out.append(f"| {g} | {c['disagree']:,} | {c['n']:,} | {c['log_changed'] / c['n']:.1%} |")
+    out += ["", "In a game where the harness flags every action as changed, its flag carries no information. The tables use the "
+            "replay's comparison of the board itself (`actions.board_changed`).", ""]
 
 turns = list(rd("turns.csv.gz"))
-ev_by_turn = Counter((k[0], k[1], e["analysis_step"]) for k, e in ev.items())
-t_exec = [t for t in turns if t["pass"] == "0" and int(t["calls_action"]) > 0]
-with_ev = sum(ev_by_turn.get((t["run_id"], t["game_run"], t["analysis_step"]), 0) > 0 for t in t_exec if t["run_id"] in runs_with_events)
+ev_by_turn = Counter((k[0], k[1], k[2], e["analysis_step"]) for k, e in ev.items())
+t_exec = [t for t in turns if int(t["calls_action"]) > 0]
+with_ev = sum(ev_by_turn.get((t["run_id"], t["game_run"], t["pass"], t["analysis_step"]), 0) > 0 for t in t_exec if t["run_id"] in runs_with_events)
 n_exec = sum(1 for t in t_exec if t["run_id"] in runs_with_events)
 out += ["## 3. Turns against logged actions", "",
         f"Turns whose tool calls called `action(...)`: {n_exec:,}; of these, turns with at least one logged action: {with_ev:,}.",

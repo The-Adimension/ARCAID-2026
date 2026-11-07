@@ -8,7 +8,8 @@ ENV_DIR    the official ARC-AGI-3 public game files (`environment_files/` of the
            they are not redistributed here)
 Needs Python 3.12 with the competition-pinned packages: pip install arc-agi==0.9.8 arcengine==0.9.3 numpy
 
-Whole-game runs start at level 0. Level trials (game ids "<game>@L<k>") are positioned exactly as the trial
+Whole-game runs start at level 0. A run that plays a game more than once lists it once per pass; `pass` numbers them
+in order (0, 1, ...), as the harness's `_p<N>` file names do. Level trials (game ids "<game>@L<k>") are positioned exactly as the trial
 cell did it: set_level(k), then RESET, with ONLY_RESET_LEVELS=true (the harness's own setting).
 
 Writes to OUT_DIR:
@@ -16,7 +17,8 @@ Writes to OUT_DIR:
                    match flag for levels, actions per level and score
   levels.csv.gz    one row per (run, game-run, level played): human baseline, our actions, cleared,
                    game-overs, actions that left the board unchanged, generated tokens
-  actions.csv.gz   one row per action: level, action and its data, board changed, level completed,
+  actions.csv.gz   one row per action: level, action and its data, board changed (last frame against the last
+                   frame before), any frame changed (any frame the action returned differs), level completed,
                    game over, a 12-hex hash of the board after the action (for detecting repeated states),
                    generated tokens and wall-clock seconds as the harness logged them
 Every outcome in these tables comes from the engine, not from the harness's own bookkeeping; the harness
@@ -49,17 +51,19 @@ def last(f):
 rep_rows, lvl_rows = [], []
 act_f = gzip.open(out / "actions.csv.gz", "wt", newline="")
 act_w = csv.writer(act_f)
-act_w.writerow(["run_id", "game_run", "action_index", "level", "action", "x", "y", "board_changed",
-                "level_completed", "game_over", "board_hash", "generated_tokens", "wallclock_seconds"])
+act_w.writerow(["run_id", "game_run", "pass", "action_index", "level", "action", "x", "y", "board_changed",
+                "any_frame_changed", "level_completed", "game_over", "board_hash", "generated_tokens", "wallclock_seconds"])
 for bpath in sorted(repo.glob("**/outputs/benchmark.json")):
     vdir = bpath.parent.parent
     run = json.loads((vdir / "run.json").read_text())
     run_id = f"{run['kernel'].split('/')[-1]}@v{run['version']}"
     folder = vdir.relative_to(repo).as_posix()
     place = run.get("placement") or {}
+    seen = {}
     for r in json.loads(bpath.read_text())["game_runs"]:
         gid = r["game_id"]; m = re.search(r"@L(\d+)$", gid); k = int(m.group(1)) if m else 0
         trial = m is not None                        # "@L0" is a trial too
+        pss = seen.get(gid, 0); seen[gid] = pss + 1  # runs with several passes list a game once per pass
         env = arc.make(gid.split("@")[0], seed=0); f = env.reset()
         if k:
             env._game.set_level(k); f = env.step(GameAction.RESET)
@@ -73,11 +77,13 @@ for bpath in sorted(repo.glob("**/outputs/benchmark.json")):
             f = env.step(GameAction[a["id"]], data=data)
             now = last(f)
             changed = not (prev is not None and now is not None and prev.shape == now.shape and np.array_equal(prev, now))
+            any_changed = any(not (prev is not None and np.asarray(fr).shape == prev.shape and np.array_equal(prev, np.asarray(fr)))
+                              for fr in (f.frame or []))
             lvl_done = f.levels_completed > cur
             over = f.state == GameState.GAME_OVER
             apl[cur] += 1; deaths[cur] += over; noop[cur] += (not changed); tok[cur] += h.get("generated_tokens") or 0
-            act_w.writerow([run_id, gid, i + 1, cur, a["id"], (data or {}).get("x", ""), (data or {}).get("y", ""),
-                            int(changed), int(lvl_done), int(over),
+            act_w.writerow([run_id, gid, pss, i + 1, cur, a["id"], (data or {}).get("x", ""), (data or {}).get("y", ""),
+                            int(changed), int(any_changed), int(lvl_done), int(over),
                             hashlib.sha1(now.tobytes()).hexdigest()[:12] if now is not None else "", h.get("generated_tokens", ""),
                             round(h["wallclock_seconds"], 3) if h.get("wallclock_seconds") is not None else ""])
             prev = now
@@ -85,7 +91,7 @@ for bpath in sorted(repo.glob("**/outputs/benchmark.json")):
         rec_apl = r.get("actions_per_level") or []
         rep_rows.append({
             "run_id": run_id, "folder": folder, "track": run["track"], "place": place.get("place", ""),
-            "group": place.get("group", ""), "arm": place.get("arm", ""), "game_run": gid, "start_level": k, "trial": int(trial),
+            "group": place.get("group", ""), "arm": place.get("arm", ""), "game_run": gid, "pass": pss, "start_level": k, "trial": int(trial),
             "actions": len(r["history"]), "recorded_levels_completed": r["levels_completed"],
             "replay_levels_completed": done, "replay_cleared_from_start": done - start,
             "levels_match": int(r["levels_completed"] in (done, done - start)),
@@ -98,7 +104,7 @@ for bpath in sorted(repo.glob("**/outputs/benchmark.json")):
         for i in played:
             cleared = (done - start >= 1) if trial else (i < done)
             lvl_rows.append({"run_id": run_id, "track": run["track"], "place": place.get("place", ""),
-                             "group": place.get("group", ""), "arm": place.get("arm", ""), "game_run": gid,
+                             "group": place.get("group", ""), "arm": place.get("arm", ""), "game_run": gid, "pass": pss,
                              "game": gid.split("@")[0], "level": i, "trial": int(trial), "human_actions": base[i],
                              "our_actions": apl[i], "cleared": int(cleared),
                              "actions_over_human": round(apl[i] / base[i], 4) if cleared and base[i] else "",

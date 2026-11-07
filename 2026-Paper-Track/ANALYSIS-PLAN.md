@@ -107,4 +107,5 @@ Any change to this plan after its commit is listed here, with its date and reaso
 
 | Date | Change | Reason |
 |---|---|---|
-| | | |
+| 2026-11-07 | Tables gained a `pass` column; the join of events to actions uses `run_id`, `game_run`, `pass` and `action_num`. | Four runs play some games more than once. Without the pass number their actions were mis-joined. A data-structure correction made before any Stage 2–4 analysis; no test or endpoint changed. |
+| 2026-11-07 | `actions.board_changed` is defined from the replay: the last frame after the action against the last frame before it. `any_frame_changed` was added alongside. | The harness's own flag is constant (always 1) in games `lf52` and `bp35` (`data/CHECKS.md` §2). Outcome definitions come from the engine (§1), as planned. |
