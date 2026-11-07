@@ -107,3 +107,7 @@ N1's header credits the following, and every fork of N1 carries them through dat
 
 - **Anthropic, Claude Code:** used as described in [`../DISCLAIMERS.md`](../DISCLAIMERS.md).
 - **Kaggle API** (`kaggle`, `kagglesdk`): every collection in `Tools/kaggle/`.
+
+## 9. Related literature for the paper
+
+The published work the writeup compares itself with, found in a literature search on 2026-11-07, is listed in [`../2026-Paper-Track/LITERATURE.md`](../2026-Paper-Track/LITERATURE.md). It covers ARC-AGI-3 agent papers, object-centric perception and world models, budget control in LLM agents, and the statistics of agent evaluation. Each entry states whether the source itself was read.
