@@ -1,0 +1,1318 @@
+{
+ "checks": {
+  "controls_install_nothing": true,
+  "power_model_matches_aa": true,
+  "trial_clears_match_replayed_actions": true,
+  "trial_starts_cover_every_level": true,
+  "public_games_and_levels": [
+   25,
+   183
+  ],
+  "rhae_formula_reproduces_engine_scores_max_abs_diff": 4.938210578586677e-05,
+  "whole_game_levels_cleared_in_order": true,
+  "whole_game_baselines_match_trial_starts": true,
+  "p6_reproduces_stage4_m1": true
+ },
+ "setup": {
+  "start_utc": {
+   "C1": "2026-10-10T10:11:51.616784+00:00",
+   "C2": "2026-10-24T07:13:04.302998+00:00",
+   "C3": "2026-10-24T15:46:15.071665+00:00",
+   "PF1": "2026-10-24T07:13:07.391588+00:00",
+   "PF2": "2026-10-24T15:46:12.000823+00:00",
+   "LEX": "2026-10-10T10:11:46.780372+00:00"
+  },
+  "addon_log_lines": {
+   "C1": [
+    "ARCAID3_LEXICON_FINAL {'tool_calls': 0, 'calls_using_view': 0, 'code': 0, 'objects': 0, 'native': 0, 'changes_since': 0, 'rules': 0, 'cue_turns': 0, 'rules_cues': 0, 'errors': 0} {'enabled': False, 'installed': False}"
+   ],
+   "C2": [
+    "ARC3_PF_ARM PF=0 round 1",
+    "ARC3_PF_READY disabled",
+    "ARC3_PF_FINAL {'openers': 0, 'nudged': 0, 'capped_requests': 0, 'max_streak': 0, 'errors': 0}"
+   ],
+   "C3": [
+    "ARC3_PF_ARM PF=0 round 2",
+    "ARC3_PF_READY disabled",
+    "ARC3_PF_FINAL {'openers': 0, 'nudged': 0, 'capped_requests': 0, 'max_streak': 0, 'errors': 0}"
+   ],
+   "PF1": [
+    "ARC3_PF_ARM PF=1 round 1",
+    "ARC3_PF_READY installed nudge_at=3 cap_at=5 cap_tokens=4096 self_test=ok",
+    "ARC3_PF_FINAL {'openers': 4847, 'nudged': 328, 'capped_requests': 390, 'max_streak': 16, 'errors': 0}"
+   ],
+   "PF2": [
+    "ARC3_PF_ARM PF=1 round 2",
+    "ARC3_PF_READY installed nudge_at=3 cap_at=5 cap_tokens=4096 self_test=ok",
+    "ARC3_PF_FINAL {'openers': 4728, 'nudged': 298, 'capped_requests': 337, 'max_streak': 16, 'errors': 0}"
+   ],
+   "LEX": [
+    "ARCAID3_LEXICON_READY {'enabled': True, 'installed': True, 'scale_lock': 'on, self-test ok', 'rules': 'on, self-test ok', 'prompt_edits': {'tool_description': 'applied', 'system_only_current': 'applied', 'system_only_history': 'applied', 'trigger': 'applied'}, 'first_turn_cue': 'installed', 'self_test': 'ok'}",
+    "ARCAID3_LEXICON_FINAL {'tool_calls': 7370, 'calls_using_view': 1408, 'code': 452, 'objects': 118, 'native': 295, 'changes_since': 8, 'rules': 688, 'cue_turns': 366, 'rules_cues': 1550, 'errors': 0} {'enabled': True, 'installed': True, 'scale_lock': 'on, self-test ok', 'rules': 'on, self-test ok', 'prompt_edits': {'tool_description': 'applied', 'system_only_current': 'applied', 'system_only_history"
+   ]
+  },
+  "notebooks": {
+   "three controls": {
+    "runs": [
+     "C1",
+     "C2",
+     "C3"
+    ],
+    "cells": [
+     29
+    ],
+    "differing_cells": [
+     {
+      "cell": 0,
+      "type": "markdown",
+      "first_lines": {
+       "C1": "# ARCAID3 lexicon view on Daniel Franzen's Milestone 2 solution",
+       "C2": "# ARCAID3 paired level trial, round 1, arm PF=0 (probe-first governor OFF: Franzen base behaviour)",
+       "C3": "# ARCAID3 paired level trial, round 2, arm PF=0 (probe-first governor OFF: Franzen base behaviour)"
+      }
+     },
+     {
+      "cell": 20,
+      "type": "markdown",
+      "first_lines": {
+       "C1": "## ARCAID3 lexicon view (the one added code cell)",
+       "C2": "## ARCAID3 probe-first governor cell (the arm flag decides whether it installs)",
+       "C3": "## ARCAID3 probe-first governor cell (the arm flag decides whether it installs)"
+      }
+     },
+     {
+      "cell": 21,
+      "type": "code",
+      "first_lines": {
+       "C1": "# ARCAID3 evaluation control arm: the lexicon view is switched off, so the next cells install nothing",
+       "C2": "# ARCAID3 paired level trial: arm flag. The probe-first cell below reads PF from the environment.",
+       "C3": "# ARCAID3 paired level trial: arm flag. The probe-first cell below reads PF from the environment."
+      }
+     },
+     {
+      "cell": 22,
+      "type": "code",
+      "first_lines": {
+       "C1": "# ---------------------------------------------------------------------------",
+       "C2": "# First-run defaults (explicit for the record; the cell reads these from the environment).",
+       "C3": "# First-run defaults (explicit for the record; the cell reads these from the environment)."
+      }
+     },
+     {
+      "cell": 28,
+      "type": "code",
+      "first_lines": {
+       "C1": "# ARCAID3 lexicon view: final counters (how often the model's Python read the new view)",
+       "C2": "# Probe-first governor: final counters for this run (never raises).",
+       "C3": "# Probe-first governor: final counters for this run (never raises)."
+      }
+     }
+    ],
+    "identical_cells": 24
+   },
+   "round 1 arms": {
+    "runs": [
+     "PF1",
+     "C2"
+    ],
+    "cells": [
+     29
+    ],
+    "differing_cells": [
+     {
+      "cell": 0,
+      "type": "markdown",
+      "first_lines": {
+       "PF1": "# ARCAID3 paired level trial, round 1, arm PF=1 (probe-first governor ON)",
+       "C2": "# ARCAID3 paired level trial, round 1, arm PF=0 (probe-first governor OFF: Franzen base behaviour)"
+      }
+     },
+     {
+      "cell": 21,
+      "type": "code",
+      "first_lines": {
+       "PF1": "# ARCAID3 paired level trial: arm flag. The probe-first cell below reads PF from the environment.",
+       "C2": "# ARCAID3 paired level trial: arm flag. The probe-first cell below reads PF from the environment."
+      }
+     }
+    ],
+    "identical_cells": 27
+   },
+   "round 2 arms": {
+    "runs": [
+     "PF2",
+     "C3"
+    ],
+    "cells": [
+     29
+    ],
+    "differing_cells": [
+     {
+      "cell": 0,
+      "type": "markdown",
+      "first_lines": {
+       "PF2": "# ARCAID3 paired level trial, round 2, arm PF=1 (probe-first governor ON)",
+       "C3": "# ARCAID3 paired level trial, round 2, arm PF=0 (probe-first governor OFF: Franzen base behaviour)"
+      }
+     },
+     {
+      "cell": 21,
+      "type": "code",
+      "first_lines": {
+       "PF2": "# ARCAID3 paired level trial: arm flag. The probe-first cell below reads PF from the environment.",
+       "C3": "# ARCAID3 paired level trial: arm flag. The probe-first cell below reads PF from the environment."
+      }
+     }
+    ],
+    "identical_cells": 27
+   },
+   "lexicon round 3 arms": {
+    "runs": [
+     "LEX",
+     "C1"
+    ],
+    "cells": [
+     28,
+     29
+    ],
+    "differing_cells": [],
+    "identical_cells": null
+   }
+  },
+  "addon_installed": {
+   "C1": false,
+   "C2": false,
+   "C3": false,
+   "PF1": true,
+   "PF2": true,
+   "LEX": true
+  }
+ },
+ "P1": {
+  "cleared": {
+   "C1": 67,
+   "C2": 58,
+   "C3": 58,
+   "PF1": 69,
+   "PF2": 65,
+   "LEX": 58
+  },
+  "pairs": {
+   "C1 vs C2": {
+    "kind": "A/A",
+    "cleared": [
+     67,
+     58
+    ],
+    "only_first": 17,
+    "only_second": 8,
+    "disagreeing_levels": 25,
+    "exact_p": 0.10775214433670044,
+    "kappa": 0.6970800503211282
+   },
+   "C1 vs C3": {
+    "kind": "A/A",
+    "cleared": [
+     67,
+     58
+    ],
+    "only_first": 19,
+    "only_second": 10,
+    "disagreeing_levels": 29,
+    "exact_p": 0.13604594767093658,
+    "kappa": 0.6486128583725089
+   },
+   "C2 vs C3": {
+    "kind": "A/A",
+    "cleared": [
+     58,
+     58
+    ],
+    "only_first": 13,
+    "only_second": 13,
+    "disagreeing_levels": 26,
+    "exact_p": 1.0,
+    "kappa": 0.6718620689655171
+   },
+   "PF1 vs PF2": {
+    "kind": "A/A",
+    "cleared": [
+     69,
+     65
+    ],
+    "only_first": 19,
+    "only_second": 15,
+    "disagreeing_levels": 34,
+    "exact_p": 0.6075913612730801,
+    "kappa": 0.5999228395061729
+   },
+   "PF1 vs C2": {
+    "kind": "add-on vs same-day control",
+    "cleared": [
+     69,
+     58
+    ],
+    "only_first": 18,
+    "only_second": 7,
+    "disagreeing_levels": 25,
+    "exact_p": 0.043285250663757324,
+    "kappa": 0.6997440441031698
+   },
+   "PF2 vs C3": {
+    "kind": "add-on vs same-day control",
+    "cleared": [
+     65,
+     58
+    ],
+    "only_first": 19,
+    "only_second": 12,
+    "disagreeing_levels": 31,
+    "exact_p": 0.28104151505976915,
+    "kappa": 0.6210167679871735
+   },
+   "LEX vs C1": {
+    "kind": "add-on vs same-day control",
+    "cleared": [
+     58,
+     67
+    ],
+    "only_first": 8,
+    "only_second": 17,
+    "disagreeing_levels": 25,
+    "exact_p": 0.10775214433670044,
+    "kappa": 0.6970800503211282
+   }
+  },
+  "icc1_controls": 0.6735328410415857,
+  "levels_by_runs_clearing_of_6": {
+   "0": 86,
+   "1": 20,
+   "2": 13,
+   "3": 7,
+   "4": 14,
+   "5": 6,
+   "6": 37
+  },
+  "levels_by_controls_clearing_of_3": {
+   "0": 100,
+   "1": 26,
+   "2": 14,
+   "3": 43
+  }
+ },
+ "P2": {
+  "observed_aa_disagreeing_levels": [
+   25,
+   29,
+   26
+  ],
+  "first_pass_model_expected_disagreeing_levels": 50.03125,
+  "models": {
+   "fitted to the 3 controls (primary)": {
+    "alpha": 0.16571476741482652,
+    "beta": 0.3244793538164338,
+    "simulated_aa_disagreeing_levels": {
+     "mean": 26.7654,
+     "p5": 19.0,
+     "p95": 34.0
+    },
+    "calibration_ok": true,
+    "power": {
+     "gain 3 pts, 1 round(s)": 0.12775,
+     "gain 3 pts, 2 round(s)": 0.25975,
+     "gain 3 pts, 4 round(s)": 0.51425,
+     "gain 5 pts, 1 round(s)": 0.32575,
+     "gain 5 pts, 2 round(s)": 0.6475,
+     "gain 5 pts, 4 round(s)": 0.92825,
+     "gain 8 pts, 1 round(s)": 0.7265,
+     "gain 8 pts, 2 round(s)": 0.96475,
+     "gain 8 pts, 4 round(s)": 0.9995,
+     "gain 10 pts, 1 round(s)": 0.89675,
+     "gain 10 pts, 2 round(s)": 0.99625,
+     "gain 10 pts, 4 round(s)": 1.0,
+     "harm 5 pts, 1 round": 0.34075,
+     "harm 8 pts, 1 round": 0.759
+    },
+    "overstatement": {
+     "true gain 3.3 pts, 2 rounds": {
+      "power": 0.3214,
+      "mean_significant_estimate": 0.055045208632995675,
+      "ratio": 1.6680366252422931,
+      "simulations": 20000
+     },
+     "true gain 4.9 pts, 2 rounds": {
+      "power": 0.62395,
+      "mean_significant_estimate": 0.061188698653081436,
+      "ratio": 1.2487489521037027,
+      "simulations": 20000
+     }
+    },
+    "simulations_per_power_cell": 4000
+   },
+   "fitted to all 6 runs (sensitivity)": {
+    "alpha": 0.1705468780733039,
+    "beta": 0.31597899730010204,
+    "simulated_aa_disagreeing_levels": {
+     "mean": 27.21785,
+     "p5": 20.0,
+     "p95": 35.0
+    },
+    "calibration_ok": true,
+    "power": {
+     "gain 3 pts, 1 round(s)": 0.1335,
+     "gain 3 pts, 2 round(s)": 0.256,
+     "gain 3 pts, 4 round(s)": 0.4915,
+     "gain 5 pts, 1 round(s)": 0.317,
+     "gain 5 pts, 2 round(s)": 0.6375,
+     "gain 5 pts, 4 round(s)": 0.9255,
+     "gain 8 pts, 1 round(s)": 0.705,
+     "gain 8 pts, 2 round(s)": 0.9625,
+     "gain 8 pts, 4 round(s)": 0.999,
+     "gain 10 pts, 1 round(s)": 0.898,
+     "gain 10 pts, 2 round(s)": 0.999,
+     "gain 10 pts, 4 round(s)": 1.0,
+     "harm 5 pts, 1 round": 0.3315,
+     "harm 8 pts, 1 round": 0.745
+    },
+    "overstatement": {
+     "true gain 3.3 pts, 2 rounds": {
+      "power": 0.3216,
+      "mean_significant_estimate": 0.05563244229671315,
+      "ratio": 1.6858315847488834,
+      "simulations": 20000
+     },
+     "true gain 4.9 pts, 2 rounds": {
+      "power": 0.6163,
+      "mean_significant_estimate": 0.061297634659154894,
+      "ratio": 1.2509721359011203,
+      "simulations": 20000
+     }
+    },
+    "simulations_per_power_cell": 2000
+   }
+  }
+ },
+ "P3": {
+  "probe-first (PF1, PF2) vs C1-C3": {
+   "clear_rate_add_on": 0.366120218579235,
+   "clear_rate_controls": 0.3333333333333333,
+   "difference": 0.03278688524590165,
+   "exact_permutation_p_two_sided": 0.08661122686732108
+  },
+  "lexicon (LEX) vs C1-C3": {
+   "clear_rate_add_on": 0.31693989071038253,
+   "clear_rate_controls": 0.3333333333333333,
+   "difference": -0.016393442622950807,
+   "exact_permutation_p_two_sided": 0.5268605061871241
+  }
+ },
+ "P4": {
+  "governor_counters": {
+   "PF1": "{'openers': 4847, 'nudged': 328, 'capped_requests': 390, 'max_streak': 16, 'errors': 0}",
+   "PF2": "{'openers': 4728, 'nudged': 298, 'capped_requests': 337, 'max_streak': 16, 'errors': 0}",
+   "C2": "{'openers': 0, 'nudged': 0, 'capped_requests': 0, 'max_streak': 0, 'errors': 0}",
+   "C3": "{'openers': 0, 'nudged': 0, 'capped_requests': 0, 'max_streak': 0, 'errors': 0}"
+  },
+  "streaks": {
+   "C1": {
+    "streaks": 1523,
+    "median": 2.0,
+    "p90": 4.0,
+    "max": 25,
+    "share_5_or_more": 0.09258043335521995,
+    "share_10_or_more": 0.013131976362442548,
+    "token_share_in_streaks_5_or_more": 0.15089868906024426,
+    "calls_in_time_order": 1.0
+   },
+   "C2": {
+    "streaks": 1542,
+    "median": 2.0,
+    "p90": 4.0,
+    "max": 15,
+    "share_5_or_more": 0.08690012970168612,
+    "share_10_or_more": 0.008430609597924773,
+    "token_share_in_streaks_5_or_more": 0.13806027139489244,
+    "calls_in_time_order": 1.0
+   },
+   "C3": {
+    "streaks": 1512,
+    "median": 2.0,
+    "p90": 4.0,
+    "max": 20,
+    "share_5_or_more": 0.09060846560846561,
+    "share_10_or_more": 0.011243386243386243,
+    "token_share_in_streaks_5_or_more": 0.14010261597513188,
+    "calls_in_time_order": 1.0
+   },
+   "PF1": {
+    "streaks": 1517,
+    "median": 2.0,
+    "p90": 4.0,
+    "max": 16,
+    "share_5_or_more": 0.09162821357943308,
+    "share_10_or_more": 0.01054713249835201,
+    "token_share_in_streaks_5_or_more": 0.13348969032543495,
+    "calls_in_time_order": 1.0
+   },
+   "PF2": {
+    "streaks": 1503,
+    "median": 2.0,
+    "p90": 4.0,
+    "max": 16,
+    "share_5_or_more": 0.07917498336660013,
+    "share_10_or_more": 0.00998003992015968,
+    "token_share_in_streaks_5_or_more": 0.11551114256565345,
+    "calls_in_time_order": 1.0
+   },
+   "LEX": {
+    "streaks": 1719,
+    "median": 2.0,
+    "p90": 4.0,
+    "max": 17,
+    "share_5_or_more": 0.09773123909249563,
+    "share_10_or_more": 0.009889470622454915,
+    "token_share_in_streaks_5_or_more": 0.14537581030226537,
+    "calls_in_time_order": 1.0
+   }
+  },
+  "moves_per_trial": {
+   "PF1 vs C2": {
+    "n": 183,
+    "median": [
+     59.0,
+     62.0
+    ],
+    "mean_difference": -1.3114754098360655,
+    "median_difference": 1.0,
+    "wilcoxon_p": 0.668231617295622
+   },
+   "PF2 vs C3": {
+    "n": 183,
+    "median": [
+     58.0,
+     63.0
+    ],
+    "mean_difference": -4.377049180327869,
+    "median_difference": -1.0,
+    "wilcoxon_p": 0.18361372957578015
+   },
+   "LEX vs C1": {
+    "n": 183,
+    "median": [
+     56.0,
+     62.0
+    ],
+    "mean_difference": -3.6775956284153004,
+    "median_difference": -3.0,
+    "wilcoxon_p": 0.2873247209095865
+   },
+   "C1 vs C2": {
+    "n": 183,
+    "median": [
+     62.0,
+     62.0
+    ],
+    "mean_difference": 2.442622950819672,
+    "median_difference": -1.0,
+    "wilcoxon_p": 0.9525063066476323
+   },
+   "C1 vs C3": {
+    "n": 183,
+    "median": [
+     62.0,
+     63.0
+    ],
+    "mean_difference": 3.551912568306011,
+    "median_difference": -1.0,
+    "wilcoxon_p": 0.8564280837498478
+   },
+   "C2 vs C3": {
+    "n": 183,
+    "median": [
+     62.0,
+     63.0
+    ],
+    "mean_difference": 1.1092896174863387,
+    "median_difference": -1.0,
+    "wilcoxon_p": 0.6288787587558007
+   }
+  },
+  "effort_on_levels_both_cleared": {
+   "PF1 vs C2": {
+    "levels": 51,
+    "tokens_to_clear": {
+     "median": [
+      28464.0,
+      36657.0
+     ],
+     "median_ratio": 0.9305948525651951,
+     "first_lower": 31,
+     "wilcoxon_p": 0.285261118060972
+    },
+    "responses_to_clear": {
+     "median": [
+      18.0,
+      19.0
+     ],
+     "median_ratio": 0.9354838709677419,
+     "first_lower": 28,
+     "wilcoxon_p": 0.2996881534693864
+    },
+    "actions_to_clear": {
+     "median": [
+      30.0,
+      32.0
+     ],
+     "median_ratio": 0.8947368421052632,
+     "first_lower": 32,
+     "wilcoxon_p": 0.06078218168153823
+    }
+   },
+   "PF2 vs C3": {
+    "levels": 46,
+    "tokens_to_clear": {
+     "median": [
+      25751.5,
+      29693.0
+     ],
+     "median_ratio": 0.9966176452123101,
+     "first_lower": 23,
+     "wilcoxon_p": 0.9568583652054201
+    },
+    "responses_to_clear": {
+     "median": [
+      17.0,
+      18.0
+     ],
+     "median_ratio": 1.0,
+     "first_lower": 22,
+     "wilcoxon_p": 0.8665600726672733
+    },
+    "actions_to_clear": {
+     "median": [
+      29.0,
+      32.5
+     ],
+     "median_ratio": 1.0063456073742667,
+     "first_lower": 23,
+     "wilcoxon_p": 0.861231064915237
+    }
+   },
+   "LEX vs C1": {
+    "levels": 50,
+    "tokens_to_clear": {
+     "median": [
+      27777.0,
+      29487.5
+     ],
+     "median_ratio": 0.8321545564967078,
+     "first_lower": 30,
+     "wilcoxon_p": 0.2260100302518655
+    },
+    "responses_to_clear": {
+     "median": [
+      18.5,
+      18.0
+     ],
+     "median_ratio": 1.0741723110591492,
+     "first_lower": 21,
+     "wilcoxon_p": 0.34086326249452625
+    },
+    "actions_to_clear": {
+     "median": [
+      29.0,
+      28.0
+     ],
+     "median_ratio": 0.9592167910854366,
+     "first_lower": 27,
+     "wilcoxon_p": 0.31274024962148517
+    }
+   },
+   "C1 vs C2": {
+    "levels": 50,
+    "tokens_to_clear": {
+     "median": [
+      29487.5,
+      31709.5
+     ],
+     "median_ratio": 0.9075631446865764,
+     "first_lower": 30,
+     "wilcoxon_p": 0.34720687274462314
+    },
+    "responses_to_clear": {
+     "median": [
+      17.5,
+      17.5
+     ],
+     "median_ratio": 1.0,
+     "first_lower": 19,
+     "wilcoxon_p": 0.9086692207190914
+    },
+    "actions_to_clear": {
+     "median": [
+      29.0,
+      27.0
+     ],
+     "median_ratio": 1.0206207261596576,
+     "first_lower": 21,
+     "wilcoxon_p": 0.9912829213723521
+    }
+   },
+   "C1 vs C3": {
+    "levels": 48,
+    "tokens_to_clear": {
+     "median": [
+      29487.5,
+      30764.5
+     ],
+     "median_ratio": 0.9647686937570942,
+     "first_lower": 26,
+     "wilcoxon_p": 0.35121691579936254
+    },
+    "responses_to_clear": {
+     "median": [
+      17.5,
+      19.0
+     ],
+     "median_ratio": 1.0,
+     "first_lower": 21,
+     "wilcoxon_p": 0.9720703556664247
+    },
+    "actions_to_clear": {
+     "median": [
+      29.5,
+      34.0
+     ],
+     "median_ratio": 0.8864052604279183,
+     "first_lower": 27,
+     "wilcoxon_p": 0.17377561465260172
+    }
+   },
+   "C2 vs C3": {
+    "levels": 45,
+    "tokens_to_clear": {
+     "median": [
+      29619.0,
+      28722.0
+     ],
+     "median_ratio": 1.0145577327576663,
+     "first_lower": 22,
+     "wilcoxon_p": 0.3581279343175652
+    },
+    "responses_to_clear": {
+     "median": [
+      18.0,
+      18.0
+     ],
+     "median_ratio": 1.0,
+     "first_lower": 19,
+     "wilcoxon_p": 0.8277831945604137
+    },
+    "actions_to_clear": {
+     "median": [
+      25.0,
+      34.0
+     ],
+     "median_ratio": 0.918918918918919,
+     "first_lower": 24,
+     "wilcoxon_p": 0.5182690958128646
+    }
+   }
+  },
+  "budget": {
+   "C1": {
+    "median_tokens_per_trial": 75705.0,
+    "total_tokens": 13920777,
+    "cleared": 67,
+    "tokens_per_cleared_level": 207772.79104477612,
+    "median_tokens_before_first_action": 2565.0
+   },
+   "C2": {
+    "median_tokens_per_trial": 76639.0,
+    "total_tokens": 13408948,
+    "cleared": 58,
+    "tokens_per_cleared_level": 231188.75862068965,
+    "median_tokens_before_first_action": 2199.0
+   },
+   "C3": {
+    "median_tokens_per_trial": 75739.0,
+    "total_tokens": 13370043,
+    "cleared": 58,
+    "tokens_per_cleared_level": 230517.9827586207,
+    "median_tokens_before_first_action": 2275.0
+   },
+   "PF1": {
+    "median_tokens_per_trial": 76191.0,
+    "total_tokens": 13634184,
+    "cleared": 69,
+    "tokens_per_cleared_level": 197596.86956521738,
+    "median_tokens_before_first_action": 2303.0
+   },
+   "PF2": {
+    "median_tokens_per_trial": 77140.0,
+    "total_tokens": 13594221,
+    "cleared": 65,
+    "tokens_per_cleared_level": 209141.86153846153,
+    "median_tokens_before_first_action": 2386.0
+   },
+   "LEX": {
+    "median_tokens_per_trial": 76014.0,
+    "total_tokens": 13792384,
+    "cleared": 58,
+    "tokens_per_cleared_level": 237799.72413793104,
+    "median_tokens_before_first_action": 2233.0
+   },
+   "PF1 / C2": {
+    "total_tokens_ratio": 1.0167974400378017,
+    "cleared_ratio": 1.1896551724137931
+   },
+   "PF2 / C3": {
+    "total_tokens_ratio": 1.016767186163874,
+    "cleared_ratio": 1.1206896551724137
+   },
+   "LEX / C1": {
+    "total_tokens_ratio": 0.9907768797675589,
+    "cleared_ratio": 0.8656716417910447
+   }
+  }
+ },
+ "P5": {
+  "score_anatomy": {
+   "Duck/TAAF-based": {
+    "runs": [
+     "arc3-duck-ab-tricks@v1",
+     "arc3-duck-ab-tricks@v2",
+     "arc3-duck-ab-tricks@v3",
+     "arc3-duck-fp4-batch@v1",
+     "arc3-duck-fp4-depth@v2",
+     "arc3-duck-fp4-ledger@v1",
+     "arc3-duck-fp4-prompts@v1",
+     "arc3-duck-fp4-reset@v2",
+     "arc3-duck-fp4-reset@v3",
+     "arc3-duck-fp4-reset@v4",
+     "arc3-duck-fp4-serving@v1",
+     "arc3-duck-fp4-stall@v2",
+     "arc3-duck-qwen38-baseline@v1",
+     "arcaid3-lexicon-view-py312@v1",
+     "arcaid3-lexicon-view-v2@v1",
+     "duck-nvfp4-batch-stall-warn-dead-sign-compact@v1",
+     "duck-nvfp4-batch-stall-warn-dead-sign@v1",
+     "duck-nvfp4-batch-stall-warn-dead-sign@v2",
+     "duck-nvfp4-batch-stall-warn-dead-sign@v3",
+     "duck-nvfp4-batch-stall-warn-dead-sign@v4",
+     "duck-v3-wmreason@v1",
+     "notebook7c0bf2022d@v1",
+     "taaf-flashnext-sheetu12b-0922@v1",
+     "taaf-flashnext-sheetu12b-reasoning-notes@v3",
+     "v5b-v5-compact-keep-reasoning-8-min-bytes-sk@v1"
+    ],
+    "game_runs": 319,
+    "mean_score": 10.627519435736676,
+    "mean_ceiling": 11.732438581968363,
+    "mean_lost_uncleared": 88.26756141803163,
+    "mean_lost_inefficiency": 1.1049191462316854,
+    "inefficiency_share_of_lost_score": 0.012363080215024275,
+    "cleared_levels_over_5x_human": 5,
+    "game_runs_with_a_level_over_5x": 5,
+    "mean_score_with_5x_rule": 10.598074953244847,
+    "mean_next_level_ceiling_raise": 8.519905729937078,
+    "mean_next_level_max_gain": 8.908869524171404
+   },
+   "Franzen-based": {
+    "runs": [
+     "arcaid3-lb-lex-r1@v1",
+     "arcaid3-lb-lex-r2@v1",
+     "arcaid3-lb-off-r1@v1",
+     "arcaid3-lb-off-r2@v1",
+     "arcaid3-lexicon-dprime-dfranzen-m2-sg@v1",
+     "arcaid3-lexicon-dprime-dfranzen-m2@v1",
+     "arcaid3-lexicon-view-dfranzen-m2@v1",
+     "arcaid3-lexicon-view-dfranzen-m2@v2",
+     "arcaid3-lexicon-view-dfranzen-m2@v3",
+     "arcaid3-lexicon-view-dfranzen-m2@v4",
+     "arcaid3-lexicon-view-dfranzen-m2@v5",
+     "arcaid3-pair-flag0-r1b@v1",
+     "arcaid3-pair-restart-r1@v1",
+     "arcaid3-probe-first-dfranzen-m2-sg@v1",
+     "arcaid3-probe-first-dfranzen-m2@v1",
+     "arcaid3-probe-first-dfranzen-m2@v2",
+     "arcaid3-rep-v2-r1@v1",
+     "arcaid3-rep-v2-r2@v1",
+     "arcaid3-rep-v4-r1@v1",
+     "arcaid3-rep-v4-r2@v1",
+     "arcaid3-restart-dfranzen-m2-r2@v1",
+     "arcaid3-restart-dfranzen-m2@v1"
+    ],
+    "game_runs": 340,
+    "mean_score": 43.80473470588236,
+    "mean_ceiling": 45.14075630252101,
+    "mean_lost_uncleared": 54.85924369747899,
+    "mean_lost_inefficiency": 1.3360215966386553,
+    "inefficiency_share_of_lost_score": 0.023774629226254514,
+    "cleared_levels_over_5x_human": 0,
+    "game_runs_with_a_level_over_5x": 0,
+    "mean_score_with_5x_rule": 43.80473642669733,
+    "mean_next_level_ceiling_raise": 11.621976063152534,
+    "mean_next_level_max_gain": 12.075851648841354
+   }
+  },
+  "difficulty": {
+   "levels": 183,
+   "human_actions_quartiles": [
+    32.5,
+    60.0,
+    117.0
+   ],
+   "spearman_clear_rate_vs_human_actions": [
+    -0.5507405076251831,
+    6.623018052112328e-16
+   ],
+   "spearman_clear_rate_vs_depth": [
+    -0.5420644859898741,
+    2.2855540833326856e-15
+   ],
+   "clear_rate_by_human_actions": {
+    "(0.0, 32.5]": [
+     46,
+     0.6594202898550724
+    ],
+    "(32.5, 60.0]": [
+     46,
+     0.41304347826086957
+    ],
+    "(60.0, 117.0]": [
+     45,
+     0.2
+    ],
+    "(117.0, inf]": [
+     46,
+     0.05797101449275362
+    ]
+   },
+   "clear_rate_by_depth": {
+    "(0, 1]": [
+     25,
+     0.76
+    ],
+    "(1, 3]": [
+     50,
+     0.49333333333333335
+    ],
+    "(3, 6]": [
+     75,
+     0.18666666666666668
+    ],
+    "(6, 10]": [
+     33,
+     0.101010101010101
+    ]
+   },
+   "logistic_clustered_by_game": {
+    "Intercept": {
+     "coef": 6.046382802354597,
+     "se": 1.1640086764576025,
+     "p": 2.053279054993366e-07,
+     "ci": [
+      3.76496771880556,
+      8.327797885903635
+     ]
+    },
+    "log_h": {
+     "coef": -1.2831993368628585,
+     "se": 0.31088476170184426,
+     "p": 3.666131520984484e-05,
+     "ci": [
+      -1.8925222731407905,
+      -0.6738764005849266
+     ]
+    },
+    "depth": {
+     "coef": -0.43227062800576377,
+     "se": 0.1180906500694245,
+     "p": 0.00025172518945941756,
+     "ci": [
+      -0.6637240490527583,
+      -0.2008172069587693
+     ]
+    }
+   },
+   "trials_in_model": 549,
+   "games": 25,
+   "per_game_clear_rate": {
+    "min": 0.0,
+    "median": 0.27777777777777773,
+    "max": 0.9166666666666666,
+    "games_never_cleared": 2
+   }
+  },
+  "budget": {
+   "C1": {
+    "clears": 67,
+    "median_budget_fraction_at_clear": 0.44265937017559276,
+    "share_of_clears_in_last_quarter": 0.208955223880597,
+    "cumulative_share_of_183_cleared_by_tokens": {
+     "2500": 0.0,
+     "5000": 0.01092896174863388,
+     "10000": 0.04371584699453552,
+     "20000": 0.07650273224043716,
+     "40000": 0.22950819672131148,
+     "80000": 0.366120218579235
+    }
+   },
+   "C2": {
+    "clears": 58,
+    "median_budget_fraction_at_clear": 0.5142330413877341,
+    "share_of_clears_in_last_quarter": 0.22413793103448276,
+    "cumulative_share_of_183_cleared_by_tokens": {
+     "2500": 0.0,
+     "5000": 0.01092896174863388,
+     "10000": 0.03825136612021858,
+     "20000": 0.1092896174863388,
+     "40000": 0.18032786885245902,
+     "80000": 0.31693989071038253
+    }
+   },
+   "C3": {
+    "clears": 58,
+    "median_budget_fraction_at_clear": 0.5091332944536413,
+    "share_of_clears_in_last_quarter": 0.2413793103448276,
+    "cumulative_share_of_183_cleared_by_tokens": {
+     "2500": 0.0,
+     "5000": 0.0,
+     "10000": 0.03825136612021858,
+     "20000": 0.06557377049180328,
+     "40000": 0.17486338797814208,
+     "80000": 0.31693989071038253
+    }
+   },
+   "PF1": {
+    "clears": 69,
+    "median_budget_fraction_at_clear": 0.5044133271583077,
+    "share_of_clears_in_last_quarter": 0.30434782608695654,
+    "cumulative_share_of_183_cleared_by_tokens": {
+     "2500": 0.0,
+     "5000": 0.01092896174863388,
+     "10000": 0.04918032786885246,
+     "20000": 0.08196721311475409,
+     "40000": 0.22404371584699453,
+     "80000": 0.37158469945355194
+    }
+   },
+   "PF2": {
+    "clears": 65,
+    "median_budget_fraction_at_clear": 0.5687995970980168,
+    "share_of_clears_in_last_quarter": 0.27692307692307694,
+    "cumulative_share_of_183_cleared_by_tokens": {
+     "2500": 0.00546448087431694,
+     "5000": 0.00546448087431694,
+     "10000": 0.03278688524590164,
+     "20000": 0.08743169398907104,
+     "40000": 0.18579234972677597,
+     "80000": 0.3551912568306011
+    }
+   },
+   "LEX": {
+    "clears": 58,
+    "median_budget_fraction_at_clear": 0.4264890152547742,
+    "share_of_clears_in_last_quarter": 0.1206896551724138,
+    "cumulative_share_of_183_cleared_by_tokens": {
+     "2500": 0.0,
+     "5000": 0.01639344262295082,
+     "10000": 0.03278688524590164,
+     "20000": 0.10382513661202186,
+     "40000": 0.21311475409836064,
+     "80000": 0.31693989071038253
+    }
+   }
+  },
+  "timing_one_vs_both": {
+   "PF1 vs C2": {
+    "kind": "add-on vs same-day control",
+    "one_run_only": {
+     "n": 25,
+     "median": 0.7816297211294458
+    },
+    "both": {
+     "n": 102,
+     "median": 0.46054490444482643
+    },
+    "mann_whitney_p": 9.993709605046024e-06
+   },
+   "PF2 vs C3": {
+    "kind": "add-on vs same-day control",
+    "one_run_only": {
+     "n": 31,
+     "median": 0.7613015248040499
+    },
+    "both": {
+     "n": 92,
+     "median": 0.42621732218608543
+    },
+    "mann_whitney_p": 3.942684662475545e-08
+   },
+   "LEX vs C1": {
+    "kind": "add-on vs same-day control",
+    "one_run_only": {
+     "n": 25,
+     "median": 0.6602901103740607
+    },
+    "both": {
+     "n": 100,
+     "median": 0.37382499715297623
+    },
+    "mann_whitney_p": 7.984185257901401e-06
+   },
+   "C1 vs C2": {
+    "kind": "A/A",
+    "one_run_only": {
+     "n": 25,
+     "median": 0.6644761661372957
+    },
+    "both": {
+     "n": 100,
+     "median": 0.43041499053760784
+    },
+    "mann_whitney_p": 0.0002981223925659882
+   },
+   "C1 vs C3": {
+    "kind": "A/A",
+    "one_run_only": {
+     "n": 29,
+     "median": 0.6630497741051087
+    },
+    "both": {
+     "n": 96,
+     "median": 0.4180406370813782
+    },
+    "mann_whitney_p": 8.575631217238554e-05
+   },
+   "C2 vs C3": {
+    "kind": "A/A",
+    "one_run_only": {
+     "n": 26,
+     "median": 0.7098151751926483
+    },
+    "both": {
+     "n": 90,
+     "median": 0.44617864054104917
+    },
+    "mann_whitney_p": 2.0390774134783572e-05
+   }
+  },
+  "failed_trials": {
+   "failed": 723,
+   "cleared": 375,
+   "cleared_moves_over_human": {
+    "median": 0.8888888888888888,
+    "p10": 0.375,
+    "p05": 0.2643081761006289
+   },
+   "failed_moves_over_human_median": 0.5636363636363636,
+   "failed_share_below_human_count": 0.7164591977869986,
+   "failed_share_below_p10_of_clears": 0.31950207468879666,
+   "failed_median_moves": 51.0,
+   "cleared_median_moves_to_clear": 34.0,
+   "by_human_actions": {
+    "(0, 32.5]": {
+     "failed": 98,
+     "failed_median_moves": 43.0,
+     "human_median": 25.0,
+     "failed_median_moves_over_human": 1.8946886446886446,
+     "failed_share_below_human_count": 0.15306122448979592,
+     "clears": 178,
+     "clears_p10_moves_over_human": 0.49482758620689654,
+     "failed_share_below_that": 0.030612244897959183
+    },
+    "(32.5, 60]": {
+     "failed": 162,
+     "failed_median_moves": 38.0,
+     "human_median": 48.5,
+     "failed_median_moves_over_human": 0.8349137931034483,
+     "failed_share_below_human_count": 0.6049382716049383,
+     "clears": 114,
+     "clears_p10_moves_over_human": 0.34247266610597143,
+     "failed_share_below_that": 0.09876543209876543
+    },
+    "(60, 117]": {
+     "failed": 206,
+     "failed_median_moves": 54.0,
+     "human_median": 86.0,
+     "failed_median_moves_over_human": 0.607349994727407,
+     "failed_share_below_human_count": 0.7766990291262136,
+     "clears": 64,
+     "clears_p10_moves_over_human": 0.4952039117769455,
+     "failed_share_below_that": 0.35436893203883496
+    },
+    "(117, inf]": {
+     "failed": 257,
+     "failed_median_moves": 64.0,
+     "human_median": 183.0,
+     "failed_median_moves_over_human": 0.2916666666666667,
+     "failed_share_below_human_count": 0.953307392996109,
+     "clears": 19,
+     "clears_p10_moves_over_human": 0.09475220125786164,
+     "failed_share_below_that": 0.0311284046692607
+    }
+   }
+  },
+  "failed_trial_new_boards_per_100_moves": {
+   "C1": 94.33262711864407,
+   "C2": 93.42105263157895,
+   "C3": 94.28571428571429,
+   "LEX": 92.85714285714286,
+   "PF1": 94.73319473319474,
+   "PF2": 94.02852049910874
+  },
+  "frontier": {
+   "levels_cleared_by_any_control": 83,
+   "levels_cleared_by_any_run": 97,
+   "levels_cleared_by_every_run": 37,
+   "new_beyond_the_3_controls": {
+    "PF1": 6,
+    "PF2": 9,
+    "LEX": 4
+   },
+   "new_beyond_the_3_controls_PF1_or_PF2": 14,
+   "reference_one_control_beyond_the_other_two": {
+    "C1": 12,
+    "C2": 6,
+    "C3": 8
+   }
+  }
+ },
+ "P6": {
+  "turns": 12005,
+  "turns_with_read": 2868,
+  "turns_with_cue": 4892,
+  "read_rate": {
+   "by_position": {
+    "level start": [
+     1599,
+     0.7704815509693559
+    ],
+    "1-5": [
+     2819,
+     0.19297623270663355
+    ],
+    "6-15": [
+     2665,
+     0.22626641651031895
+    ],
+    "16-40": [
+     3079,
+     0.1136732705423839
+    ],
+    ">40": [
+     1843,
+     0.07542051003798156
+    ]
+   },
+   "by_cue": {
+    "0": [
+     7113,
+     0.0780261493040911
+    ],
+    "1": [
+     4892,
+     0.47281275551921503
+    ]
+   },
+   "by_stuck": {
+    "0": [
+     8619,
+     0.2709130989673976
+    ],
+    "1": [
+     3386,
+     0.15741287655050207
+    ]
+   }
+  },
+  "outcomes": {
+   "lvl_done": {
+    "as Stage 4 M1: same run, game and level": {
+     "difference": -0.10649183607662453,
+     "ci": [
+      -0.14291571579415455,
+      -0.06680961563813516
+     ],
+     "strata": 1190,
+     "turns": 12005,
+     "reads": 2868
+    },
+    "matched: also position in level and stuck status": {
+     "difference": -0.025402994263659915,
+     "ci": [
+      -0.04249499839007439,
+      -0.009011984029262277
+     ],
+     "strata": 1022,
+     "turns": 12005,
+     "reads": 2868
+    },
+    "matched, turns without a cue (unprompted reads)": {
+     "difference": -0.011318404026365891,
+     "ci": [
+      -0.034735736584474555,
+      0.013471106338607028
+     ],
+     "strata": 364,
+     "turns": 7113,
+     "reads": 555
+    },
+    "matched, turns with a cue (prompted reads)": {
+     "difference": -0.032069157836029,
+     "ci": [
+      -0.05769658408180629,
+      -0.011227292362782698
+     ],
+     "strata": 405,
+     "turns": 4892,
+     "reads": 2313
+    }
+   },
+   "lvl_within_10": {
+    "as Stage 4 M1: same run, game and level": {
+     "difference": -0.0934013101495252,
+     "ci": [
+      -0.1448659120400399,
+      -0.05609557516682025
+     ],
+     "strata": 1190,
+     "turns": 12005,
+     "reads": 2868
+    },
+    "matched: also position in level and stuck status": {
+     "difference": -0.005614759783485165,
+     "ci": [
+      -0.013565403869155052,
+      0.0020045634055717277
+     ],
+     "strata": 1022,
+     "turns": 12005,
+     "reads": 2868
+    },
+    "matched, turns without a cue (unprompted reads)": {
+     "difference": 0.003312588688815663,
+     "ci": [
+      -0.015215764427618308,
+      0.020768703357309827
+     ],
+     "strata": 364,
+     "turns": 7113,
+     "reads": 555
+    },
+    "matched, turns with a cue (prompted reads)": {
+     "difference": -0.019520356943669825,
+     "ci": [
+      -0.03755962770239648,
+      8.472458917245901e-19
+     ],
+     "strata": 405,
+     "turns": 4892,
+     "reads": 2313
+    }
+   }
+  }
+ }
+}

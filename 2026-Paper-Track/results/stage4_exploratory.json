@@ -6,11 +6,11 @@
    "acts": {
     "rate_read": 0.9633891213389121,
     "rate_no_read": 0.941665754624056,
-    "strata": 1192,
-    "stratified_difference": 0.009415671880795758,
+    "strata": 1190,
+    "stratified_difference": 0.022928985518040634,
     "ci": [
-     0.00042782703114435184,
-     0.018611300651640305
+     0.014560876575683097,
+     0.031724550364842695
     ]
    },
    "share_changed": {
@@ -26,31 +26,31 @@
    "lvl_done": {
     "rate_read": 0.03765690376569038,
     "rate_no_read": 0.0944511327569224,
-    "strata": 1192,
-    "stratified_difference": -0.1075092426797439,
+    "strata": 1190,
+    "stratified_difference": -0.10649183607662453,
     "ci": [
-     -0.14383273311408085,
-     -0.06900776254601118
+     -0.14301114284449862,
+     -0.06814081882017202
     ]
    },
    "lvl_within_10": {
-    "rate_read": 0.11262203626220363,
-    "rate_no_read": 0.12914523366531686,
-    "strata": 1192,
-    "stratified_difference": -0.08105882931940767,
+    "rate_read": 0.09937238493723849,
+    "rate_no_read": 0.12816022764583562,
+    "strata": 1190,
+    "stratified_difference": -0.0934013101495252,
     "ci": [
-     -0.12932590739505467,
-     -0.044341666892550584
+     -0.140777180314384,
+     -0.0553956820268908
     ]
    },
    "over": {
     "rate_read": 0.01603905160390516,
     "rate_no_read": 0.02002845572945168,
-    "strata": 1192,
-    "stratified_difference": -0.0020277520087048067,
+    "strata": 1190,
+    "stratified_difference": -0.0016506420651098024,
     "ci": [
-     -0.01291651853224038,
-     0.014284876365812153
+     -0.012810206193565349,
+     0.015510450969668342
     ]
    }
   },
@@ -58,7 +58,7 @@
    "acts": 0.964032509078333,
    "share_changed": 0.9166078749461427,
    "lvl_done": 0.05965761715372644,
-   "lvl_within_10": 0.09648971122254885,
+   "lvl_within_10": 0.09251253674563376,
    "over": 0.01660038042538475
   }
  },
@@ -149,40 +149,40 @@
   }
  },
  "M3": {
-  "Duck/TAAF whole games (Sept)": {
+  "Duck/TAAF-based whole games (Sept to 4 Oct)": {
    "not cleared": {
-    "levels": 266,
-    "median_actions": 28.0,
-    "median_revisit_share": 0.05778894472361809,
-    "median_unchanged_share": 0.03076923076923077,
-    "game_overs_per_100_actions": 0.6568974229408793,
-    "median_tokens_per_action": 707.0743243243244
+    "levels": 316,
+    "median_actions": 33.5,
+    "median_revisit_share": 0.052675371223758316,
+    "median_unchanged_share": 0.031009615384615385,
+    "game_overs_per_100_actions": 0.663734506197521,
+    "median_tokens_per_action": 704.6267144009682
    },
    "cleared": {
-    "levels": 433,
-    "median_actions": 20.0,
+    "levels": 510,
+    "median_actions": 21.0,
     "median_revisit_share": 0.0,
     "median_unchanged_share": 0.0,
-    "game_overs_per_100_actions": 0.17459955970545812,
-    "median_tokens_per_action": 606.1147540983607
+    "game_overs_per_100_actions": 0.18960940462646947,
+    "median_tokens_per_action": 611.9035714285715
    }
   },
   "Franzen-based whole games (Oct)": {
    "not cleared": {
-    "levels": 315,
-    "median_actions": 40.0,
-    "median_revisit_share": 0.013036093418259023,
+    "levels": 265,
+    "median_actions": 39.0,
+    "median_revisit_share": 0.010101010101010102,
     "median_unchanged_share": 0.0,
-    "game_overs_per_100_actions": 0.7152884551106358,
-    "median_tokens_per_action": 1113.7388059701493
+    "game_overs_per_100_actions": 0.7168458781362007,
+    "median_tokens_per_action": 1267.3333333333333
    },
    "cleared": {
-    "levels": 1492,
+    "levels": 1415,
     "median_actions": 24.0,
     "median_revisit_share": 0.0,
     "median_unchanged_share": 0.0,
-    "game_overs_per_100_actions": 0.30218833025736713,
-    "median_tokens_per_action": 618.9757085020242
+    "game_overs_per_100_actions": 0.3043422349864975,
+    "median_tokens_per_action": 616.9285714285714
    }
   },
   "level trials (Oct)": {
@@ -205,30 +205,30 @@
   }
  },
  "M4": {
-  "Duck/TAAF whole games (Sept)": {
-   "cleared_levels": 433,
-   "median_actions_over_human": 0.7059,
+  "Duck/TAAF-based whole games (Sept to 4 Oct)": {
+   "cleared_levels": 510,
+   "median_actions_over_human": 0.7222,
    "iqr": [
-    0.5465,
+    0.546775,
     1.0
    ],
-   "share_at_or_below_human": 0.7621247113163973,
+   "share_at_or_below_human": 0.7529411764705882,
    "ci_median": [
     0.6087,
-    0.8462
+    0.8333
    ]
   },
   "Franzen-based whole games (Oct)": {
-   "cleared_levels": 1492,
-   "median_actions_over_human": 0.65745,
+   "cleared_levels": 1415,
+   "median_actions_over_human": 0.65,
    "iqr": [
-    0.48275,
-    0.90515
+    0.47809999999999997,
+    0.89775
    ],
-   "share_at_or_below_human": 0.8304289544235925,
+   "share_at_or_below_human": 0.8374558303886925,
    "ci_median": [
-    0.5833,
-    0.7857
+    0.5769,
+    0.7879
    ]
   },
   "level trials (Oct)": {
@@ -240,8 +240,8 @@
    ],
    "share_at_or_below_human": 0.6199575371549894,
    "ci_median": [
-    0.71363375,
-    0.9881
+    0.71628375,
+    1.0
    ]
   },
   "A3 lexicon on (r3)": {
@@ -300,25 +300,25 @@
   }
  },
  "M5": {
-  "Duck/TAAF whole games (Sept)": {
-   "turns": 6559,
-   "actions": 34942,
-   "turns_without_action_share": 0.03582863241347766,
-   "median_reasoning_chars_per_turn": 3064.0,
-   "unchanged_board_share": 0.09882090321103543,
-   "revisit_share": 0.12955755251559728,
-   "game_overs_per_100_actions": 0.4750729780779578,
-   "mean_generated_tokens_per_action": 520.7388529563276
+  "Duck/TAAF-based whole games (Sept to 4 Oct)": {
+   "turns": 7729,
+   "actions": 40832,
+   "turns_without_action_share": 0.036874110492948635,
+   "median_reasoning_chars_per_turn": 3345.0,
+   "unchanged_board_share": 0.10024000783699061,
+   "revisit_share": 0.12886951410658307,
+   "game_overs_per_100_actions": 0.4800156739811912,
+   "mean_generated_tokens_per_action": 528.3917025862069
   },
   "Franzen-based whole games (Oct)": {
-   "turns": 13384,
-   "actions": 64266,
-   "turns_without_action_share": 0.02301255230125523,
-   "median_reasoning_chars_per_turn": 5341.5,
-   "unchanged_board_share": 0.029066691563190528,
-   "revisit_share": 0.03843400865154203,
-   "game_overs_per_100_actions": 0.3983443811657797,
-   "mean_generated_tokens_per_action": 765.8515700370335
+   "turns": 12214,
+   "actions": 58376,
+   "turns_without_action_share": 0.02112330112985099,
+   "median_reasoning_chars_per_turn": 5429.0,
+   "unchanged_board_share": 0.021036042209127026,
+   "revisit_share": 0.02972111826778128,
+   "game_overs_per_100_actions": 0.3871454022200905,
+   "mean_generated_tokens_per_action": 785.2299575167877
   },
   "level trials (Oct)": {
    "turns": 26273,

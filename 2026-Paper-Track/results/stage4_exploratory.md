@@ -8,11 +8,11 @@ Turns in lexicon-on runs: 12,005; turns whose tool code read `current_frame.code
 
 | Outcome of the turn | With a read | Without | Stratified difference (95% CI) | Lexicon-off runs, for reference |
 |---|---|---|---|---|
-| executes at least one action | 96.3% | 94.2% | +0.9 pts (+0.0 to +1.9) | 96.4% |
+| executes at least one action | 96.3% | 94.2% | +2.3 pts (+1.5 to +3.2) | 96.4% |
 | share of its actions that change the board | 89.8% | 92.9% | -4.1 pts (-6.0 to -2.2) | 91.7% |
-| completes a level | 3.8% | 9.4% | -10.8 pts (-14.4 to -6.9) | 6.0% |
-| a level completes within 10 actions of the turn's start | 11.3% | 12.9% | -8.1 pts (-12.9 to -4.4) | 9.6% |
-| ends in a game over | 1.6% | 2.0% | -0.2 pts (-1.3 to +1.4) | 1.7% |
+| completes a level | 3.8% | 9.4% | -10.6 pts (-14.3 to -6.8) | 6.0% |
+| a level completes within 10 actions of the turn's start | 9.9% | 12.8% | -9.3 pts (-14.1 to -5.5) | 9.3% |
+| ends in a game over | 1.6% | 2.0% | -0.2 pts (-1.3 to +1.6) | 1.7% |
 
 ## M2. Spending in the paired level trials
 
@@ -31,10 +31,10 @@ No-action shares follow the definition in `Ablations/ARC-AGI-3/2026-10-24__level
 
 | Generation | Levels | Cleared? | Median actions | Median share of actions revisiting a seen board | Median unchanged-board share | Game-overs per 100 actions | Median generated tokens per action |
 |---|---|---|---|---|---|---|---|
-| Duck/TAAF whole games (Sept) | 266 | not cleared | 28 | 5.8% | 3.1% | 0.66 | 707 |
-| Duck/TAAF whole games (Sept) | 433 | cleared | 20 | 0.0% | 0.0% | 0.17 | 606 |
-| Franzen-based whole games (Oct) | 315 | not cleared | 40 | 1.3% | 0.0% | 0.72 | 1,114 |
-| Franzen-based whole games (Oct) | 1492 | cleared | 24 | 0.0% | 0.0% | 0.30 | 619 |
+| Duck/TAAF-based whole games (Sept to 4 Oct) | 316 | not cleared | 34 | 5.3% | 3.1% | 0.66 | 705 |
+| Duck/TAAF-based whole games (Sept to 4 Oct) | 510 | cleared | 21 | 0.0% | 0.0% | 0.19 | 612 |
+| Franzen-based whole games (Oct) | 265 | not cleared | 39 | 1.0% | 0.0% | 0.72 | 1,267 |
+| Franzen-based whole games (Oct) | 1415 | cleared | 24 | 0.0% | 0.0% | 0.30 | 617 |
 | level trials (Oct) | 1359 | not cleared | 48 | 6.0% | 6.4% | 0.57 | 1,367 |
 | level trials (Oct) | 471 | cleared | 31 | 0.7% | 1.6% | 0.29 | 869 |
 
@@ -42,9 +42,9 @@ No-action shares follow the definition in `Ablations/ARC-AGI-3/2026-10-24__level
 
 | Group | Cleared levels | Median (95% CI) | IQR | At or below the human count |
 |---|---|---|---|---|
-| Duck/TAAF whole games (Sept) | 433 | 0.71 (0.61–0.85) | 0.55–1.00 | 76.2% |
-| Franzen-based whole games (Oct) | 1492 | 0.66 (0.58–0.79) | 0.48–0.91 | 83.0% |
-| level trials (Oct) | 471 | 0.86 (0.71–0.99) | 0.56–1.31 | 62.0% |
+| Duck/TAAF-based whole games (Sept to 4 Oct) | 510 | 0.72 (0.61–0.83) | 0.55–1.00 | 75.3% |
+| Franzen-based whole games (Oct) | 1415 | 0.65 (0.58–0.79) | 0.48–0.90 | 83.7% |
+| level trials (Oct) | 471 | 0.86 (0.72–1.00) | 0.56–1.31 | 62.0% |
 | A3 lexicon on (r3) | 58 | 0.86 | 0.59–1.35 | 62.1% |
 | A3 lexicon off (r3) | 67 | 0.86 | 0.58–1.20 | 64.2% |
 | probe-first on (r1) | 69 | 0.81 | 0.56–1.21 | 65.2% |
@@ -56,8 +56,8 @@ No-action shares follow the definition in `Ablations/ARC-AGI-3/2026-10-24__level
 
 | Generation | Turns | Actions | Turns without an action | Median reasoning characters per turn | Unchanged-board actions | Revisits of a seen board | Game-overs per 100 actions | Mean generated tokens per action |
 |---|---|---|---|---|---|---|---|---|
-| Duck/TAAF whole games (Sept) | 6,559 | 34,942 | 3.6% | 3,064 | 9.9% | 13.0% | 0.48 | 521 |
-| Franzen-based whole games (Oct) | 13,384 | 64,266 | 2.3% | 5,342 | 2.9% | 3.8% | 0.40 | 766 |
+| Duck/TAAF-based whole games (Sept to 4 Oct) | 7,729 | 40,832 | 3.7% | 3,345 | 10.0% | 12.9% | 0.48 | 528 |
+| Franzen-based whole games (Oct) | 12,214 | 58,376 | 2.1% | 5,429 | 2.1% | 3.0% | 0.39 | 785 |
 | level trials (Oct) | 26,273 | 92,466 | 6.2% | 6,625 | 8.1% | 7.9% | 0.46 | 1,030 |
 
 The generations differ in setup (time per game, number of games, harness), which is stated rather than adjusted away.
