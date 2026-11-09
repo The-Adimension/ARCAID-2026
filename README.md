@@ -4,7 +4,7 @@
 
 Shehab Anwer · [The Adimension](https://www.theadimension.com) · Built on the [DEITY Principles Framework](https://doi.org/10.1093/ehjimp/qyaf038)
 
-> **Status: preparation repository.** This is `habanwer/ARCAID-2026-Prep`. It is being checked for licence and privacy issues before it is released publicly as `The-Adimension/ARCAID-2026`. All 51 competition notebooks are public on Kaggle (checked live on 2026-11-06, `Documentation/KAGGLE-VISIBILITY.csv`). The two run-output datasets are still private.
+> **Status: public release, 9 November 2026.** This repository and both run-output datasets are public. All 51 competition notebooks are public on Kaggle (checked live on 2026-11-06, `Documentation/KAGGLE-VISIBILITY.csv`).
 
 ---
 
@@ -86,8 +86,8 @@ The [DEITY Principles Framework](https://doi.org/10.1093/ehjimp/qyaf038) (Data, 
 | **GitHub** (this repository) | The source of truth: code, notebooks, logs, tables, paper source |
 | **Kaggle notebooks** | Every notebook used in the competitions, with its outputs ([`Documentation/LINKS.md`](Documentation/LINKS.md)) |
 | **Kaggle Writeup** | The Paper Track submission |
-| **Kaggle Dataset** [`habanwer/arcaid-2026-run-outputs`](https://www.kaggle.com/datasets/habanwer/arcaid-2026-run-outputs) | Full run outputs, too large for git: one zip per notebook version (80 zips, 17.2 GB). Private until release. |
-| **Hugging Face** [`The-Adimension/ARCAID-2026-run-outputs`](https://huggingface.co/datasets/The-Adimension/ARCAID-2026-run-outputs) | The same zips, at the same folder paths as this repository (`<folder>/outputs.zip`). Private until release. |
+| **Kaggle Dataset** [`habanwer/arcaid-2026-run-outputs`](https://www.kaggle.com/datasets/habanwer/arcaid-2026-run-outputs) | Full run outputs, too large for git. Kaggle unpacked each notebook version's zip into a folder named `<track>__<notebook>__v<N>` (52.8 GB unpacked). Public. |
+| **Hugging Face** [`The-Adimension/ARCAID-2026-run-outputs`](https://huggingface.co/datasets/The-Adimension/ARCAID-2026-run-outputs) | The same outputs as 80 zips (17.2 GB), at the same folder paths as this repository (`<folder>/outputs.zip`). Public. |
 
 ## Licence and citation
 

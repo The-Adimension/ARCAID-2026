@@ -81,7 +81,7 @@ N1's header credits the following, and every fork of N1 carries them through dat
 | M2 | *albucino-Qwen3.8-Flash-Next-drafter*, Transformers/default/1. https://www.kaggle.com/models/dfranzen/albucino-qwen3-8-flash-next-drafter | dfranzen | "Other (specified in description)" | [R2] Speculative drafter, same notebooks |
 | M3 | *Qwen3.8 Flash Next NVFP4*, PyTorch/radixark-modelopt-fp4/1. https://www.kaggle.com/models/keithtyser/qwen3-8-flash-next-nvfp4 | keithtyser | Not readable by the API on 2026-11-06 (403); recorded on 2026-10-20 as "Other (specified in description)" | [R2] The playing model of the sheetu and NVFP4 lines |
 | M4 | *Qwen3.8 27B FP8 Repacked*, PyTorch/hf-fp8/1. https://www.kaggle.com/models/foysalemonshanto/qwen3-8-27b-fp8-repacked-v1 | foysalemonshanto | Apache 2.0 | [R2] The playing model of our ARC-AGI-2 entry and of the first Duck submission |
-| M5 | The Qwen3.8 model family (Qwen team, Alibaba), from which M1–M4 derive | Qwen team | Per model; our 2026-10-17 notes record Qwen3.8-Flash-Next as Qwen Community License 1.0 (to verify) | [R2] |
+| M5 | The Qwen3.8 model family (Qwen team, Alibaba), from which M1–M4 derive | Qwen team | Per model. Qwen3.8-Flash-Next: Qwen Community License 1.0, as are the Intel and Albucino quantisations behind M1 and M2 (Hugging Face model cards, checked 2026-11-08). Qwen3.8-27B, behind M4: Apache 2.0 | [R2] |
 
 ## 6. Kaggle discussions
 

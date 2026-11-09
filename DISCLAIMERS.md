@@ -4,16 +4,18 @@
 
 Claude Code (Anthropic), running Claude Opus 5 and Claude Opus 5.5, with subagents running Claude Haiku and Claude Sonnet, was used for:
 - The lexicon improvement;
-- Logs analyses;
+- Logs analyses, including the Paper Track analyses in `2026-Paper-Track/`;
 - Decision-support;
-- Code implementation and engineering.
+- Code implementation and engineering;
+- Drafting the Paper Track writeup and its figures.
 
 The concept and the base work are by Shehab Anwer. Every ablation was built on public notebooks by others. Their lineage is in [`ARCAID/LINEAGE.md`](ARCAID/LINEAGE.md), and every source is cited in [`Documentation/REFERENCES.md`](Documentation/REFERENCES.md).
 
 Other AI use, stated for completeness:
+- **Local agent play.** Agents run on the author's machines, outside Kaggle, on Claude, Gemini, Gemma and Grok, played the public games so the author could see how different agents play them while improving the lexicon.
 - **September 2026 autoresearch loop.** Frontier models were used as teachers and consultants in the loop behind the first starter agent (`ARCAID/s1-offline-autoresearch/`). The records name Claude, Gemini and Grok.
 - **No hosted model in a submission.** None of these models ran inside a Kaggle submission. Scored runs use only open-weight models, offline, as the competition requires.
-- **This repository.** It was assembled with Claude Code from the work records. The author reviews it before release.
+- **This repository.** It was assembled with Claude Code from the work records and reviewed by the author before release.
 
 ## 2. Affiliation
 
@@ -25,7 +27,7 @@ This work is independent. It is not affiliated with, or endorsed by:
 
 ## 3. Scores
 
-- **Public leaderboard only.** Every score here is a public-leaderboard score: one run of the notebook on half of the hidden games. Private scores will be published on 2026-12-04 and may differ.
+- **Public leaderboard only.** Every score here is a public-leaderboard score: one run of the notebook, scored on half of the hidden games (the 55 semi-private games, according to the host in Kaggle discussion 703990). Private scores will be published on 2026-12-04 and may differ.
 - **One draw is noisy.** Identical code can score several points apart. Copies of the base notebook we build on scored 25.77 ± 3.93 (Son Pham's measurement, Kaggle discussion 745062).
 - **Selection on noise.**
   - Our 31.90 is the best of three draws of identical code (27.05, 31.90, 26.83).
@@ -47,7 +49,8 @@ This work is independent. It is not affiliated with, or endorsed by:
 - **Others' notebook cells.** Our notebooks contain, unchanged, the cells of the public notebooks they fork. Those cells remain their authors' work. Every one of those notebooks displays the Apache 2.0 licence on its Kaggle page (rendered 2026-11-06; `Documentation/references/kaggle-notebook-licences-2026-11-06.csv`). A copy of the licence is in `Documentation/licenses/Apache-2.0.txt`.
 - **Our notebooks on Kaggle.** Kaggle displays the Apache 2.0 licence on every public notebook, ours included. The code we wrote in them is also offered under MIT-0, as in this repository.
 - **No model weights.** No model weights are redistributed here. The models are referenced by their Kaggle model pages and keep their own licences.
-- **No competition data.** Competition data (game files and hidden-set material) is not redistributed. Run outputs that contain game state are listed by name and sha256 only.
+- **No competition data.** Competition data (game files and hidden-set material) is not redistributed, here or in the run-output datasets. In this repository, run outputs that contain game state are listed by name and sha256 only.
+- **Game-derived material in the run-output datasets.** The datasets hold the full outputs of our runs on the public games and tasks, including rendered frames, replays and game states. That material remains the ARC Prize Foundation's. Both competitions license their data under Apache 2.0 (Kaggle rules, section 7, "Data access and use").
 
 ## 6. Research use
 

@@ -50,9 +50,10 @@ for track in ("ARC-AGI-3", "ARC-AGI-2"):
 # 2. Links registry
 out = ["# Links", "",
        "Every notebook version of ours that used an ARC Prize 2026 competition, with its address on Kaggle and its folder in this repository. "
-       "Each run's full outputs are one zip in the Kaggle Dataset [`habanwer/arcaid-2026-run-outputs`](https://www.kaggle.com/datasets/habanwer/arcaid-2026-run-outputs) "
-       "and at `<folder>/outputs.zip` in the Hugging Face dataset [`The-Adimension/ARCAID-2026-run-outputs`](https://huggingface.co/datasets/The-Adimension/ARCAID-2026-run-outputs) "
-       "(both private until release). [`DATASET-MANIFEST.csv`](DATASET-MANIFEST.csv) maps each zip to its folder with its sha256; each folder's "
+       "Each run's full outputs are in the public Kaggle Dataset [`habanwer/arcaid-2026-run-outputs`](https://www.kaggle.com/datasets/habanwer/arcaid-2026-run-outputs), "
+       "which unpacked each zip into a folder named `<track>__<notebook>__v<N>`, "
+       "and at `<folder>/outputs.zip` in the public Hugging Face dataset [`The-Adimension/ARCAID-2026-run-outputs`](https://huggingface.co/datasets/The-Adimension/ARCAID-2026-run-outputs). "
+       "[`DATASET-MANIFEST.csv`](DATASET-MANIFEST.csv) maps each zip to its folder with its sha256; each folder's "
        "`outputs-manifest.csv` lists the files inside.", "",
        "| Notebook | Version | Track | Placement | Kaggle (version) | Folder here |", "|---|---|---|---|---|---|"]
 for r in sorted(runs, key=lambda r: (r["kernel"], r["version"])):

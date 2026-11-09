@@ -22,7 +22,7 @@ This dataset holds the full outputs of every saved run of every Kaggle notebook 
 - `run.json`, with the Kaggle notebook version and its inputs;
 - `outputs-manifest.csv`, with the sha256 of every file inside the zip.
 
-**The same zips are also a Kaggle Dataset,** `habanwer/arcaid-2026-run-outputs`. `DATASET-MANIFEST.csv` maps every zip to its folder and gives the Kaggle copy's sha256.
+**The same outputs are also a Kaggle Dataset,** `habanwer/arcaid-2026-run-outputs`, where Kaggle unpacked each zip into a folder named `<track>__<notebook>__v<N>`. `DATASET-MANIFEST.csv` maps every zip to its folder and gives the sha256 of each zip as uploaded.
 
 ## Contents of a run's outputs
 
@@ -41,4 +41,5 @@ The contents vary by notebook:
 
 - Material authored by Shehab Anwer is released under MIT-0 / CC0-equivalent terms.
 - The outputs also contain text produced by third-party harness code and by open-weight models (the Qwen3.8 family). That text remains under its owners' terms.
+- Rendered frames, replays and game states of the public ARC-AGI-3 games and ARC-AGI-2 tasks remain the ARC Prize Foundation's. Both competitions license their data under Apache 2.0 (Kaggle rules, section 7). No game files are included.
 - See `DISCLAIMERS.md` and `Documentation/REFERENCES.md` in the repository.

@@ -45,7 +45,7 @@ What each step does:
 
 ## 2. Check an outputs file
 
-Every version folder has `outputs-manifest.csv` with each output file's sha256. The full outputs of each run are one zip in the Kaggle Dataset `habanwer/arcaid-2026-run-outputs` and at `<folder>/outputs.zip` in the Hugging Face dataset `The-Adimension/ARCAID-2026-run-outputs`. `Documentation/DATASET-MANIFEST.csv` gives each zip's sha256. Unzip and check any file with `sha256sum` against the folder's manifest.
+Every version folder has `outputs-manifest.csv` with each output file's sha256. The full outputs of each run are at `<folder>/outputs.zip` in the Hugging Face dataset `The-Adimension/ARCAID-2026-run-outputs`, and unpacked in the Kaggle Dataset `habanwer/arcaid-2026-run-outputs` (one folder per notebook version, named `<track>__<notebook>__v<N>`). `Documentation/DATASET-MANIFEST.csv` gives each zip's sha256. Check any file with `sha256sum` against the folder's manifest.
 
 ## 3. Re-run an analysis
 
